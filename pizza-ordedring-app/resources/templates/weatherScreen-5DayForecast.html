@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width,
+        initial-scale=1">
+<title>Weather App</title>
+
+<link rel="stylesheet" href="/cssStyles/weatherScreen/5Day/weatherScreen-5Day-top.css">
+<link rel="stylesheet" href="/cssStyles/weatherScreen/5Day/weatherScreen-5Day-bottom.css">
+<link rel="stylesheet" href="/cssStyles/weatherScreen/5Day/weatherScreen-5Day-advancedInfo.css">
+<link rel="stylesheet" href="/cssStyles/bottomLinks.css">
+
+</head>
+<body>
+     <div id="backgr">
+     </div>     
+    <div>
+    </div>
+    <div id="aspect-ratio">
+        <div id="textarea">
+        
+            <div id="top">
+            	<div id="top-search">
+                    <form>
+                        <input type="text" id="userInput" placeholder="ZIP or City (Dallas, TX)">
+                    </form>
+                </div>
+                
+                <div id="top-columns">
+                	<div id="top-column1">
+	                	<div id="top-location">
+	                    	[[${report.getCity()}]]
+	                    	<input type="hidden" id="location" 	th:value="${report.getCity()}"/>
+	                    	<input type="hidden" id="id" 	th:value="${id}"/>
+	                    	<input type="hidden" id="locationIndex" 	th:value="${locationIndex}"/>
+		                </div>
+		                <div id="top-time">
+		                    5-Day Forecast
+		                </div>
+		               <div id="top-date">
+						   [[${fiveDayList.get(0).getDaysDateNoYear()}]] - [[${fiveDayList.get(fiveDayList.size()-1).getDaysDate()}]]
+						</div>
+
+		            </div>
+		            
+		            <div id="top-column2">
+	                	<div id="top-avgTemp">
+	                    	[[${fiveDay.getAvgTemp()}]]<span id="degreesSymbol">&#176;</span>F
+		                </div>
+		                <div id="top-highLowTemp">
+	                    	[[${fiveDay.getLowTemp()}]] - [[${fiveDay.getHighTemp()}]] <span id="degreesSymbol">&#176;</span>F
+		                </div>
+		            </div>
+		            
+		            
+                </div>
+                <div id="top-daySelector">
+                	<div id="top-TodayDiv">
+                		Today
+                	</div>
+                	<div id="top-TomorrowDiv">
+                		Tomorrow
+                	</div>
+                	<div id="top-5DayDiv">
+                		5-Day Forecast
+                	</div>
+                </div>
+                
+                
+            </div>
+            
+            <div id="bottom">
+            
+            	<div id="bottom-DailyWeatherInfo1">
+            		
+            		<div th:each="day, iterStat : ${fiveDayList}" th:if="${iterStat.index} &lt; 3" id="bottom-DailyWeather-hourInfo">
+            			<div id="bottom-DailyWeather-hourInfo-box">
+            			
+            				<div id="bottom-DailyWeather-time">
+            					<b> [[${day.getDaysDateForBottom()}]] </b>
+            				</div>
+            				
+            				<div id="bottom-DailyWeather-tempAndIcon">
+            					<div id="bottom-DailyWeather-temp">
+            						[[${day.getAvgTemp()}]]<span id="degreesSymbol">&#176;</span>F
+            					</div>
+            					<div id="bottom-DailyWeather-iconAndDisc">
+            						<div id="bottom-3hourlyWeather-icon">
+            							<img id="bottom-3hourlyWeatherImg" th:src="@{'http://openweathermap.org/img/wn/' + ${day.getAvgWeatherIconId()} + '@2x.png'}"/>
+		                			</div>
+            						<div id="bottom-DailyWeather-iconDisc">
+            							[[${day.getAvgWeatherMain()}]]
+            						</div>
+            					</div>
+            				</div>
+            				
+		            		<div id="bottom-DailyWeather-highLow">
+		            				[[${day.getLowTemp()}]]<span id="degreesSymbol">&#176;</span>- [[${day.getHighTemp()}]]<span id="degreesSymbol">&#176;</span>
+		            		</div>	
+		            		<div id="bottom-DailyWeather-weatherDisc">
+		            				([[${day.getAvgWeatherDesc()}]])
+		            		</div>	
+		            		<div id="bottom-DailyWeather-downfall">
+		            				
+		            				<span id="precipChance">Precip Chance: [[${day.getDownfallProbability()}]]% </span>
+			                		
+			                		<th:block th:if="${day.getDownfallRainAmount() != 0}">
+			                			<span id="downfall"> 
+			                			  Rain: [[${day.getDownfallAmountRainInches()}]] <br>
+										 </span>
+									</th:block>
+									<th:block th:if="${day.getDownfallSnowAmount() != 0}">
+			                			<span id="downfall"> 
+			                			  Snow: [[${day.getDownfallAmountSnowInches()}]]
+										 </span>
+									</th:block>
+									<th:block th:if="${day.getDownfallRainAmount() == 0 && day.getDownfallSnowAmount() == 0}">
+										 Precip: None
+									</th:block>
+		            				
+		            		</div>	
+            			</div>
+            		</div>
+            		
+            	</div>
+            	<div id="bottom-DailyWeatherInfo2">
+            		
+            		<div th:each="day, iterStat : ${fiveDayList}" th:if="${iterStat.index} &gt; 2" id="bottom-DailyWeather-hourInfo2">
+            			<div id="bottom-DailyWeather-hourInfo-box">
+            			
+            				<div id="bottom-DailyWeather-time">
+            					<b> [[${day.getDaysDateForBottom()}]] </b>
+            				</div>
+            				
+            				<div id="bottom-DailyWeather-tempAndIcon">
+            					<div id="bottom-DailyWeather-temp">
+            						[[${day.getAvgTemp()}]]<span id="degreesSymbol">&#176;</span>F
+            					</div>
+            					<div id="bottom-DailyWeather-iconAndDisc">
+            						<div id="bottom-3hourlyWeather-icon">
+            							<img id="bottom-3hourlyWeatherImg" th:src="@{'http://openweathermap.org/img/wn/' + ${day.getAvgWeatherIconId()} + '@2x.png'}"/>
+		                			</div>
+            						<div id="bottom-DailyWeather-iconDisc">
+            							[[${day.getAvgWeatherMain()}]]
+            						</div>
+            					</div>
+            				</div>
+            				
+		            		<div id="bottom-DailyWeather-highLow">
+		            				[[${day.getLowTemp()}]]<span id="degreesSymbol">&#176;</span>- [[${day.getHighTemp()}]]<span id="degreesSymbol">&#176;</span>
+		            		</div>	
+		            		<div id="bottom-DailyWeather-weatherDisc">
+		            				([[${day.getAvgWeatherDesc()}]])
+		            		</div>	
+		            		<div id="bottom-DailyWeather-downfall">
+		            				
+		            				<span id="precipChance">Precip Chance: [[${day.getDownfallProbability()}]]% </span>
+			                		
+			                		<th:block th:if="${day.getDownfallRainAmount() != 0}">
+			                			<span id="downfall"> 
+			                			  Rain: [[${day.getDownfallAmountRainInches()}]] <br>
+										 </span>
+									</th:block>
+									<th:block th:if="${day.getDownfallSnowAmount() != 0}">
+			                			<span id="downfall"> 
+			                			  Snow: [[${day.getDownfallAmountSnowInches()}]]
+										 </span>
+									</th:block>
+									<th:block th:if="${day.getDownfallRainAmount() == 0 && day.getDownfallSnowAmount() == 0}">
+										 Precip: None
+									</th:block>
+		            				
+		            		</div>	
+            			</div>
+            		</div>
+            		
+            	</div>
+            	
+            <div id="advancedInfo">
+            		<div id="advancedInfo-Title">^ Advanced Info</div>
+            		<div id="advancedInfo-hiddenContent">
+            			<span id="hiddenContent-tempGraph-Title">5 Day Temperature Graph (&#176;F)</span>
+						<div id="graph-container">
+						  <canvas id="temp-graph"></canvas>
+						</div>
+						<div id="hiddenContent-tempValuesDiv">
+							 <div th:each="day, i : ${fiveDayList}" th:id="'hiddenContent-avgTempValues' + ${i.index + 1}">
+						        <span id="hiddenAvgTemp" th:text="${day.getAvgTemp()}"></span>&#176;
+						        <input type="hidden" id="hiddenHighTemp" th:value="${day.getHighTemp()}"/>
+						        <input type="hidden" id="hiddenLowTemp" th:value="${day.getLowTemp()}"/>
+						        <input type="hidden" id="hiddenDate" th:value="${day.getDaysDateForBottom()}"/>
+						    </div>
+						</div>
+						
+						<div id="hiddenContent-otherInfo">
+							<div id="hiddenContent-otherInfo-col1">
+								<div id="hiddenContent-otherInfo-col1-info">
+									Chance of precip: [[${fiveDay.getFiveDayDownfallProb()}]]% <br>
+									<th:block th:if="${fiveDay.getFiveDayDownfallRainAmount() != 0}">
+										&nbsp;&nbsp;Rain  [[${fiveDay.getDownfallAmountRainMmAndInches()}]]<br>
+									</th:block>
+									<th:block th:if="${fiveDay.getFiveDayDownfallSnowAmount() != 0}">
+										&nbsp;&nbsp;Snow  [[${fiveDay.getDownfallAmountSnowMmAndInches()}]]
+									 </th:block>            
+			                	</div>
+			                	
+			                </div>
+			                <div id="hiddenContent-otherInfo-col2">
+			                	<div id="hiddenContent-otherInfo-col2-info">
+									Population: [[${fiveDayList.get(0).getCityPopulation()}]]<br>
+									                  
+			                	</div>
+	                	
+	                
+	                		</div>
+						</div>
+						
+						        		
+            		</div>
+            </div>
+            	
+            	
+            	
+	            <div id="openWeatherLogoAndSocialLinks">
+	                <div id="openWeatherLogoText">
+	                    <i>Powered by</i> 
+	                    <a href="https://openweathermap.org/" target="_blank">
+	                        <img id="openWeatherLogoImage" src="/images/openWeatherLogo.png">
+	                    </a>
+	                </div>
+	                <div id="socialLinks">
+	                	<b> <a href="https://github.com/Nathan-Barthen" target="_blank">GitHub</a> <br>
+	                	    <a href="https://www.linkedin.com/in/nathan-barthen-22993722a/" target="_blank">LinkedIn</a> </b>
+	                </div>
+	            </div>
+            
+            </div>
+            
+           
+        
+            
+        </div>    
+    </div>
+	
+	
+	<script src="/javaScript/entersLocation.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="/javaScript/advancedInfo-Popup.js"></script>
+	<script src="/javaScript/advandedInfo-5Day-Graph.js"></script>
+	<script src="/javaScript/clicks-Today.js"></script>
+	<script src="/javaScript/clicks-Tomorrow.js"></script>
+	
+	
+	
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

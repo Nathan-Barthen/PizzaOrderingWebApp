@@ -1,0 +1,122 @@
+
+/* BOTTOM SECTIONS (Generic Todays Info + 3-Hourly Info */
+
+
+   /* START BOTTOM SECTIONS */
+   
+   
+   #bottom {
+       height: 63%;
+       width: 100%;
+       background-image: url("/images/blueBackground.png");
+       background-size: cover;
+       background-position: center;
+       
+   }
+   
+    /* START CURRENT WEATHER INFO */
+   #bottom-currentWeatherInfo{
+   		width: 100%;
+ 	 	height: 26%;
+ 	 	
+ 	 	display: flex;
+  		flex-direction: row;
+  		
+  		border-bottom: 1px solid black;
+	    margin-left: auto;
+	    margin-right: auto;
+	    width: 95%;
+   }
+     
+     /* START COL1 INFO */
+   #bottom-currentWeatherInfo-col1{
+   		width: 50%;
+   		height: 100%;
+   		font-size: 45px;
+   }
+   #bottom-currentWeatherInfo-col1-title {
+   		width: 100%;
+   		height: 10%;
+   		color: white;
+   		display: flex;
+	  	align-items: flex-start; 
+		
+	  	position: relative;
+  		top: 5%;
+	  	left: 5%;
+	  	font-family: Garamond, serif;
+	  	font-size: 50px;
+   }
+   #bottom-currentWeatherInfo-col1-info {
+   		width: 100%;
+   		height: 50%;
+   		display: flex;
+	  	align-items: flex-start; 
+	  	
+	  	position: relative;
+  		top: 15%;
+	  	left: 10%;
+	  	font-family: Garamond, serif;
+   }
+    #bottom-currentWeatherInfo-col1-sunset {
+    	width: 100%;
+   		height: 40%;
+   		display: flex;
+   		
+   		align-items: flex-end; 
+   		position: relative;
+  		bottom: 5%;
+	  	left: 10%;
+	  	font-family: Garamond, serif;
+   }
+   
+     /* END COL1 INFO */
+     /* START COL2 INFO */
+   
+   #bottom-currentWeatherInfo-col2 {
+   		width: 50%;
+ 	 	height: 100%;
+ 	 	
+   }
+ 
+   #bottom-currentWeatherInfo-col2-info {
+   		width: 95%;
+   		height: 50%;
+   		display: flex;
+   		 
+   		position: relative;
+  		top: 5%;
+	  	left: 10%;
+	  	font-family: Garamond, serif;
+	  	font-size: 45px;
+   
+   }
+   #bottom-currentWeatherInfo-col2-downfall{
+   		width: 95%;
+   		height: 50%;
+   		padding-top: 12%;
+   		position: relative;
+   		 
+   		align-items: flex-end; 
+  		bottom: 5%;
+	  	left: 10%;
+	  	font-size: 45px;
+	  	font-family: Garamond, serif;
+   
+   }
+   #downfallAmount {
+   		position: relative;
+   		
+   		align-items: flex-end; 
+   		left: 10%;
+   }
+       /* END COL2 INFO */ 
+   
+   /* END CURRENT WEATHER INFO */
+   
+  
+  
+  
+   
+   
+   

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width,
+        initial-scale=1">
+<title>Weather App</title>
+
+<link rel="stylesheet" href="/cssStyles/weatherScreen/today/weatherScreen-Today-top.css">
+<link rel="stylesheet" href="/cssStyles/weatherScreen/today/weatherScreen-Today-bottom.css">
+<link rel="stylesheet" href="/cssStyles/weatherScreen/today/weatherScreen-Today-advancedInfo.css">
+<link rel="stylesheet" href="/cssStyles/bottomLinks.css">
+
+</head>
+<body>
+     <div id="backgr">
+     </div>     
+    <div>
+    </div>
+    <div id="aspect-ratio">
+        <div id="textarea">
+        
+            <div id="top">
+            	<div id="top-search">
+                    <form>
+                        <input type="text" id="userInput" placeholder="ZIP or City (Dallas, TX)">
+                    </form>
+                </div>
+                
+                <div id="top-columns">
+                	<div id="top-column1">
+	                	<div id="top-location">
+	                    	[[${report.getCity()}]]
+	                    	<input type="hidden" id="location" 	th:value="${report.getCity()}"/>
+	                    	<input type="hidden" id="id" 	th:value="${id}"/>
+	                    	<input type="hidden" id="locationIndex" 	th:value="${locationIndex}"/>
+		                </div>
+		                <div id="top-time">
+		                    [[${today.getCurrTime()}]]
+		                </div>
+		                <div id="top-date">
+		                    [[${today.getCurrDate()}]]
+		                </div>
+		            </div>
+		            
+		            <div id="top-column2">
+	                	<div id="top-temp">
+	                    	[[${today.getCurrTemp()}]]<span id="degreesSymbol">&#176;</span>F
+		                </div>
+		                
+		            </div>
+		            
+		            <div id="top-column3">
+	                	<div id="top-imageDiv">
+	                    	<img id="top-currentWeatherImg" th:src="@{'http://openweathermap.org/img/wn/' + ${today.getWeatherIconId()} + '@2x.png'}"/>
+		                </div>
+		                <div id="top-imageDisc">
+	                    	[[${today.getWeatherMain()}]]
+		                </div>
+		                <div id="top-imageDisc2">
+	                    	<i>([[${today.getWeatherDesc()}]])</i>
+		                </div>
+		                
+		            </div>
+                </div>
+                <div id="top-daySelector">
+                	<div id="top-TodayDiv">
+                		Today
+                	</div>
+                	<div id="top-TomorrowDiv">
+                		Tomorrow
+                	</div>
+                	<div id="top-5DayDiv">
+                		5-Day Forecast
+                	</div>
+                </div>
+                
+                
+            </div>
+            
+            <div id="bottom">
+            
+            	<div id="bottom-currentWeatherInfo">
+            	
+	                <div id="bottom-currentWeatherInfo-col1">
+	                	<span id="bottom-currentWeatherInfo-col1-title"> <b>[[${today.getCurrTime()}]]</b> </span>
+						<div id="bottom-currentWeatherInfo-col1-info">
+							Real Feel: [[${today.getCurrFeelsLike()}]]&#176;F                  
+	                	</div>
+	                	<div id="bottom-currentWeatherInfo-col1-sunset">
+							Sunrise: [[${today.getSunriseTime()}]] <br>
+							Sunset: [[${today.getSunsetTime()}]]
+	                	</div>
+	                	
+	                </div>
+	                <div id="bottom-currentWeatherInfo-col2">
+	                	
+	                	<div id="bottom-currentWeatherInfo-col2-info">
+							Cloudiness: [[${today.getCloudiness()}]]% <br>
+							Wind speed: [[${today.getWindSpeed()}]] mph 
+							
+						</div>
+						<div id="bottom-currentWeatherInfo-col2-downfall">	
+							[[${today.getDownfallType()}]] <br>
+							<span id="downfallAmount"><th:block th:if="${today.getDownfallAmount() != 0}">
+							    [[${today.getDownfallAmountMmAndInches()}]]
+							</th:block> </span>
+						</div>
+	                	
+	                </div>
+	                
+            	</div>
+            	
+            	
+         
+            	
+            	
+            	
+            	<div id="advancedInfo">
+            		<div id="advancedInfo-Title">^ Advanced Info</div>
+            		<div id="advancedInfo-hiddenContent">
+            			<span id="hiddenContent-tempGraph-Title">[[${report.getCity()}]] (Clouds and Precipitation)</span>
+						
+						<div id="weatherMap">
+		            		<input type="hidden" id="lon" 		th:value="${report.getLocations().get(locationIndex).getLon()}"/>
+		            		<input type="hidden" id="lat" 		th:value="${report.getLocations().get(locationIndex).getLat()}"/>
+		            		<input type="hidden" id="apiKey" 	th:value="${apiKey}"/>
+		            		<input type="hidden" id="city" 	th:value="${report.getCity()}"/>
+		            		<div id="precipitationMap"></div>
+		            	</div>
+						
+						<div id="hiddenContent-otherInfo">
+							<div id="hiddenContent-otherInfo-col1">
+								<div id="hiddenContent-otherInfo-col1-info">
+									Solar noon: [[${today.getSolarNoon()}]] <br>
+									Sunlight: [[${today.getTotalSunlight()}]] <br>
+									Sunlight remaining: [[${today.getRemainingSunlight()}]]
+									                  
+			                	</div>
+			                	
+			                </div>
+			                <div id="hiddenContent-otherInfo-col2">
+			                	<div id="hiddenContent-otherInfo-col2-info">
+									Humidity: [[${today.getCurrHumidity()}]]% <br>
+									Visibility: [[${today.getVisibilityMiles()}]]mi
+									                  
+			                	</div>
+	                	
+	                
+	                		</div>
+						</div>
+						
+						        		
+            		</div>
+            	</div>
+            	
+            	
+            	
+	            <div id="openWeatherLogoAndSocialLinks">
+	                <div id="openWeatherLogoText">
+	                    <i>Powered by</i> 
+	                    <a href="https://openweathermap.org/" target="_blank">
+	                        <img id="openWeatherLogoImage" src="/images/openWeatherLogo.png">
+	                    </a>
+	                </div>
+	                <div id="socialLinks">
+	                	<b> <a href="https://github.com/Nathan-Barthen" target="_blank">GitHub</a> <br>
+	                	    <a href="https://www.linkedin.com/in/nathan-barthen-22993722a/" target="_blank">LinkedIn</a> </b>
+	                </div>
+	            </div>
+            
+            </div>
+            
+           
+        
+            
+        </div>    
+    </div>
+	
+	
+	<script src="/javaScript/entersLocation.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="/javaScript/advancedInfo-Popup.js"></script>
+	<script src="/javaScript/clicks-Tomorrow.js"></script>
+	<script src="/javaScript/clicks-5DayForeCast.js"></script>
+	
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+	<script src="https://cdn.jsdelivr.net/npm/leaflet.label@1.0.0/dist/leaflet.label.js"></script>
+	
+	<script src="/javaScript/leafletMap-PrecipitationMap.js"></script>
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

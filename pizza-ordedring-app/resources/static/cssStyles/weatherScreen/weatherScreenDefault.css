@@ -1,0 +1,676 @@
+
+/* START GENERIC STYLES */
+
+html, body { 
+        
+        background-image: url('https://free4kwallpapers.com/uploads/originals/2019/04/19/nice-weather-amp-river-views-wallpaper.jpg'); 
+        background-size: cover;
+        transform: scale(1.0);
+    }
+    header {
+        padding: 20px;
+    }
+    
+    #backgr {
+        position: absolute;
+        height: 100%; 
+        
+    }
+    
+    #aspect-ratio {
+      position: relative;
+      height: 1920px;
+      width: 1080px;
+      margin: auto;
+    }
+    #textarea {
+        border: 3px solid black;
+        background-color: rgb(77, 121, 255);
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        
+        
+        
+        font-family: Trebuchet MS;
+    }
+    
+    /* END GENERIC STYLES */
+    
+    
+    /* START TOP STYLES */
+    #top {
+        background-color: rgb(0, 32, 128);
+        position: relative;
+        width: 100%;
+        height: 30%;
+        color: white;
+        border-bottom: 2px solid black;
+        font-family: Trebuchet MS;
+        
+    }
+   
+    #top-search {
+    	height:25%;
+    	padding-top: 10px;
+        width: 100%;
+        font-size: 6px;
+        display: flex;
+	    align-items: center;
+	    text-align: center;
+	    position: relative;
+    }
+    #top-search input {
+      width: 90%;
+      height: 25%;
+      font-size: 15em;
+      padding-left: 10px;
+      border: 1px solid gray;
+      border-radius: 5px;
+      outline: none;
+      background-color: rgb(0, 0, 56);
+	  color: rgb(255, 255, 102);
+    }
+    
+    
+    /* START COLUMN STYLES */
+    #top-columns {
+		display: flex;
+	 	flex-wrap: wrap;
+	  	justify-content: center;
+	  	height:63%;
+    }
+    
+    #top-column1 {
+    	width: 40%;
+    }
+    
+    #top-column2 {
+    	width: 30%;
+    }
+    
+    #top-column3 {
+    	width: 20%;
+    	position: relative;
+    	height: 100%;
+	    align-items: center;
+	    text-align: center;
+	    
+    }
+    
+    /* Column1 */
+    #top-location {
+        padding-top: 10%;
+        width: 100%;
+        padding-left: 5%;
+        font-size: 65px;
+        color: rgb(255, 133, 51);
+    }
+    #top-time {
+    	padding-top: 10px;
+        width: 100%;
+        padding-left: 5%;
+        padding-top: 20%;
+        font-size: 65px;
+    }
+    #top-date {
+        width: 100%;
+        padding-left: 5%;
+        font-size: 65px;
+    }
+    
+    /* Column2 */
+    #top-temp {
+    	position: relative;
+    	height: 100%;
+    	width: 100%;
+    	display: flex;
+	    align-items: center;
+	    text-align: center;
+    	font-size: 180px;
+    	left: -25%;
+    }
+   
+   /* Column3 */
+   #top-imageDiv {
+	  display: flex;
+	  height: 65%;
+      align-items: flex-end; /* aligns items vertically at the bottom */
+      justify-content: center; /* aligns items horizontally in the middle */
+   
+   
+   }
+   #top-currentWeatherImg {
+   	  height: 300px;
+	  width: 300px;
+	  
+	  position: absolute;
+	  bottom: 22%;
+   }
+   #top-imageDisc {
+	   	height: 20%;
+	   	display: flex;
+	  	align-items: flex-start; 
+	  	justify-content: center;
+	   	z-index: 2;
+	   	font-size: 60px;
+   }
+    #top-imageDisc2 {
+	   	height: 15%;
+	   	max-width: 100%;
+	   	display: flex;
+	  	align-items: flex-start; 
+	  	justify-content: center;
+	   	z-index: 2;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		font-size: 30px;
+   }
+   
+   
+   /* END COLUMN STYLES */
+   /* START TODAY | TOMORROR | 5 DAY FORECAST */
+   
+   #top-daySelector {
+   		height: 10%;
+        width: 100%;
+        display: flex;
+	 	flex-wrap: wrap;
+	  	border-top: 2px solid black;
+	  	border-bottom: 4px solid black;
+   		background-color: rgb(0, 0, 102);
+   		color: rgb(230, 184, 0);
+   		font-size: 45px;
+   }
+   #top-TodayDiv {
+   		width: 33%;
+   		height: 100%;
+   		display: flex;
+   		justify-content: center;
+	    align-items: center;
+	    text-align: center;
+	    border-right: 4px solid black;
+   }
+   #top-TodayDiv:hover {
+    	background-color: rgb(0, 0, 255);
+    	cursor: pointer;
+   }
+   #top-TomorrowDiv {
+   		width: 33%;
+   		height: 100%;
+   		
+   		display: flex;
+   		justify-content: center;
+	    align-items: center;
+	    text-align: center;
+	    border-right: 4px solid black;
+   }
+   #top-TomorrowDiv:hover {
+    	background-color: rgb(0, 0, 255);
+    	cursor: pointer;
+   }
+   #top-5DayDiv {
+   		width: 33.3%;
+   		height: 100%;
+   		display: flex;
+   		justify-content: center;
+	    align-items: center;
+	    text-align: center;
+   }
+   #top-5DayDiv:hover {
+    	background-color: rgb(0, 0, 255);
+    	cursor: pointer;
+   }
+   
+   /* END TOP SECTION */
+   
+   
+   /* START BOTTOM SECTIONS */
+   
+   
+   #bottom {
+       height: 63%;
+       width: 100%;
+   }
+   
+    /* START CURRENT WEATHER INFO */
+   #bottom-currentWeatherInfo{
+   		width: 100%;
+ 	 	height: 26%;
+ 	 	
+ 	 	display: flex;
+  		flex-direction: row;
+  		
+  		border-bottom: 1px solid black;
+	    margin-left: auto;
+	    margin-right: auto;
+	    width: 95%;
+   }
+     
+     /* START COL1 INFO */
+   #bottom-currentWeatherInfo-col1{
+   		width: 50%;
+   		height: 100%;
+   		font-size: 50px;
+   }
+   #bottom-currentWeatherInfo-col1-time {
+   		width: 100%;
+   		height: 10%;
+   		color: white;
+   		display: flex;
+	  	align-items: flex-start; 
+		
+	  	position: relative;
+  		top: 5%;
+	  	left: 5%;
+	  	font-family: Garamond, serif;
+   }
+   #bottom-currentWeatherInfo-col1-info {
+   		width: 100%;
+   		height: 50%;
+   		display: flex;
+	  	align-items: flex-start; 
+	  	
+	  	position: relative;
+  		top: 15%;
+	  	left: 10%;
+	  	font-family: Garamond, serif;
+   }
+    #bottom-currentWeatherInfo-col1-sunset {
+    	width: 100%;
+   		height: 40%;
+   		display: flex;
+   		
+   		align-items: flex-end; 
+   		position: relative;
+  		bottom: 10%;
+	  	left: 10%;
+	  	font-family: Garamond, serif;
+   }
+   
+     /* END COL1 INFO */
+     /* START COL2 INFO */
+   
+   #bottom-currentWeatherInfo-col2 {
+   		width: 50%;
+ 	 	height: 100%;
+ 	 	
+   }
+   #bottom-currentWeatherInfo-col2-warningBorder {
+   		width: 105%;
+   		height: 46%;
+ 	 	border-bottom: 1px solid black;
+ 	 	border-left: 1px solid black;
+ 	 	background-color: rgb(77, 77, 255);
+   }
+   #bottom-currentWeatherInfo-col2-warningTitle {
+   		width: 100%;
+   		height: 28%;
+   		color: white;
+   		display: flex;
+	  	align-items: flex-start; 
+		color: rgb(153, 0, 0);
+	  	position: relative;
+  		top: 5%;
+	  	left: 5%;
+	  	font-size: 45px;
+   }
+   #bottom-currentWeatherInfo-col2-warning {
+   		width: 95%;
+   		height: 36%;
+   		color: white;
+   		display: flex;
+	  	align-items: flex-start; 
+	  	position: relative;
+  		top: 12%;
+	  	left: 10%;
+	  	font-size: 35px;
+	  	
+   }
+   #bottom-currentWeatherInfo-col2-info {
+   		width: 95%;
+   		height: 54%;
+   		display: flex;
+   		
+   		align-items: flex-end; 
+   		position: relative;
+  		bottom: 5%;
+	  	left: 10%;
+	  	font-family: Garamond, serif;
+	  	font-size: 40px;
+   
+   }
+       /* END COL2 INFO */ 
+   
+   /* END CURRENT WEATHER INFO */
+   
+   /* START 3HOURLY INFO */
+ 
+   #bottom-3hourlyWeather1 {
+   		width: 100%;
+ 	 	height: 34%;
+ 	 	
+ 	 	display: flex;
+  		flex-direction: row;
+   }  
+   #bottom-3hourlyWeather2 {
+   		width: 100%;
+ 	 	height: 34%;
+ 	 	display: flex;
+  		flex-direction: row;
+   }
+   
+   #bottom-3hourlyWeather-hourInfo {
+   		width: 25%;
+   		height: 100%;
+        align-items: center;
+        display: flex;
+   }
+   #bottom-3hourlyWeather-hourInfo-box {
+   		border: 1px solid black;
+		width: 75%;
+		height: 63%;
+		margin: auto;
+		justify-content: center;
+		background-color: rgb(77, 77, 255);
+		color: white;
+   }
+   #bottom-3hourlyWeather-time {
+   		width: 100%;
+   		height: 15%;
+   		justify-content: center;
+	    align-items: center;
+	    text-align: center;
+	    color: rgb(230, 184, 0);
+	    font-size: 30px;
+   }
+   
+   #bottom-3hourlyWeather-tempAndIcon {
+   		width: 100%;
+   		height: 40%;
+   		display: flex;
+  		flex-direction: row;
+  		font-size: 30px;
+   }
+	   #bottom-3hourlyWeather-temp {
+	   		width: 50%;
+	   		height: 100%;
+	   		display: flex;
+	   		justify-content: center;
+		    align-items: center;
+		    text-align: center;
+	   }
+	   
+	   #bottom-3hourlyWeather-iconAndDisc {
+	   		width: 50%;
+	   		height: 100%;
+	   		display: flex;
+		 	flex-wrap: wrap;
+	   }
+	   
+	   #bottom-3hourlyWeather-icon {
+		  	display: flex;
+		    height: 70%;
+	        align-items: flex-end; /* aligns items vertically at the bottom */
+	        justify-content: center; 
+	   }
+	   #bottom-3hourlyWeatherImg {
+	   	    height: 90px;
+		    width: 90px;
+		    
+	   }
+	   #bottom-3hourlyWeather-iconDisc {
+	   		height: 20%;
+	   		width: 100%;
+		   	display: flex;
+		  	align-items: flex-start;
+		  	justify-content: center;
+		   	z-index: 2;
+		   	font-size: 1em;
+		   	position: relative;
+		   	bottom: 25%;
+	   }
+	   
+  #bottom-3hourlyWeather-highLow {
+  		width: 100%;
+   		height: 17%;
+   		justify-content: center;
+	    align-items: center;
+	    text-align: center;
+	    font-size: 30px;
+  }
+  #bottom-3hourlyWeather-weatherDisc {
+  		width: 100%;
+   		height: 14%;
+   		justify-content: center;
+	    align-items: center;
+	    text-align: center;
+	    color: black;
+	    font-size: 25px;
+  }
+  #bottom-3hourlyWeather-downfall {
+  		width: 100%;
+   		height: 14%;
+   		justify-content: center;
+	    align-items: center;
+	    text-align: center;
+	    color: black;
+	    font-size: 25px;
+  } 
+   
+   
+  /* START ADVANCED INFO */ 
+   
+   #bottom-advancedInfo {
+   		width: 100%;
+ 	 	height: 3%;
+ 	    top: 89.8%;
+ 	 	
+ 	 	z-index: 4;
+ 	 	bottom: 0;
+ 	 	background-color: rgb(166, 166, 166);
+ 	 	
+	    
+	    border-top: 1px solid black;
+	    font-size: 50px;
+	    position: absolute;
+   }
+   #bottom-advancedInfo-Title {
+   		padding-left: 10px;
+   		display: flex;
+   		top: 0;
+   		left: 0;
+   		border-bottom: 3px solid black;
+   }
+   #bottom-advancedInfo-Title:hover {
+    	background-color: rgb(128, 128, 128);
+    	cursor: pointer;
+   }
+  
+   #bottom-advancedInfo-hiddenContent {
+   		display: none;
+   		padding-top: 5px;
+   		font-size: 30px;
+   }
+   #bottom-advancedInfo.expanded #bottom-advancedInfo-hiddenContent {
+	  display: block;
+	}
+	
+	#hiddenContent-tempGraph-Title {
+		height: 5%;
+		width: 100%;
+		color: rgb(0, 0, 204);
+		display: flex;
+		justify-content: center;
+	    align-items: center;
+	    text-align: center;
+	    padding-bottom: 5px;
+	    text-decoration: underline;
+	    
+	    width: 920px;
+	    height: 20px;
+	    margin: 0 auto;
+	    margin-top: 15px;
+	    padding-bottom: 10px;
+	    padding-top: 10px;
+	    background-color: rgb(153, 204, 255);
+	    border-top: 3px solid black;
+	    border-left: 3px solid black;
+	    border-right: 3px solid black;
+	}
+	#graph-container {
+	  width: 920px;
+	  height: 450px;
+	  margin: 0 auto;
+	  background-color: rgb(153, 204, 255);
+	  border-left: 3px solid black;
+	  border-right: 3px solid black;
+	}
+	#hiddenContent-tempValuesDiv {
+		width: 920px;
+	  	height: 35px;
+	  	margin: 0 auto;
+	  	font-size: 26px;
+	  	display: flex;
+	 	flex-wrap: wrap;
+	 	background-color: rgb(153, 204, 255);
+	 	color: rgb(153, 122, 0);
+	 	
+	 	border-bottom: 3px solid black;
+	    border-left: 3px solid black;
+	    border-right: 3px solid black;
+	}
+		#hiddenContent-avgTempValues1 {
+			width: 11.5%;
+		  	justify-content: center;
+		    align-items: center;
+		    padding-left: 30px;
+		}
+		#hiddenContent-avgTempValues2 {
+			width: 11.5%;
+		  	justify-content: center;
+		    align-items: center;
+		    padding-left: 12px;
+		}
+		#hiddenContent-avgTempValues3 {
+			width: 12.5%;
+		  	justify-content: center;
+		    align-items: center;
+		    padding-left: 10px;
+		}
+		#hiddenContent-avgTempValues4 {
+			width: 12.5%;
+		  	justify-content: center;
+		    align-items: center;
+		    padding-left: 0px;
+		}
+		#hiddenContent-avgTempValues5 {
+			width: 12.5%;
+		  	justify-content: center;
+		    align-items: center;
+		    padding-left: 0px;
+		}
+		#hiddenContent-avgTempValues6 {
+			width: 12.5%;
+		  	justify-content: center;
+		    align-items: center;
+		    padding-left: 0px;
+		}
+		#hiddenContent-avgTempValues7 {
+			width: 12.5%;
+		  	justify-content: center;
+		    align-items: center;
+		    padding-left: 0px;
+		}
+		#hiddenContent-avgTempValues8 {
+		  	justify-content: center;
+		    align-items: center;
+		    padding-left: 0px;
+		    
+		}
+	
+	#hiddenContent-otherInfo {
+		width: 95%;
+		height: 40%;
+		
+		border-top: 3px solid black;
+		margin: auto;
+		margin-top: 20px;
+		justify-content: center;
+	    align-items: center;
+	    text-align: center;
+		display: flex;
+		flex-dirction: row;
+		font-size: 50px;
+	}
+	#hiddenContent-otherInfo-col1 {
+		width: 50%;
+		height: 90%;
+		justify-content: center;
+	    align-items: center;
+	    text-align: start;
+	    padding-left: 50px;
+		margin: auto;
+		margin-top: 20px;
+	}
+	#hiddenContent-otherInfo-col2 {
+		width: 50%;
+		height: 90%;
+		justify-content: center;
+	    align-items: center;
+	    text-align: start;
+	    padding-left: 50px;
+	    border-left: 1px solid black;
+	    margin: auto;
+		margin-top: 20px;
+	}
+	 /* END ADVANCED INFO */
+	
+	
+	
+	
+   /* START BOTTOM OPENWEATHER LOGO */
+   
+   #openWeatherLogoAndSocialLinks {
+       position: absolute;
+       border-top: 2px solid black;
+       bottom: 0;
+       height: 7%;
+       width: 100%;
+       display: flex;
+       
+       background-color: rgb(0, 32, 128);
+       
+   }
+   #openWeatherLogoText{
+   	   width: 100%;
+       color: white;
+       font-size: 50px;
+       display: flex;
+       align-items: center;
+       padding-left: 10px;
+   }
+   #openWeatherLogoImage {
+       padding-left: 20px;
+       height: 80px;
+       width: 190px;       
+       z-index: 1;
+   }
+   #socialLinks {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		padding-right: 3px;
+		padding-bottom: 3px;
+		color: white;
+		text-align: right;
+		font-size: 25px;
+   
+   }
+   
+   
+   
+   

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width,
+        initial-scale=1">
+<title>Weather App</title>
+
+<link rel="stylesheet" href="/cssStyles/weatherScreen/tomorrow/weatherScreen-Tomorrow-top.css">
+<link rel="stylesheet" href="/cssStyles/weatherScreen/tomorrow/weatherScreen-Tomorrow-bottom.css">
+<link rel="stylesheet" href="/cssStyles/weatherScreen/tomorrow/weatherScreen-Tomorrow-advancedInfo.css">
+<link rel="stylesheet" href="/cssStyles/bottomLinks.css">
+
+</head>
+<body>
+     <div id="backgr">
+     </div>     
+    <div>
+    </div>
+    <div id="aspect-ratio">
+        <div id="textarea">
+        
+            <div id="top">
+            	<div id="top-search">
+                    <form>
+                        <input type="text" id="userInput" placeholder="ZIP or City (Dallas, TX)">
+                    </form>
+                </div>
+                
+                <div id="top-columns">
+                	<div id="top-column1">
+	                	<div id="top-location">
+	                    	[[${report.getCity()}]]
+	                    	<input type="hidden" id="location" 	th:value="${report.getCity()}"/>
+	                    	<input type="hidden" id="id" 	th:value="${id}"/>
+	                    	<input type="hidden" id="locationIndex" 	th:value="${locationIndex}"/>
+		                </div>
+		                <div id="top-time">
+		                    Tomorrow
+		                </div>
+		                <div id="top-date">
+		                    [[${tomorrow.getDaysDate()}]]
+		                </div>
+		            </div>
+		            
+		            <div id="top-column2">
+	                	<div id="top-avgTemp">
+	                    	[[${tomorrow.getAvgTemp()}]]<span id="degreesSymbol">&#176;</span>F
+		                </div>
+		                <div id="top-highLowTemp">
+	                    	[[${tomorrow.getLowTemp()}]] - [[${tomorrow.getHighTemp()}]] <span id="degreesSymbol">&#176;</span>F
+		                </div>
+		            </div>
+		            
+		            <div id="top-column3">
+	                	<div id="top-imageDiv">
+	                    	<img id="top-currentWeatherImg" th:src="@{'http://openweathermap.org/img/wn/' + ${tomorrow.getAvgWeatherIconId()} + '@2x.png'}"/>
+		                </div>
+		                <div id="top-imageDisc">
+	                    	[[${tomorrow.getAvgWeatherMain()}]]
+		                </div>
+		                <div id="top-imageDisc2">
+	                    	<i>([[${tomorrow.getAvgWeatherDesc()}]])</i>
+		                </div>
+		                
+		            </div>
+                </div>
+                <div id="top-daySelector">
+                	<div id="top-TodayDiv">
+                		Today
+                	</div>
+                	<div id="top-TomorrowDiv">
+                		Tomorrow
+                	</div>
+                	<div id="top-5DayDiv">
+                		5-Day Forecast
+                	</div>
+                </div>
+                
+                
+            </div>
+            
+            <div id="bottom">
+            
+            	<div id="bottom-currentWeatherInfo">
+            	
+	                <div id="bottom-currentWeatherInfo-col1">
+	                	<span id="bottom-currentWeatherInfo-col1-title"> <b>Tomorrow:</b> </span>
+						<div id="bottom-currentWeatherInfo-col1-info">
+							Average: [[${tomorrow.getAvgTemp()}]]&#176;F  <br>              
+	                	</div>
+	                	<div id="bottom-currentWeatherInfo-col1-sunset">
+							Sunrise: [[${tomorrow.getSunriseTime()}]] <br>
+							Sunset: [[${tomorrow.getSunsetTime()}]]
+	                	</div>
+	                	
+	                </div>
+	                <div id="bottom-currentWeatherInfo-col2">
+	                	
+	                	<div id="bottom-currentWeatherInfo-col2-info">
+	                		Precipitation: <br>
+	                		<span id="precipChance">Chance: [[${tomorrow.getDownfallProbability()}]]% </span>
+	                		<br>
+	                		<th:block th:if="${tomorrow.getDownfallRainAmount() != 0}">
+	                			<span id="downfall"> 
+	                			  Rain: [[${tomorrow.getDownfallAmountRainMmAndInches()}]] <br>
+								 </span>
+							</th:block>
+							<th:block th:if="${tomorrow.getDownfallSnowAmount() != 0}">
+	                			<span id="downfall"> 
+	                			  Snow: [[${tomorrow.getDownfallAmountSnowMmAndInches()}]]
+								 </span>
+							</th:block>
+							<th:block th:if="${tomorrow.getDownfallRainAmount() == 0 && tomorrow.getDownfallSnowAmount() == 0}">
+								None
+							</th:block>
+	                	</div>
+	                	
+	                </div>
+	                
+            	</div>
+            	
+            	
+            	<div id="bottom-3hourlyWeather1">
+            		<div id="bottom-3hourlyWeather-hourInfo" th:each="triReport, iterStat : ${tomorrow.getTriHourlyReports()}" th:if="${iterStat.index} &lt; 4">
+            			<div id="bottom-3hourlyWeather-hourInfo-box">
+            			
+            				<div id="bottom-3hourlyWeather-time">
+            					<b>  [[${triReport.getTimeWindow()}]] </b>
+            				</div>
+            				
+            				<div id="bottom-3hourlyWeather-tempAndIcon">
+            					<div id="bottom-3hourlyWeather-temp">
+            						 [[${triReport.getTemp()}]]&#176;F 
+            					</div>
+            					<div id="bottom-3hourlyWeather-iconAndDisc">
+            						<div id="bottom-3hourlyWeather-icon">
+            							<img id="bottom-3hourlyWeatherImg" th:src="@{'http://openweathermap.org/img/wn/' + ${triReport.getWeatherIconId()} + '@2x.png'}"/>
+		                			</div>
+            						<div id="bottom-3hourlyWeather-iconDisc">
+            							 [[${triReport.getWeatherMain()}]]
+            						</div>
+            					</div>
+            				</div>
+            				
+		            		<div id="bottom-3hourlyWeather-weatherDisc">
+		            				([[${triReport.getWeatherDesc()}]])
+		            		</div>	
+		            		<div id="bottom-3hourlyWeather-downfall">
+		            				<th:block th:if="${triReport.downfallType.contains('Rain')}">
+			                			<span id="3hourlyWeather-downfallAmount"> 
+			                			  Rain: [[${triReport.getDownfallAmountInches()}]]
+										 </span>
+									</th:block>
+									<th:block th:if="${triReport.downfallType.contains('Snow')}">
+			                			<span id="3hourlyWeather-downfallAmount"> 
+			                			  Snow: [[${triReport.getDownfallAmountInches()}]]
+										 </span>
+									</th:block>
+									<th:block th:if="${triReport.getDownfallTotalAmount() == 0}">
+										Precip: None
+									</th:block>
+		            		</div>	
+		            		<div id="bottom-3hourlyWeather-humidity">
+		            				Humidity: [[${triReport.getHumidity()}]]%
+		            		</div>	
+            			</div>
+            		</div>
+            		
+            		
+            		
+            	</div>
+            	
+            	
+            	
+            	<div id="bottom-3hourlyWeather2">
+            		<div id="bottom-3hourlyWeather-hourInfo" th:each="triReport, iterStat : ${tomorrow.getTriHourlyReports()}" th:if="${iterStat.index >= 4 and iterStat.index < 8}">
+            			<div id="bottom-3hourlyWeather-hourInfo-box">
+            			
+            				<div id="bottom-3hourlyWeather-time">
+            					<b>  [[${triReport.getTimeWindow()}]] </b>
+            				</div>
+            				
+            				<div id="bottom-3hourlyWeather-tempAndIcon">
+            					<div id="bottom-3hourlyWeather-temp">
+            						 [[${triReport.getTemp()}]]&#176;F 
+            					</div>
+            					<div id="bottom-3hourlyWeather-iconAndDisc">
+            						<div id="bottom-3hourlyWeather-icon">
+            							<img id="bottom-3hourlyWeatherImg" th:src="@{'http://openweathermap.org/img/wn/' + ${triReport.getWeatherIconId()} + '@2x.png'}"/>
+		                			</div>
+            						<div id="bottom-3hourlyWeather-iconDisc">
+            							 [[${triReport.getWeatherMain()}]]
+            						</div>
+            					</div>
+            				</div>
+            				
+		            		<div id="bottom-3hourlyWeather-weatherDisc">
+		            				([[${triReport.getWeatherDesc()}]])
+		            		</div>	
+		            		<div id="bottom-3hourlyWeather-downfall">
+		            				<th:block th:if="${triReport.downfallType.contains('Rain')}">
+			                			<span id="3hourlyWeather-downfallAmount"> 
+			                			  Rain: [[${triReport.getDownfallAmountInches()}]]
+										 </span>
+									</th:block>
+									<th:block th:if="${triReport.downfallType.contains('Snow')}">
+			                			<span id="3hourlyWeather-downfallAmount"> 
+			                			  Snow: [[${triReport.getDownfallAmountInches()}]]
+										 </span>
+									</th:block>
+									<th:block th:if="${triReport.getDownfallTotalAmount() == 0}">
+										Precip: None
+									</th:block>
+		            		</div>	
+		            		<div id="bottom-3hourlyWeather-humidity">
+		            				Humidity: [[${triReport.getHumidity()}]]%
+		            		</div>	
+            			</div>
+            		</div>
+            		
+            	</div>
+            	
+            	<div id="advancedInfo">
+            		<div id="advancedInfo-Title">^ Advanced Info</div>
+            		<div id="advancedInfo-hiddenContent">
+            			<span id="hiddenContent-tempGraph-Title">Tomorrow's Temperature Graph (&#176;F)</span>
+						<div id="graph-container">
+						  <canvas id="temp-graph"></canvas>
+						</div>
+						<div id="hiddenContent-tempValuesDiv">
+							 <div th:each="report, i : ${tomorrow.triHourlyReports}" th:id="'hiddenContent-avgTempValues' + ${i.index + 1}">
+						        <span th:text="${report.getTemp()}"></span>&#176;
+						    </div>
+						</div>
+						
+						<div id="hiddenContent-otherInfo">
+							<div id="hiddenContent-otherInfo-col1">
+								<div id="hiddenContent-otherInfo-col1-info">
+									Solar noon: [[${tomorrow.getSolarNoon()}]] <br>
+									Sunlight: [[${tomorrow.getTotalSunlight()}]] <br>
+									                  
+			                	</div>
+			                	
+			                </div>
+			                <div id="hiddenContent-otherInfo-col2">
+			                	<div id="hiddenContent-otherInfo-col2-info">
+									Population: [[${tomorrow.getCityPopulation()}]] <br>
+									
+									                  
+			                	</div>
+	                	
+	                
+	                		</div>
+						</div>
+						
+						        		
+            		</div>
+            	</div>
+            	
+            	
+            	
+	            <div id="openWeatherLogoAndSocialLinks">
+	                <div id="openWeatherLogoText">
+	                    <i>Powered by</i> 
+	                    <a href="https://openweathermap.org/" target="_blank">
+	                        <img id="openWeatherLogoImage" src="/images/openWeatherLogo.png">
+	                    </a>
+	                </div>
+	                <div id="socialLinks">
+	                	<b> <a href="https://github.com/Nathan-Barthen" target="_blank">GitHub</a> <br>
+	                	    <a href="https://www.linkedin.com/in/nathan-barthen-22993722a/" target="_blank">LinkedIn</a> </b>
+	                </div>
+	            </div>
+            
+            </div>
+            
+           
+        
+            
+        </div>    
+    </div>
+	
+	
+	<script src="/javaScript/entersLocation.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="/javaScript/advancedInfo-Popup.js"></script>
+	<script src="/javaScript/advandedInfo-Tomorrow-Graph.js"></script>
+	<script src="/javaScript/clicks-Today.js"></script>
+	<script src="/javaScript/clicks-5DayForeCast.js"></script>
+	
+	
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
