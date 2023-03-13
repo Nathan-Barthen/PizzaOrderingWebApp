@@ -1,47 +1,43 @@
 
-/* OPENWEATHER LOGO / Social Links */
-
-
 	
-   /* START BOTTOM OPENWEATHER LOGO / Social Links */
+/* Social Links */
    
-   #openWeatherLogoAndSocialLinks {
-       position: absolute;
+   #socialLinksBorder {
+   		height: 100px;
+		width: 1396px;
+		min-width: 99%;
+		position: relative;
+		
+	   bottom: 0;
+	   left: 50%;
+  	   transform: translate(-50%, 50%);
        border-top: 2px solid black;
-       bottom: 0;
-       height: 7%;
-       width: 100%;
-       display: flex;
-       
-       background-color: rgb(0, 32, 128);
+       height: 65px;
+       background-color: rgb(51, 102, 255);
        
    }
-   #openWeatherLogoText{
-   	   width: 100%;
-       color: white;
-       font-size: 50px;
-       display: flex;
-       align-items: center;
-       padding-left: 10px;
-   }
-   #openWeatherLogoImage {
-       padding-left: 20px;
-       height: 80px;
-       width: 190px;       
-       z-index: 1;
-   }
+   
    #socialLinks {
-		position: absolute;
-		bottom: 0;
-		right: 0;
+   		width: 100%;
+   		height: 65px;
 		padding-right: 3px;
-		padding-bottom: 3px;
-		color: white;
-		text-align: right;
+		color: black;
+		
+		display: flex;
+    	justify-content: flex-end; /* align links to the right */
+		align-items: end;
+		
 		font-size: 25px;
    
    }
-   
-   
+   		 #socialLinks b {
+   		 	display: flex;
+   		 	flex-direction: column;
+   		 	padding-bottom: 5px;
+   		 }
+   		 
+   		#gitHub {
+   			padding-left: 14px;
+   		}
    
    
