@@ -94,48 +94,129 @@
    					Search:  
    					<div id="searchDiv">
    							<form>
-		                        <input type="text" id="userSearchInput" placeholder="Search item">
+		                        <input type="text" id="userSearchInput" placeholder="Search menu">
 		                     </form>
 		             </div>
    				</div>
    			</div>
    			
    			<div id="foodCategories">
-   				<div id="foodCategories-col1">
-   					<div id="category1">
-   						Pizza
+   				<div id="foodCategories-col">
+   				
+   					<div id="category">
+   						<div id="categoryBorder">
+	   						<div id="categoryImgDiv">
+	   							<img id="categoryImg" src="/images/categoryImages/pizzaGeneral.jpg">
+	   						</div>
+	   						<div id="categoryItemName">
+	   							Pizza
+	   						</div>
+   						</div>
    					</div>
    					
-   					<div id="category2">
-   						Sides
+   					<div id="category">
+   						<div id="categoryBorder">
+	   						<div id="categoryImgDiv">
+	   							<img id="categoryImg" src="/images/categoryImages/sidesGeneral.jpg">
+	   						</div>
+	   						<div id="categoryItemName">
+	   							Sides
+	   						</div>
+	   					</div>
    					</div>
    						
-   					<div id="category3">
-   						Wings
+   					<div id="category">
+   						<div id="categoryBorder">
+	   						<div id="categoryImgDiv">
+	   							<img id="categoryImg" src="/images/categoryImages/wingsGeneral.jpg">
+	   						</div>
+	   						<div id="categoryItemName">
+	   							Wings
+	   						</div>
+	   					</div>
    					</div>
    					
+   				</div>
+   					
+   				<div id="foodCategories-col">
+   					
+   					<div id="category">
+   						<div id="categoryBorder">
+	   						<div id="categoryImgDiv">
+	   							<img id="categoryImg" src="/images/categoryImages/pastaGeneral.jpg">
+	   						</div>
+	   						<div id="categoryItemName">
+	   							Pasta
+	   						</div>
+   						</div>
+   					</div>
+   					
+   					<div id="category">
+   						<div id="categoryBorder">
+	   						<div id="categoryImgDiv">
+	   							<img id="categoryImg" src="/images/categoryImages/wedgieGeneral.jpg">
+	   						</div>
+	   						<div id="categoryItemName">
+	   							Wedgies
+	   						</div>
+	   					</div>
+   					</div>
+   						
+   					<div id="category">
+   						<div id="categoryBorder">
+	   						<div id="categoryImgDiv">
+	   							<img id="categoryImg" src="/images/categoryImages/dessertsGeneral.jpg">
+	   						</div>
+	   						<div id="categoryItemName">
+	   							Desserts
+	   						</div>
+	   					</div>
+   					</div>
    					
    				</div>
    					
-   				<div id="foodCategories-col2">
-   					
-   					
-   					
-   				</div>
-   					
-   				<div id="foodCategories-col3">
-   					
-   					
+   				<div id="foodCategories-col">
+   				
+   					<div id="category">
+   						<div id="categoryBorder">
+	   						<div id="categoryImgDiv">
+	   							<img id="categoryImg" src="/images/categoryImages/drinksGeneral.jpg">
+	   						</div>
+	   						<div id="categoryItemName">
+	   							Drinks
+	   						</div>
+	   					</div>
+   					</div>
+   						
+   					<div id="category">
+   						<div id="categoryBorder">
+	   						<div id="categoryImgDiv">
+	   							<img id="categoryImg" src="/images/categoryImages/miscGeneral.jpg">
+	   						</div>
+	   						<div id="categoryItemName">
+	   							Misc
+	   						</div>
+	   					</div>
+   					</div>
    					
    				</div>
    				
    			</div>
    				
    				
+   			<div id="socialLinksBorder">
+		     	<div id="socialLinks">
+		            <b> 
+		            	<a id="gitHub" href="https://github.com/Nathan-Barthen" target="_blank">GitHub</a>
+		                <a id="linkedIn" href="https://www.linkedin.com/in/nathan-barthen-22993722a/" target="_blank">LinkedIn</a> 
+		            </b>
+		        </div>
+		    </div>
+   			
    		</div>
    	
-   	
-   	
+   		
+   		
    	
    	</div>
   </div>
@@ -154,6 +235,11 @@
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>
+	
+	<script>const foodCategoryCols = document.querySelectorAll('#foodCategories-col');
+		const height = 100 + (400 * foodCategoryCols.length);
+		document.querySelector('#pageBody').style.height = height + 'px';
+	</script>
 	
 </body>
 </html>
