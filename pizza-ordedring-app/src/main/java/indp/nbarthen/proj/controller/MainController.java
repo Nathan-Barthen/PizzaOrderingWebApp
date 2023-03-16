@@ -62,7 +62,7 @@ public class MainController {
 		 	model.addAttribute("popupError", userSearchPopupError);
 		 	
 		 	
-	        return "homePage";
+	        return "itemPage";
 	    }
 	 
 	 
