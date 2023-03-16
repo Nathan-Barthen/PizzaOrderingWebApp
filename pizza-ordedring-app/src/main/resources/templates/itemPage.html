@@ -7,7 +7,7 @@
 <title>Online Pizza Ordering</title>
 
 <link rel="stylesheet" href="/cssStyles/backgroundAndTopBar.css">
-<link rel="stylesheet" href="/cssStyles/home.css">
+<link rel="stylesheet" href="/cssStyles/itemPage.css">
 <link rel="stylesheet" href="/cssStyles/bottomLinks.css">
 
 
@@ -89,7 +89,7 @@
    		<div id="pageBody">
    			<div id="body-headers">
    				<div id="storeLocation"> 156 Elderwood Ave </div>
-   				<div id="menuTitle"> Menu </div>
+   				<div id="categoryTitle"> Dessert(s) </div>
    				<div id="searchMenu">
    					Search:  
    					<div id="searchDiv">
@@ -100,110 +100,36 @@
    				</div>
    			</div>
    			
-   			<div id="foodCategories">
-   				<div id="foodCategories-row">
-   				
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/pizzaGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Pizza
-	   						</div>
-   						</div>
-   					</div>
-   					
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/sidesGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Sides
-	   						</div>
-	   					</div>
-   					</div>
-   						
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/wingsGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Wings
-	   						</div>
-	   					</div>
-   					</div>
-   					
+   			<div id="imageAndDesc">
+   				<div id="itemImgDiv"> 
+	   				<img id="itemImg" src="/images/items/desserts/brownie.jpg">
    				</div>
-   					
-   				<div id="foodCategories-row">
-   					
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/pastaGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Pasta
-	   						</div>
-   						</div>
+   				<div id="itemDescDiv">
+   					<div id="itemName">
+   						Brownie
    					</div>
-   					
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/wedgieGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Wedgies
-	   						</div>
-	   					</div>
+   					<div id="itemDesc">
+   						This is the description for the item that is shown above me. 
+   						I made this extra long to test length.
    					</div>
-   						
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/dessertsGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Desserts
-	   						</div>
-	   					</div>
-   					</div>
-   					
    				</div>
-   					
-   				<div id="foodCategories-row">
-   				
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/drinksGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Drinks
-	   						</div>
-	   					</div>
-   					</div>
-   						
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/miscGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Misc
-	   						</div>
-	   					</div>
-   					</div>
-   					
-   				</div>
-   				
    			</div>
+   			<div id="mainOptions">
+   				<div id="mainOption-dropDown">
+   					<label id="labelName">Sauce Type:</label>
+					 <select id="selectionTypes" name="selectionTypes">
+					    <option value="redSauce">Red Sauce</option>
+					    <option value="spicySauce">Spicy Sauce</option>
+					    <option value="tomatoSauce">Tomato Sauce</option>
+					 </select>
+   				</div>
+   				<div id="mainOption-keepOrRemove">
    				
+   				</div >
    			
+   			</div>
+   			
+   				
    				
    			<div id="socialLinksBorder">
 		     	<div id="socialLinks">
@@ -212,10 +138,9 @@
 		                <a id="linkedIn" href="https://www.linkedin.com/in/nathan-barthen-22993722a/" target="_blank">LinkedIn</a> 
 		            </b>
 		        </div>
-		    </div>
+			</div>
    			
    		</div>
-   		
    	
    	</div>
   </div>
@@ -230,10 +155,11 @@
 	<script src="/javaScript/menuOptions/showDrinks.js"></script>
 	<script src="/javaScript/menuOptions/showMisc.js"></script>
 	
-	<script src="/javaScript/bodySize-homePage.js"></script>
+	
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>
+	
 	
 	
 	
