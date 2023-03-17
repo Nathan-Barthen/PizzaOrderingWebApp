@@ -1,4 +1,5 @@
 
+	@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 	
 	#pageBody {
 		width: 1400px;
@@ -148,32 +149,194 @@
 					font-size: 40px;
 				}
 		
-		#mainOptions {
-			width: 100%;
-			height: 100px;
-			
-			margin-top: 20px;
-		}
-			#mainOption-dropDown {
+		
+					
+		/* START - mainOptions Dropdown box styles. */	
+			#mainOptions-dropdownContainer {
+				width: 100%;
+				
 				display: flex;
-				justify-content: center;
 				align-items: center;
-			}
-				#labelName {
+			    text-align: center;
+			    
+			    
+				padding-bottom: 10px;
+			}	
+			
+				#dropdownLabelName {
+					width: 45%;
 					font-size: 40px;
 					padding-right: 10px;
+					text-align: end;
+					
 				}
-				#selectionTypes {
-					font-size: 40px;
-					background-color: rgb(255, 187, 153);
-					color: black;
-				  	padding-left: 5px;
+			  	.dropdown {
+			    	width: 55%;
+			  		margin-left: 60px;
+			  
+				    border: 3px solid black;
+				    background: rgb(255, 187, 153);
+				    color: black;
+				    cursor: pointer;
+				    height: 50px;
+				    line-height: 50px;
+				    position: relative;
+				    width: 300px;
+				    text-align: center;
+				    text-decoration: none;
+				    z-index: 1;
+				    transform: perspective(1000px);
+				    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+				    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 				  	
-					border-radius: 10px;
-				  	border: 3px solid black;	
-				  	
-				}
-				
-				
+				  	font-size: 25px;
+			  }
+			  #selectedOption {
+			    position: relative;
+			    font-weight: bold;
+			  }
 			
+			  .dropdown-menu {
+				    background-color: rgb(255, 136, 77);
+				    list-style-type: none;
+				    margin: 0;
+				    padding: 0;
+				    position: absolute;
+				    left: 0;
+				    opacity: 0;
+				    text-align: center;
+				    top: 100%;
+				    visibility: hidden;
+				    z-index: -99999;
+				    width: 100%;
+				    
+				    
+				    -webkit-transition: all .5s, background, 2s .5s linear;
+				    transition: all .5s, background 2s .5s linear;
+			  }
+			
+			  .dropdown-menu li:first-child {
+			    	cursor: default;
+			  }
+			
+			  .dropdown-menu a {
+				    color: #000;
+				    display: inline-block;
+				    width: 100%;
+				    text-decoration: none;
+				    -webkit-transition: all .5s;
+				    transition: all .001s;
+			  }
+			
+			  .dropdown-menu a:hover {
+				    background: rgb(179, 60, 0);
+				    color: #fff;
+			  }
+			
+			  .dropdown:hover .dropdown-menu {
+				    background: rgb(255, 102, 26);
+				    opacity: 1;
+				    visibility: visible;
+				    z-index: 10;
+			  }
+  		/* END - Main Options - Dropdown box styles. */
+ 		/* START - Main Options - lightNormalExtra styles */
+ 		#mainOption-lightNormalExtra{
+ 			width: 100%;
+				
+			display: flex;
+			align-items: center;
+			text-align: center;
+			    
+			padding-bottom: 10px;
+ 		}
+	 		#ingredientName {
+	 			width: 30%;
+				font-size: 40px;
+				padding-right: 10px;
+				text-align: end; 
+	 		
+	 		}
+	 		#amountDiv {
+	 			width: 25%;
+				font-size: 30px;
+				padding-right: 30px;
+				
+				display: flex;
+				flex-direction: row;
+				
+	 		}
+	 			#light {
+	 				width: 33.33%;
+				
+					display: flex;
+					align-items: center;
+					text-align: center;
+					justify-content: center;
+	 			}
+	 			#normal {
+	 				width: 33.33%;
+				
+					display: flex;
+					align-items: center;
+					text-align: center;
+					justify-content: center;
+	 			}
+	 			#extra {
+	 				width: 33.33%;
+				
+					display: flex;
+					align-items: center;
+					text-align: center;
+					justify-content: center;
+	 			}
+	 			
+ 			#sideOfPizzaDiv {
+	 			width: 25%;
+				font-size: 30px;
+				padding-right: 30px;
+				
+				display: flex;
+				flex-direction: row;
+	 		}
+	 			#leftSide {
+	 				width: 33.33%;
+				
+					display: flex;
+					align-items: center;
+					text-align: center;
+					justify-content: center;
+	 			}
+	 			#wholeSide {
+	 				width: 33.33%;
+				
+					display: flex;
+					align-items: center;
+					text-align: center;
+					justify-content: center;
+	 			}
+	 			#rightSide {
+	 				width: 33.33%;
+				
+					display: flex;
+					align-items: center;
+					text-align: center;
+					justify-content: center;
+	 			}
+	 		
+	 		#removeIngredient {
+	 			width: 20%;
+				font-size: 35px;
+				padding-right: 10px;
+				text-align: start; 
+	 		
+	 		}
+	 		
+ 		
+ 		/* END - Main Options - lightNormalExtra styles */
+			
+		
+		
+		
+		
 		
