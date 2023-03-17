@@ -111,25 +111,53 @@
    					<div id="itemDesc">
    						This is the description for the item that is shown above me. 
    						I made this extra long to test length.
+   						This is the description for the item that is shown above me. 
+   						I made this extra long to test length.
    					</div>
    				</div>
    			</div>
    			<div id="mainOptions">
-   				<div id="mainOption-dropDown">
-   					<label id="labelName">Sauce Type:</label>
-					 <select id="selectionTypes" name="selectionTypes">
-					    <option value="redSauce">Red Sauce</option>
-					    <option value="spicySauce">Spicy Sauce</option>
-					    <option value="tomatoSauce">Tomato Sauce</option>
-					 </select>
+   				<div id="mainOptions-dropdownContainer">
+   					<label id="dropdownLabelName">Sauce Type: </label>
+	   				<div class="dropdown">
+					  	<div id="selectedOption">Select</div>
+					  	<ul class="dropdown-menu">
+						    <li><a href="#">Red Sauce</a></li>
+						    <li><a href="#">Spicy Sauce</a></li>
+						    <li><a href="#">Tomato Sauce</a></li>
+						    <li><a href="#">Light Sauce</a></li>
+						</ul>
+					</div>
+				</div>
+   				
+   				<div id="mainOption-lightNormalExtra">
+   				
+   					<div id="ingredientName">Cheese: </div>
+   					
+   					<div id="amountDiv">
+	   					<div id="light"> Light </div>
+	   					<div id="normal"> Normal </div>
+	   					<div id="extra"> Extra </div>
+	   				</div>
+   					
+   					<div id="sideOfPizzaDiv">
+	   					<div id="leftSide"> Left </div>
+	   					<div id="wholeSide"> Whole </div>
+	   					<div id="rightSide"> Right </div>
+	   				</div>
+   				
+   					
+   					<div id="removeIngredient"> Remove </div>
+   					
    				</div>
+   				
    				<div id="mainOption-keepOrRemove">
    				
-   				</div >
+   				</div>
    			
    			</div>
    			
-   				
+   			
    				
    			<div id="socialLinksBorder">
 		     	<div id="socialLinks">
@@ -155,7 +183,7 @@
 	<script src="/javaScript/menuOptions/showDrinks.js"></script>
 	<script src="/javaScript/menuOptions/showMisc.js"></script>
 	
-	
+	<script src="/javaScript/updateSelectedOption.js"></script>
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>
