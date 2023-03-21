@@ -4,9 +4,9 @@
 	#pageBody {
 		width: 1400px;
 	    min-width: 99%;
-		height: 1360px;
-		min-height: 100%;
-		margin: 0 auto;
+	    min-height: 100%;
+	    margin: 0 auto;
+		margin-bottom: -100px;
 		
 		background: url(/images/lightBlueBackgrd.png) no-repeat center center fixed;
   	    background-size: cover;
@@ -150,7 +150,9 @@
 				}
 		
 		
-					
+		#mainOptions {
+			min-height: 350px;
+		}			
 		/* START - mainOptions Dropdown box styles. */	
 			#mainOptions-dropdownContainer {
 				width: 100%;
@@ -240,15 +242,44 @@
 				    z-index: 10;
 			  }
   		/* END - Main Options - Dropdown box styles. */
- 		/* START - Main Options - lightNormalExtra styles */
- 		#mainOption-lightNormalExtra{
+ 		/* START - Main Options - toppings - lightNormalExtra styles */
+ 		#mainOption-toppingsTitleDiv {
  			width: 100%;
+			height: 70px;
+			
+			
+			display: flex;
+			align-items: center;
+			text-align: center;
+			justify-content: center;
+			
+			padding-top: 20px;
+ 			padding-bottom: 10px;
+ 			
+ 		}
+ 			#mainOption-toppingsTitle {
+	 			width: 70%;
+				height: 70px;
 				
+				font-size: 50px;
+				display: flex;
+				align-items: center;
+				text-align: center;
+				justify-content: center;
+				
+				border-top: 1px solid black;
+ 			}
+ 		
+ 		#lightNormalExtra{
+ 			width: 100%;
+			height: 50px;
+			
 			display: flex;
 			align-items: center;
 			text-align: center;
 			    
 			padding-bottom: 10px;
+			
  		}
 	 		#ingredientName {
 	 			width: 30%;
@@ -274,6 +305,14 @@
 					text-align: center;
 					justify-content: center;
 	 			}
+	 				#lightText {
+		 				width: 70%;
+						border-radius: 10px;
+					  	border: 2px solid black;
+				  		background-color: rgb(255, 238, 230);
+				  	
+				  		cursor: pointer;
+	 				}
 	 			#normal {
 	 				width: 33.33%;
 				
@@ -281,7 +320,16 @@
 					align-items: center;
 					text-align: center;
 					justify-content: center;
+					
 	 			}
+	 				#normalText {
+		 				width: 92%;
+						border-radius: 10px;
+					  	border: 2px solid black;
+				  		background-color: rgb(255, 133, 77);
+				  		
+				  		cursor: pointer;
+	 				}
 	 			#extra {
 	 				width: 33.33%;
 				
@@ -290,14 +338,23 @@
 					text-align: center;
 					justify-content: center;
 	 			}
+	 				#extraText {
+		 				width: 70%;
+						border-radius: 10px;
+					  	border: 2px solid black;
+					  	background-color: rgb(255, 238, 230);
+				  		
+				  		cursor: pointer;
+	 				}
 	 			
  			#sideOfPizzaDiv {
-	 			width: 25%;
+	 			width: 15%;
 				font-size: 30px;
 				padding-right: 30px;
 				
 				display: flex;
 				flex-direction: row;
+				
 	 		}
 	 			#leftSide {
 	 				width: 33.33%;
@@ -307,6 +364,20 @@
 					text-align: center;
 					justify-content: center;
 	 			}
+	 				#leftSideText {
+	 					width: 40px;
+					    height: 40px;
+					    border-radius: 50%;
+					    border: 2px solid black;
+					    background-color: transparent;
+					    background-image: conic-gradient(from 0deg, rgb(191, 191, 191) 50%, rgb(255, 238, 230) 50%);
+					    display: flex;
+					    justify-content: center;
+					    align-items: center;
+					    
+					    cursor: pointer;
+	 				}
+	 				
 	 			#wholeSide {
 	 				width: 33.33%;
 				
@@ -315,6 +386,20 @@
 					text-align: center;
 					justify-content: center;
 	 			}
+	 				#wholeSideText {
+		 				width: 40px;
+					    height: 40px;
+					    border-radius: 50%;
+					    border: 2px solid black;
+					    background-color: transparent;
+					    background-image: conic-gradient(from 0deg, rgb(255, 133, 77) 50%, rgb(255, 133, 77) 50%);
+					    display: flex;
+					    justify-content: center;
+					    align-items: center;
+				  	
+				  		cursor: pointer;
+	 				}
+	 				
 	 			#rightSide {
 	 				width: 33.33%;
 				
@@ -323,19 +408,71 @@
 					text-align: center;
 					justify-content: center;
 	 			}
+	 				#rightSideText {
+		 				width: 40px;
+					    height: 40px;
+					    border-radius: 50%;
+					    border: 2px solid black;
+					    background-color: transparent;
+					    background-image: conic-gradient(from 0deg, rgb(255, 238, 230) 50%, rgb(191, 191, 191) 50%);
+					    display: flex;
+					    justify-content: center;
+					    align-items: center;
+					    
+					    cursor: pointer;
+				  	}
 	 		
 	 		#removeIngredient {
 	 			width: 20%;
 				font-size: 35px;
 				padding-right: 10px;
-				text-align: start; 
+				text-align: end; 
 	 		
+	 			
 	 		}
-	 		
+	 		#removeIngredientText {
+	 			padding-left: 10px;
+	 			padding-right: 10px;
+	 			
+	 			border-radius: 10px;
+	 			border: 2px solid black;
+				background-color: rgb(191, 191, 191);
+				cursor: pointer;
+	 		}
  		
  		/* END - Main Options - lightNormalExtra styles */
 			
-		
+		#add-ons_Extra {
+			min-height: 450px;
+			padding-bottom: 100px;
+		}
+			#add-ons_Extra-TitleDiv {
+ 			width: 100%;
+			height: 70px;
+			
+			
+			display: flex;
+			align-items: center;
+			text-align: center;
+			justify-content: center;
+			
+			padding-top: 20px;
+ 			padding-bottom: 10px;
+ 			
+ 		}
+ 			#add-ons_Extra-Title {
+	 			width: 70%;
+				height: 70px;
+				
+				font-size: 50px;
+				display: flex;
+				align-items: center;
+				text-align: center;
+				justify-content: center;
+				
+				border-top: 1px solid black;
+ 			}
+
 		
 		
 		

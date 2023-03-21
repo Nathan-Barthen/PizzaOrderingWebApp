@@ -10,31 +10,21 @@
 	// Get a reference to the hidden div for Wedgie items
 	const hiddenWedgieDiv = document.getElementById('hiddenWedgie');
 	
-	// Set initial display of hidden div to none
-	hiddenWedgieDiv.style.display = 'none';
-	
-	// Add a click event listener to the Wedgie category div
+	// If category is clicked, show hidden div (dropdown menu)
 	wedgieCategory.addEventListener('click', () => {
-	  // Toggle the visibility of the hidden div
-	  if (hiddenWedgieDiv.style.display === 'none') {
-	    hiddenWedgieDiv.style.display = 'flex';
-	    hiddenWedgieDiv.style.flexDirection = 'column';
-	  } else {
-	    hiddenWedgieDiv.style.display = 'none';
-	  }
+	  hiddenWedgieDiv.classList.toggle('show');
 	});
 	
-	// Hide Wedgie div if user clicks anywhere outside of it
+	// If user clicks outside of the dropdown menu, hide dropdown.
 	document.addEventListener('click', (event) => {
 	  const clickedElement = event.target;
+	  const wedgie = document.getElementById('wedgieText');
+	  const isClickedOutsideWedgie = !wedgie.contains(clickedElement);
+	  const isClickedOutsideHidden = !hiddenWedgieDiv.contains(clickedElement);
 	
-	  // Check if click was outside of Wedgie category or hidden Wedgie div
-	  const isClickedOutsideWedgie = !wedgieCategory.contains(clickedElement);
-	  const isClickedOutsideHiddenWedgie = !hiddenWedgieDiv.contains(clickedElement);
-	
-	  if (hiddenWedgieDiv.style.display === 'flex') {
-	    if (isClickedOutsideWedgie && isClickedOutsideHiddenWedgie) {
-	      hiddenWedgieDiv.style.display = 'none';
+	  if (hiddenWedgieDiv.classList.contains('show')) {
+	    if (isClickedOutsideHidden && isClickedOutsideWedgie) {
+	      hiddenWedgieDiv.classList.remove('show');
 	    }
 	  }
 	});

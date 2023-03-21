@@ -4,37 +4,27 @@
 *    Reveals a dropdown list of items for said category (Ex. 'Pepperoni Pizza', 'Three Meat Pizza', etc...)
 */
 
-	// Get a reference to the Drinks category
+	// Get a reference to the drinks category div
 	const drinksCategory = document.getElementById('drinksText');
-	
-	// Get a reference to the hidden div
+		
+	// Get a reference to the hidden div for drinks
 	const hiddenDrinksDiv = document.getElementById('hiddenDrinks');
 	
-	// Add a click event listener to the Drinks category
-	hiddenDrinksDiv.style.display = 'none';
-	
-	// If user clicks on the Drinks category
+	//If drinks category is clicked, show hidden div (dropdown menu)
 	drinksCategory.addEventListener('click', () => {
-	  // Toggle the visibility of the hidden div
-	  if (hiddenDrinksDiv.style.display === 'none') {
-	    hiddenDrinksDiv.style.display = 'flex';
-	    hiddenDrinksDiv.style.flexDirection = 'column';
-	  } else {
-	    hiddenDrinksDiv.style.display = 'none';
-	  }
+	  hiddenDrinksDiv.classList.toggle('show');
 	});
 	
-	// Hide Drinks div if user clicks anywhere (other than inside of the div)
+	//If user clicks outside of the dropdown menu, hide dropdown.
 	document.addEventListener('click', (event) => {
 	  const clickedElement = event.target;
+	  const drinks = document.getElementById('drinksText');
+	  const isClickedOutsideDrinks = !drinks.contains(clickedElement);
+	  const isClickedOutsideHidden = !hiddenDrinksDiv.contains(clickedElement);
 	
-	  const isClickedOutsideDrinks = !drinksCategory.contains(clickedElement);
-	  const isClickedOutsideHiddenDrinks = !hiddenDrinksDiv.contains(clickedElement);
-	
-	  if (hiddenDrinksDiv.style.display === 'flex') {
-	    if (isClickedOutsideDrinks && isClickedOutsideHiddenDrinks) {
-	      hiddenDrinksDiv.style.display = 'none';
-	    } else {
+	  if (hiddenDrinksDiv.classList.contains('show')) {
+	    if (isClickedOutsideHidden && isClickedOutsideDrinks) {
+	      hiddenDrinksDiv.classList.remove('show');
 	    }
 	  }
 	});

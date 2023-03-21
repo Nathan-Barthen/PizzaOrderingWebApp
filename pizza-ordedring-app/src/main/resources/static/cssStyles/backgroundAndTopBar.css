@@ -111,6 +111,9 @@
 			  	display: none;
 				font-size: 20px;
 				
+				animation-name: wave-downward;
+			  	animation-duration: 0.4s;
+			  	animation-fill-mode: forwards;
 			}
 				#day {
 					height: 40px;
@@ -164,6 +167,15 @@
 				color: rgb(255, 204, 0);
 	}
 	
+	@keyframes wave-downward {
+		  0% {
+		    transform: translateY(-10%);
+		  }
+		  100% {
+		    transform: translateY(0%);
+		  }
+	}
+	
 	#pizzas {
 		border-left: 2px solid black;
 		width: 7%;
@@ -201,8 +213,16 @@
 			  	
 			display: none;
 			font-size: 25px;		
-		}
 			
+			animation-name: wave-downward;
+		  	animation-duration: 0.4s;
+		  	animation-fill-mode: forwards;
+		}
+		
+		#hiddenPizzas.show {
+		  display: flex;
+		  flex-direction: column;
+		}
 	
 	#sides {
 		width: 6%;
@@ -239,7 +259,16 @@
 		  	border: 2px solid black;
 			  	
 			display: none;
-			font-size: 25px;		
+			font-size: 25px;
+			
+			animation-name: wave-downward;
+		  	animation-duration: 0.4s;
+		  	animation-fill-mode: forwards;
+		}
+		
+		#hiddenSides.show {
+		  display: flex;
+		  flex-direction: column;
 		}
 	
 	#wings {
@@ -278,7 +307,16 @@
 		  	border: 2px solid black;
 			  	
 			display: none;
-			font-size: 25px;		
+			font-size: 25px;
+			
+			animation-name: wave-downward;
+		  	animation-duration: 0.4s;
+		  	animation-fill-mode: forwards;
+		}
+		
+		#hiddenWings.show {
+		  display: flex;
+		  flex-direction: column;
 		}
 		
 		
@@ -317,7 +355,16 @@
 		  	border: 2px solid black;
 			  	
 			display: none;
-			font-size: 25px;		
+			font-size: 25px;	
+			
+			animation-name: wave-downward;
+		  	animation-duration: 0.4s;
+		  	animation-fill-mode: forwards;
+		}
+		
+		#hiddenPasta.show {
+		  display: flex;
+		  flex-direction: column;
 		}
 	
 	#wedgie{
@@ -355,7 +402,16 @@
 		  	border: 2px solid black;
 			  	
 			display: none;
-			font-size: 25px;		
+			font-size: 25px;	
+			
+			animation-name: wave-downward;
+		  	animation-duration: 0.4s;
+		  	animation-fill-mode: forwards;
+		}
+		
+		#hiddenWedgie.show {
+		  display: flex;
+		  flex-direction: column;
 		}
 	
 	#desserts {
@@ -393,7 +449,16 @@
 		  	border: 2px solid black;
 			  	
 			display: none;
-			font-size: 25px;		
+			font-size: 25px;	
+			
+			animation-name: wave-downward;
+		  	animation-duration: 0.4s;
+		  	animation-fill-mode: forwards;
+		}
+		
+		#hiddenDesserts.show {
+		  display: flex;
+		  flex-direction: column;
 		}
 	
 	#drinks {
@@ -432,6 +497,15 @@
 			  	
 			display: none;
 			font-size: 25px;		
+			
+			animation-name: wave-downward;
+		  	animation-duration: 0.4s;
+		  	animation-fill-mode: forwards;
+		}
+		
+		#hiddenDrinks.show {
+		  display: flex;
+		  flex-direction: column;
 		}
 	
 	#misc {
@@ -469,7 +543,16 @@
 		  	border: 2px solid black;
 			  	
 			display: none;
-			font-size: 25px;		
+			font-size: 25px;	
+			
+			animation-name: wave-downward;
+		  	animation-duration: 0.4s;
+		  	animation-fill-mode: forwards;
+		}
+		
+		#hiddenMisc.show {
+		  display: flex;
+		  flex-direction: column;
 		}
 	
 	#spaceBetween {

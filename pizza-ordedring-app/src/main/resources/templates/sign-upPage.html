@@ -7,7 +7,7 @@
 <title>Online Pizza Ordering</title>
 
 <link rel="stylesheet" href="/cssStyles/backgroundAndTopBar.css">
-<link rel="stylesheet" href="/cssStyles/home.css">
+<link rel="stylesheet" href="/cssStyles/sign-upPage.css">
 <link rel="stylesheet" href="/cssStyles/bottomLinks.css">
 
 
@@ -89,134 +89,98 @@
    		<div id="pageBody">
    			<div id="body-headers">
    				<div id="storeLocation"> 156 Elderwood Ave </div>
-   				<div id="menuTitle"> Menu </div>
-   				<div id="searchMenu">
-   					Search:  
-   					<div id="searchDiv">
-   							<form>
-		                        <input type="text" id="userSearchInput" placeholder="Search menu">
-		                     </form>
-		             </div>
+   				<div id="signUpTitle"> Sign-up </div>
+   				<div id="emptySpace">
+   					
    				</div>
    			</div>
    			
-   			<div id="foodCategories">
-   				<div id="foodCategories-row">
+   			<div id="signUpDiv">
    				
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/pizzaGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Pizza
-	   						</div>
-   						</div>
-   					</div>
-   					
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/sidesGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Sides
-	   						</div>
-	   					</div>
-   					</div>
-   						
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/wingsGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Wings
-	   						</div>
-	   					</div>
-   					</div>
-   					
-   				</div>
-   					
-   				<div id="foodCategories-row">
-   					
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/pastaGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Pasta
-	   						</div>
-   						</div>
-   					</div>
-   					
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/wedgieGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Wedgies
-	   						</div>
-	   					</div>
-   					</div>
-   						
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/dessertsGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Desserts
-	   						</div>
-	   					</div>
-   					</div>
-   					
-   				</div>
-   					
-   				<div id="foodCategories-row">
-   				
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/drinksGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Drinks
-	   						</div>
-	   					</div>
-   					</div>
-   						
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/miscGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Misc
-	   						</div>
-	   					</div>
-   					</div>
-   					
-   				</div>
-   				
+   				<div id="signUpTextDiv">
+				      <div id="createAccount">
+				        	Create an Account
+				      </div>
+				      <div id="signUpEntry">
+				      
+				      	<div id="signUpFirstName">
+						    <span id="signUpParamTitle"> *First Name: </span>
+						    <input type="text" name="firstname" required>
+						</div>
+						<div id="signUpCheckFirstName">
+						    <span id="emptyText"></span>
+						    <div class="errorMessages" id="firstNameErrorMessages"></div>
+						</div>
+						
+						
+						<div id="signUpLastName">
+						    <span id="signUpParamTitle"> *Last Name: </span>
+						    <input type="text" name="lastname" required>
+						</div>
+						<div id="signUpCheckLastName">
+						    <span id="emptyText"></span>
+						    <div class="errorMessages" id="lastNameErrorMessages"></div>
+						</div>
+						
+						
+						<div id="signUpAddress">
+						    <span id="signUpParamTitle"> *Address: </span>
+						    <input type="text" name="address" required>
+						</div>
+						<div id="signUpCheckAddress">
+						    <span id="emptyText"></span>
+						    <div class="errorMessages" id="addressErrorMessages"></div>
+						</div>
+						
+						
+						<div id="signUpEmail">
+						    <span id="signUpParamTitle"> *Email: </span>
+						    <input type="text" name="email" required>
+						</div>
+						<div id="signUpCheckEmail">
+						    <span id="emptyText"></span>
+						    <div class="errorMessages" id="emailErrorMessages"></div>
+						</div>
+				        
+				        
+				        <div id="signUpPassword">
+				          	<span id="signUpParamTitle"> *Password: </span>
+				          	 <input id="password"  type="password" name="password" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[a-z]).{7,}$" required title="Password must be at least 7 characters with one capital and one number">
+				        </div>
+				        
+				        <div id="signUpConfirmPassword">
+						  	<span id="signUpConfirmPassTitle"> *Confirm Pass: </span>
+						  	<input id="confirmPassword" type="password" name="confirmPassword" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[a-z]).{7,}$" required title="Password must be at least 7 characters with one capital and one number">
+						</div>
+				        
+				        <div id="signUpConfirmPassword">
+				        	<span id="emptyText"></span>
+				        	<div class="errorMessages" id="passwordErrorMessages"></div>
+				        </div>
+				        
+				        
+				        <form id="signUpForm">
+				        	<input type="submit" value="Sign Up">
+				      	</form>
+				      	<div id="signInDiv">
+				          	<span id="signInParamTitle"> Already have an Account? </span>
+				          	 <a id="signInLink" th:href="@{/pizzaStore/login}">Log-in</a>
+				        </div>
+				      </div>
+			    </div>
    			</div>
-   				
    			
-   				
-   			<div id="socialLinksBorder">
+   		</div>
+   		
+   		<div id="socialLinksBorder">
 		     	<div id="socialLinks">
 		            <b> 
 		            	<a id="gitHub" href="https://github.com/Nathan-Barthen" target="_blank">GitHub</a>
 		                <a id="linkedIn" href="https://www.linkedin.com/in/nathan-barthen-22993722a/" target="_blank">LinkedIn</a> 
 		            </b>
 		        </div>
-		    </div>
+		</div>
    			
-   		</div>
-   		
-   	
    	</div>
   </div>
 
@@ -230,10 +194,14 @@
 	<script src="/javaScript/menuOptions/showDrinks.js"></script>
 	<script src="/javaScript/menuOptions/showMisc.js"></script>
 	
-	<script src="/javaScript/bodySize-homePage.js"></script>
+	<script src="/javaScript/updateSelectedOption.js"></script>
+	
+	<script src="/javaScript/signUpParameterChecking/confirmParameters-SignUp.js"></script>
+	
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>
+	
 	
 	
 	
