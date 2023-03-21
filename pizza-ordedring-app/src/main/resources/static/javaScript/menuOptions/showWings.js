@@ -10,31 +10,23 @@
 	// Get a reference to the hidden div
 	const hiddenWingsDiv = document.getElementById('hiddenWings');
 	
-	// Hide the hidden div by default
-	hiddenWingsDiv.style.display = 'none';
-	
-	// Add a click event listener to the Wings category div
+	// If Wings category is clicked, show hidden div (dropdown menu)
 	wingsCategory.addEventListener('click', () => {
-	  // Toggle the visibility of the hidden div
-	  if (hiddenWingsDiv.style.display === 'none') {
-	    hiddenWingsDiv.style.display = 'flex';
-	    hiddenWingsDiv.style.flexDirection = 'column';
-	  } else {
-	    hiddenWingsDiv.style.display = 'none';
-	  }
+	  hiddenWingsDiv.classList.toggle('show');
 	});
 	
-	// Hide the Wings category div if user clicks anywhere (other than inside of the div)
+	// If user clicks outside of the dropdown menu, hide dropdown.
 	document.addEventListener('click', (event) => {
 	  const clickedElement = event.target;
-	  
-	  const isClickedOutsideWings = !wingsCategory.contains(clickedElement);
-	  const isClickedOutsideHiddenWings = !hiddenWingsDiv.contains(clickedElement);
-	  
-	  if(hiddenWingsDiv.style.display === 'flex') {
-	    if (isClickedOutsideWings && isClickedOutsideHiddenWings) {
-	      hiddenWingsDiv.style.display = 'none';
+	  const wings = document.getElementById('wingsText');
+	  const isClickedOutsideWings = !wings.contains(clickedElement);
+	  const isClickedOutsideHidden = !hiddenWingsDiv.contains(clickedElement);
+	
+	  if (hiddenWingsDiv.classList.contains('show')) {
+	    if (isClickedOutsideHidden && isClickedOutsideWings) {
+	      hiddenWingsDiv.classList.remove('show');
 	    }
 	  }
 	});
+
 	

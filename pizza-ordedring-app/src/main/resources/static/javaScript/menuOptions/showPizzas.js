@@ -4,47 +4,28 @@
 *    Reveals a dropdown list of items for said category (Ex. 'Pepperoni Pizza', 'Three Meat Pizza', etc...)
 */
 
-	// Get a reference to the operatingHours div
+	// Get a reference to the category's div
 	const pizzaCategory = document.getElementById('pizzasText');
-	
-	// Get a reference to the hidden div
 	const hiddenPizzaDiv = document.getElementById('hiddenPizzas');
 	
-	// Add a click event listener to the operatingHours div
-	hiddenPizzaDiv.style.display = 'none';
-	
-	
-	//If user clicks on the 'Pizzas' div
+	//If category is clicked, show hidden div (dropdown menu)
 	pizzaCategory.addEventListener('click', () => {
-	  // Toggle the visibility of the hidden div
-	  if (hiddenPizzaDiv.style.display === 'none') {
-		  hiddenPizzaDiv.style.display = 'flex';
-		  hiddenPizzaDiv.style.flexDirection = 'column';
-	  } 
-	  else {
-		  hiddenPizzaDiv.style.display = 'none';
-	  }
-	  
+	  hiddenPizzaDiv.classList.toggle('show');
 	});
-
 	
-	
-	
-	//Hide pizzas div if user clicks anywhere (other than inside of the div)
+	//If user clicks outside of the dropdown menu, hide dropdown.
 	document.addEventListener('click', (event) => {
-		  const clickedElement = event.target;
-		  const pizzas = document.getElementById('pizzasText');
-		  
-		  const isClickedOutsidePizzas = !pizzas.contains(clickedElement);
-		  const isClickedOutsideHidden = !hiddenPizzaDiv.contains(clickedElement);
-		  
-		  if(hiddenPizzaDiv.style.display === 'flex') {
-			  if (isClickedOutsideHidden && isClickedOutsidePizzas) {
-				  hiddenPizzaDiv.style.display = 'none';
-			  }
-			  else {
-			  }
-		  }
+	  const clickedElement = event.target;
+	  const pizzas = document.getElementById('pizzasText');
+	  const isClickedOutsidePizzas = !pizzas.contains(clickedElement);
+	  const isClickedOutsideHidden = !hiddenPizzaDiv.contains(clickedElement);
+	
+	  if (hiddenPizzaDiv.classList.contains('show')) {
+	    if (isClickedOutsideHidden && isClickedOutsidePizzas) {
+	      hiddenPizzaDiv.classList.remove('show');
+	    }
+	  }
 	});
+	
 	
 	

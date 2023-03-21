@@ -4,46 +4,29 @@
 *    Reveals a dropdown list of items for said category (Ex. 'Pepperoni Pizza', 'Three Meat Pizza', etc...)
 */
 
-	// Get a reference to the operatingHours div
+	// Get a reference to the sides category div
 	const sidesCategory = document.getElementById('sidesText');
 	
 	// Get a reference to the hidden div
 	const hiddenSidesDiv = document.getElementById('hiddenSides');
 	
-	// Add a click event listener to the operatingHours div
-	hiddenSidesDiv.style.display = 'none';
-	
-	
-	//If user clicks on the 'Pizzas' div
+	// If category is clicked, show hidden div (dropdown menu)
 	sidesCategory.addEventListener('click', () => {
-	  // Toggle the visibility of the hidden div
-	  if (hiddenSidesDiv.style.display === 'none') {
-		  hiddenSidesDiv.style.display = 'flex';
-		  hiddenSidesDiv.style.flexDirection = 'column';
-	  } 
-	  else {
-		  hiddenSidesDiv.style.display = 'none';
-	  }
-	  
+	  hiddenSidesDiv.classList.toggle('show');
 	});
-
 	
-	
-	
-	//Hide pizzas div if user clicks anywhere (other than inside of the div)
+	// If user clicks outside of the dropdown menu, hide dropdown.
 	document.addEventListener('click', (event) => {
-		  const clickedElement = event.target;
-		  
-		  const isClickedOutsideSides = !sidesCategory.contains(clickedElement);
-		  const isClickedOutsideHiddenSides = !hiddenSidesDiv.contains(clickedElement);
-		  
-		  if(hiddenSidesDiv.style.display === 'flex') {
-			  if (isClickedOutsideSides && isClickedOutsideHiddenSides) {
-				  hiddenSidesDiv.style.display = 'none';
-			  }
-			  else {
-			  }
-		  }
+	  const clickedElement = event.target;
+	  const sides = document.getElementById('sidesText');
+	  const isClickedOutsideSides = !sides.contains(clickedElement);
+	  const isClickedOutsideHidden = !hiddenSidesDiv.contains(clickedElement);
+	
+	  if (hiddenSidesDiv.classList.contains('show')) {
+	    if (isClickedOutsideHidden && isClickedOutsideSides) {
+	      hiddenSidesDiv.classList.remove('show');
+	    }
+	  }
 	});
 	
 	

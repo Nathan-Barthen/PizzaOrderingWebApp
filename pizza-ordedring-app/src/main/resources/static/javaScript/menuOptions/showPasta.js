@@ -10,30 +10,21 @@
 	// Get a reference to the hidden div
 	const hiddenPastaDiv = document.getElementById('hiddenPasta');
 	
-	// Add a click event listener to the pasta category div
-	hiddenPastaDiv.style.display = 'none';
-	
-	// If user clicks on the 'Pasta' div
+	// If category is clicked, show hidden div (dropdown menu)
 	pastaCategory.addEventListener('click', () => {
-	  // Toggle the visibility of the hidden div
-	  if (hiddenPastaDiv.style.display === 'none') {
-	    hiddenPastaDiv.style.display = 'flex';
-	    hiddenPastaDiv.style.flexDirection = 'column';
-	  } 
-	  else {
-	    hiddenPastaDiv.style.display = 'none';
-	  }
+	  hiddenPastaDiv.classList.toggle('show');
 	});
 	
-	// Hide pasta div if user clicks anywhere (other than inside of the div)
+	// If user clicks outside of the dropdown menu, hide dropdown.
 	document.addEventListener('click', (event) => {
 	  const clickedElement = event.target;
-	  const isClickedOutsidePasta = !pastaCategory.contains(clickedElement);
-	  const isClickedOutsideHiddenPasta = !hiddenPastaDiv.contains(clickedElement);
+	  const pasta = document.getElementById('pastaText');
+	  const isClickedOutsidePasta = !pasta.contains(clickedElement);
+	  const isClickedOutsideHidden = !hiddenPastaDiv.contains(clickedElement);
 	
-	  if (hiddenPastaDiv.style.display === 'flex') {
-	    if (isClickedOutsidePasta && isClickedOutsideHiddenPasta) {
-	      hiddenPastaDiv.style.display = 'none';
+	  if (hiddenPastaDiv.classList.contains('show')) {
+	    if (isClickedOutsideHidden && isClickedOutsidePasta) {
+	      hiddenPastaDiv.classList.remove('show');
 	    }
 	  }
 	});

@@ -6,34 +6,25 @@
 
 	// Get a reference to the desserts category div
 	const dessertsCategory = document.getElementById('dessertsText');
-	
+		
 	// Get a reference to the hidden div for desserts
 	const hiddenDessertsDiv = document.getElementById('hiddenDesserts');
 	
-	// Hide the hidden div by default
-	hiddenDessertsDiv.style.display = 'none';
-	
-	// Add a click event listener to the desserts category div
+	//If desserts category is clicked, show hidden div (dropdown menu)
 	dessertsCategory.addEventListener('click', () => {
-	  // Toggle the visibility of the hidden div
-	  if (hiddenDessertsDiv.style.display === 'none') {
-	    hiddenDessertsDiv.style.display = 'flex';
-	    hiddenDessertsDiv.style.flexDirection = 'column';
-	  } else {
-	    hiddenDessertsDiv.style.display = 'none';
-	  }
+	  hiddenDessertsDiv.classList.toggle('show');
 	});
 	
-	// Hide the desserts div if the user clicks anywhere outside of it
+	//If user clicks outside of the dropdown menu, hide dropdown.
 	document.addEventListener('click', (event) => {
 	  const clickedElement = event.target;
-	  
-	  const isClickedOutsideDesserts = !dessertsCategory.contains(clickedElement);
-	  const isClickedOutsideHiddenDesserts = !hiddenDessertsDiv.contains(clickedElement);
-	  
-	  if (hiddenDessertsDiv.style.display === 'flex') {
-	    if (isClickedOutsideDesserts && isClickedOutsideHiddenDesserts) {
-	      hiddenDessertsDiv.style.display = 'none';
+	  const desserts = document.getElementById('dessertsText');
+	  const isClickedOutsideDesserts = !desserts.contains(clickedElement);
+	  const isClickedOutsideHidden = !hiddenDessertsDiv.contains(clickedElement);
+	
+	  if (hiddenDessertsDiv.classList.contains('show')) {
+	    if (isClickedOutsideHidden && isClickedOutsideDesserts) {
+	      hiddenDessertsDiv.classList.remove('show');
 	    }
 	  }
 	});
