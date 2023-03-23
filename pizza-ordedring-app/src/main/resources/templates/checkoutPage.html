@@ -7,7 +7,7 @@
 <title>Online Pizza Ordering</title>
 
 <link rel="stylesheet" href="/cssStyles/backgroundAndTopBar.css">
-<link rel="stylesheet" href="/cssStyles/categoryPage.css">
+<link rel="stylesheet" href="/cssStyles/checkoutPage.css">
 <link rel="stylesheet" href="/cssStyles/bottomLinks.css">
 
 
@@ -88,96 +88,56 @@
 		
    		<div id="pageBody">
    			<div id="body-headers">
-   				<div id="storeLocation"> 156 Elderwood Ave </div>
-   				<div id="menuTitle"> Pizza(s) </div>
-   				<div id="searchMenu">
-   					Search:  
-   					<div id="searchDiv">
-   							<form>
-		                        <input type="text" id="userSearchInput" placeholder="Search menu">
-		                     </form>
-		             </div>
-   				</div>
+   				<div id="emptySpace1"> </div>
+   				<div id="checkoutTitle"> Checkout </div>
+   				<div id="emptySpace2"> </div>
    			</div>
    			
-   			<div id="foodItems">
-   				<div id="foodItems-row">
+   			<div id="orderAndCart">
    				
-   					<div id="foodItems-Item">
-   						<div id="itemBorder">
-	   						<div id="itemImgDiv">
-	   							<img id="itemImg" src="/images/categoryImages/pizzaGeneral.jpg">
-	   						</div>
-	   						<div id="itemName">
-	   							Custom Pizza
-	   						</div>
-   						</div>
-   					</div>
-   					
-   					<div id="foodItems-Item">
-   						<div id="itemBorder">
-	   						<div id="itemImgDiv">
-	   							<img id="itemImg" src="/images/categoryImages/sidesGeneral.jpg">
-	   						</div>
-	   						<div id="itemName">
-	   							Pepperoni Pizza
-	   						</div>
-	   					</div>
-   					</div>
-   						
-   					<div id="foodItems-Item">
-   						<div id="itemBorder">
-	   						<div id="itemImgDiv">
-	   							<img id="itemImg" src="/images/categoryImages/wingsGeneral.jpg">
-	   						</div>
-	   						<div id="itemName">
-	   							Three Meat Pizza
-	   						</div>
-	   					</div>
-   					</div>
-   					
-   				</div>
-   					
-   				<div id="foodItems-row">
-   				
-   					<div id="foodItems-Item">
-   						<div id="itemBorder">
-	   						<div id="itemImgDiv">
-	   							<img id="itemImg" src="/images/categoryImages/drinksGeneral.jpg">
-	   						</div>
-	   						<div id="itemName">
-	   							Some type of Pizza
-	   						</div>
-	   					</div>
-   					</div>
-   						
-   					<div id="foodItems-Item">
-   						<div id="itemBorder">
-	   						<div id="itemImgDiv">
-	   							<img id="itemImg" src="/images/categoryImages/miscGeneral.jpg">
-	   						</div>
-	   						<div id="itemName">
-	   							Some type of Pizza
-	   						</div>
-	   					</div>
-   					</div>
-   					
-   				</div>
-   				
+   				<div id="orderInformation">
+				      <div id="orderInfoTitle">
+				        	Order Information
+				      </div>
+				      <div id="orderInfoDetails">
+				      
+				      </div>
+			    </div>
+			    <div id="cart">
+			    	<div id="cartTitle">Cart</div>
+			    	
+			    	<div id="cartItem">
+			    		<div id="cartItemName">
+			    			Pepp Pizza
+			    		</div>
+			    		<div id="cartItemDetails">
+			    		
+			    		</div>
+			    	</div>
+			    	
+			    	<div id="cartItem">
+			    		<div id="cartItemName">
+			    			Pepp Pizza
+			    		</div>
+			    		<div id="cartItemDetails">
+			    		
+			    		</div>
+			    	</div>
+			    	
+			    </div>
    			</div>
-   				
-   				
-   			<div id="socialLinksBorder">
+   			
+   		</div>
+   		
+   		<div id="socialLinksBorder">
 		     	<div id="socialLinks">
 		            <b> 
 		            	<a id="gitHub" href="https://github.com/Nathan-Barthen" target="_blank">GitHub</a>
 		                <a id="linkedIn" href="https://www.linkedin.com/in/nathan-barthen-22993722a/" target="_blank">LinkedIn</a> 
 		            </b>
 		        </div>
-			</div>
+		</div>
    			
-   		</div>
-   	
    	</div>
   </div>
 
@@ -196,7 +156,10 @@
 	<script src="/javaScript/pageRedirects/clicksItem.js"></script>
 	<script src="/javaScript/pageRedirects/clicksCheckout.js"></script>
 	
-	<script src="/javaScript/bodySize-categoryPage.js"></script>
+	<script src="/javaScript/updateSelectedOption.js"></script>
+	
+	<script src="/javaScript/signUpParameterChecking/confirmParameters-SignUp.js"></script>
+	
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>
