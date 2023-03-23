@@ -113,7 +113,7 @@
 			    
 			}
 			
-				#item {
+				#foodItems-Item {
 					width: 33.33%;
 					display: flex;
 					justify-content: center;
@@ -132,6 +132,7 @@
 					  	border: 2px solid black;
 					  	
 					  	flex-direction: column;
+					  	cursor: pointer;
 					}
 				
 						#itemImgDiv {
@@ -146,7 +147,7 @@
 							  	border-radius: 10px;
 							  	border: 2px solid black;
 							}
-						#itemItemName {
+						#itemName {
 							padding-top: 8px;
 							font-size: 30px;
 							text-align: center;
