@@ -18,13 +18,15 @@ public class UserOrder {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
+	@OneToOne
+	private UserAccount userAcc;
 	
 	
 	
 	private String apiError;
 	
 	public UserOrder(){
-		
+		UserAccount userAcc = new UserAccount();
 		apiError = "";
 	}
 
@@ -36,7 +38,14 @@ public class UserOrder {
 		this.id = id;
 	}
 
-	
+	public UserAccount getUserAccount() {
+		return userAcc;
+	}
+
+
+	public void setUserAccount(UserAccount userAcc) {
+		this.userAcc = userAcc;
+	}
 
 
 		public String getApiError() {

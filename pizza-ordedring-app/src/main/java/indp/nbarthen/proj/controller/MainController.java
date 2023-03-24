@@ -4,6 +4,7 @@ package indp.nbarthen.proj.controller;
 
 import indp.nbarthen.proj.repository.UserOrder;
 import indp.nbarthen.proj.repository.OrdersRepository;
+import indp.nbarthen.proj.repository.UserAccount;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.io.IOException;
@@ -178,5 +179,21 @@ public class MainController {
 		 	
 	        return "sign-upPage";
 	    }
+	
+	 @PostMapping("/signup")
+	 public String signUp(@RequestParam("firstname") String firstName,
+	                      @RequestParam("lastname") String lastName,
+	                      @RequestParam("address") String address,
+	                      @RequestParam("email") String email,
+	                      @RequestParam("passwordHash") String passwordHash) {
+
+	     // Create the UserAccount object with hashed password
+	     UserAccount user = new UserAccount(firstName, lastName, address, email, passwordHash);
+
+	     // Save the user account to your database
+	     // ...
+
+	     return "redirect:/welcome";
+	 }
 	 
 }

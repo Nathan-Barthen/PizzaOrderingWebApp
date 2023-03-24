@@ -100,7 +100,29 @@
 				        	Order Information
 				      </div>
 				      <div id="orderInfoDetails">
-				      
+				      		<div id="storeName">115 Pizza's</div>
+				      		<div id="storeLocation">115 Group 935 Ave.</div>
+				      		<div id="storePhone">### - ### - ####</div>
+				      		<div id="deliveryPickupEta">
+				      			<div id="typeEta">Delivery: 	<span id="etaTimes"> 45 mins </span> </div>
+				      			<div id="typeEta">Pickup: 	<span id="etaTimes"> 30 mins </span> </div>
+				      		</div>
+				      		<div id="deliveryPickupSelector">
+				      			<div id="deliverySelector">Delivery</div>
+				      			<div id="pickupSelector">Pickup</div>
+				      		</div>
+				      		<div id="usersHomeAddr" hidden> My Home Address St. </div>
+				      		<div id="collectionMethod"> 
+				      			<span id="collectionType"> Delivery to: </span> 	
+				      			<span id="collectionLocation"> My Home Address St. </span> 
+				      		</div>
+				      		
+				      		<div id="userComments">
+				   				<textarea id="additionalInstructions" name="additionalInstructions"
+				   				 placeholder="Delivery Instructions..."  rows="5" cols="50" maxlength="250"></textarea>
+				    			 <div id="countDisplay">0/250</div>
+				   			</div>
+				      		
 				      </div>
 			    </div>
 			    <div id="cart">
@@ -110,19 +132,58 @@
 			    		<div id="cartItemName">
 			    			Pepp Pizza
 			    		</div>
-			    		<div id="cartItemDetails">
+			    		<div id="cartRemoveItem">   </div>
+			    		<div id="cartEditItem"> Edit </div>
 			    		
+			    		<div id="cartItemDetails">
+			    			<div id="itemIngredients">
+			   					<div id="ingredientName">Red Sauce: </div>
+			   					
+			   					<div id="amountDiv">
+				   					<div id="pickedAmount"> <span id="pickedAmtText">Normal</span> </div>
+				   				</div>
+			   					<div id="sideOfPizzaDiv">
+				   				</div>
+			   				</div>
+			    			<div id="itemIngredients">
+			   					<div id="ingredientName">Cheese: </div>
+			   					
+			   					<div id="amountDiv">
+				   					<div id="pickedAmount"> <span id="pickedAmtText">Extra</span> </div>
+				   				</div>
+			   					<div id="sideOfPizzaDiv">
+				   				</div>
+			   				</div>
+			   				<div id="itemIngredients">
+			   					<div id="ingredientName">Ham: </div>
+			   					
+			   					<div id="amountDiv">
+				   					<div id="pickedAmount"> <span id="pickedAmtText">Normal</span> </div>
+				   				</div>
+			   					
+			   					<div id="sideOfPizzaDiv">
+				   					<div id="wholeSide"><span id="wholeSideText"></span></div>
+				   				</div>
+			   				
+			   				</div>
+			   				<div id="itemIngredients">
+			   					<div id="ingredientName">Pineapple: </div>
+			   					
+			   					<div id="amountDiv">
+				   					<div id="pickedAmount"> <span id="pickedAmtText">Normal</span> </div>
+				   				</div>
+			   					
+			   					<div id="sideOfPizzaDiv">
+				   					<div id="leftSide"><span id="leftSideText"></span></div>
+				   				</div>
+			   				
+			   				</div>
 			    		</div>
 			    	</div>
 			    	
-			    	<div id="cartItem">
-			    		<div id="cartItemName">
-			    			Pepp Pizza
-			    		</div>
-			    		<div id="cartItemDetails">
-			    		
-			    		</div>
-			    	</div>
+			    
+			    	
+			    	
 			    	
 			    </div>
    			</div>
@@ -155,6 +216,11 @@
 	<script src="/javaScript/pageRedirects/clicksPizzaLogo.js"></script>
 	<script src="/javaScript/pageRedirects/clicksItem.js"></script>
 	<script src="/javaScript/pageRedirects/clicksCheckout.js"></script>
+	<script src="/javaScript/pageRedirects/clicksRemoveItemFromCart.js"></script>
+	<script src="/javaScript/pageRedirects/clicksEditItemFromCart.js"></script>
+	<script src="/javaScript/pageRedirects/clicksPickupDelivery.js"></script>
+	<script src="/javaScript/collectionLocation.js"></script>
+	<script src="/javaScript/usesCommentsCharLeft.js"></script>
 	
 	<script src="/javaScript/updateSelectedOption.js"></script>
 	
