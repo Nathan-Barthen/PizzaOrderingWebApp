@@ -9,10 +9,9 @@
  *  
 */
 
-  const form = document.getElementById('signUpForm');
-  form.addEventListener('submit', validateForm);
+  const signUpForm = document.getElementById('signUpForm');
 
-  function validateForm(event) {
+  signUpForm.addEventListener('submit', function(event) {
 	  
 	  //Get first name fields.
 	  const firstNameField = document.getElementsByName('firstname')[0];
@@ -21,6 +20,10 @@
 	  //Get last name fields.
 	  const lastNameField = document.getElementsByName('lastname')[0];
 	  const lastNameErrorMessages = document.getElementById('lastNameErrorMessages');
+	  
+	  // Get phone number fields
+	  const phoneField = document.getElementsByName('phone')[0];
+	  const phoneErrorMessages = document.getElementById('phoneErrorMessages');
 	  
 	  //Get address fields
 	  const addressField = document.getElementsByName('address')[0];
@@ -34,7 +37,6 @@
 	  const passwordField = document.getElementById('password');
 	  const confirmPasswordField = document.getElementById('confirmPassword');
 	  const passwordErrorMessages = document.getElementById('passwordErrorMessages');
-	  
 	  
 	  
 	  //Check first name
@@ -68,6 +70,19 @@
 			  lastNameErrorMessages.innerHTML = '';
 		  }
 		  
+		 
+		// Check phone number
+		// Must: be in the format ########## or ###-###-####
+		const phoneRegex = /^(\d{10}|\d{3}-\d{3}-\d{4})$/;
+
+		// If invalid phone number is entered
+		if (!phoneRegex.test(phoneField.value)) {
+		    phoneErrorMessages.innerHTML = '*Please enter a valid phone number (###-###-####).';
+		    event.preventDefault();
+		} 
+		else {
+		    phoneErrorMessages.innerHTML = '';
+		}	  
 		  
 	  //Check address
 		  //Must: contain at least 1 letter, at least 1 number, and a space.
@@ -108,5 +123,5 @@
 			  event.preventDefault();
 		  }
 	  
-	  return true;
-	}
+		
+  });

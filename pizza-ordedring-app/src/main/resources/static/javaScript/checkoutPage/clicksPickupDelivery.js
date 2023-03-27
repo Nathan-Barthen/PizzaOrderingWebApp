@@ -14,6 +14,8 @@
 		const collectionType = document.getElementById('collectionType');
 		const collectionLocation = document.getElementById('collectionLocation');
 		
+		const editButton2 = document.getElementById("editLocationBtn");
+		
 		//Clicks delivery
 		deliverySelector.addEventListener('click', () => {
 		  deliverySelector.style.backgroundColor = 'rgb(213, 128, 255)';
@@ -21,6 +23,9 @@
 		  
 		  collectionType.textContent = 'Delivery to: ';
 		  collectionLocation.textContent = usersHomeAddr.textContent;
+		  
+		  //Show edit button
+		  editButton2.style.display = "block";
 		});
 		
 		//Clicks pickup
@@ -30,6 +35,9 @@
 		  
 		  collectionType.textContent = 'Pickup at: ';
 		  collectionLocation.textContent = storeLocation.textContent;
+		  
+		  //Hide edit button.
+		  editButton2.style.display = "none";
 		});
 
 	

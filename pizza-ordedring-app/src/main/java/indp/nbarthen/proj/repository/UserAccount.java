@@ -21,7 +21,7 @@ public class UserAccount {
     private boolean isAdmin;
 
     public UserAccount() {
-    	
+    	firstName = "Guest";
     }
     public UserAccount(String firstName, String lastName, String address, String email, String password) {
         this.firstName = firstName;

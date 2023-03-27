@@ -105,7 +105,7 @@
 				      	<form id="signUpForm" method="post" th:action="@{/signup}">
 					      	<div id="signUpFirstName">
 							    <span id="signUpParamTitle"> *First Name: </span>
-							    <input type="text" name="firstname" required>
+							    <input type="text" name="firstname" >
 							</div>
 							<div id="signUpCheckFirstName">
 							    <span id="emptyText"></span>
@@ -115,42 +115,55 @@
 							
 							<div id="signUpLastName">
 							    <span id="signUpParamTitle"> *Last Name: </span>
-							    <input type="text" name="lastname" required>
+							    <input type="text" name="lastname" >
 							</div>
 							<div id="signUpCheckLastName">
 							    <span id="emptyText"></span>
 							    <div class="errorMessages" id="lastNameErrorMessages"></div>
 							</div>
 							
+							<div id="signUpPhone">
+							    <span id="signUpParamTitle"> *Phone: </span>
+							    <input type="text" name="phone" >
+							</div>
+							<div id="signUpCheckPhone">
+							    <span id="emptyText"></span>
+							    <div class="errorMessages" id="phoneErrorMessages"></div>
+							</div>
+							
+							<div id="signUpEmail">
+							    <span id="signUpParamTitle"> *Email: </span>
+							    <input type="text" name="email" >
+							</div>
+							<div id="signUpCheckEmail">
+							    <span id="emptyText"></span>
+							    <div class="errorMessages" id="emailErrorMessages"></div>
+							</div>
 							
 							<div id="signUpAddress">
 							    <span id="signUpParamTitle"> *Address: </span>
-							    <input type="text" name="address" required>
+							    <input type="text" name="address" >
 							</div>
 							<div id="signUpCheckAddress">
 							    <span id="emptyText"></span>
 							    <div class="errorMessages" id="addressErrorMessages"></div>
 							</div>
 							
+								<div id="signUpApartment">
+								  	<span id="signUpConfirmApartmentTitle"> Apt / Bldg: </span>
+								  	<input type="text" name="apartment">
+								</div>
 							
-							<div id="signUpEmail">
-							    <span id="signUpParamTitle"> *Email: </span>
-							    <input type="text" name="email" required>
-							</div>
-							<div id="signUpCheckEmail">
-							    <span id="emptyText"></span>
-							    <div class="errorMessages" id="emailErrorMessages"></div>
-							</div>
 					        
 					        
 					        <div id="signUpPassword">
 					          	<span id="signUpParamTitle"> *Password: </span>
-					          	 <input id="password"  type="password" name="password" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[a-z]).{7,}$" required title="Password must be at least 7 characters with one capital and one number">
+					          	 <input id="password"  type="password" name="password" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[a-z]).{7,}$"  title="Password must be at least 7 characters with one capital and one number">
 					        </div>
 					        
 					        <div id="signUpConfirmPassword">
 							  	<span id="signUpConfirmPassTitle"> *Confirm Pass: </span>
-							  	<input id="confirmPassword" type="password" name="confirmPassword" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[a-z]).{7,}$" required title="Password must be at least 7 characters with one capital and one number">
+							  	<input id="confirmPassword" type="password" name="confirmPassword" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[a-z]).{7,}$"  title="Password must be at least 7 characters with one capital and one number">
 							</div>
 					        
 					        <div id="signUpConfirmPassword">

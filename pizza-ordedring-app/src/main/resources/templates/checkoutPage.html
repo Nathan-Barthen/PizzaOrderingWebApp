@@ -107,15 +107,31 @@
 				      			<div id="typeEta">Delivery: 	<span id="etaTimes"> 45 mins </span> </div>
 				      			<div id="typeEta">Pickup: 	<span id="etaTimes"> 30 mins </span> </div>
 				      		</div>
+				      		
+				      		<div id="orderTime">
+				      			<div id="timeAsap">ASAP</div>
+				      			<div id="timeLater">Later</div>
+				      		</div>
+				      		
+				      		<div id="laterDateSelectorDiv">
+							  <span id="laterDateTitle">Select Date and Time:</span>
+							</div>
+
+
 				      		<div id="deliveryPickupSelector">
 				      			<div id="deliverySelector">Delivery</div>
 				      			<div id="pickupSelector">Pickup</div>
 				      		</div>
+				      		
+				      		
 				      		<div id="usersHomeAddr" hidden> My Home Address St. </div>
-				      		<div id="collectionMethod"> 
-				      			<span id="collectionType"> Delivery to: </span> 	
-				      			<span id="collectionLocation"> My Home Address St. </span> 
-				      		</div>
+				      		<div id="collectionMethod">
+							  <span id="collectionType">Delivery to:</span>
+							  <span id="collectionLocation" data-original-text="My Home Address St.">My Home Address St.</span>
+							  <span id="collectionLocationApt" data-original-text=""></span>
+							  <button id="editLocationBtn">Edit</button>
+							</div>
+				      		
 				      		
 				      		<div id="userComments">
 				   				<textarea id="additionalInstructions" name="additionalInstructions"
@@ -216,16 +232,15 @@
 	<script src="/javaScript/pageRedirects/clicksPizzaLogo.js"></script>
 	<script src="/javaScript/pageRedirects/clicksItem.js"></script>
 	<script src="/javaScript/pageRedirects/clicksCheckout.js"></script>
-	<script src="/javaScript/pageRedirects/clicksRemoveItemFromCart.js"></script>
-	<script src="/javaScript/pageRedirects/clicksEditItemFromCart.js"></script>
-	<script src="/javaScript/pageRedirects/clicksPickupDelivery.js"></script>
-	<script src="/javaScript/collectionLocation.js"></script>
+	
+	<script src="/javaScript/checkoutPage/clicksRemoveItemFromCart.js"></script>
+	<script src="/javaScript/checkoutPage/clicksEditItemFromCart.js"></script>
+	<script src="/javaScript/checkoutPage/clicksAsapLater.js"></script>
+	<script src="/javaScript/checkoutPage/showAsapLaterTimeDateSelector.js"></script>
+	<script src="/javaScript/checkoutPage/clicksPickupDelivery.js"></script>
+	<script src="/javaScript/checkoutPage/clicksEditAddress-checkoutPage.js"></script>
+	
 	<script src="/javaScript/usesCommentsCharLeft.js"></script>
-	
-	<script src="/javaScript/updateSelectedOption.js"></script>
-	
-	<script src="/javaScript/signUpParameterChecking/confirmParameters-SignUp.js"></script>
-	
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>

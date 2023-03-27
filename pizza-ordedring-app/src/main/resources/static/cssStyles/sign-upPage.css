@@ -90,23 +90,26 @@
 				justify-content: center;
 				align-items: center;
 				
-				
+				padding-top: 140px;
 		        margin-bottom: 10px;
 		        font-size: 50px;
 		      }
 		      
 		      #signUpEntry {
-		      	width: 80%;
+		      	width: 90%;
 		        display: flex;
 		        flex-direction: column;
 		        align-items: center;
 		        border: 3px solid #ccc;
 		        padding: 20px;
 		      }
+		      #signUpForm {
+		      	width: 100%;
+		      }
 		      
-		      #signUpFirstName, #signUpLastName, #signUpAddress,
+		      #signUpFirstName, #signUpLastName, #signUpAddress, #signUpPhone, #signUpApartment,
 		      #signUpEmail, #signUpPassword, #signUpConfirmPassword, #signUpPasswordError {
-		      	width: 90%;
+		      	width: 100%;
 		      	display: flex;
 		      	flex-direction: row;
 		      	
@@ -117,11 +120,20 @@
 		        margin-bottom: 10px;
 		      }
 		      	#signUpParamTitle {
-		      		width: 45%;
+		      		width: 40%;
 		      		display: flex;
 			      	justify-content: left;
 					align-items: center;
 					margin-bottom: 7px;
+		      	}
+		      	#signUpConfirmApartmentTitle {
+		      		width: 45%;
+		      		display: flex;
+			      	justify-content: center;
+					align-items: center;
+		      		font-size: 30px;
+		      		font-style: italic;
+		      		margin-top: 10px;
 		      	}
 		      	#signUpConfirmPassTitle {
 		      		width: 45%;
