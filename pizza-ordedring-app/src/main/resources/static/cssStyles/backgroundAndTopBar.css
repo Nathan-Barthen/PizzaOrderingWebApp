@@ -37,6 +37,7 @@
 		width: 1396px;
 		min-width: 99%;
 		position: relative;
+		z-index: 10;
 		
 		display: flex;
 		align-items: center;
