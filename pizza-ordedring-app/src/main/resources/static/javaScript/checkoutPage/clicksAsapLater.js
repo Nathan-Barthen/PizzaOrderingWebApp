@@ -13,6 +13,7 @@
 		
 		const laterDateSelectorDiv1 = document.getElementById('laterDateSelectorDiv');
 		
+		
 		//Clicks ASAP
 		timeAsap.addEventListener('click', () => {
 			
@@ -22,12 +23,15 @@
 			laterDateSelectorDiv1.style.display = "none";
 		});
 		
+		
 		//Clicks Later
 		timeLater.addEventListener('click', () => {
 			timeLater.style.backgroundColor = 'rgb(204, 102, 255)';
 		    timeAsap.style.backgroundColor = 'rgb(204, 204, 204)';
 		  
 		    laterDateSelectorDiv1.style.display = "flex";
+		    
+		    
 		});
 
 	

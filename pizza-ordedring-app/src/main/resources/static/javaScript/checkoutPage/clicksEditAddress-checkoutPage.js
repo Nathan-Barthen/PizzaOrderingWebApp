@@ -9,7 +9,10 @@
 	const editButton1 = document.getElementById("editLocationBtn");
 	
 	editButton1.addEventListener("click", () => {
+	 //User clicks 'Edit'
 	  if (editButton1.innerText === "Edit") {
+		  collectionLocationApt.style.display = "block";  
+		  
 	    const originalTextLocation = collectionLocation1.getAttribute("data-original-text");
 	    const originalTextLocationApt = collectionLocationApt.getAttribute("data-original-text");
 	    collectionLocation1.innerHTML = `<input type="text" placeholder="*Address" value="${originalTextLocation}"/>`;
@@ -24,6 +27,7 @@
 	    
 	    editButton1.innerText = "Update";
 	  } 
+	  //User clicks 'Update'
 	  else {
 	    const newLocation = collectionLocation1.querySelector("input").value;
 	    const newLocationApt = collectionLocationApt.querySelector("input").value;
