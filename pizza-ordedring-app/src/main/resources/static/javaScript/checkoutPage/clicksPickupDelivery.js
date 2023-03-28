@@ -38,6 +38,11 @@
 		  
 		  //Hide edit button.
 		  editButton2.style.display = "none";
+		  
+		  //Hide apt/bldg textbox
+		  collectionLocationApt.style.display = "none";
+		  //Change 'Update' textbox back to edit
+		  editButton1.innerText = "Edit";
 		});
 
 	

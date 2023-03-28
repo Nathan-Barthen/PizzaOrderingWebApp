@@ -32,6 +32,24 @@
 			padding-left: 15px;
 		}
 		
+		#adminEditMenu {
+			position: relative;
+			top: 11.7%;
+			left: 0%;
+			
+			width: 200px;
+			height: 40px;
+			
+			background-color: rgb(255, 191, 128);
+		   	border-radius: 10px;
+		  	display: flex;
+		  	justify-content: center;
+		  	align-items: center;
+		  	border: 2px solid black;
+		  	
+		  	cursor: pointer;
+		}
+		
 		#menuTitle {
 			width: 34%;
 			height: 100%;
