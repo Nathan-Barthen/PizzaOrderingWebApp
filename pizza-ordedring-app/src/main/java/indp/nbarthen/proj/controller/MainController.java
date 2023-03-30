@@ -71,7 +71,7 @@ public class MainController {
 		 * 		This will show all of the items for the given category.
 	 */
 	 @RequestMapping({"/pizzaStore/{categoryName}"})
-	    public String categoryPage(@PathVariable("categoryName") String summonerName, Model model) {
+	    public String categoryPage(@PathVariable("categoryName") String categoryName, Model model) {
 		 
 		 	
 		 	//User was redirected to home from API call error.
@@ -193,7 +193,70 @@ public class MainController {
 	     // Save the user account to your database
 	     // ...
 
-	     return "redirect:/welcome";
+	     return "redirect:/";
 	 }
 	 
+	 
+	 //Admin options page. Shows selectors to delete, add, edit items on the menu.
+	 @RequestMapping({"/pizzaStore/admin/optionsPage"})
+	    public String adminOptionsPage(Model model) {
+		 
+		 	//If user is admin, continue. Else redirect to home.
+		 	
+		 	
+		 	
+	        return "admin/adminOptionsPage";
+	    }
+	 
+	/*If user clicks 'Delete an Item' at the optionsPage, they will be redirected here.
+	 *	This will list all of the item by category, 
+	 * 	 and allow the user to click to view the item (and then delete it if they want)
+	 */
+		 @RequestMapping({"/pizzaStore/admin/delete/showAllItems"})
+		    public String adminShowAllItemsDeletePage(Model model) {
+			 
+			 	//If user is admin, continue. Else redirect to home.
+			 		//Show all items
+			 	
+			 	
+		        return "admin/adminShowAllDeletePage";
+		}
+	 /*If user clicks on an item at the 'adminShowAllDeletePage.html' page
+		 *	They will be redirected to here which will list the item and its description.
+		 *		At this page the user will be able to permanently delete an item
+		 */
+		 @RequestMapping({"/pizzaStore/admin/delete/{categoryName}/{itemName}"})
+		    public String adminDeleteItemFromMenuPage(@PathVariable("categoryName") String categoryName, @PathVariable("itemName") String itemName, Model model) {
+			 
+			 	//Check if the user is an admin
+				 	
+			 	
+			 	
+		        return "admin/adminDeleteItemPage";
+		    }
+		 	
+			 @PostMapping("/deleteClickedItem")
+			 public String deleteAnItem(@RequestParam("categoryName") String categoryName,
+			                      		@RequestParam("itemName") String itemName) {
+				//If user is admin, continue. Else redirect to home.
+				 	//Delete item from database
+				 System.out.println("categoryName- " + categoryName + "     itemName- " + itemName);
+			     
+				 
+				 return "redirect:/pizzaStore/admin/delete/showAllItems";
+			 }
+			 
+			 
+	 /*If user clicks 'Add an Item' at the optionsPage, they will be redirected here.
+		 *	This will give the user textboxes and list the steps to add an item to the menu.
+		 */
+			 @RequestMapping({"/pizzaStore/admin/add/addAnItem"})
+			    public String adminAddAnItemPage(Model model) {
+				 
+				 	//If user is admin, continue. Else redirect to home.
+				 		//Show all items
+				 	
+				 	
+			        return "admin/adminAddItemPage";
+			}
 }
