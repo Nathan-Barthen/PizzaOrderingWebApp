@@ -7,7 +7,7 @@
 <title>Online Pizza Ordering</title>
 
 <link rel="stylesheet" href="/cssStyles/backgroundAndTopBar.css">
-<link rel="stylesheet" href="/cssStyles/itemPage.css">
+<link rel="stylesheet" href="/cssStyles/admin/adminDeleteItem.css">
 <link rel="stylesheet" href="/cssStyles/bottomLinks.css">
 
 
@@ -90,13 +90,8 @@
    			<div id="body-headers">
    				<div id="storeLocation"> 156 Elderwood Ave </div>
    				<div id="categoryTitle"> Dessert(s) </div>
-   				<div id="searchMenu">
-   					Search:  
-   					<div id="searchDiv">
-   							<form>
-		                        <input type="text" id="userSearchInput" placeholder="Search menu">
-		                     </form>
-		             </div>
+   				<div id="adminHomeDiv">
+   					<div id="adminHome">Admin Home</div>
    				</div>
    			</div>
    			
@@ -105,8 +100,15 @@
 	   				<img id="itemImg" src="/images/items/desserts/brownie.jpg">
    				</div>
    				<div id="itemDescDiv">
-   					<div id="itemName">
-   						Brownie
+   					<div id="itemNameAndDelete">
+   						<div id="itemName"> Brownie</div>
+   						<div id="deleteItemDiv"> 
+   							<div id="deleteItem">Delete</div>
+   							<form id="myDeleteForm" method="POST" action="/deleteClickedItem" style="display: none;">
+							  <input type="hidden" name="itemName" value="Pepperoni Pizza" />
+							  <input type="hidden" name="categoryName" value="Pizzas" />
+							</form>
+   						</div>
    					</div>
    					<div id="itemDesc">
    						This is the description for the item that is shown above me. 
@@ -354,6 +356,9 @@
 	<script src="/javaScript/itemPage/updateSelectedOption-itemPage.js"></script>
 	<script src="/javaScript/itemPage/selectedOptions-itemPage.js"></script>
 	<script src="/javaScript/itemPage/removeSelectedOption-itemPage.js"></script>
+	
+	<script src="/javaScript/adminPages/deleteItemPermanently.js"></script>
+	<script src="/javaScript/adminPages/adminClicksAdminHome.js"></script>
 	
 	<script src="/javaScript/usesCommentsCharLeft.js"></script>
 	

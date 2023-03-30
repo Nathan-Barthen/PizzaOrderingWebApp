@@ -7,7 +7,7 @@
 <title>Online Pizza Ordering</title>
 
 <link rel="stylesheet" href="/cssStyles/backgroundAndTopBar.css">
-<link rel="stylesheet" href="/cssStyles/home.css">
+<link rel="stylesheet" href="/cssStyles/admin/adminOptions.css">
 <link rel="stylesheet" href="/cssStyles/bottomLinks.css">
 
 
@@ -89,135 +89,38 @@
    		<div id="pageBody">
    			<div id="body-headers">
    				<div id="storeLocation"> 156 Elderwood Ave </div>
-   				<div id="adminEditMenu"> Edit Menu </div>
-   				<div id="menuTitle"> Menu </div>
-   				<div id="searchMenu">
-   					Search:  
-   					<div id="searchDiv">
-   							<form>
-		                        <input type="text" id="userSearchInput" placeholder="Search menu">
-		                     </form>
-		             </div>
+   				<div id="adminHomeTitle"> Admin Menu Home </div>
+   				<div id="emptySpace">
+   					
    				</div>
    			</div>
    			
-   			<div id="foodCategories">
-   				<div id="foodCategories-row">
+   			<div id="editMenuDiv">
    				
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/pizzaGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Pizza
-	   						</div>
-   						</div>
-   					</div>
-   					
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/sidesGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Sides
-	   						</div>
-	   					</div>
-   					</div>
-   						
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/wingsGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Wings
-	   						</div>
-	   					</div>
-   					</div>
-   					
-   				</div>
-   					
-   				<div id="foodCategories-row">
-   					
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/pastaGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Pasta
-	   						</div>
-   						</div>
-   					</div>
-   					
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/wedgieGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Wedgies
-	   						</div>
-	   					</div>
-   					</div>
-   						
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/dessertsGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Desserts
-	   						</div>
-	   					</div>
-   					</div>
-   					
-   				</div>
-   					
-   				<div id="foodCategories-row">
-   				
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/drinksGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Drinks
-	   						</div>
-	   					</div>
-   					</div>
-   						
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/miscGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Misc
-	   						</div>
-	   					</div>
-   					</div>
-   					
-   				</div>
-   				
+   				<div id="editMenuTextDiv">
+				      <div id="deleteItemDiv">
+				      	<div id="deleteItem" class="modifyItem">Delete an Item</div>
+				      </div>
+				      <div id="addItemDiv">
+				      	<div id="addItem" class="modifyItem">Add an Item</div>
+				      </div>
+				      <div id="editItemDiv">
+				      	<div id="editItem" class="modifyItem">Edit an Item</div>
+				      </div>
+			    </div>
    			</div>
-   				
    			
-   				
-   			<div id="socialLinksBorder">
+   		</div>
+   		
+   		<div id="socialLinksBorder">
 		     	<div id="socialLinks">
 		            <b> 
 		            	<a id="gitHub" href="https://github.com/Nathan-Barthen" target="_blank">GitHub</a>
 		                <a id="linkedIn" href="https://www.linkedin.com/in/nathan-barthen-22993722a/" target="_blank">LinkedIn</a> 
 		            </b>
 		        </div>
-		    </div>
+		</div>
    			
-   		</div>
-   		
-   	
    	</div>
   </div>
 
@@ -233,15 +136,14 @@
 	
 	<script src="/javaScript/pageRedirects/clicksLoginSignup.js"></script>
 	<script src="/javaScript/pageRedirects/clicksPizzaLogo.js"></script>
-	<script src="/javaScript/pageRedirects/clicksCategory.js"></script>
 	<script src="/javaScript/pageRedirects/clicksItem.js"></script>
 	<script src="/javaScript/pageRedirects/clicksCheckout.js"></script>
 	
-	<script src="/javaScript/bodySize-homePage.js"></script>
-	<script src="/javaScript/adminPages/adminClicksEditMenu.js"></script>
+	<script src="/javaScript/adminPages/adminClicksDeleteAddEdit.js"></script>
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>
+	
 	
 	
 	

@@ -24,7 +24,7 @@ public class Item {
 	private String itemDesc;
 	
 	private Double itemDefaultCost;
-	//Items additional cost to be added to itemDefaultCost if additional toppings are added or 'Extra' is selected.
+	//Calculated: Items additional cost to be added to itemDefaultCost if additional toppings are added or 'Extra' is selected.
 	private Double itemAdditionalCost;
 	
 	//Toppings included on item. (Ex. Pepperoni Pizza - Sauce, Cheese, Pepperoni)

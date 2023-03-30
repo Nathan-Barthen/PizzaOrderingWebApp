@@ -7,7 +7,7 @@
 <title>Online Pizza Ordering</title>
 
 <link rel="stylesheet" href="/cssStyles/backgroundAndTopBar.css">
-<link rel="stylesheet" href="/cssStyles/home.css">
+<link rel="stylesheet" href="/cssStyles/admin/adminAddItem.css">
 <link rel="stylesheet" href="/cssStyles/bottomLinks.css">
 
 
@@ -89,135 +89,101 @@
    		<div id="pageBody">
    			<div id="body-headers">
    				<div id="storeLocation"> 156 Elderwood Ave </div>
-   				<div id="adminEditMenu"> Edit Menu </div>
-   				<div id="menuTitle"> Menu </div>
-   				<div id="searchMenu">
-   					Search:  
-   					<div id="searchDiv">
-   							<form>
-		                        <input type="text" id="userSearchInput" placeholder="Search menu">
-		                     </form>
-		             </div>
+   				<div id="adminHomeTitle"> Add an Item </div>
+   				<div id="adminHomeDiv">
+   					<div id="adminHome">Admin Home</div>
    				</div>
    			</div>
    			
-   			<div id="foodCategories">
-   				<div id="foodCategories-row">
-   				
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/pizzaGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Pizza
-	   						</div>
-   						</div>
-   					</div>
-   					
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/sidesGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Sides
-	   						</div>
-	   					</div>
-   					</div>
-   						
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/wingsGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Wings
-	   						</div>
-	   					</div>
-   					</div>
-   					
-   				</div>
-   					
-   				<div id="foodCategories-row">
-   					
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/pastaGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Pasta
-	   						</div>
-   						</div>
-   					</div>
-   					
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/wedgieGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Wedgies
-	   						</div>
-	   					</div>
-   					</div>
-   						
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/dessertsGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Desserts
-	   						</div>
-	   					</div>
-   					</div>
-   					
-   				</div>
-   					
-   				<div id="foodCategories-row">
-   				
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/drinksGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Drinks
-	   						</div>
-	   					</div>
-   					</div>
-   						
-   					<div id="category">
-   						<div id="categoryBorder">
-	   						<div id="categoryImgDiv">
-	   							<img id="categoryImg" src="/images/categoryImages/miscGeneral.jpg">
-	   						</div>
-	   						<div id="categoryItemName">
-	   							Misc
-	   						</div>
-	   					</div>
-   					</div>
-   					
-   				</div>
-   				
+   			<div id="addItemDiv">
+   				<div id="addInstructions-1"> Enter data into the fields to add an item to the menu.</div>
+   			 	<div id="addInstructions-2"> If you do not use one of the already established&nbsp;<b>Categories</b>, it will be placed in Misc. </div>
+   				<div id="addItemFields">
+   					<form id="signUpForm" method="post" th:action="@{/signup}">
+					      	<div id="signUpFirstName">
+							    <span id="signUpParamTitle"> *Category: </span>
+							    <input type="text" name="category" >
+							</div>
+							<div id="signUpCheckFirstName">
+							    <span id="emptyText"></span>
+							    <div class="errorMessages" id="firstNameErrorMessages"></div>
+							</div>
+							
+							
+							<div id="signUpLastName">
+							    <span id="signUpParamTitle"> *Item Name: </span>
+							    <input type="text" name="name" >
+							</div>
+							<div id="signUpCheckLastName">
+							    <span id="emptyText"></span>
+							    <div class="errorMessages" id="lastNameErrorMessages"></div>
+							</div>
+							
+							<div id="signUpPhone">
+							    <span id="signUpParamTitle"> *Item Description: </span>
+							    <input type="text" name="description" >
+							</div>
+							<div id="signUpCheckPhone">
+							    <span id="emptyText"></span>
+							    <div class="errorMessages" id="phoneErrorMessages"></div>
+							</div>
+							
+							<div id="signUpEmail">
+							    <span id="signUpParamTitle"> *Price ($): </span>
+							    <input type="text" name="price" >
+							</div>
+							<div id="signUpCheckEmail">
+							    <span id="emptyText"></span>
+							    <div class="errorMessages" id="emailErrorMessages"></div>
+							</div>
+							
+							<div id="signUpEmail">
+							    <span id="signUpParamTitle"> *Price ($): </span>
+							    <input type="text" name="price" >
+							</div>
+							<div id="signUpCheckEmail">
+							    <span id="emptyText"></span>
+							    <div class="errorMessages" id="emailErrorMessages"></div>
+							</div>
+							
+							<div id="signUpEmail">
+							    <span id="signUpParamTitle"> Included Toppings (optional): </span>
+							    <input type="text" name="includedToppings" >
+							</div>
+							<div id="signUpCheckEmail">
+							    <span id="emptyText"></span>
+							    <div class="errorMessages" id="emailErrorMessages"></div>
+							</div>
+							
+							<div id="signUpEmail">
+							    <span id="signUpParamTitle"> Extra Toppings (optional): </span>
+							    <input type="text" name="extraToppings" >
+							</div>
+							<div id="signUpCheckEmail">
+							    <span id="emptyText"></span>
+							    <div class="errorMessages" id="emailErrorMessages"></div>
+							</div>
+					        
+					        
+					       
+				        	<input type="submit" value="Sign Up">
+				      	</form>
+   					  
+
+			    </div>
    			</div>
-   				
    			
-   				
-   			<div id="socialLinksBorder">
+   		</div>
+   		
+   		<div id="socialLinksBorder">
 		     	<div id="socialLinks">
 		            <b> 
 		            	<a id="gitHub" href="https://github.com/Nathan-Barthen" target="_blank">GitHub</a>
 		                <a id="linkedIn" href="https://www.linkedin.com/in/nathan-barthen-22993722a/" target="_blank">LinkedIn</a> 
 		            </b>
 		        </div>
-		    </div>
+		</div>
    			
-   		</div>
-   		
-   	
    	</div>
   </div>
 
@@ -233,15 +199,15 @@
 	
 	<script src="/javaScript/pageRedirects/clicksLoginSignup.js"></script>
 	<script src="/javaScript/pageRedirects/clicksPizzaLogo.js"></script>
-	<script src="/javaScript/pageRedirects/clicksCategory.js"></script>
 	<script src="/javaScript/pageRedirects/clicksItem.js"></script>
 	<script src="/javaScript/pageRedirects/clicksCheckout.js"></script>
 	
-	<script src="/javaScript/bodySize-homePage.js"></script>
-	<script src="/javaScript/adminPages/adminClicksEditMenu.js"></script>
+	<script src="/javaScript/adminPages/adminClicksOnItemInDelete.js"></script>
+	<script src="/javaScript/adminPages/adminClicksAdminHome.js"></script>
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>
+	
 	
 	
 	
