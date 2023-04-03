@@ -99,61 +99,156 @@
    				<div id="addInstructions-1"> Enter data into the fields to add an item to the menu.</div>
    			 	<div id="addInstructions-2"> If you do not use one of the already established&nbsp;<b>Categories</b>, it will be placed in Misc. </div>
    				<div id="addItemFields">
-   					<form id="signUpForm" method="post" th:action="@{/signup}">
-					      	<div id="signUpFirstName">
-							    <span id="signUpParamTitle"> *Category: </span>
-							    <input type="text" name="category" >
-							</div>
-							<div id="signUpCheckFirstName">
-							    <span id="emptyText"></span>
-							    <div class="errorMessages" id="firstNameErrorMessages"></div>
-							</div>
-							
-							
-							<div id="signUpLastName">
-							    <span id="signUpParamTitle"> *Item Name: </span>
-							    <input type="text" name="name" >
-							</div>
-							<div id="signUpCheckLastName">
-							    <span id="emptyText"></span>
-							    <div class="errorMessages" id="lastNameErrorMessages"></div>
+   					<form id="addItemForm" method="post" th:action="@{/pizzaStore/admin/addItemToMenu}">
+   						<div id="addItemRow1">
+   						   
+   						    <div id=addItemCol>
+	   							<div id="itemName">
+								    <span id="addItemParamTitle"> *Item Name: </span>
+								    <input type="text" name="itemName" >
+								</div>
+								<div id="checkItemName">
+								    <span id="emptyText"></span>
+								    <div class="errorMessages" id="itemNameErrorMessages"></div>
+								</div>
 							</div>
 							
-							<div id="signUpPhone">
-							    <span id="signUpParamTitle"> *Item Description: </span>
-							    <input type="text" name="description" >
-							</div>
-							<div id="signUpCheckPhone">
-							    <span id="emptyText"></span>
-							    <div class="errorMessages" id="phoneErrorMessages"></div>
-							</div>
-							
-							<div id="signUpEmail">
-							    <span id="signUpParamTitle"> *Price ($): </span>
-							    <input type="text" name="price" >
-							</div>
-							<div id="signUpCheckEmail">
-							    <span id="emptyText"></span>
-							    <div class="errorMessages" id="emailErrorMessages"></div>
+							<div id=addItemCol>
+						      	<div id="categoryName">
+								    <span id="addItemParamTitle"> *Category: </span>
+								    <input type="text" name="categoryName" >
+								</div>
+								<div id="checkCategoryName">
+								    <span id="emptyText"></span>
+								    <div class="errorMessages" id="categoryNameErrorMessages"></div>
+								</div>
 							</div>
 							
-							<div id="signUpEmail">
-							    <span id="signUpParamTitle"> *Price ($): </span>
-							    <input type="text" name="price" >
-							</div>
-							<div id="signUpCheckEmail">
-							    <span id="emptyText"></span>
-							    <div class="errorMessages" id="emailErrorMessages"></div>
+							<div id=addItemCol>
+								<div id="itemPrice">
+								    <span id="addItemParamTitle"> *Price ($): </span>
+								    <input type="text" name="price" >
+								</div>
+								<div id="checkItemPrice">
+								    <span id="emptyText"></span>
+								    <div class="errorMessages" id="itemPriceErrorMessages"></div>
+								</div>
 							</div>
 							
-							<div id="signUpEmail">
-							    <span id="signUpParamTitle"> Included Toppings (optional): </span>
-							    <input type="text" name="includedToppings" >
-							</div>
-							<div id="signUpCheckEmail">
+						</div>		
+						<div id=addItemCol>
+							<div id="itemDescriptionDiv">
+				   				<textarea id="itemDescription" name="itemDescription"
+				   				 placeholder="*Item Description..."  rows="5" cols="50" maxlength="250"></textarea>
+				    			 <div id="countDisplay">0/250</div>
+				   			</div>
+							<div id="checkItemDescription">
 							    <span id="emptyText"></span>
-							    <div class="errorMessages" id="emailErrorMessages"></div>
+							    <div class="errorMessages" id="itemDescriptionErrorMessages"></div>
 							</div>
+						</div>	
+							
+						<div id="addInstructions-3"> Topping Instructions</div>
+						<div id="addInstructions-4"> Topping Type: </div>
+						<div id="addInstructions-4"> &nbsp;&nbsp;&nbsp;default - This means the topping will have [Light] - [Normal] - [Extra].</div>
+						<div id="addInstructions-4"> &nbsp;&nbsp;&nbsp;dropdown - This means topping will have multiple options. You will have to list these options seperated by a comma ( ' , ' ).</div>
+						<div id="addInstructions-4"> [Extra] Cost ($): </div>
+						<div id="addInstructions-5"> &nbsp;&nbsp;&nbsp;Additional price if user selects [Extra] on the topping. </div>
+						
+						<div id="addInstructions-3"> Included Topping(s) (<i>optional</i>)</div>
+							
+						<div id="addItemRow1">	
+						
+							<div id="addItemToppingCol1" class="addItemToppingCol">	
+								<div id="add-toppingTitle">
+									<span id="add-toppingTitleSpan">Topping</span>-
+								</div>
+								
+							</div>
+							
+							<div id="addItemToppingCol2" class="addItemToppingCol">
+								<div id="add-toppingName">
+								    <span id="addItemToppingParamTitle"> Name: </span>
+								    <input type="text" name="price" >
+								</div>
+								<div id="checkToppingName">
+								    <span id="emptyText"></span>
+								    <div class="errorMessages" id="toppingNameErrorMessages"></div>
+								</div>
+							</div>	
+							
+							<div id="addItemToppingCol3" class="addItemToppingCol">	
+								<div id="add-toppingType">
+								    <span id="addItemToppingParamTitle"> Type: </span>
+								    <div class="dropdown">
+									    <div id="selectedOption">Select</div>
+									  	<ul class="dropdown-menu">
+										    <li><a href="#">default</a></li>
+										    <li><a href="#">dropdown</a></li>
+										</ul>
+									</div>
+								</div>
+								<div id="checkToppingType">
+								    <span id="emptyText"></span>
+								    <div class="errorMessages" id="emailErrorMessages"></div>
+								</div>
+							</div>
+							
+							<div id="addItemToppingCol3point5" class="addItemToppingCol">
+								<div id="add-toppingTypes">
+								    <span id="addItemToppingParamTitle"> Types (,): </span>
+								    <input type="text" name="price" >
+								</div>
+								<div id="checkToppingTypes">
+								    <span id="emptyText"></span>
+								    <div class="errorMessages" id="toppingTypesErrorMessages"></div>
+								</div>
+							</div>	
+							
+							<div id="addItemToppingCol4" class="addItemToppingCol">	
+								<div id="add-toppingType">
+								    <span id="addItemToppingParamTitle"> IsPizza: </span>
+								    <div class="dropdown">
+									    <div id="selectedOption">Select</div>
+									  	<ul class="dropdown-menu">
+										    <li><a href="#">Yes</a></li>
+										    <li><a href="#">No</a></li>
+										</ul>
+									</div>
+								</div>
+								<div id="checkisPizza">
+								    <span id="emptyText"></span>
+								    <div class="errorMessages" id="isPizzaErrorMessages"></div>
+								</div>
+							</div>
+							
+							<div id="addItemToppingCol5" class="addItemToppingCol">
+								<div id="add-toppingAddonCost">
+								    <span id="addItemToppingParamTitle"> Addon ($): </span>
+								    <input type="text" name="price" >
+								</div>
+								<div id="checkToppingAddonCost">
+								    <span id="emptyText"></span>
+								    <div class="errorMessages" id="toppingAddonCostErrorMessages"></div>
+								</div>
+							</div>	
+							
+							<div id="addItemToppingCol6" class="addItemToppingCol">
+								<div id="add-toppingExtraCost">
+								    <span id="addItemToppingParamTitle"> [Extra] ($): </span>
+								    <input type="text" name="price" >
+								</div>
+								<div id="checkToppingExtraCost">
+								    <span id="emptyText"></span>
+								    <div class="errorMessages" id="toppingExtraCostErrorMessages"></div>
+								</div>
+							</div>	
+							
+							<div>+</div>
+							
+						</div>	
+							
+							
 							
 							<div id="signUpEmail">
 							    <span id="signUpParamTitle"> Extra Toppings (optional): </span>
@@ -166,7 +261,7 @@
 					        
 					        
 					       
-				        	<input type="submit" value="Sign Up">
+				        	<input type="submit" value="Add to Menu">
 				      	</form>
    					  
 
@@ -204,6 +299,8 @@
 	
 	<script src="/javaScript/adminPages/adminClicksOnItemInDelete.js"></script>
 	<script src="/javaScript/adminPages/adminClicksAdminHome.js"></script>
+	<script src="/javaScript/adminPages/addItem-ItemDescription.js"></script>
+	
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>

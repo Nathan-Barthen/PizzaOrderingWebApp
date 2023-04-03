@@ -73,16 +73,18 @@
 		
 		#addItemDiv {
 			width: 100%;
-			height: 450px;
+			height: 800px;
 			
 			display: flex;
 			flex-direction: column;
+			
+			font-family: Trebuchet MS;
 		}
 			#addInstructions-1 {
 				width: 100%;
 				height: 60px;
 				margin-bottom: 5px;
-				font-size: 40px;
+				font-size: 35px;
 				font-weight: bold;
 				
 				display: flex;
@@ -95,7 +97,7 @@
 				width: 100%;
 				height: 60px;
 				margin-bottom: 5px;
-				font-size: 35px;
+				font-size: 30px;
 				font-style: italic;
 				
 				display: flex;
@@ -111,64 +113,359 @@
 				display: flex;
 				flex-direction: column;
 				
-				justify-content: center;
+				justify-content: start;
 				align-items: center;
 				text-align: center;
 				
 				padding-top: 20px;
 				margin: auto;
 			}
-			 #rowOne-firstFourCategories {
-				width: 100%;
-				display: flex;
-				flex-direction: row;
-				
-				
-				font-size: 26px;
-				margin-bottom: 15px;
+		 	 #addItemForm {
+		      	width: 100%;
 		      }
-		      #rowOne-lastFourCategories {
-				width: 100%;
-				display: flex;
-				flex-direction: row;
-				font-size: 26px;
-		      }
-		      	
-		      #itemCategory {
-				width: 100%;
-				display: flex;
-				justify-content: center;
+		     #addItemRow1 {
+		      	width: 100%;
+		      	height: 40px;
+		      	display: flex;
+		      	flex-direction: row;
+		      	justify-content: left;
 				align-items: center;
-				text-align: center;
-					
-				flex-direction: column;
-				
-				border: 3px solid gray;
-		      	border-radius: 5px;
-				
-				margin: 5px;
-				padding-bottom: 10px;
-				
-				background-color: rgb(128, 191, 255);
-		      }
-		      	#categoryName {
-		      		display: flex;
-		      		justify-content: center;
-		      		margin-bottom: 10px;
-		      		font-size: 40px;
-		      	}
 		      	
-		      	#itemInCategory {
-		      		width: 80%;
+		        margin-bottom: 10px;
+		      }
+		       #addItemCol {
+		       		width: 100%;
+			      	display: flex;
+			      	flex-direction: column;
+			      	
+			      	justify-content: center;
+					align-items: center;
+			      	
+		       }
+		      
+			      #itemName, #categoryName, #itemPrice {
+			      	width: 100%;
+			      	display: flex;
+			      	flex-direction: row;
+			      	
+			      	justify-content: center;
+					align-items: center;
+			      	
+			      	font-size: 22px;
+			        margin-bottom: 10px;
+			      }
+			      	#addItemParamTitle {
+			      		width: 40%;
+			      		display: flex;
+				      	justify-content: right;
+						align-items: center;
+						
+						padding-right: 8px;
+						margin-bottom: 7px;
+						color: rgb(0, 57, 230);
+			      	}
+			      	
+			      	
+			      	#itemDescriptionDiv {
+						width: 100%;
+						height: 120px;
+						
+						padding-top: 0px;
+						display: flex;
+						align-items: center;
+						text-align: center;
+						justify-content: center;
+						
+						margin-bottom: 10px;
+					}
+						#itemDescription {
+							height: 100px;
+							width: 550px;
+							font-size: 20px;
+						}
+						#countDisplay {
+							height: 100%;
+							display: flex;
+							align-items: end;
+							text-align: center;
+							justify-content: center;
+							padding-left: 5px;
+							
+							font-size: 20px;
+						}
+			      	
+			      	
+			      	
+			      	#addInstructions-3 {
+						width: 100%;
+						height: 30px;
+						margin-bottom: 5px;
+						font-size: 25px;
+						
+						display: flex;
+						
+						justify-content: center;
+						align-items: center;
+						text-align: center;
+						
+						color: rgb(179, 89, 0);
+						text-decoration: underline;
+					}
 					
-		      		border: 1px solid gray;
-		      		border-radius: 5px;
-					margin: 5px;
-					padding-left: 2px;
+			      	#addInstructions-4 {
+						width: 100%;
+						height: 25px;
+						margin-bottom: 5px;
+						font-size: 17px;
+						
+						display: flex;
+						
+						justify-content: left;
+						align-items: center;
+						text-align: center;
+						margin-left: 100px;
+					}
+			      	#addInstructions-5 {
+						width: 100%;
+						height: 25px;
+						margin-bottom: 5px;
+						font-size: 17px;
+						
+						display: flex;
+						
+						justify-content: left;
+						align-items: center;
+						text-align: center;
+						
+						margin-bottom: 25px;
+						margin-left: 100px;
+					}
+			      	
+			       .addItemToppingCol {
+			       		width: 100%;
+				      	display: flex;
+				      	flex-direction: column;
+				      	
+				      	justify-content: center;
+						align-items: center;
+						text-align: center;
+						
+						font-size: 17px;
+				      	
+			       }
+			       #addItemToppingCol1 {
+			       		width: 7%;
+			       }
+			       #addItemToppingCol2 {
+			       		width: 17%;
+			       		
+			       }
+			       #addItemToppingCol3 {
+			       		width: 14%;
+			       		padding-right: 0px;
+			       }
+			       #addItemToppingCol3point5 {
+			       		width: 21%;
+			       		padding-left: 10px;
+			       }
+			       #addItemToppingCol4 {
+			       		width: 14%;
+			       		margin-left: 5px;
+			       		padding-right: 40px;
+			       		
+			       }
+			       #addItemToppingCol5 {
+			       		width: 7%;
+			       		padding-right: 75px;
+			       }
+			       #addItemToppingCol6 {
+			       		width: 7%;
+			       		
+			       }
+			       
+			       
+			       #addItemToppingParamTitle {
+			      		width: 25%;
+			      		display: flex;
+				      	justify-content: right;
+						align-items: center;
+						
+						white-space: nowrap;
+						
+						padding-right: 8px;
+						margin-bottom: 7px;
+			      	
+			       	}
+			      	#add-toppingTitle {
+				      	width: 100%;
+				      	display: flex;
+				      	
+				      	justify-content: center;
+						align-items: center;
+				      	margin-bottom: 7px;
+				      	
+				      	
+				      }
+				      	#add-toppingTitleSpan {
+				      		color: rgb(230, 115, 0);
+				      	}
+				      #add-toppingName {
+				      	width: 100%;
+				      	display: flex;
+				      	
+				      	justify-content: center;
+						align-items: center;
+				      	
+				      }
+				      #add-toppingType {
+				      	width: 100%;
+				      	display: flex;
+				      	
+				      	justify-content: center;
+						align-items: center;
+				      	
+				      }
+				      #add-toppingTypes {
+				      	width: 100%;
+				      	display: flex;
+				      	
+				      	justify-content: center;
+						align-items: center;
+				      }
+				      #add-isPizza{
+				      	width: 100%;
+				      	display: flex;
+				      	
+				      	justify-content: center;
+						align-items: center;
+				      	
+				      }
+				      #add-toppingAddonCost {
+				      	width: 100%;
+				      	display: flex;
+				      	
+				      	justify-content: center;
+						align-items: center;
+				      }
+				      #add-toppingExtraCost {
+				      	width: 100%;
+				      	display: flex;
+				      	
+				      	justify-content: center;
+						align-items: center;
+				      	
+				      }
+			      	 
+			      	
+			      	#emptyText {
+			      		width: 0%;
+			      	}
+			      	.errorMessages {
+			      		width: 100%;
+			      		color: red;
+			      		font-size: 15px;
+			      		text-align: right;
+			      	}
+			      
+			       input[type="text"] {
+			       	width: 57%;
+			       	height: 20px;
+			       	display: flex;
+			      	justify-content: center;
+					align-items: center;
+					text-align: center;
 					
-					background-color: rgb(255, 204, 204);
-					cursor: pointer;
-		      	}
-		
+					margin-bottom: 5px;
+			       }
+			      input[type="submit"] {
+			      	width: 200px;
+			      	height: 50px;
+			      	font-size: 30px;
+			      	
+			        background-color: #4CAF50;
+			        color: white;
+			        padding: 10px 20px;
+			        border: none;
+			        border-radius: 5px;
+			        cursor: pointer;
+			        
+			      }
+			      
+			      input[type="submit"]:hover {
+			        background-color: #3e8e41;
+			      }	
+			
+		/* START - mainOptions Dropdown box styles. */	
+			
+			  .dropdown {
+			    	width: 100px;
+			  		margin-right: 0px;
+			  
+				    border: 3px solid black;
+				    background: rgb(255, 187, 153);
+				    color: black;
+				    cursor: pointer;
+				    height: 30px;
+				    line-height: 30px;
+				    position: relative;
+				    text-align: center;
+				    text-decoration: none;
+				    z-index: 1;
+				    transform: perspective(1000px);
+				    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+				    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+				  	
+				  	font-size: 20px;
+				  	margin-right: 0px;
+			  }
+			  #selectedOption {
+			    position: relative;
+			    font-weight: bold;
+			  }
+			
+			  .dropdown-menu {
+				    background-color: rgb(255, 136, 77);
+				    list-style-type: none;
+				    margin: 0;
+				    padding: 0;
+				    position: absolute;
+				    left: 0;
+				    opacity: 0;
+				    text-align: center;
+				    top: 100%;
+				    visibility: hidden;
+				    z-index: -99999;
+				    width: 100%;
+				    
+				    
+				    -webkit-transition: all .5s, background, 2s .5s linear;
+				    transition: all .5s, background 2s .5s linear;
+			  }
+			
+			  .dropdown-menu li:first-child {
+			    	cursor: default;
+			  }
+			
+			  .dropdown-menu a {
+				    color: #000;
+				    display: inline-block;
+				    width: 100%;
+				    text-decoration: none;
+				    -webkit-transition: all .5s;
+				    transition: all .001s;
+			  }
+			
+			  .dropdown-menu a:hover {
+				    background: rgb(179, 60, 0);
+				    color: #fff;
+			  }
+			
+			  .dropdown:hover .dropdown-menu {
+				    background: rgb(255, 102, 26);
+				    opacity: 1;
+				    visibility: visible;
+				    z-index: 10;
+			  }
+  		/* END - Dropdown box styles. */	  
 		
 		
