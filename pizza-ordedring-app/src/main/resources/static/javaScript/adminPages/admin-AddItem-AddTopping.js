@@ -28,7 +28,7 @@
 			<div id="add-topping-name" class="addItemToppingCol">
 				<div id="add-toppingName">
 				    <span id="addItemToppingParamTitle"> Name: </span>
-				    <input type="text" name="mainToppingsName" >
+				    <input type="text" name="mainToppingsName" placeholder="Name">
 				</div>
 				<div id="checkToppingName">
 				    <span id="emptyText"></span>
@@ -84,7 +84,7 @@
 			<div id="add-topping-ExtraPrice" class="addItemToppingCol">
 				<div id="add-toppingExtraCost">
 				    <span id="addItemToppingParamTitle"> [Extra] ($): </span>
-				    <input type="text" name="mainToppings[0][additionalCostExtra]" >
+				    <input type="text" name="mainToppings[0][additionalCostExtra]" placeholder="$0.00">
 				</div>
 				<div id="checkToppingExtraCost">
 				    <span id="emptyText"></span>
@@ -100,12 +100,9 @@
 	
 	
 		addMainToppingDiv.parentNode.insertBefore(newToppingRow, addMainToppingDiv);
-		
-		initRemoveTopping();
 		initTypeDropdowns();
+		initRemoveTopping();
 	});
-
-
 
 
   
