@@ -186,98 +186,13 @@
 						
 						<div id="addInstructions-3"> Add-on Topping(s) (<i>optional</i>)</div>
 							
-						<div id="addItemToppingRow">	
 						
-							<div id="add-topping-title" class="addItemToppingCol">	
-								<div id="add-toppingTitle">
-									<span id="add-toppingTitleSpan">Topping</span> -
-								</div>
-								
-							</div>
-							
-							<div id="add-topping-name" class="addItemToppingCol">
-								<div id="add-toppingName">
-								    <span id="addItemToppingParamTitle"> Name: </span>
-								    <input type="text" name="mainToppingsName" placeholder="Name">
-								</div>
-								<div id="checkToppingName">
-								    <span id="emptyText"></span>
-								    <div class="errorMessages" id="toppingNameErrorMessages"></div>
-								</div>
-							</div>	
-							
-							<div id="add-topping-type" class="addItemToppingCol">	
-								<div id="add-toppingType">
-								    <span id="addItemToppingParamTitle"> Type: </span>
-								    <div class="dropdown" id="typeDropdown">
-									    <div id="typeSelectedOption">default</div>
-									  	<ul class="dropdown-menu" id="type-dropdown-menu">
-										    <li><a href="#">dropdown</a></li>
-										</ul>
-									</div>
-								</div>
-								<input type="hidden" value="default" name="toppingType" id="toppingTypeInput">
-								<div id="checkToppingType">
-								    <span id="emptyText"></span>
-								    <div class="errorMessages" id="toppingTypeErrorMessages"></div>
-								</div>
-							</div>
-							
-							<div id="add-topping-types" class="addItemToppingCol">
-								<div id="add-toppingTypes">
-								    <span id="addItemToppingParamTitle"> Types (,): </span>
-								    <input type="text" name="price" >
-								</div>
-								<div id="checkToppingTypes">
-								    <span id="emptyText"></span>
-								    <div class="errorMessages" id="toppingTypesErrorMessages"></div>
-								</div>
-							</div>	
-							
-							<div id="add-topping-isPizza" class="addItemToppingCol">	
-								<div id="add-isPizza">
-								    <span id="addItemToppingParamTitle"> IsPizza: </span>
-								    <div class="dropdown" id="isPizzaDropdown">
-									    <div id="isPizzaSelectedOption">No</div>
-									  	<ul class="dropdown-menu" id="isPizza-dropdown-menu">
-										    <li><a href="#">Yes</a></li>
-										</ul>
-									</div>
-								</div>
-								<input type="hidden" value="Select" name="isPizza" id="isPizzaInput">
-								<div id="checkisPizza">
-								    <span id="emptyText"></span>
-								    <div class="errorMessages" id="isPizzaErrorMessages"></div>
-								</div>
-							</div>
-							
-							<div id="add-topping-addonPrice" class="addItemToppingCol">
-								<div id="add-toppingAddonCost">
-								    <span id="addItemToppingParamTitle"> Addon ($): </span>
-								    <input type="text" name="mainToppings[0][additionalCostAddon]" placeholder="$0.00">
-								</div>
-								<div id="checkToppingAddonCost">
-								    <span id="emptyText"></span>
-								    <div class="errorMessages" id="toppingAddonCostErrorMessages"></div>
-								</div>
-							</div>	
-							
-							<div id="add-topping-ExtraPrice" class="addItemToppingCol">
-								<div id="add-toppingExtraCost">
-								    <span id="addItemToppingParamTitle"> [Extra] ($): </span>
-								    <input type="text" name="mainToppings[0][additionalCostExtra]" placeholder="$0.00" >
-								</div>
-								<div id="checkToppingExtraCost">
-								    <span id="emptyText"></span>
-								    <div class="errorMessages" id="toppingExtraCostErrorMessages"></div>
-								</div>
-							</div>	
-							
-							<div id="removeTopping"> - </div>
-							
-						</div>
 						
-					        <div id="addAddonToppingDiv" class="addToppingDiv">	
+							
+							
+							
+						
+					    <div id="addAddonToppingDiv" class="addToppingDiv">	
 							<div id="addAddonTopping" class="addTopping"> + </div>	
 						</div>	
 					       
@@ -323,8 +238,9 @@
 	<script src="/javaScript/adminPages/admin-AddItem-ConfirmParameters.js"></script>
 	<script src="/javaScript/adminPages/admin-AddItem-InstructionsDropdown.js"></script>
 	<script src="/javaScript/adminPages/admin-AddItem-ToppingSelectedOptions.js"></script>
-	<script src="/javaScript/adminPages/admin-AddItem-RemoveTopping.js"></script>
-	<script src="/javaScript/adminPages/admin-AddItem-AddTopping.js"></script>
+	<script src="/javaScript/adminPages/admin-AddItem-AddMainTopping.js"></script>
+	<script src="/javaScript/adminPages/admin-AddItem-AddAddonTopping.js"></script>
+	<script src="/javaScript/adminPages/admin-AddItem-AdjustHeight.js"></script>
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>

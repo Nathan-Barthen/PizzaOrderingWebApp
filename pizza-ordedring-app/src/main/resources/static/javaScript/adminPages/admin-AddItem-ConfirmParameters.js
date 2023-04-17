@@ -29,14 +29,8 @@
 	  const itemDescription = document.getElementsByName('itemDescription')[0];
 	  const itemDescriptionErrorMessages = document.getElementById('itemDescriptionErrorMessages');
 	  
-	  //Get email fields
-	  const emailField = document.getElementsByName('email')[0];
-	  const emailErrorMessages = document.getElementById('emailErrorMessages');
-	  
-	  //Get password fields.
-	  const passwordField = document.getElementById('password');
-	  const confirmPasswordField = document.getElementById('confirmPassword');
-	  const passwordErrorMessages = document.getElementById('passwordErrorMessages');
+	 
+ 
 	  
 	  
 	  //Check item name
@@ -82,24 +76,87 @@
 		  else {
 			  itemDescriptionErrorMessages.innerHTML = '';
 		  }
-	
 		  
 	
 		  
+    //Topping - Checks -----------------------------------------
+	  //Check topping Names
+		  //Check if topping Name(s) are empty
+		  const toppingNames = document.querySelectorAll('.toppingNameValue');
+
+		  toppingNames.forEach((toppingName) => {
+		    const nameErrorMessage = toppingName.closest('#addItemToppingRow').querySelector('#toppingNameErrorMessages');
+		    if (toppingName.value.trim() === '' || toppingName.value == null) {
+		    	nameErrorMessage.textContent = '*Name cannot be empty';
+		      event.preventDefault();
+		    }
+		    else {
+		    	nameErrorMessage.textContent = '';
+		    }
+		  });
+     //Check Extra Prices
+		  //Chech if price matches correct format.
+		  const priceInputs = document.querySelectorAll('.toppingExtraValue');
 		  
-	  //Check passwords
-		  //Check if passwords match
-		  if (passwordField.value !== confirmPasswordField.value) {
-			  firstNameErrorMessages.innerHTML = '*Passwords do not match.';
-			  event.preventDefault();
-		  }
-		  //Check if password matches required characters.
-		  const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{7,}$/;
-		  if (!passwordRegex.test(passwordField.value)) {
-			  passwordErrorMessages.innerHTML = '*Password must be at least 7 characters with one capital and one number.';
-			  event.preventDefault();
-		  }
-	  
+		  priceInputs.forEach((priceInput) => {
+			  const extraValue = priceInput.value.trim();
+			  // Regular expression to match currency format ($00.00)
+			  const currencyRegex = /^(\$)?\d{1,}\.\d{2}$/;
+	
+			  // Check if value matches currency format
+			  const extraErrorMessage = priceInput.closest('#addItemToppingRow').querySelector('#toppingExtraCostErrorMessages');
+			  //If value is valid
+			  if (currencyRegex.test(extraValue)) {
+				  extraErrorMessage.textContent = '';
+			  } 
+			  //If value in invalid
+			  else {
+				  extraErrorMessage.textContent = '*Invalid price.';
+				  event.preventDefault();
+			  }
+			});
+		//Check Addon Prices
+		  //Chech if price matches correct format.
+		  const addonInputs = document.querySelectorAll('.toppingAddonValue');
+		  
+		  addonInputs.forEach((addonInput) => {
+			  const addonValue = addonInput.value.trim();
+			  // Regular expression to match currency format ($00.00)
+			  const currencyRegex = /^(\$)?\d{1,}\.\d{2}$/;
+	
+			  // Check if value matches currency format
+			  const addonErrorMessage = addonInput.closest('#addItemToppingRow').querySelector('#toppingAddonCostErrorMessages');
+			  //If value is valid
+			  if (currencyRegex.test(addonValue)) {
+				  addonErrorMessage.textContent = '';
+			  } 
+			  //If value in invalid
+			  else {
+				  addonErrorMessage.textContent = '*Invalid price.';
+				  event.preventDefault();
+			  }
+			});	  
+			
+		//Check types if type = 'dropdown'
+		  const toppingTypes = document.querySelectorAll('.toppingTypeValue');
+		  toppingTypes.forEach((toppingType) => {
+			  if(toppingType.value == 'dropdown'){
+				  
+				  const closestToppingType = toppingType.closest('#addItemToppingRow').querySelector('.toppingTypesValue');
+				  const typesErrorMessage = closestToppingType.closest('#addItemToppingRow').querySelector('#toppingTypesErrorMessages');
+				    
+				   if (closestToppingType.value.trim() === '' || closestToppingType.value == null) {
+				    	typesErrorMessage.textContent = '*Types cannot be empty';
+				        event.preventDefault();
+				   }
+				   else {
+				    	typesErrorMessage.textContent = '';
+				   }
+				 
+				  
+			  }
+		 });
+		
 		
 		  
 		  

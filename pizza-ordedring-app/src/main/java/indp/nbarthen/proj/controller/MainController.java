@@ -259,4 +259,26 @@ public class MainController {
 				 	
 			        return "admin/adminAddItemPage";
 			}
+			 
+	 /*If user clicks 'Add an Item' at the optionsPage, they will be redirected here.
+		 *	This will give the user textboxes and list the steps to add an item to the menu.
+		 */
+			 @RequestMapping({"/pizzaStore/admin/addItemToMenu"})
+			    public String saveItemToMenu(Model model, @RequestParam("itemName") String itemName,
+			    		@RequestParam("categoryName") String categoryName, @RequestParam("itemPrice") String itemPrice,
+			    		@RequestParam("itemDescription") String itemDescription,
+			    		@RequestParam("mainToppingsName[]") String[] mainToppingsName,
+			    		@RequestParam(required = false) String[] mainToppingsType,
+			    		@RequestParam(required = false) String[] mainToppingsTypes,
+			    		@RequestParam(required = false) String[] mainToppingsIsPizza,
+			    		@RequestParam(required = false) String[] mainToppingsExtra
+			    		
+			    		) {
+				 
+				 System.out.println("ItemName- " + itemName + " CategoryName- " + categoryName + " Price- " + itemPrice);	
+				 System.out.println("ItemDesc- " + itemDescription);	
+				 System.out.println("Topping Name- " + mainToppingsName[0]);	
+				 
+				 return "redirect:admin/adminOptionsPage";
+			}
 }

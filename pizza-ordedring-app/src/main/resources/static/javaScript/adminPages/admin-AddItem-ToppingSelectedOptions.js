@@ -26,7 +26,8 @@ function initTypeDropdowns() {
 	      var addToppingTypesDiv = selectedOption1.closest("#addItemToppingRow").querySelector("#add-topping-types");
 
 	      // Change the value of the hidden inputs
-	      var input = selectedOption1.closest('#add-topping-type').querySelector('input[name="toppingType"]');
+	      var input = selectedOption1.closest('#add-topping-type').querySelector('.toppingTypeValue');
+
 	      input.value = currentState;
 
 	      const liElement = dropdownMenu1.querySelector('a');
@@ -36,11 +37,13 @@ function initTypeDropdowns() {
 	        liElement.textContent = "default";
 	        addToppingTypesDiv.style.visibility = "visible";
 	        currentState = "dropdown";
+	        input.value = "dropdown";
 	      } else {
 	        selectedOption1.textContent = "default";
 	        liElement.textContent = "dropdown";
 	        addToppingTypesDiv.style.visibility = "hidden";
 	        currentState = "default";
+	        input.value = "default";
 	      }
 	    });
 	  });
@@ -63,8 +66,9 @@ function initTypeDropdowns() {
 	            
 
 	            //Change the value of the hidden inputs
-	            var input1 = selectedOption2.closest('#add-topping-isPizza').querySelector('input[name="isPizza"]');
-	            input1.value = selectedOption2.textContent;
+	            var input1 = selectedOption2.closest('#add-topping-isPizza').querySelector('.toppingIsPizzaValue');
+
+	            input1.value = currentIsPizzaState;
 
 	            const liElement1 = dropdownMenu2.querySelector('a');
 	            
@@ -72,11 +76,13 @@ function initTypeDropdowns() {
 	            	selectedOption2.textContent = "No";
 	                liElement1.textContent = 'Yes';
 	                currentIsPizzaState = 'Yes';
+	                input1.value = "No";
 	            }
-	            else if (currentIsPizzaState === 'Yes') {
+	            else {
 	            	selectedOption2.textContent = "Yes";
 	                liElement1.textContent = 'No';
 	                currentIsPizzaState = 'No';
+	                input1.value = "Yes";
 	            }
 	            
 	        });
