@@ -78,7 +78,7 @@
 			display: flex;
 			flex-direction: column;
 		}
-			#deleteInstructions {
+			#editInstructions {
 				width: 100%;
 				height: 60px;
 				margin-bottom: 5px;
@@ -91,8 +91,8 @@
 				align-items: center;
 				text-align: center;
 			}
-				#deleteText {
-					color: red;
+				#editText {
+					color: blue;
 				}
 			#showAllItemsTextDiv {
 				width: 90%;

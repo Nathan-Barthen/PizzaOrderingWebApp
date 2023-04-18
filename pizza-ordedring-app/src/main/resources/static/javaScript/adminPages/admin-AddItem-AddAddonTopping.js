@@ -8,13 +8,11 @@
 
 
 	const addAddonToppingDiv = document.querySelector("#addAddonToppingDiv");
-	let toppingAddonCount = 0;
 	
 	const addAddonTopping = document.querySelector("#addAddonTopping");
 
 	//IF the [+] is clicked created the div for the topping, and append div above the [+]
 	addAddonTopping.addEventListener("click", function() {
-	  toppingCount++;
 	  const newToppingRow = document.createElement("div");
 	  newToppingRow.id = "addItemToppingRow";
 	  newToppingRow.innerHTML = `
@@ -29,7 +27,7 @@
 		<div id="add-topping-name" class="addItemToppingCol">
 		  <div id="add-toppingName">
 		    <span id="addItemToppingParamTitle"> Name: </span>
-		    <input type="text" class="toppingNameValue" name="addonToppingsName[${toppingAddonCount - 1}]" placeholder="Name">
+		    <input type="text" class="toppingNameValue" name="addonToppingsName" placeholder="Name">
 		  </div>
 		  <div id="checkToppingName">
 		    <span id="emptyText"></span>
@@ -47,7 +45,7 @@
 		      </ul>
 		    </div>
 		  </div>
-		  <input type="hidden" value="default" class="toppingTypeValue" name="addonToppingsToppingType[${toppingAddonCount - 1}]" id="toppingTypeInput">
+		  <input type="hidden" value="default" class="toppingTypeValue" name="addonToppingsType" id="toppingTypeInput">
 		  <div id="checkToppingType">
 		    <span id="emptyText"></span>
 		    <div class="errorMessages" id="toppingTypeErrorMessages"></div>
@@ -57,7 +55,7 @@
 		<div id="add-topping-types" class="addItemToppingCol">
 		  <div id="add-toppingTypes">
 		    <span id="addItemToppingParamTitle"> Types (,): </span>
-		    <input type="text" class="toppingTypesValue" name="addonToppingsTypes[${toppingAddonCount - 1}]" >
+		    <input type="text" class="toppingTypesValue" name="addonToppingsTypes" >
 		  </div>
 		  <div id="checkToppingTypes">
 		    <span id="emptyText"></span>
@@ -75,7 +73,7 @@
 		      </ul>
 		    </div>
 		  </div>
-			<input type="hidden" value="No" class="toppingIsPizzaValue" name="addonToppingsIsPizza[${toppingAddonCount - 1}]" id="isPizzaInput">
+			<input type="hidden" value="No" class="toppingIsPizzaValue" name="addonToppingsIsPizza" id="isPizzaInput">
 			<div id="checkisPizza">
 			    <span id="emptyText"></span>
 			    <div class="errorMessages" id="isPizzaErrorMessages"></div>
@@ -85,7 +83,7 @@
 		<div id="add-topping-addonPrice" class="addItemToppingCol">
 			<div id="add-toppingAddonCost">
 			    <span id="addItemToppingParamTitle"> Addon ($): </span>
-			    <input type="text" class="toppingAddonValue" name="addonToppingsPrice[${toppingAddonCount - 1}]" placeholder="$0.00">
+			    <input type="text" class="toppingAddonValue" name="addonToppingsPrice" placeholder="$0.00">
 			</div>
 			<div id="checkToppingAddonCost">
 			    <span id="emptyText"></span>
@@ -96,7 +94,7 @@
 		<div id="add-topping-ExtraPrice" class="addItemToppingCol">
 			<div id="add-toppingExtraCost">
 			    <span id="addItemToppingParamTitle"> [Extra] ($): </span>
-			    <input type="text" class="toppingExtraValue" name="addonToppingsExtra[${toppingAddonCount - 1}]" placeholder="$0.00">
+			    <input type="text" class="toppingExtraValue" name="addonToppingsExtra" placeholder="$0.00">
 			</div>
 			<div id="checkToppingExtraCost">
 			    <span id="emptyText"></span>

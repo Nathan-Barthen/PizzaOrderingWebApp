@@ -22,6 +22,7 @@ public class Item {
 	private String itemName;
 	
 	private String itemDesc;
+	private boolean hasImage;
 	
 	private Double itemDefaultCost;
 	//Calculated: Items additional cost to be added to itemDefaultCost if additional toppings are added or 'Extra' is selected.
@@ -43,16 +44,17 @@ public class Item {
 	public Item() {
 		this.includedToppings = new Vector<Topping>();
 		this.additionalToppings = new Vector<Topping>();
-		
+		this.hasImage = false;
 	}
 	
-	public Item(String category, String itemName, String itemDesc, Double itemDefaultCost, 
+	public Item(String category, String itemName, String itemDesc, boolean hasImage, Double itemDefaultCost, 
 			Double itemAdditionalCost, Vector<Topping> includedToppings, 
 			Vector<Topping> additionalToppings, String itemAdditionalInstructions) 
 	{	
 		this.category = category;
 		this.itemName = itemName;
 		this.itemDesc = itemDesc;
+		this.hasImage = hasImage;
 		this.itemDefaultCost = itemDefaultCost;
 		this.itemAdditionalCost = itemAdditionalCost;
 		this.includedToppings = includedToppings;
@@ -90,6 +92,14 @@ public class Item {
 
 	public void setItemDesc(String itemDesc) {
 		this.itemDesc = itemDesc;
+	}
+
+	public boolean getHasImage() {
+		return hasImage;
+	}
+
+	public void setHasImage(boolean hasImage) {
+		this.hasImage = hasImage;
 	}
 
 	public Double getItemDefaultCost() {

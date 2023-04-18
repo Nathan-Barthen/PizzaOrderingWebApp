@@ -8,13 +8,12 @@
 
 
 	const addMainToppingDiv = document.querySelector("#addMainToppingDiv");
-	let toppingCount = 0;
 	
 	const addMainTopping = document.querySelector("#addMainTopping");
 
 	//IF the [+] is clicked created the div for the topping, and append div above the [+]
 	addMainTopping.addEventListener("click", function() {
-	  toppingCount++;
+	  
 	  const newToppingRow = document.createElement("div");
 	  newToppingRow.id = "addItemToppingRow";
 	  newToppingRow.innerHTML = `
@@ -29,7 +28,7 @@
 		<div id="add-topping-name" class="addItemToppingCol">
 		  <div id="add-toppingName">
 		    <span id="addItemToppingParamTitle"> Name: </span>
-		    <input type="text" class="toppingNameValue" name="mainToppingsName[${toppingCount - 1}]" placeholder="Name">
+		    <input type="text" class="toppingNameValue" name="mainToppingsName" placeholder="Name">
 		  </div>
 		  <div id="checkToppingName">
 		    <span id="emptyText"></span>
@@ -47,7 +46,7 @@
 		      </ul>
 		    </div>
 		  </div>
-		  <input type="hidden" value="default" class="toppingTypeValue" name="mainToppingsToppingType[${toppingCount - 1}]" id="toppingTypeInput">
+		  <input type="hidden" value="default" class="toppingTypeValue" name="mainToppingsType" id="toppingTypeInput">
 		  <div id="checkToppingType">
 		    <span id="emptyText"></span>
 		    <div class="errorMessages" id="toppingTypeErrorMessages"></div>
@@ -57,7 +56,7 @@
 		<div id="add-topping-types" class="addItemToppingCol">
 		  <div id="add-toppingTypes">
 		    <span id="addItemToppingParamTitle"> Types (,): </span>
-		    <input type="text" class="toppingTypesValue" name="mainToppingsTypes[${toppingCount - 1}]" >
+		    <input type="text" class="toppingTypesValue" name="mainToppingsTypes" >
 		  </div>
 		  <div id="checkToppingTypes">
 		    <span id="emptyText"></span>
@@ -75,7 +74,7 @@
 		      </ul>
 		    </div>
 		  </div>
-			<input type="hidden" value="No" class="toppingIsPizzaValue" name="mainToppingsIsPizza[${toppingCount - 1}]" id="isPizzaInput">
+			<input type="hidden" value="No" class="toppingIsPizzaValue" name="mainToppingsIsPizza" id="isPizzaInput">
 			<div id="checkisPizza">
 			    <span id="emptyText"></span>
 			    <div class="errorMessages" id="isPizzaErrorMessages"></div>
@@ -85,7 +84,7 @@
 		<div id="add-topping-ExtraPrice" class="addItemToppingCol">
 			<div id="add-toppingExtraCost">
 			    <span id="addItemToppingParamTitle"> [Extra] ($): </span>
-			    <input type="text" class="toppingExtraValue" name="mainToppingsExtra[${toppingCount - 1}]" placeholder="$0.00">
+			    <input type="text" class="toppingExtraValue" name="mainToppingsExtra" placeholder="$0.00">
 			</div>
 			<div id="checkToppingExtraCost">
 			    <span id="emptyText"></span>
