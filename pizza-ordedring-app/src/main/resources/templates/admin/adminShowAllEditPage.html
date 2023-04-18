@@ -7,7 +7,7 @@
 <title>Online Pizza Ordering</title>
 
 <link rel="stylesheet" href="/cssStyles/backgroundAndTopBar.css">
-<link rel="stylesheet" href="/cssStyles/admin/adminOptions.css">
+<link rel="stylesheet" href="/cssStyles/admin/adminShowAllItemsEdit.css">
 <link rel="stylesheet" href="/cssStyles/bottomLinks.css">
 
 
@@ -89,28 +89,72 @@
    		<div id="pageBody">
    			<div id="body-headers">
    				<div id="storeLocation"> 156 Elderwood Ave </div>
-   				<div id="adminHomeTitle"> Admin Menu Home </div>
-   				<div id="emptySpace">
-   					
+   				<div id="adminHomeTitle"> All Items </div>
+   				<div id="adminHomeDiv">
+   					<div id="adminHome">Admin Home</div>
    				</div>
    			</div>
    			
-   			<span id="popup" th:text="${itemCreationError}" style="display: none;"></span>
-   			
-   			<div id="editMenuDiv">
-   		
-   				<div id="editMenuTextDiv">
-				      <div id="deleteItemDiv">
-				      	<div id="deleteItem" class="modifyItem">Delete an Item</div>
+   			<div id="showAllItemsDiv">
+   				<div id="editInstructions"> Click on an Item to be view its description and ingredients. </div>
+   			 	<div id="editInstructions"> While there you will have an option to <span id="editText">&nbsp;edit&nbsp;</span> the Item. </div>
+   				<div id="showAllItemsTextDiv">
+   				
+   					  <div id="rowOne-firstFourCategories">
+				    	<div id="itemCategory">
+				    		<div id="categoryName">Category Name</div>
+				    		<div id="itemInCategory">Pep Pizza</div>
+				    		<div id="itemInCategory">Pineapple Pizza</div>
+				    		<div id="itemInCategory">Spicy Pizza</div>
+				    	</div>
+				    	<div id="itemCategory">
+				    		<div id="categoryName">Category Name</div>
+				    		<div id="itemInCategory">Pep Pizza</div>
+				    		<div id="itemInCategory">Pineapple Pizza</div>
+				    		<div id="itemInCategory">Spicy Pizza</div>
+				    	</div>
+				    	<div id="itemCategory">
+				    		<div id="categoryName">Category Name</div>
+				    		<div id="itemInCategory">Pep Pizza</div>
+				    		<div id="itemInCategory">Pineapple Pizza</div>
+				    		<div id="itemInCategory">Spicy Pizza</div>
+				    	</div>
+				    	<div id="itemCategory">
+				    		<div id="categoryName">Category Name</div>
+				    		<div id="itemInCategory">Pep Pizza</div>
+				    		<div id="itemInCategory">Pineapple Pizza</div>
+				    		<div id="itemInCategory">Spicy Pizza</div>
+				    	</div>
 				      </div>
-				      <div id="addItemDiv">
-				      	<div id="addItem" class="modifyItem">Add an Item</div>
+				      
+				      <div id="rowOne-lastFourCategories">
+				    	<div id="itemCategory">
+				    		<div id="categoryName">Pizza</div>
+				    		<div id="itemInCategory">Pep Pizza</div>
+				    		<div id="itemInCategory">Pineapple Pizza</div>
+				    		<div id="itemInCategory">Spicy Pizza</div>
+				    	</div>
+				    	<div id="itemCategory">
+				    		<div id="categoryName">Wings</div>
+				    		<div id="itemInCategory">Pep Pizza</div>
+				    		<div id="itemInCategory">Pineapple Pizza</div>
+				    		<div id="itemInCategory">Spicy Pizza</div>
+				    	</div>
+				    	<div id="itemCategory">
+				    		<div id="categoryName">Misc</div>
+				    		<div id="itemInCategory">Pep Pizza</div>
+				    		<div id="itemInCategory">Pineapple Pizza</div>
+				    		<div id="itemInCategory">Spicy Pizza</div>
+				    	</div>
+				    	<div id="itemCategory">
+				    		<div id="categoryName">Category Name</div>
+				    		<div id="itemInCategory">Pep Pizza</div>
+				    		<div id="itemInCategory">Pineapple Pizza</div>
+				    		<div id="itemInCategory">Spicy Pizza</div>
+				    	</div>
 				      </div>
-				      <div id="editItemDiv">
-				      	<div id="editItem" class="modifyItem">Edit an Item</div>
-				      </div>
+
 			    </div>
-			    
    			</div>
    			
    		</div>
@@ -142,8 +186,8 @@
 	<script src="/javaScript/pageRedirects/clicksItem.js"></script>
 	<script src="/javaScript/pageRedirects/clicksCheckout.js"></script>
 	
-	<script src="/javaScript/adminPages/adminClicksDeleteAddEdit.js"></script>
-	<script src="/javaScript/adminPages/adminItemCreationError.js"></script>
+	<script src="/javaScript/adminPages/adminClicksOnItemInEdit.js"></script>
+	<script src="/javaScript/adminPages/adminClicksAdminHome.js"></script>
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>
