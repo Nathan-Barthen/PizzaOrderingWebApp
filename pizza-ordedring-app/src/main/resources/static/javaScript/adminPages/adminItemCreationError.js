@@ -5,7 +5,7 @@
 				
 	    var popupElement = document.getElementById("popup");
 	    if (popupElement.innerText.includes("failed")) {
-	    	console.log("Hello");
+	    	
 	        alert(popupElement.innerText);
 	    }
 				  

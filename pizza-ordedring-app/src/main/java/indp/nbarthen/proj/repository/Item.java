@@ -23,6 +23,7 @@ public class Item {
 	
 	private String itemDesc;
 	private boolean hasImage;
+	private String imageUrl;
 	
 	private Double itemDefaultCost;
 	//Calculated: Items additional cost to be added to itemDefaultCost if additional toppings are added or 'Extra' is selected.
@@ -100,6 +101,14 @@ public class Item {
 
 	public void setHasImage(boolean hasImage) {
 		this.hasImage = hasImage;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	public Double getItemDefaultCost() {

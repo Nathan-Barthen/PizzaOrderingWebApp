@@ -51,7 +51,7 @@ public class CreateNewMenuItem {
 			item.setHasImage(false);
 		}
 		
-		//Check if main topping(s) exist
+		//Check if main topping(s) exist. Add toppings to item.
 		if(mainToppingsName[0] != null || mainToppingsName[0] != "") {
 			List<Topping> includedToppings = new Vector<Topping>();
 			for(int i = 0; i < mainToppingsName.length; i ++) {
@@ -96,7 +96,7 @@ public class CreateNewMenuItem {
 			item.setIncludedToppings(includedToppings);
 		}
 		
-		//Check if addon topping(s) exist
+		//Check if addon topping(s) exist. Add toppings to item.
 		if(addonToppingsName[0] != null || addonToppingsName[0] != "") {
 			List<Topping> addonToppings = new Vector<Topping>();
 			for(int i = 0; i < addonToppingsName.length; i ++) {
@@ -148,6 +148,8 @@ public class CreateNewMenuItem {
 			item.setAdditionalToppings(addonToppings);
 		}
 		
+		
+		//Retuen completed item.
 		return item;
 	}
 	
