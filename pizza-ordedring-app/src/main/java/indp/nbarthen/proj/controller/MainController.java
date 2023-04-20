@@ -4,6 +4,7 @@ package indp.nbarthen.proj.controller;
 
 import indp.nbarthen.proj.repository.UserOrder;
 import indp.nbarthen.proj.admin.CreateNewMenuItem;
+import indp.nbarthen.proj.admin.SaveItemImage;
 import indp.nbarthen.proj.repository.Item;
 import indp.nbarthen.proj.repository.OrdersRepository;
 import indp.nbarthen.proj.repository.UserAccount;
@@ -55,7 +56,7 @@ public class MainController {
 	    public String homePage(Model model) {
 		 
 		 	
-		 	//User was redirected to home from API call error.
+		 	//REMOVE - User was redirected to home from API call error.
 		 	if(!userSearchPopupError.equals("none")) {
 		 		String popupError = userSearchPopupError;
 		 		userSearchPopupError = "none";
@@ -66,7 +67,7 @@ public class MainController {
 		 	
 		 	//Default value for userSearchPopupError is 'none' (no error will popup)
 		 	model.addAttribute("popupError", userSearchPopupError);
-		 	
+		 	model.addAttribute("itemCategories", itemCategories.toArray());
 		 	
 	        return "homePage";
 	    }
@@ -79,18 +80,11 @@ public class MainController {
 	    public String categoryPage(@PathVariable("categoryName") String categoryName, Model model) {
 		 
 		 	
-		 	//User was redirected to home from API call error.
-		 	if(!userSearchPopupError.equals("none")) {
-		 		String popupError = userSearchPopupError;
-		 		userSearchPopupError = "none";
-		 		//Display error message
-		 		model.addAttribute("popupError", popupError);
-		 		return "homePage";
-		 	}
+		 	
 		 	
 		 	//Default value for userSearchPopupError is 'none' (no error will popup)
 		 	model.addAttribute("popupError", userSearchPopupError);
-		 	
+		 	model.addAttribute("itemCategories", itemCategories.toArray());
 		 	
 	        return "categoryPage";
 	    }
@@ -104,18 +98,8 @@ public class MainController {
 	    public String itemPage(@PathVariable("categoryName") String categoryName, @PathVariable("itenName") String itemName, Model model) {
 		 
 		 	
-		 	//User was redirected to home from API call error.
-		 	if(!userSearchPopupError.equals("none")) {
-		 		String popupError = userSearchPopupError;
-		 		userSearchPopupError = "none";
-		 		//Display error message
-		 		model.addAttribute("popupError", popupError);
-		 		return "homePage";
-		 	}
 		 	
-		 	//Default value for userSearchPopupError is 'none' (no error will popup)
-		 	model.addAttribute("popupError", userSearchPopupError);
-		 	
+		 	model.addAttribute("itemCategories", itemCategories.toArray());
 		 	
 	        return "itemPage";
 	    }
@@ -124,17 +108,7 @@ public class MainController {
 	    public String checkoutPage(Model model) {
 		 
 		 	
-		 	//User was redirected to home from API call error.
-		 	if(!userSearchPopupError.equals("none")) {
-		 		String popupError = userSearchPopupError;
-		 		userSearchPopupError = "none";
-		 		//Display error message
-		 		model.addAttribute("popupError", popupError);
-		 		return "homePage";
-		 	}
-		 	
-		 	//Default value for userSearchPopupError is 'none' (no error will popup)
-		 	model.addAttribute("popupError", userSearchPopupError);
+		 	model.addAttribute("itemCategories", itemCategories.toArray());
 		 	
 		 	
 	        return "checkoutPage";
@@ -147,17 +121,7 @@ public class MainController {
 	    public String signInPage(Model model) {
 		 
 		 	
-		 	//User was redirected to home from API call error.
-		 	if(!userSearchPopupError.equals("none")) {
-		 		String popupError = userSearchPopupError;
-		 		userSearchPopupError = "none";
-		 		//Display error message
-		 		model.addAttribute("popupError", popupError);
-		 		return "homePage";
-		 	}
-		 	
-		 	//Default value for userSearchPopupError is 'none' (no error will popup)
-		 	model.addAttribute("popupError", userSearchPopupError);
+		 	model.addAttribute("itemCategories", itemCategories.toArray());
 		 	
 		 	
 	        return "sign-inPage";
@@ -169,17 +133,7 @@ public class MainController {
 	    public String signUpPage(Model model) {
 		 
 		 	
-		 	//User was redirected to home from API call error.
-		 	if(!userSearchPopupError.equals("none")) {
-		 		String popupError = userSearchPopupError;
-		 		userSearchPopupError = "none";
-		 		//Display error message
-		 		model.addAttribute("popupError", popupError);
-		 		return "homePage";
-		 	}
-		 	
-		 	//Default value for userSearchPopupError is 'none' (no error will popup)
-		 	model.addAttribute("popupError", userSearchPopupError);
+		 	model.addAttribute("itemCategories", itemCategories.toArray());
 		 	
 		 	
 	        return "sign-upPage";
@@ -216,6 +170,8 @@ public class MainController {
 			 	//If user is admin, continue. Else redirect to home.
 			 	
 			 	
+			 	model.addAttribute("itemCategories", itemCategories.toArray());
+			 	
 			 	
 		        return "admin/adminOptionsPage";
 		    }
@@ -230,6 +186,8 @@ public class MainController {
 				 	//If user is admin, continue. Else redirect to home.
 				 		//Show all items
 				 	
+				 
+				 	model.addAttribute("itemCategories", itemCategories.toArray());
 				 	
 			        return "admin/adminShowAllDeletePage";
 			}
@@ -243,6 +201,7 @@ public class MainController {
 				 	//Check if the user is an admin
 					 	
 				 	
+				 	model.addAttribute("itemCategories", itemCategories.toArray());
 				 	
 			        return "admin/adminDeleteItemPage";
 			    }
@@ -254,6 +213,8 @@ public class MainController {
 					 	//Delete item from database
 					 System.out.println("categoryName- " + categoryName + "     itemName- " + itemName);
 				     
+					 
+					 
 					 
 					 return "redirect:/pizzaStore/admin/delete/showAllItems";
 				 }
@@ -268,6 +229,8 @@ public class MainController {
 					 	//If user is admin, continue. Else redirect to home.
 					 		//Show all items
 					 	
+					 
+					 	model.addAttribute("itemCategories", itemCategories.toArray());
 					 	
 				        return "admin/adminAddItemPage";
 				}
@@ -276,7 +239,8 @@ public class MainController {
 			 *	This will give the user textboxes and list the steps to add an item to the menu.
 			 */
 				 @RequestMapping({"/pizzaStore/admin/addItemToMenu"})
-				    public String saveItemToMenu(Model model, @RequestParam("itemName") String itemName,
+				    public String saveItemToMenu(
+				    		Model model, @RequestParam("itemName") String itemName,
 				    		@RequestParam("categoryName") String categoryName, @RequestParam("itemPrice") String itemPrice,
 				    		@RequestParam("itemDescription") String itemDescription,
 				    		
@@ -296,7 +260,7 @@ public class MainController {
 				    		@RequestParam(name = "jpgfile", required = false) MultipartFile jpgFile
 				    ) {
 					 
-						//Create item 
+						//Creates item 
 					 	Item item = CreateNewMenuItem.CreateItem(itemCategories, itemName, categoryName, itemPrice, itemDescription, mainToppingsName,
 					            mainToppingsType, mainToppingsTypes, mainToppingsIsPizza, mainToppingsExtra, addonToppingsName,
 					            addonToppingsType, addonToppingsTypes, addonToppingsIsPizza, addonToppingsExtra, addonToppingsPrice,
@@ -307,11 +271,27 @@ public class MainController {
 					 		return "redirect:/pizzaStore/admin/optionsPage?itemCreationError=Item creation failed. Try again.";
 					    }
 					 	
+					 	
 					 	//Check if this item already exists.
+					 	
+					 	
 					 	//If item does not exist, save image. If image exists. 
 					 	if(item.getHasImage()) {
 							//Save image to database, rename image to item name.
+					 		if(SaveItemImage.saveImage(item, jpgFile)) {
+					 			//Save url
+					 			item.setImageUrl("/images/items/" + item.getCategory().toLowerCase() + "/" + item.getItemName().toLowerCase() + ".jpg");
+					 		}
+					 		else {
+					 			item.setImageUrl("/images/items/noImageAvailable.jpg");
+					 		}
+					 		
 						}
+					 	//Set item url to default picture.
+					 	else {
+					 		item.setImageUrl("/images/items/noImageAvailable.jpg");
+					 	}
+					 	
 					 	
 					 	//Save item to database.
 						 
@@ -331,6 +311,8 @@ public class MainController {
 					 		//Show all items
 					 	
 					 	
+					 	model.addAttribute("itemCategories", itemCategories.toArray());
+					 
 				        return "admin/adminShowAllEditPage";
 				}
 			 /*If user clicks on an item at the 'adminShowAllEditPage.html' page
@@ -343,6 +325,8 @@ public class MainController {
 				 	//Check if the user is an admin
 					 	
 				 	
+				 
+				 	model.addAttribute("itemCategories", itemCategories.toArray());
 				 	
 			        return "admin/adminEditItemPage";
 			    }
@@ -351,9 +335,11 @@ public class MainController {
 				 public String editAnItem(@RequestParam("categoryName") String categoryName,
 				                      		@RequestParam("itemName") String itemName) {
 					//If user is admin, continue. Else redirect to home.
-					 	//Delete item from database
+					 	//Edit item from database
 					 System.out.println("categoryName- " + categoryName + "     itemName- " + itemName);
 				     
+					 
+					 
 					 
 					 return "redirect:/pizzaStore/admin/edit/showAllItems";
 				 }		 
