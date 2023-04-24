@@ -36,7 +36,7 @@
    				<div id="addInstructions-1"> Enter data into the fields to add an item to the menu.</div>
    			 	<div id="addInstructions-2"> If you do not use one of the already established&nbsp;<b>Categories</b>, it will be placed in Misc. </div>
    				<div id="addItemFields">
-   					<form id="addItemForm" method="post" th:action="@{/pizzaStore/admin/addItemToMenu}">
+   					<form id="addItemForm" method="post" th:action="@{/pizzaStore/admin/addItemToMenu}" enctype="multipart/form-data">
    						<div id="addItemRow1">
    						   
    						    <div id=addItemCol>

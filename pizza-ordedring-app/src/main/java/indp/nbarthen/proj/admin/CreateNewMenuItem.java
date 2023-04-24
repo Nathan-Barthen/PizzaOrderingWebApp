@@ -2,17 +2,34 @@ package indp.nbarthen.proj.admin;
 
 
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+
 import indp.nbarthen.proj.repository.Item;
 import indp.nbarthen.proj.repository.Topping;
 
 
 public class CreateNewMenuItem {
+	
+	 
+	
+	//Create the actual Item class using parameters
 	public static Item CreateItem(List<String> itemCategories, String itemName, String categoryName, String itemPrice, String itemDescription,
             String[] mainToppingsName, String[] mainToppingsType, String[] mainToppingsTypes,
             String[] mainToppingsIsPizza, String[] mainToppingsExtra, String[] addonToppingsName,
@@ -44,7 +61,7 @@ public class CreateNewMenuItem {
 		
 		item.setItemDesc(itemDescription);
 		
-		if(jpgFile != null) {
+		if(jpgFile != null && !jpgFile.isEmpty()) {
 			item.setHasImage(true);
 		}
 		else {
@@ -52,7 +69,7 @@ public class CreateNewMenuItem {
 		}
 		
 		//Check if main topping(s) exist. Add toppings to item.
-		if(mainToppingsName[0] != null || mainToppingsName[0] != "") {
+		if(mainToppingsName != null) {
 			List<Topping> includedToppings = new Vector<Topping>();
 			for(int i = 0; i < mainToppingsName.length; i ++) {
 				Topping topping = new Topping();
@@ -97,7 +114,7 @@ public class CreateNewMenuItem {
 		}
 		
 		//Check if addon topping(s) exist. Add toppings to item.
-		if(addonToppingsName[0] != null || addonToppingsName[0] != "") {
+		if(addonToppingsName != null) {
 			List<Topping> addonToppings = new Vector<Topping>();
 			for(int i = 0; i < addonToppingsName.length; i ++) {
 				Topping topping = new Topping();
@@ -154,6 +171,77 @@ public class CreateNewMenuItem {
 	}
 	
 
+	/* Adds the item to MenuItems database. Returns true.
+	 * 	If MenuItems does not exist, it will create the file.
+	 * 	If the item already exists in the database, it will not add the item and returns false.
+	 */
+		
+	public static boolean addItemToDatabase(Item item, MultipartFile jpgFile) {
+		String menuFileLocation = "src/main/resources/MenuItems.json";
+		List<Item> items = new ArrayList<>();
+		
+		try {
+	        // Load existing items from file
+	        File file = new File(menuFileLocation);
+	        if (file.exists()) {
+	            try {
+	                ObjectMapper objectMapper = new ObjectMapper();
+	                items = objectMapper.readValue(file, new TypeReference<List<Item>>() {});
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	                System.out.println("Failed to read Items from MenuItems.json");
+	                return false;
+	            }
+	        }
+
+	        // Check if item already exists
+	        for (Item i : items) {
+	        	// Item already exists
+	            if (	i.getItemName().toLowerCase().equals(item.getItemName().toLowerCase()) 
+	            	&& 	i.getCategory().toLowerCase().equals(item.getCategory().toLowerCase())) {
+	            	System.out.println("Item already exsist in MenuItems.json");
+	                return false; 
+	            }
+	        }
+	        
+	        
+	      //Save image. If image exists. 
+		 	if(item.getHasImage()) {
+				//Save image to database, rename image to item name.
+		 		if(SaveItemImage.saveImage(item, jpgFile)) {
+		 			//Save url
+		 			item.setImageUrl("/images/items/" + item.getCategory().toLowerCase() + "/" + item.getItemName().toLowerCase() + ".jpg");
+		 		}
+		 		else {
+		 			//Image did not save. Set to default image url
+		 			item.setImageUrl("/images/items/noImageAvailable.jpg");
+		 		}
+		 		
+			}
+		 	//Set item url to default picture.
+		 	else {
+		 		System.out.println("No image passed.");
+		 		item.setImageUrl("/images/items/noImageAvailable.jpg");
+		 	}
+		 	
+		 	
+	        // Add item to list and save to file
+	        items.add(item);
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        objectMapper.writeValue(new File(menuFileLocation), items);
+
+	        return true; // Item saved successfully
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        System.out.println("Error adding item to MenuItems.json");
+	        return false; // Error saving item
+	    }
+		
+	}
+
+	    
+	
 
 
 	    

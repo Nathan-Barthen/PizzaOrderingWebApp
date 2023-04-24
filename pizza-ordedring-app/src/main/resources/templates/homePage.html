@@ -18,8 +18,12 @@
    	<div class="content">
    	
    		<!-- Listing category names to pass to JavaScript. -->
-   		<div hidden >
+   		<div hidden>
 		    <p th:each="category : ${itemCategories}" th:id="'categoryName' + ${category}" th:text="${category}"></p>
+		</div>
+		<!-- Listing item names to pass to JavaScript. -->
+		<div hidden>
+		    <p th:each="item : ${menuItems}" th:id="'itemName' + ${item.getItemName()}" th:text="${item.getCategory()} + ' ' + ${item.getItemName()}"></p>
 		</div>
    		<!-- TopHeader div inserted here from JavaScript (topHeaderHtml.js) -->
 		
@@ -49,7 +53,7 @@
 	   							<img id="categoryImg" src="/images/categoryImages/pizzaGeneral.jpg">
 	   						</div>
 	   						<div id="categoryItemName">
-	   							Pizza
+	   							Pizzas
 	   						</div>
    						</div>
    					</div>
@@ -97,7 +101,7 @@
 	   							<img id="categoryImg" src="/images/categoryImages/wedgieGeneral.jpg">
 	   						</div>
 	   						<div id="categoryItemName">
-	   							Wedgies
+	   							Wedgie
 	   						</div>
 	   					</div>
    					</div>

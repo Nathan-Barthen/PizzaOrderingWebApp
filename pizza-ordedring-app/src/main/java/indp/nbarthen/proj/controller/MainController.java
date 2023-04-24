@@ -5,11 +5,13 @@ package indp.nbarthen.proj.controller;
 import indp.nbarthen.proj.repository.UserOrder;
 import indp.nbarthen.proj.admin.CreateNewMenuItem;
 import indp.nbarthen.proj.admin.SaveItemImage;
+import indp.nbarthen.proj.menu.MenuItems;
 import indp.nbarthen.proj.repository.Item;
 import indp.nbarthen.proj.repository.OrdersRepository;
 import indp.nbarthen.proj.repository.UserAccount;
 import io.github.cdimascio.dotenv.Dotenv;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -54,7 +56,7 @@ public class MainController {
 	 */
 	 @RequestMapping({"/"})
 	    public String homePage(Model model) {
-		 
+		 	List<Item> menuItems = MenuItems.getMenuItemsList();
 		 	
 		 	//REMOVE - User was redirected to home from API call error.
 		 	if(!userSearchPopupError.equals("none")) {
@@ -67,6 +69,8 @@ public class MainController {
 		 	
 		 	//Default value for userSearchPopupError is 'none' (no error will popup)
 		 	model.addAttribute("popupError", userSearchPopupError);
+		 	
+		 	model.addAttribute("menuItems", menuItems.toArray());
 		 	model.addAttribute("itemCategories", itemCategories.toArray());
 		 	
 	        return "homePage";
@@ -78,13 +82,21 @@ public class MainController {
 	 */
 	 @RequestMapping({"/pizzaStore/{categoryName}"})
 	    public String categoryPage(@PathVariable("categoryName") String categoryName, Model model) {
-		 
+			List<Item> menuItems = MenuItems.getMenuItemsList();
 		 	
-		 	
+			//Get items to display.
+			List<Item> displayItems = new Vector<Item>();
+			for(Item item : menuItems) {
+				if(item.getCategory().equals(categoryName)) {
+					displayItems.add(item);
+				}
+			}
 		 	
 		 	//Default value for userSearchPopupError is 'none' (no error will popup)
 		 	model.addAttribute("popupError", userSearchPopupError);
+		 	model.addAttribute("menuItems", menuItems.toArray());
 		 	model.addAttribute("itemCategories", itemCategories.toArray());
+		 	model.addAttribute("displayItems", displayItems);
 		 	
 	        return "categoryPage";
 	    }
@@ -96,20 +108,21 @@ public class MainController {
 	 */
 	 @RequestMapping({"/pizzaStore/{categoryName}/{itenName}"})
 	    public String itemPage(@PathVariable("categoryName") String categoryName, @PathVariable("itenName") String itemName, Model model) {
-		 
+		 	List<Item> menuItems = MenuItems.getMenuItemsList();
 		 	
 		 	
 		 	model.addAttribute("itemCategories", itemCategories.toArray());
+		 	model.addAttribute("menuItems", menuItems.toArray());
 		 	
 	        return "itemPage";
 	    }
 	 
 	 @RequestMapping({"/pizzaStore/checkout"})
 	    public String checkoutPage(Model model) {
-		 
+		 	List<Item> menuItems = MenuItems.getMenuItemsList();
 		 	
 		 	model.addAttribute("itemCategories", itemCategories.toArray());
-		 	
+		 	model.addAttribute("menuItems", menuItems.toArray());
 		 	
 	        return "checkoutPage";
 	    }
@@ -119,10 +132,10 @@ public class MainController {
 	 */
 	 @RequestMapping({"/pizzaStore/signin"})
 	    public String signInPage(Model model) {
-		 
+		 	List<Item> menuItems = MenuItems.getMenuItemsList();
 		 	
 		 	model.addAttribute("itemCategories", itemCategories.toArray());
-		 	
+		 	model.addAttribute("menuItems", menuItems.toArray());
 		 	
 	        return "sign-inPage";
 	    }
@@ -131,10 +144,10 @@ public class MainController {
 	*/
 	 @RequestMapping({"/pizzaStore/signup"})
 	    public String signUpPage(Model model) {
-		 
+		 	List<Item> menuItems = MenuItems.getMenuItemsList();
 		 	
 		 	model.addAttribute("itemCategories", itemCategories.toArray());
-		 	
+		 	model.addAttribute("menuItems", menuItems.toArray());
 		 	
 	        return "sign-upPage";
 	    }
@@ -145,7 +158,8 @@ public class MainController {
 	                      @RequestParam("address") String address,
 	                      @RequestParam("email") String email,
 	                      @RequestParam("passwordHash") String passwordHash) {
-
+		 
+		 
 	     // Create the UserAccount object with hashed password
 	     UserAccount user = new UserAccount(firstName, lastName, address, email, passwordHash);
 
@@ -161,7 +175,8 @@ public class MainController {
 		 //Admin options page. Shows selectors to delete, add, edit items on the menu.
 		 @RequestMapping({"/pizzaStore/admin/optionsPage"})
 		 	public String adminOptionsPage(Model model, @RequestParam(name = "itemCreationError", required = false) String itemCreationError) {
-			    
+			 	List<Item> menuItems = MenuItems.getMenuItemsList();
+			 
 			 	if (itemCreationError != null) {
 			 		//Error creating item
 			        model.addAttribute("itemCreationError", itemCreationError);
@@ -171,7 +186,7 @@ public class MainController {
 			 	
 			 	
 			 	model.addAttribute("itemCategories", itemCategories.toArray());
-			 	
+			 	model.addAttribute("menuItems", menuItems.toArray());
 			 	
 		        return "admin/adminOptionsPage";
 		    }
@@ -182,12 +197,13 @@ public class MainController {
 		 */
 			 @RequestMapping({"/pizzaStore/admin/delete/showAllItems"})
 			    public String adminShowAllItemsDeletePage(Model model) {
-				 
+				 	List<Item> menuItems = MenuItems.getMenuItemsList();
 				 	//If user is admin, continue. Else redirect to home.
 				 		//Show all items
 				 	
 				 
 				 	model.addAttribute("itemCategories", itemCategories.toArray());
+				 	model.addAttribute("menuItems", menuItems.toArray());
 				 	
 			        return "admin/adminShowAllDeletePage";
 			}
@@ -197,11 +213,12 @@ public class MainController {
 			 */
 			 @RequestMapping({"/pizzaStore/admin/delete/{categoryName}/{itemName}"})
 			    public String adminDeleteItemFromMenuPage(@PathVariable("categoryName") String categoryName, @PathVariable("itemName") String itemName, Model model) {
-				 
+				 	List<Item> menuItems = MenuItems.getMenuItemsList();
 				 	//Check if the user is an admin
 					 	
 				 	
 				 	model.addAttribute("itemCategories", itemCategories.toArray());
+				 	model.addAttribute("menuItems", menuItems.toArray());
 				 	
 			        return "admin/adminDeleteItemPage";
 			    }
@@ -225,12 +242,13 @@ public class MainController {
 			 */
 				 @RequestMapping({"/pizzaStore/admin/add/addAnItem"})
 				    public String adminAddAnItemPage(Model model) {
-					 
+					 	List<Item> menuItems = MenuItems.getMenuItemsList();
 					 	//If user is admin, continue. Else redirect to home.
 					 		//Show all items
 					 	
 					 
 					 	model.addAttribute("itemCategories", itemCategories.toArray());
+					 	model.addAttribute("menuItems", menuItems.toArray());
 					 	
 				        return "admin/adminAddItemPage";
 				}
@@ -241,7 +259,8 @@ public class MainController {
 				 @RequestMapping({"/pizzaStore/admin/addItemToMenu"})
 				    public String saveItemToMenu(
 				    		Model model, @RequestParam("itemName") String itemName,
-				    		@RequestParam("categoryName") String categoryName, @RequestParam("itemPrice") String itemPrice,
+				    		@RequestParam("categoryName") String categoryName, 
+				    		@RequestParam("itemPrice") String itemPrice,
 				    		@RequestParam("itemDescription") String itemDescription,
 				    		
 				    		@RequestParam(name = "mainToppingsName", required = false) String[] mainToppingsName,
@@ -257,9 +276,9 @@ public class MainController {
 				    		@RequestParam(name = "addonToppingsExtra",required = false) String[] addonToppingsExtra,
 				    		@RequestParam(name = "addonToppingsPrice",required = false) String[] addonToppingsPrice,
 				    		
-				    		@RequestParam(name = "jpgfile", required = false) MultipartFile jpgFile
+				    		@RequestParam(name = "jpgFile", required = false) MultipartFile jpgFile
 				    ) {
-					 
+				
 						//Creates item 
 					 	Item item = CreateNewMenuItem.CreateItem(itemCategories, itemName, categoryName, itemPrice, itemDescription, mainToppingsName,
 					            mainToppingsType, mainToppingsTypes, mainToppingsIsPizza, mainToppingsExtra, addonToppingsName,
@@ -272,30 +291,20 @@ public class MainController {
 					    }
 					 	
 					 	
-					 	//Check if this item already exists.
 					 	
 					 	
-					 	//If item does not exist, save image. If image exists. 
-					 	if(item.getHasImage()) {
-							//Save image to database, rename image to item name.
-					 		if(SaveItemImage.saveImage(item, jpgFile)) {
-					 			//Save url
-					 			item.setImageUrl("/images/items/" + item.getCategory().toLowerCase() + "/" + item.getItemName().toLowerCase() + ".jpg");
-					 		}
-					 		else {
-					 			item.setImageUrl("/images/items/noImageAvailable.jpg");
-					 		}
-					 		
-						}
-					 	//Set item url to default picture.
-					 	else {
-					 		item.setImageUrl("/images/items/noImageAvailable.jpg");
+					 	/* CreateNewMenuItem.addItemToDatabase(item, jpgFile) 
+					 	  *  Saves item to database.
+					 		 *  Checks if item already exists, 
+					 		 *  Saves image to database (if it exists), 
+					 		 *  Saves item to MenuItems.json
+					 	*/
+					 	if(!CreateNewMenuItem.addItemToDatabase(item, jpgFile)) {
+					 		//Error saving item
+					 		return "redirect:/pizzaStore/admin/optionsPage?itemCreationError=Error saving item. Item may already exsit.";
 					 	}
 					 	
-					 	
-					 	//Save item to database.
-						 
-						return "redirect:/pizzaStore/admin/optionsPage";
+					 	return "redirect:/pizzaStore/admin/optionsPage?itemCreationError=Item was added to the menu! :D";
 				}
 		
 			
@@ -306,13 +315,14 @@ public class MainController {
 			 */
 				 @RequestMapping({"/pizzaStore/admin/edit/showAllItems"})
 				    public String adminShowAllItemsEditPage(Model model) {
-					 
+					 	List<Item> menuItems = MenuItems.getMenuItemsList();
 					 	//If user is admin, continue. Else redirect to home.
 					 		//Show all items
 					 	
 					 	
 					 	model.addAttribute("itemCategories", itemCategories.toArray());
-					 
+					 	model.addAttribute("menuItems", menuItems.toArray());
+					 	
 				        return "admin/adminShowAllEditPage";
 				}
 			 /*If user clicks on an item at the 'adminShowAllEditPage.html' page
@@ -321,12 +331,13 @@ public class MainController {
 			 */
 			 @RequestMapping({"/pizzaStore/admin/edit/{categoryName}/{itemName}"})
 			    public String adminEditItemFromMenuPage(@PathVariable("categoryName") String categoryName, @PathVariable("itemName") String itemName, Model model) {
-				 
+				 	List<Item> menuItems = MenuItems.getMenuItemsList();
 				 	//Check if the user is an admin
 					 	
 				 	
 				 
 				 	model.addAttribute("itemCategories", itemCategories.toArray());
+				 	model.addAttribute("menuItems", menuItems.toArray());
 				 	
 			        return "admin/adminEditItemPage";
 			    }
@@ -334,7 +345,7 @@ public class MainController {
 				 @PostMapping("/editClickedItem")
 				 public String editAnItem(@RequestParam("categoryName") String categoryName,
 				                      		@RequestParam("itemName") String itemName) {
-					//If user is admin, continue. Else redirect to home.
+					 //If user is admin, continue. Else redirect to home.
 					 	//Edit item from database
 					 System.out.println("categoryName- " + categoryName + "     itemName- " + itemName);
 				     

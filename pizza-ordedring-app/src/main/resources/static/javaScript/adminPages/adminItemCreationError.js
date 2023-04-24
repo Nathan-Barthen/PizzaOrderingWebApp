@@ -8,4 +8,8 @@
 	    	
 	        alert(popupElement.innerText);
 	    }
+	    if (popupElement.innerText.includes("Item was")) {
+	    	
+	        alert(popupElement.innerText);
+	    }
 				  
