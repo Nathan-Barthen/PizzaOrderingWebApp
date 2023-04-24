@@ -23,7 +23,7 @@
 	topItemDivs.forEach(function(div) {
 	  div.addEventListener("click", function() {
 	    // Get the category name
-	    const topCategoryName = this.parentNode.previousElementSibling.textContent;
+	    const topCategoryName = this.parentNode.previousElementSibling.textContent.trim();
 	    // Get the item name
 	    const topItemName = this.textContent;
 	    // Redirect to the URL with the category name and item name
@@ -43,9 +43,10 @@
 		// Add an event listener to each item div
 		itemDivs.forEach(itemDiv => {
 		    const itemBorder = itemDiv.querySelector('#itemBorder');
-		    const itemName = itemDiv.querySelector('#itemName').textContent;
+		    const itemName1 = itemDiv.querySelector('#itemName').textContent;
+		    
 		    itemBorder.addEventListener('click', () => {
-		        window.location.href = `/pizzaStore/${menuTitle}/${itemName}`;
+		        window.location.href = `/pizzaStore/${menuTitle}/${itemName1}`;
 		    });
 		});
 

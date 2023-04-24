@@ -26,7 +26,7 @@
    		<div id="pageBody">
    			<div id="body-headers">
    				<div id="storeLocation"> 156 Elderwood Ave </div>
-   				<div id="menuTitle"> Pizza(s) </div>
+   				<div id="menuTitle">[[${displayItems.get(0).getCategory()}]]</div>
    				<div id="searchMenu">
    					Search:  
    					<div id="searchDiv">
@@ -39,65 +39,16 @@
    			
    			<div id="foodItems">
    				<div id="foodItems-row">
-   				
-   					<div id="foodItems-Item">
-   						<div id="itemBorder">
-	   						<div id="itemImgDiv">
-	   							<img id="itemImg" src="/images/categoryImages/pizzaGeneral.jpg">
-	   						</div>
-	   						<div id="itemName">
-	   							Custom Pizza
-	   						</div>
-   						</div>
-   					</div>
    					
-   					<div id="foodItems-Item">
-   						<div id="itemBorder">
-	   						<div id="itemImgDiv">
-	   							<img id="itemImg" src="/images/categoryImages/sidesGeneral.jpg">
-	   						</div>
-	   						<div id="itemName">
-	   							Pepperoni Pizza
-	   						</div>
-	   					</div>
-   					</div>
-   						
-   					<div id="foodItems-Item">
-   						<div id="itemBorder">
-	   						<div id="itemImgDiv">
-	   							<img id="itemImg" src="/images/categoryImages/wingsGeneral.jpg">
-	   						</div>
-	   						<div id="itemName">
-	   							Three Meat Pizza
-	   						</div>
-	   					</div>
-   					</div>
-   					
-   				</div>
-   					
-   				<div id="foodItems-row">
-   				
-   					<div id="foodItems-Item">
-   						<div id="itemBorder">
-	   						<div id="itemImgDiv">
-	   							<img id="itemImg" src="/images/categoryImages/drinksGeneral.jpg">
-	   						</div>
-	   						<div id="itemName">
-	   							Some type of Pizza
-	   						</div>
-	   					</div>
-   					</div>
-   						
-   					<div id="foodItems-Item">
-   						<div id="itemBorder">
-	   						<div id="itemImgDiv">
-	   							<img id="itemImg" src="/images/categoryImages/miscGeneral.jpg">
-	   						</div>
-	   						<div id="itemName">
-	   							Some type of Pizza
-	   						</div>
-	   					</div>
-   					</div>
+   					<div th:each="item : ${displayItems}" id="foodItems-Item">
+					    <div id="itemBorder">
+					        <div id="itemImgDiv">
+					            <img id="itemImg" th:src="${item.getImageUrl()}" />
+					        </div>
+					        <div id="itemName" th:text="${item.getItemName()}">
+					        </div>
+					    </div>
+					</div>
    					
    				</div>
    				
