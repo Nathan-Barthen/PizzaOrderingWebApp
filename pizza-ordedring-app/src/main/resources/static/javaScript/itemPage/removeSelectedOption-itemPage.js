@@ -7,28 +7,29 @@
   
  //Add a line-through to mainOption-lightNormalExtra text and changed the 'Remove' option text to 'Add'
 	//Also allow the user to reclick the text and remove the line-through
-  	const removeIngredientTexts = document.querySelectorAll("#removeIngredientText");
-
-	removeIngredientTexts.forEach((removeText) => {
-	  removeText.addEventListener("click", () => {
-	    const parentDiv = removeText.closest("#lightNormalExtra");
-	    console.log(parentDiv);
+  	function addRemoveListeners() {
+		const removeIngredientTexts = document.querySelectorAll("#removeIngredientText");
 	
-	    const ingredientNameDiv = parentDiv.querySelector("#ingredientName");
-	    const amountDiv = parentDiv.querySelector("#amountDiv");
-	
-	    if (ingredientNameDiv.style.textDecoration === "line-through") {
-	      ingredientNameDiv.style.textDecoration = "none";
-	      amountDiv.style.textDecoration = "none";
-	      removeText.textContent = "Remove";
-	    } else {
-	      ingredientNameDiv.style.textDecoration = "line-through";
-	      amountDiv.style.textDecoration = "line-through";
-	      removeText.textContent = "Add";
-	    }
-	  });
-	});
-	
+		removeIngredientTexts.forEach((removeText) => {
+		  removeText.addEventListener("click", () => {
+		    const parentDiv = removeText.closest("#lightNormalExtra");
+		    console.log(parentDiv);
+		
+		    const ingredientNameDiv = parentDiv.querySelector("#ingredientName");
+		    const amountDiv = parentDiv.querySelector("#amountDiv");
+		
+		    if (ingredientNameDiv.style.textDecoration === "line-through") {
+		      ingredientNameDiv.style.textDecoration = "none";
+		      amountDiv.style.textDecoration = "none";
+		      removeText.textContent = "Remove";
+		    } else {
+		      ingredientNameDiv.style.textDecoration = "line-through";
+		      amountDiv.style.textDecoration = "line-through";
+		      removeText.textContent = "Add";
+		    }
+		  });
+		});
+  	}
   
 	//On page load, remove all add-ons by adding line-through ahd changing 'Remove' to 'Add'
 		window.addEventListener('load', () => {

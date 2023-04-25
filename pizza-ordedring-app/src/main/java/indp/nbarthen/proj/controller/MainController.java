@@ -55,17 +55,13 @@ public class MainController {
 	 * 	This will be the home page
 	 */
 	 @RequestMapping({"/"})
-	    public String homePage(Model model) {
+	    public String homePage(Model model, @RequestParam(name = "showError", required = false) String showError) {
 		 	List<Item> menuItems = MenuItems.getMenuItemsList();
 		 	
-		 	//REMOVE - User was redirected to home from API call error.
-		 	if(!userSearchPopupError.equals("none")) {
-		 		String popupError = userSearchPopupError;
-		 		userSearchPopupError = "none";
-		 		//Display error message
-		 		model.addAttribute("popupError", popupError);
-		 		return "homePage";
-		 	}
+		 	if (showError != null) {
+		 		//Error creating item
+		        model.addAttribute("showError", showError);
+		    }
 		 	
 		 	//Default value for userSearchPopupError is 'none' (no error will popup)
 		 	model.addAttribute("popupError", userSearchPopupError);
@@ -110,9 +106,18 @@ public class MainController {
 	    public String itemPage(@PathVariable("categoryName") String categoryName, @PathVariable("itenName") String itemName, Model model) {
 		 	List<Item> menuItems = MenuItems.getMenuItemsList();
 		 	
+		 	Item item = MenuItems.getItemFromMenu(itemName, categoryName);
+		 	
+		 	//If there was an error getting item from menu.
+		 	if(item.getItemName() == null || item.getItemName().isEmpty()) {
+		 		//Redirect to home and show popup error.
+		 		return "redirect:/?showError=Item not found. Try again.";
+		 	}
 		 	
 		 	model.addAttribute("itemCategories", itemCategories.toArray());
 		 	model.addAttribute("menuItems", menuItems.toArray());
+		 	model.addAttribute("item", item);
+		 	
 		 	
 	        return "itemPage";
 	    }
