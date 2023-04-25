@@ -6,6 +6,7 @@
 */
   
  //Change the background color for the amount options (Light, Normal, Extra).
+function addSelectedOptionListeners() {
   	const lightTexts = document.querySelectorAll("#lightText");
 	const normalTexts = document.querySelectorAll("#normalText");
 	const extraTexts = document.querySelectorAll("#extraText");
@@ -91,6 +92,6 @@
 	  });
 	});
   
-
+}
   
   

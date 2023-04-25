@@ -174,7 +174,8 @@
 			  	.dropdown {
 			    	width: 55%;
 			  		margin-left: 60px;
-			  
+			  		position: relative;
+			  		z-index: 2;
 				    border: 3px solid black;
 				    background: rgb(255, 187, 153);
 				    color: black;
@@ -196,47 +197,49 @@
 			  #selectedOption {
 			    position: relative;
 			    font-weight: bold;
+			     z-index: 10;
 			  }
-			
-			  .dropdown-menu {
-				    background-color: rgb(255, 136, 77);
-				    list-style-type: none;
-				    margin: 0;
-				    padding: 0;
-				    position: absolute;
-				    left: 0;
-				    opacity: 0;
-				    text-align: center;
-				    top: 100%;
-				    visibility: hidden;
-				    z-index: -99999;
-				    width: 100%;
-				    
-				    
-				    -webkit-transition: all .5s, background, 2s .5s linear;
-				    transition: all .5s, background 2s .5s linear;
-			  }
+			.dropdown-menu li {
+			  position: relative;
+			}
+			.active .dropdown-menu {
+			   z-index: 9999;
+			   background-color: red;
+			}
+			 .dropdown-menu {
+				  background-color: rgb(255, 136, 77);
+				  list-style-type: none;
+				  margin: 0;
+				  padding: 0;
+				  position: absolute;
+				  left: 0;
+				  opacity: 0;
+				  text-align: center;
+				  top: 100%;
+				  visibility: hidden;
+				  z-index: 10;
+				  width: 100%;
+				  -webkit-transition: all .5s, background, 2s .5s linear;
+				  transition: all .5s, background 2s .5s linear;
+				}
 			
 			  .dropdown-menu li:first-child {
 			    	cursor: default;
 			  }
 			
 			  .dropdown-menu a {
-				    color: #000;
 				    display: inline-block;
 				    width: 100%;
 				    text-decoration: none;
 				    -webkit-transition: all .5s;
 				    transition: all .001s;
+				    color: black;
 			  }
 			
 			  .dropdown-menu a:hover {
-				    background: rgb(179, 60, 0);
-				    color: #fff;
 			  }
 			
 			  .dropdown:hover .dropdown-menu {
-				    background: rgb(255, 102, 26);
 				    opacity: 1;
 				    visibility: visible;
 				    z-index: 10;
