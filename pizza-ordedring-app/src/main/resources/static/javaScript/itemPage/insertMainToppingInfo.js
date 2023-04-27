@@ -32,9 +32,10 @@
 	  var topping = toppings[i];
 	  //If topping requires a dropdown box
 	  if(topping.toppingType == "dropdown"){
+		  var zindex = (toppings.length + 5) - i;
 		  htmlText += "<div id=\"mainOptions-dropdownContainer\"> <label id=\"dropdownLabelName\">" 
-			  + topping.toppingName + ": </label>" +
-   					"<div class=\"dropdown\"> <div id=\"selectedOption\">Select</div> <ul class=\"dropdown-menu\">";
+		      + topping.toppingName + ": </label>" +
+		           "<div class=\"dropdown\" style=\"z-index:" + zindex + "\"> <div id=\"selectedOption\">Select</div> <ul class=\"dropdown-menu\">";
 		  
 		  for (var j = 0; j < topping.toppingOptions.length; j++) {
 		    var option = topping.toppingOptions[j];
