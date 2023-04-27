@@ -41,25 +41,7 @@
    			</div>
    			
    			
-   			<div th:each="topping : ${item.getIncludedToppings()}" id="hiddenIncludedToppings" hidden>
-				    
-				    <p id="toppingName" th:text="${topping.getToppingName()}"></p>
-				    <p id="toppingType" th:text="${topping.getToppingType()}"></p>
-				    <p id="isPizza" th:text="${topping.getIsPizza()}"></p>
-				    <p id="toppingOptions" th:each="toppOpt : ${topping.getToppingOptions()}" th:text="${toppOpt}"></p>
-				    <p id="additionalCostExtra" th:text="${topping.getAdditionalCostExtra()}"></p>
-				    
-			</div>
-			<div th:each="topping : ${item.getAdditionalToppings()}" id="hiddenAdditionalToppings" hidden>
-				    
-				    <p id="toppingName" th:text="${topping.getToppingName()}"></p>
-				    <p id="toppingType" th:text="${topping.getToppingType()}"></p>
-				    <p id="isPizza" th:text="${topping.getIsPizza()}"></p>
-				    <p id="toppingOptions" th:each="toppOpt : ${topping.getToppingOptions()}" th:text="${toppOpt}"></p>
-				    <p id="additionalCostExtra" th:text="${topping.getAdditionalCostExtra()}"></p>
-				    <p id="additionalCostAddon" th:text="${topping.getAdditionalCostAddon()}"></p>
-				    
-			</div>
+   			
    			
    			
    			<div id="imageAndDesc">
@@ -77,10 +59,37 @@
    			</div>
    			<div id="mainOptions">
    			
-   			
+   				<!-- Thymleaf variables to be inserted into mainOptions -->
+   				<div th:each="topping : ${item.getIncludedToppings()}" id="hiddenIncludedToppings" hidden>
+				    
+					    <p id="toppingName" th:text="${topping.getToppingName()}"></p>
+					    <p id="toppingType" th:text="${topping.getToppingType()}"></p>
+					    <p id="isPizza" th:text="${topping.getIsPizza()}"></p>
+					    <p id="toppingOptions" th:each="toppOpt : ${topping.getToppingOptions()}" th:text="${toppOpt}"></p>
+					    <p id="additionalCostExtra" th:text="${topping.getAdditionalCostExtra()}"></p>
+					    
+				</div>
+				<div th:each="topping : ${item.getAdditionalToppings()}" id="hiddenAdditionalToppings" hidden>
+					    
+					    <p id="toppingName" th:text="${topping.getToppingName()}"></p>
+					    <p id="toppingType" th:text="${topping.getToppingType()}"></p>
+					    <p id="isPizza" th:text="${topping.getIsPizza()}"></p>
+					    <p id="toppingOptions" th:each="toppOpt : ${topping.getToppingOptions()}" th:text="${toppOpt}"></p>
+					    <p id="additionalCostExtra" th:text="${topping.getAdditionalCostExtra()}"></p>
+					    <p id="additionalCostAddon" th:text="${topping.getAdditionalCostAddon()}"></p>
+					    
+				</div>
    				<!-- Insert main toppings html here from insertToppingInfo -->
    				
-	   				<div id="mainOptions-dropdownContainer">
+   				
+   			</div>
+   			
+   			<div id="add-ons_Extra">
+   			<div id="add-ons_Extra-TitleDiv"><span id="add-ons_Extra-Title">Add-ons (may cost extra)</span></div>
+	   				
+	   				
+	   				
+	   				<div id="addonOptions-dropdownContainer">
 	   					<label id="dropdownLabelName">Sauce Type: </label>
 		   				<div class="dropdown">
 						  	<div id="selectedOption">Select</div>
@@ -96,81 +105,9 @@
 			   					<div id="normal"> <span id="normalText">Normal</span> </div>
 			   					<div id="extra"> <span id="extraText">Extra</span> </div>
 			   			 </div>
+			   			 <div id="removeIngredient" class="dropdownAddonRemove"> <span id="removeIngredientText">Remove</span> </div>
 					</div>
    				
-	   				
-	   				<div id="lightNormalExtra">
-	   				
-	   					<div id="ingredientName">Cheese: </div>
-	   					
-	   					<div id="amountDiv">
-		   					<div id="light"> <span id="lightText">Light</span> </div>
-		   					<div id="normal"> <span id="normalText">Normal</span> </div>
-		   					<div id="extra"> <span id="extraText">Extra</span> </div>
-		   				</div>
-	   					
-	   					<div id="sideOfPizzaDiv">
-		   					<div id="leftSide"><span id="leftSideText"></span></div>
-		   					<div id="wholeSide"><span id="wholeSideText"></span></div>
-		   					<div id="rightSide"><span id="rightSideText"></span></div>
-		   				</div>
-	   				
-	   					
-	   					<div id="removeIngredient"> <span id="removeIngredientText">Remove</span> </div>
-	   					
-	   				</div>
-	   				
-	   				<div id="lightNormalExtra">
-	   				
-	   					<div id="ingredientName">Pepperoni: </div>
-	   					
-	   					<div id="amountDiv">
-		   					<div id="light"> <span id="lightText">Light</span> </div>
-		   					<div id="normal"> <span id="normalText">Normal</span> </div>
-		   					<div id="extra"> <span id="extraText">Extra</span> </div>
-		   				</div>
-	   					
-	   					<div id="sideOfPizzaDiv">
-		   					<div id="leftSide"><span id="leftSideText"></span></div>
-		   					<div id="wholeSide"><span id="wholeSideText"></span></div>
-		   					<div id="rightSide"><span id="rightSideText"></span></div>
-		   				</div>
-	   				
-	   					
-	   					<div id="removeIngredient"> <span id="removeIngredientText">Remove</span> </div>
-	   					
-	   				</div>
-	   				
-	   				<div id="mainOption-keepOrRemove">
-	   				
-	   				</div>
-   			
-   				
-   			</div>
-   			
-   			<div id="add-ons_Extra">
-   			<div id="add-ons_Extra-TitleDiv"><span id="add-ons_Extra-Title">Add-ons (may cost extra)</span></div>
-	   				
-	   				<div id="lightNormalExtra">
-	   				
-	   					<div id="ingredientName">Cheese: </div>
-	   					
-	   					<div id="amountDiv">
-		   					<div id="light"> <span id="lightText">Light</span> </div>
-		   					<div id="normal"> <span id="normalText">Normal</span> </div>
-		   					<div id="extra"> <span id="extraText">Extra</span> </div>
-		   				</div>
-	   					
-	   					<div id="sideOfPizzaDiv">
-		   					<div id="leftSide"><span id="leftSideText"></span></div>
-		   					<div id="wholeSide"><span id="wholeSideText"></span></div>
-		   					<div id="rightSide"><span id="rightSideText"></span></div>
-		   				</div>
-	   				
-	   					
-	   					<div id="removeIngredient"> <span id="removeIngredientText">Remove</span> </div>
-	   					
-	   				</div>
 	   				
 	   				<div id="lightNormalExtra">
 	   				
@@ -317,7 +254,8 @@
 	<script src="/javaScript/itemPage/updateSelectedOption-itemPage.js"></script>
 	<script src="/javaScript/itemPage/selectedOptions-itemPage.js"></script>
 	<script src="/javaScript/itemPage/removeSelectedOption-itemPage.js"></script>
-	<script src="/javaScript/itemPage/insertToppingInfo.js"></script>
+	<script src="/javaScript/itemPage/insertMainToppingInfo.js"></script>
+	<script src="/javaScript/itemPage/insertAdditionalToppingInfo.js"></script>
 	
 	<script src="/javaScript/usesCommentsCharLeft.js"></script>
 	
