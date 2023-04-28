@@ -46,8 +46,8 @@
 		   					"<div id=\"light\"> <span id=\"lightText\">Light</span> </div>" +
 		   					"<div id=\"normal\"> <span id=\"normalText\">Normal</span> </div>" +
 		   					"<div id=\"extra\"> <span id=\"extraText\">Extra</span> </div>" + 
-		   			 "</div> </div>";
-		  
+		   			 "</div>";
+		  htmlText += "<div id=\"toppPriceDiv\" class=\"dropdownToppPrice\"> <span id=\"toppPriceText\" style=\"display:none\"></span> </div> </div>";
 		  
 	  }
 	  
@@ -68,6 +68,7 @@
 		   					"<div id=\"rightSide\"><span id=\"rightSideText\"></span></div>" + 
 	   				   "</div>";
 		  }
+		  htmlText += "<div id=\"toppPriceDiv\" class=\"dropdownToppPrice\"> <span id=\"toppPriceText\" style=\"display:none\"></span> </div>";
 		  htmlText += "<div id=\"removeIngredient\"> <span id=\"removeIngredientText\">Remove</span> </div> </div>";
 	  }
 	  
