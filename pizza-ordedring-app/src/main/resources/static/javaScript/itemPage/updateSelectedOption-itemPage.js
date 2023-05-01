@@ -2,7 +2,7 @@
  * Used for the mainOptions div. This contains dropdown(s) for item specifications. (Ex. Sauce type)
  * 		-Changes text of box to reflect the type clicked. 
  * 		(Ex. When Red Sauce is clicked, the text will change from 'Select Sauce' to 'Red Sauce'.)
- *  
+ * 
 */
 function addUpdateSelOptListeners() {
 		var allDropdowns = document.querySelectorAll('.dropdown');
@@ -21,6 +21,7 @@ function addUpdateSelOptListeners() {
 
   
 }
+
 
 
 
