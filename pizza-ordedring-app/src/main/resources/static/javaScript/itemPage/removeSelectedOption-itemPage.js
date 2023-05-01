@@ -15,7 +15,6 @@
 		  removeText.addEventListener("click", () => {
 			 if (removeText.closest("#lightNormalExtra")) {
 			    const parentDiv = removeText.closest("#lightNormalExtra");
-			
 			    const ingredientNameDiv = parentDiv.querySelector("#ingredientName");
 			    const amountDiv = parentDiv.querySelector("#amountDiv");
 			    const toppPriceText = parentDiv.querySelector('#toppPriceText');
@@ -25,12 +24,15 @@
 			      amountDiv.style.textDecoration = "none";
 			      toppPriceText.style.textDecoration = 'none';
 			      removeText.textContent = "Remove";
+			      console.log("Meep");
 			    } 
 			    else {
 			      ingredientNameDiv.style.textDecoration = "line-through";
 			      amountDiv.style.textDecoration = "line-through";
 			      toppPriceText.style.textDecoration = 'line-through';
 			      removeText.textContent = "Add";
+			      console.log("Mop");
+			      
 			    }
 			 }
 			 //If it is a dropdown
@@ -48,6 +50,7 @@
 		          amountDropdownDiv.style.textDecoration = "none";
 		          toppPriceText.style.textDecoration = 'none';
 		          removeText.textContent = "Remove";
+		          
 		        } 
 		        else {
 		          dropdownLabelName.style.textDecoration = "line-through";

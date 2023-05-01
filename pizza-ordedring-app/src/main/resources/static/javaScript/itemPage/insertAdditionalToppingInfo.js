@@ -11,30 +11,45 @@
 	var hiddenAddToppings = document.querySelectorAll("#hiddenAdditionalToppings");
 	
 	//Loop through hiddenAddToppings. Store info in addTopping
-	hiddenAddToppings.forEach(function(topping) {
-	  var obj = {
-	    toppingName: topping.querySelector("#toppingName").textContent,
-	    toppingType: topping.querySelector("#toppingType").textContent,
-	    isPizza: topping.querySelector("#isPizza").textContent,
-	    toppingOptions: Array.from(topping.querySelectorAll("#toppingOptions")).map(function(opt) {
-	      return opt.textContent;
-	    }),
-	    additionalCostExtra: topping.querySelector("#additionalCostExtra").textContent
-	    additionalCostAddon: topping.querySelector("#additionalCostAddon").textContent
-	  };
-	  addTopping.push(obj);
-	});
+	hiddenAddToppings.forEach(function(addTopping) {
+		  var additionalCostExtra = parseFloat(addTopping.querySelector("#additionalCostExtra").textContent);
+		  var additionalCostAddon = parseFloat(addTopping.querySelector("#additionalCostAddon").textContent);
+		  
+		  // Check if a trailing zero is needed
+		  additionalCostExtra = additionalCostExtra.toFixed(2);
+		  additionalCostAddon = additionalCostAddon.toFixed(2);
+
+		  var obj = {
+		    toppingName: addTopping.querySelector("#toppingName").textContent,
+		    toppingType: addTopping.querySelector("#toppingType").textContent,
+		    isPizza: addTopping.querySelector("#isPizza").textContent,
+		    toppingOptions: Array.from(addTopping.querySelectorAll("#toppingOptions")).map(function(opt) {
+		      return opt.textContent;
+		    }),
+		    additionalCostExtra: additionalCostExtra,
+		    additionalCostAddon: additionalCostAddon
+		  };
+		  addToppings.push(obj);
+		});
+
 	
 	var htmlAddonText = "";
-	htmlAddonText +=  "<div id=\"add-ons_Extra-TitleDiv\"><span id=\"add-ons_Extra-Title\">Add-ons (may cost extra)</span></div>";
+	if(toppings.length >= 1){
+		htmlAddonText +=  "<div id=\"add-ons_Extra-TitleDiv\"><span id=\"add-ons_Extra-Title\">Add-ons (may cost extra)</span></div>";
+	}
+	else {
+		htmlAddonText +=  "<div id=\"add-ons_Extra-TitleDiv\"><span id=\"add-ons_Extra-Title\">  </span></div>";
+	}
+		
+		
 	//Iterate over array and save html code.
 	
-	for (var i = 0; i < toppings.length; i++) {
-	  var topping = toppings[i];
+	for (var i = 0; i < addToppings.length; i++) {
+	  var topping = addToppings[i];
 	  //If topping requires a dropdown box
 	  if(topping.toppingType == "dropdown"){
 		  var zindex = (toppings.length + 5) - i;
-		  htmlAddonText += "<div id=\"mainOptions-dropdownContainer\"> <label id=\"dropdownLabelName\">" 
+		  htmlAddonText += "<div id=\"addonOptions-dropdownContainer\"> <label id=\"dropdownLabelName\">" 
 		      + topping.toppingName + ": </label>" +
 		           "<div class=\"dropdown\" style=\"z-index:" + zindex + "\"> <div id=\"selectedOption\">Select</div> <ul class=\"dropdown-menu\">";
 		  
@@ -47,9 +62,10 @@
 		   					"<div id=\"light\"> <span id=\"lightText\">Light</span> </div>" +
 		   					"<div id=\"normal\"> <span id=\"normalText\">Normal</span> </div>" +
 		   					"<div id=\"extra\"> <span id=\"extraText\">Extra</span> </div>" + 
-		   			 "</div> </div>";
-		  
-		  
+		   			 "</div> ";
+		  htmlAddonText += " <div id=\"toppPricesHidden\" style=\"display:none\"> <span id=\"hiddenAddonPrice\">"+topping.additionalCostAddon+"</span> <span id=\"hiddenExtraPrice\">"+ topping.additionalCostExtra + "</span> </div>";
+		  htmlAddonText += "<div id=\"toppPriceDiv\" class=\"dropdownToppPrice\"> <span id=\"toppPriceText\"> $"+ topping.additionalCostAddon+ "</span> </div>" + 
+			   			 "<div id=\"removeIngredient\" class=\"dropdownAddonRemove\"> <span id=\"removeIngredientText\">Remove</span> </div> </div>";
 	  }
 	  
 	  //If topping is default (no dropdown box)
@@ -69,6 +85,8 @@
 		   					"<div id=\"rightSide\"><span id=\"rightSideText\"></span></div>" + 
 	   				   "</div>";
 		  }
+		  htmlAddonText += " <div id=\"toppPricesHidden\" style=\"display:none\"> <span id=\"hiddenAddonPrice\">"+topping.additionalCostAddon+"</span> <span id=\"hiddenExtraPrice\">"+ topping.additionalCostExtra + "</span> </div>";
+		  htmlAddonText += "<div id=\"toppPriceDiv\"> <span id=\"toppPriceText\"> $"+ topping.additionalCostAddon + "</span> </div>";
 		  htmlAddonText += "<div id=\"removeIngredient\"> <span id=\"removeIngredientText\">Remove</span> </div> </div>";
 	  }
 	  
@@ -84,7 +102,7 @@
 		const addonToppings1 = document.createElement("div");
 	  
 	  	//CHANGE TO 'mainOptions' LATER
-		addonToppings1.id = "mainOptions1";
+		addonToppings1.id = "addonOptions1";
 	  	addonToppings1.innerHTML = htmlAddonText;
 	
 	
@@ -93,7 +111,7 @@
 	  	addRemoveListeners();
 	  	addSelectedOptionListeners();
 	  	addUpdateSelOptListeners();
-	
+	  	addUpdateForAddonCosts();
 	
 	  	
 

@@ -11,6 +11,9 @@
 	var hiddenToppings = document.querySelectorAll("#hiddenIncludedToppings");
 	
 	hiddenToppings.forEach(function(topping) {
+	  var costExtra = parseFloat(topping.querySelector("#additionalCostExtra").textContent);
+	  costExtra = costExtra.toFixed(2);
+	  
 	  var obj = {
 	    toppingName: topping.querySelector("#toppingName").textContent,
 	    toppingType: topping.querySelector("#toppingType").textContent,
@@ -18,14 +21,20 @@
 	    toppingOptions: Array.from(topping.querySelectorAll("#toppingOptions")).map(function(opt) {
 	      return opt.textContent;
 	    }),
-	    additionalCostExtra: topping.querySelector("#additionalCostExtra").textContent
+	    additionalCostExtra: costExtra
 	  };
 	  toppings.push(obj);
 	});
 	
 	var htmlText = "";
-	htmlText +=  "<div id=\"mainOption-toppings\">" + 
+	if(toppings.length >= 1){
+		htmlText +=  "<div id=\"mainOption-toppings\">" + 
    				 "	<div id=\"mainOption-toppingsTitleDiv\"><span id=\"mainOption-toppingsTitle\">Included</span></div>";
+	}
+	else {
+		htmlText +=  "<div id=\"mainOption-toppings\">" + 
+			 "	<div id=\"mainOption-toppingsTitleDiv\"><span id=\"mainOption-toppingsTitle\"></span></div>";
+	}
 	//Iterate over array and save html code.
 	
 	for (var i = 0; i < toppings.length; i++) {
@@ -47,7 +56,7 @@
 		   					"<div id=\"normal\"> <span id=\"normalText\">Normal</span> </div>" +
 		   					"<div id=\"extra\"> <span id=\"extraText\">Extra</span> </div>" + 
 		   			 "</div>";
-		  htmlText += "<div id=\"toppPriceDiv\" class=\"dropdownToppPrice\"> <span id=\"toppPriceText\" style=\"display:none\"></span> </div> </div>";
+		  htmlText += "<div id=\"toppPriceDiv\" class=\"dropdownToppPrice\"> <span id=\"toppPriceText\" style=\"display:none\"> + $" + topping.additionalCostExtra + "</span> </div> </div>";
 		  
 	  }
 	  
@@ -68,7 +77,7 @@
 		   					"<div id=\"rightSide\"><span id=\"rightSideText\"></span></div>" + 
 	   				   "</div>";
 		  }
-		  htmlText += "<div id=\"toppPriceDiv\" class=\"dropdownToppPrice\"> <span id=\"toppPriceText\" style=\"display:none\"></span> </div>";
+		  htmlText += "<div id=\"toppPriceDiv\" class=\"dropdownToppPrice\"> <span id=\"toppPriceText\" style=\"display:none\"> + $" + topping.additionalCostExtra + "</span> </div>";
 		  htmlText += "<div id=\"removeIngredient\"> <span id=\"removeIngredientText\">Remove</span> </div> </div>";
 	  }
 	  
@@ -90,10 +99,10 @@
 	
 	  	// Insert the new div after the existing div
 	  	mainOptionsDiv.insertBefore(mainToppings1, mainOptionsDiv.firstChild);
-	  	addRemoveListeners();
+	  	addUpdateForCosts();
 	  	addSelectedOptionListeners();
 	  	addUpdateSelOptListeners();
-	
+	  	
 	
 	  	
 
