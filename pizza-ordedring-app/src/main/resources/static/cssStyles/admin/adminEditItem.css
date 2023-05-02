@@ -147,7 +147,7 @@
 			      	
 		       }
 		      
-			      #itemName, #categoryName, #itemPrice {
+			      #itemName, #categoryN, #itemPrice {
 			      	width: 100%;
 			      	display: flex;
 			      	flex-direction: row;
@@ -175,10 +175,25 @@
 				      	flex-direction: row;
 			      	}
 			      	#itemDescRow {
-			      		width: 70%;
+			      		width: 50%;
 				      	
 			      	
 			      	}
+			      	#oldImageDiv {
+			      		display: flex;
+						align-items: center;
+						text-align: center;
+						justify-content: center;
+			      		width: 20%;
+			      		
+			      	}
+			      		#oldImage {
+			      			width: 180px;
+						  	height: 120px;
+						  	
+						  	border-radius: 10px;
+						  	border: 2px solid black;			
+			      		}
 			      	#addImageRow {
 			      		width: 30%;
 			      		display: flex;

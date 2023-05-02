@@ -21,12 +21,15 @@
    		<div hidden >
 		    <p th:each="category : ${itemCategories}" th:id="'categoryName' + ${category}" th:text="${category}"></p>
 		</div>
+		<div hidden>
+		    <p th:each="item : ${menuItems}" th:id="'itemName' + ${item.getItemName()}" th:text="${item.getCategory()} + ' ' + ${item.getItemName()}"></p>
+		</div>
    		<!-- TopHeader div inserted here from JavaScript (topHeaderHtml.js) -->
 		
    		<div id="pageBody">
    			<div id="body-headers">
    				<div id="storeLocation"> 156 Elderwood Ave </div>
-   				<div id="categoryTitle"> Dessert(s) </div>
+   				<div id="categoryTitle"> [[${item.getCategory()}]] </div>
    				<div id="adminHomeDiv">
    					<div id="adminHome">Admin Home</div>
    				</div>
@@ -34,233 +37,65 @@
    			
    			<div id="imageAndDesc">
    				<div id="itemImgDiv"> 
-	   				<img id="itemImg" src="/images/items/desserts/brownie.jpg">
+	   				<img id="itemImg" th:src="${item.getImageUrl()}">
    				</div>
    				<div id="itemDescDiv">
    					<div id="itemNameAndDelete">
-   						<div id="itemName"> Brownie</div>
+   						<div id="itemName">
+   							[[${item.getItemName()}]] <span id="itemCost">$[[${item.getItemDefaultCostAsString()}]]</span>
+   						</div>
    						<div id="deleteItemDiv"> 
    							<div id="deleteItem">Delete</div>
    							<form id="myDeleteForm" method="POST" action="/deleteClickedItem" style="display: none;">
-							  <input type="hidden" name="itemName" value="Pepperoni Pizza" />
-							  <input type="hidden" name="categoryName" value="Pizzas" />
+							  <input type="hidden" name="itemName" th:value="${item.getItemName()}" />
+							  <input type="hidden" name="categoryName" th:value="${item.getCategory()}" />
 							</form>
    						</div>
    					</div>
    					<div id="itemDesc">
-   						This is the description for the item that is shown above me. 
-   						I made this extra long to test length.
-   						This is the description for the item that is shown above me. 
-   						I made this extra long to test length.
+   						[[${item.getItemDesc()}]]
    					</div>
    				</div>
    			</div>
    			<div id="mainOptions">
-   				<div id="mainOptions-dropdownContainer">
-   					<label id="dropdownLabelName">Sauce Type: </label>
-	   				<div class="dropdown">
-					  	<div id="selectedOption">Select</div>
-					  	<ul class="dropdown-menu">
-						    <li><a href="#">Red Sauce</a></li>
-						    <li><a href="#">Spicy Sauce</a></li>
-						    <li><a href="#">Tomato Sauce</a></li>
-						    <li><a href="#">Light Sauce</a></li>
-						</ul>
-					</div>
-					<div id="amountDiv">
-		   					<div id="light"> <span id="lightText">Light</span> </div>
-		   					<div id="normal"> <span id="normalText">Normal</span> </div>
-		   					<div id="extra"> <span id="extraText">Extra</span> </div>
-		   			 </div>
-				</div>
-   				
-   				<div id="mainOption-toppings">
-   					<div id="mainOption-toppingsTitleDiv"><span id="mainOption-toppingsTitle">Toppings</span></div>
-	   				
-	   				<div id="lightNormalExtra">
-	   				
-	   					<div id="ingredientName">Cheese: </div>
-	   					
-	   					<div id="amountDiv">
-		   					<div id="light"> <span id="lightText">Light</span> </div>
-		   					<div id="normal"> <span id="normalText">Normal</span> </div>
-		   					<div id="extra"> <span id="extraText">Extra</span> </div>
-		   				</div>
-	   					
-	   					<div id="sideOfPizzaDiv">
-		   					<div id="leftSide"><span id="leftSideText"></span></div>
-		   					<div id="wholeSide"><span id="wholeSideText"></span></div>
-		   					<div id="rightSide"><span id="rightSideText"></span></div>
-		   				</div>
-	   				
-	   					
-	   					<div id="removeIngredient"> <span id="removeIngredientText">Remove</span> </div>
-	   					
-	   				</div>
-	   				
-	   				<div id="lightNormalExtra">
-	   				
-	   					<div id="ingredientName">Pepperoni: </div>
-	   					
-	   					<div id="amountDiv">
-		   					<div id="light"> <span id="lightText">Light</span> </div>
-		   					<div id="normal"> <span id="normalText">Normal</span> </div>
-		   					<div id="extra"> <span id="extraText">Extra</span> </div>
-		   				</div>
-	   					
-	   					<div id="sideOfPizzaDiv">
-		   					<div id="leftSide"><span id="leftSideText"></span></div>
-		   					<div id="wholeSide"><span id="wholeSideText"></span></div>
-		   					<div id="rightSide"><span id="rightSideText"></span></div>
-		   				</div>
-	   				
-	   					
-	   					<div id="removeIngredient"> <span id="removeIngredientText">Remove</span> </div>
-	   					
-	   				</div>
-	   				
-	   				<div id="mainOption-keepOrRemove">
-	   				
-	   				</div>
    			
-   				</div>
+   				<!-- Thymleaf variables to be inserted into mainOptions -->
+   				<div th:each="topping : ${item.getIncludedToppings()}" id="hiddenIncludedToppings" hidden>
+				    
+					    <p id="toppingName" th:text="${topping.getToppingName()}"></p>
+					    <p id="toppingType" th:text="${topping.getToppingType()}"></p>
+					    <p id="isPizza" th:text="${topping.getIsPizza()}"></p>
+					    <p id="toppingOptions" th:each="toppOpt : ${topping.getToppingOptions()}" th:text="${toppOpt}"></p>
+					    <p id="additionalCostExtra" th:text="${topping.getAdditionalCostExtra()}"></p>
+					    
+				</div>
+				<div th:each="topping : ${item.getAdditionalToppings()}" id="hiddenAdditionalToppings" hidden>
+					    
+					    <p id="toppingName" th:text="${topping.getToppingName()}"></p>
+					    <p id="toppingType" th:text="${topping.getToppingType()}"></p>
+					    <p id="isPizza" th:text="${topping.getIsPizza()}"></p>
+					    <p id="toppingOptions" th:each="toppOpt : ${topping.getToppingOptions()}" th:text="${toppOpt}"></p>
+					    <p id="additionalCostExtra" th:text="${topping.getAdditionalCostExtra()}"></p>
+					    <p id="additionalCostAddon" th:text="${topping.getAdditionalCostAddon()}"></p>
+					    
+				</div>
+   				<!-- Insert main toppings html here from insertToppingInfo -->
+   				
+   				
    			</div>
    			
    			<div id="add-ons_Extra">
-   			<div id="add-ons_Extra-TitleDiv"><span id="add-ons_Extra-Title">Add-ons (may cost extra)</span></div>
-	   				
-	   				<div id="lightNormalExtra">
-	   				
-	   					<div id="ingredientName">Cheese: </div>
-	   					
-	   					<div id="amountDiv">
-		   					<div id="light"> <span id="lightText">Light</span> </div>
-		   					<div id="normal"> <span id="normalText">Normal</span> </div>
-		   					<div id="extra"> <span id="extraText">Extra</span> </div>
-		   				</div>
-	   					
-	   					<div id="sideOfPizzaDiv">
-		   					<div id="leftSide"><span id="leftSideText"></span></div>
-		   					<div id="wholeSide"><span id="wholeSideText"></span></div>
-		   					<div id="rightSide"><span id="rightSideText"></span></div>
-		   				</div>
-	   				
-	   					
-	   					<div id="removeIngredient"> <span id="removeIngredientText">Remove</span> </div>
-	   					
-	   				</div>
-	   				
-	   				<div id="lightNormalExtra">
-	   				
-	   					<div id="ingredientName">Ham: </div>
-	   					
-	   					<div id="amountDiv">
-		   					<div id="light"> <span id="lightText">Light</span> </div>
-		   					<div id="normal"> <span id="normalText">Normal</span> </div>
-		   					<div id="extra"> <span id="extraText">Extra</span> </div>
-		   				</div>
-	   					
-	   					<div id="sideOfPizzaDiv">
-		   					<div id="leftSide"><span id="leftSideText"></span></div>
-		   					<div id="wholeSide"><span id="wholeSideText"></span></div>
-		   					<div id="rightSide"><span id="rightSideText"></span></div>
-		   				</div>
-	   				
-	   					
-	   					<div id="removeIngredient"> <span id="removeIngredientText">Remove</span> </div>
-	   					
-	   				</div>
-	   				
-	   				<div id="lightNormalExtra">
-	   				
-	   					<div id="ingredientName">Pineapple: </div>
-	   					
-	   					<div id="amountDiv">
-		   					<div id="light"> <span id="lightText">Light</span> </div>
-		   					<div id="normal"> <span id="normalText">Normal</span> </div>
-		   					<div id="extra"> <span id="extraText">Extra</span> </div>
-		   				</div>
-	   					
-	   					<div id="sideOfPizzaDiv">
-		   					<div id="leftSide"><span id="leftSideText"></span></div>
-		   					<div id="wholeSide"><span id="wholeSideText"></span></div>
-		   					<div id="rightSide"><span id="rightSideText"></span></div>
-		   				</div>
-	   				
-	   					
-	   					<div id="removeIngredient"> <span id="removeIngredientText">Remove</span> </div>
-	   					
-	   				</div>
-	   				
-	   				<div id="lightNormalExtra">
-	   				
-	   					<div id="ingredientName">Bacon: </div>
-	   					
-	   					<div id="amountDiv">
-		   					<div id="light"> <span id="lightText">Light</span> </div>
-		   					<div id="normal"> <span id="normalText">Normal</span> </div>
-		   					<div id="extra"> <span id="extraText">Extra</span> </div>
-		   				</div>
-	   					
-	   					<div id="sideOfPizzaDiv">
-		   					<div id="leftSide"><span id="leftSideText"></span></div>
-		   					<div id="wholeSide"><span id="wholeSideText"></span></div>
-		   					<div id="rightSide"><span id="rightSideText"></span></div>
-		   				</div>
-	   				
-	   					
-	   					<div id="removeIngredient"> <span id="removeIngredientText">Remove</span> </div>
-	   					
-	   				</div>
-	   				
-	   				<div id="lightNormalExtra">
-	   				
-	   					<div id="ingredientName">Sausage: </div>
-	   					
-	   					<div id="amountDiv">
-		   					<div id="light"> <span id="lightText">Light</span> </div>
-		   					<div id="normal"> <span id="normalText">Normal</span> </div>
-		   					<div id="extra"> <span id="extraText">Extra</span> </div>
-		   				</div>
-	   					
-	   					<div id="sideOfPizzaDiv">
-		   					<div id="leftSide"><span id="leftSideText"></span></div>
-		   					<div id="wholeSide"><span id="wholeSideText"></span></div>
-		   					<div id="rightSide"><span id="rightSideText"></span></div>
-		   				</div>
-	   				
-	   					
-	   					<div id="removeIngredient"> <span id="removeIngredientText">Remove</span> </div>
-	   					
-	   				</div>
-	   				
-	   				<div id="lightNormalExtra">
-	   				
-	   					<div id="ingredientName">Lettuce: </div>
-	   					
-	   					<div id="amountDiv">
-		   					<div id="light"> <span id="lightText">Light</span> </div>
-		   					<div id="normal"> <span id="normalText">Normal</span> </div>
-		   					<div id="extra"> <span id="extraText">Extra</span> </div>
-		   				</div>
-	   					
-	   					<div id="sideOfPizzaDiv">
-		   					<div id="leftSide"><span id="leftSideText"></span></div>
-		   					<div id="wholeSide"><span id="wholeSideText"></span></div>
-		   					<div id="rightSide"><span id="rightSideText"></span></div>
-		   				</div>
-	   				
-	   					
-	   					<div id="removeIngredient"> <span id="removeIngredientText">Remove</span> </div>
-	   					
-	   				</div>
+   			
+   			
    				
    			</div>
-   			<div id="userComments">
-   				<textarea id="additionalInstructions" name="additionalInstructions"
-   				 placeholder="Additional Instructions..."  rows="5" cols="50" maxlength="250"></textarea>
-    			 <div id="countDisplay">0/250</div>
-   			</div>
+   			<div id=commentsAndSubmit>
+	   			<div id="userComments">
+	   				<textarea id="additionalInstructions" name="additionalInstructions"
+	   				 placeholder="Additional Instructions..."  rows="5" cols="50" maxlength="250"></textarea>
+	    			 <div id="countDisplay">0/250</div>
+	   			</div>
+	   		</div>
    		</div>
    		
    		<div id="socialLinksBorder">
@@ -295,6 +130,9 @@
 	<script src="/javaScript/itemPage/updateSelectedOption-itemPage.js"></script>
 	<script src="/javaScript/itemPage/selectedOptions-itemPage.js"></script>
 	<script src="/javaScript/itemPage/removeSelectedOption-itemPage.js"></script>
+	<script src="/javaScript/itemPage/updateToppingCosts.js"></script>
+	<script src="/javaScript/itemPage/insertMainToppingInfo.js"></script>
+	<script src="/javaScript/itemPage/insertAdditionalToppingInfo.js"></script>
 	
 	<script src="/javaScript/adminPages/deleteItemPermanently.js"></script>
 	<script src="/javaScript/adminPages/adminClicksAdminHome.js"></script>

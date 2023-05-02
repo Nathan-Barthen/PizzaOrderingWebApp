@@ -38,12 +38,14 @@ function initTypeDropdowns() {
 	        addToppingTypesDiv.style.visibility = "visible";
 	        currentState = "dropdown";
 	        input.value = "dropdown";
+	        console.log("Meep");
 	      } else {
 	        selectedOption1.textContent = "default";
 	        liElement.textContent = "dropdown";
 	        addToppingTypesDiv.style.visibility = "hidden";
 	        currentState = "default";
 	        input.value = "default";
+	        console.log("Moop");
 	      }
 	    });
 	  });

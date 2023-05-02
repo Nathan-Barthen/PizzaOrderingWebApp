@@ -5,6 +5,9 @@ package indp.nbarthen.proj.admin;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
@@ -220,10 +223,20 @@ public class CreateNewMenuItem {
 			}
 		 	//Set item url to default picture.
 		 	else {
-		 		System.out.println("No image passed.");
 		 		item.setImageUrl("/images/items/noImageAvailable.jpg");
 		 	}
-		 	
+		 	//No image passed, but image for item already exists (item was edited)
+		 	String fileName = "/images/items/" + item.getCategory().toLowerCase() + "/" + item.getItemName().toLowerCase() + ".jpg";
+		 	File file1 = new File(fileName);
+
+		 	if (file1.exists()) {
+		 	    // File exists
+		 		System.out.println("it exists");
+		 		item.setImageUrl("/images/items/" + item.getCategory().toLowerCase() + "/" + item.getItemName().toLowerCase() + ".jpg");
+		 	}
+		 	else {
+		 		System.out.println("doesnt exist");
+		 	}
 		 	
 	        // Add item to list and save to file
 	        items.add(item);

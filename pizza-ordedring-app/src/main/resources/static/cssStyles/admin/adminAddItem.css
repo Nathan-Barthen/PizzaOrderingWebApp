@@ -147,7 +147,7 @@
 			      	
 		       }
 		      
-			      #itemName, #categoryName, #itemPrice {
+			      #itemName, #categoryN, #itemPrice {
 			      	width: 100%;
 			      	display: flex;
 			      	flex-direction: row;

@@ -83,7 +83,28 @@ public class MenuItems {
 	   
 	}
 	
-	
+public static boolean removeItemFromMenu(String itemName, String categoryName) {
+		
+		String menuFileLocation = "src/main/resources/MenuItems.json";
+		
+		List<Item> items = getMenuItemsList();
+		// Find the item matching name and category and remove it from the list
+	    items.removeIf(i -> i.getItemName().equals(itemName) && i.getCategory().equals(categoryName));
+
+	    // Write the updated list back to the file
+	    try {
+	        ObjectMapper objectMapper = new ObjectMapper();
+	        objectMapper.writeValue(new File(menuFileLocation), items);
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        System.out.println("Failed to write Items to MenuItems.json when trying to delete: " + itemName);
+	        return false;
+	    }
+
+	    return true; 
+
+	   
+	}
 
 
 
