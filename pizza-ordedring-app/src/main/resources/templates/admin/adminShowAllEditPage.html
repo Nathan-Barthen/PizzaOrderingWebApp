@@ -21,6 +21,9 @@
    		<div hidden >
 		    <p th:each="category : ${itemCategories}" th:id="'categoryName' + ${category}" th:text="${category}"></p>
 		</div>
+		<div hidden>
+		    <p th:each="item : ${menuItems}" th:id="'itemName' + ${item.getItemName()}" th:text="${item.getCategory()} + ' ' + ${item.getItemName()}"></p>
+		</div>
    		<!-- TopHeader div inserted here from JavaScript (topHeaderHtml.js) -->
 		
    		<div id="pageBody">
@@ -36,62 +39,29 @@
    				<div id="editInstructions"> Click on an Item to be view its description and ingredients. </div>
    			 	<div id="editInstructions"> While there you will have an option to <span id="editText">&nbsp;edit&nbsp;</span> the Item. </div>
    				<div id="showAllItemsTextDiv">
-   				
-   					  <div id="rowOne-firstFourCategories">
-				    	<div id="itemCategory">
-				    		<div id="categoryName">Category Name</div>
-				    		<div id="itemInCategory">Pep Pizza</div>
-				    		<div id="itemInCategory">Pineapple Pizza</div>
-				    		<div id="itemInCategory">Spicy Pizza</div>
-				    	</div>
-				    	<div id="itemCategory">
-				    		<div id="categoryName">Category Name</div>
-				    		<div id="itemInCategory">Pep Pizza</div>
-				    		<div id="itemInCategory">Pineapple Pizza</div>
-				    		<div id="itemInCategory">Spicy Pizza</div>
-				    	</div>
-				    	<div id="itemCategory">
-				    		<div id="categoryName">Category Name</div>
-				    		<div id="itemInCategory">Pep Pizza</div>
-				    		<div id="itemInCategory">Pineapple Pizza</div>
-				    		<div id="itemInCategory">Spicy Pizza</div>
-				    	</div>
-				    	<div id="itemCategory">
-				    		<div id="categoryName">Category Name</div>
-				    		<div id="itemInCategory">Pep Pizza</div>
-				    		<div id="itemInCategory">Pineapple Pizza</div>
-				    		<div id="itemInCategory">Spicy Pizza</div>
-				    	</div>
-				      </div>
-				      
-				      <div id="rowOne-lastFourCategories">
-				    	<div id="itemCategory">
-				    		<div id="categoryName">Pizza</div>
-				    		<div id="itemInCategory">Pep Pizza</div>
-				    		<div id="itemInCategory">Pineapple Pizza</div>
-				    		<div id="itemInCategory">Spicy Pizza</div>
-				    	</div>
-				    	<div id="itemCategory">
-				    		<div id="categoryName">Wings</div>
-				    		<div id="itemInCategory">Pep Pizza</div>
-				    		<div id="itemInCategory">Pineapple Pizza</div>
-				    		<div id="itemInCategory">Spicy Pizza</div>
-				    	</div>
-				    	<div id="itemCategory">
-				    		<div id="categoryName">Misc</div>
-				    		<div id="itemInCategory">Pep Pizza</div>
-				    		<div id="itemInCategory">Pineapple Pizza</div>
-				    		<div id="itemInCategory">Spicy Pizza</div>
-				    	</div>
-				    	<div id="itemCategory">
-				    		<div id="categoryName">Category Name</div>
-				    		<div id="itemInCategory">Pep Pizza</div>
-				    		<div id="itemInCategory">Pineapple Pizza</div>
-				    		<div id="itemInCategory">Spicy Pizza</div>
-				    	</div>
-				      </div>
+   					
+   					<div id="rowOne-firstFourCategories">
+   					  
+				    	<div id="itemCategory" th:each="category, index : ${itemCategories}" th:if="${index.index} &lt; 4">
+						        <div id="category" th:text="${category}"></div>
+						        <div id="itemInCategory" th:each="menuItem : ${menuItems}" th:if="${menuItem.getCategory() == category}"  th:text="${menuItem.getItemName()}"> </div>
+						    
+						</div>
 
-			    </div>
+
+				    </div>
+				      
+				    <div id="rowOne-lastFourCategories">
+				      
+				    	<div id="itemCategory" th:each="category, index : ${itemCategories}" th:if="${index.index} &gt;= 4">
+						        <div id="category" th:text="${category}"></div>
+						        <div id="itemInCategory" th:each="menuItem : ${menuItems}" th:if="${menuItem.getCategory() == category}"  th:text="${menuItem.getItemName()}"> </div>
+						    
+						</div>
+						
+				    </div>
+   				
+   				</div>	 
    			</div>
    			
    		</div>

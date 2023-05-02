@@ -220,10 +220,17 @@ public class MainController {
 			    public String adminDeleteItemFromMenuPage(@PathVariable("categoryName") String categoryName, @PathVariable("itemName") String itemName, Model model) {
 				 	List<Item> menuItems = MenuItems.getMenuItemsList();
 				 	//Check if the user is an admin
-					 	
+				 	Item item = MenuItems.getItemFromMenu(itemName, categoryName);
+				 	
+				 	//If there was an error getting item from menu.
+				 	if(item.getItemName() == null || item.getItemName().isEmpty()) {
+				 		//Redirect to home and show popup error.
+				 		return "redirect:/?showError=Item not found. Try again.";
+				 	}
 				 	
 				 	model.addAttribute("itemCategories", itemCategories.toArray());
 				 	model.addAttribute("menuItems", menuItems.toArray());
+				 	model.addAttribute("item", item);
 				 	
 			        return "admin/adminDeleteItemPage";
 			    }
@@ -233,8 +240,15 @@ public class MainController {
 				                      		@RequestParam("itemName") String itemName) {
 					//If user is admin, continue. Else redirect to home.
 					 	//Delete item from database
-					 System.out.println("categoryName- " + categoryName + "     itemName- " + itemName);
-				     
+					 	Item item = MenuItems.getItemFromMenu(itemName, categoryName);
+					 	
+					 	//If there was an error getting item from menu.
+					 	if(item.getItemName() == null || item.getItemName().isEmpty()) {
+					 		//Redirect to home and show popup error.
+					 		return "redirect:/?showError=Item not found. Try again.";
+					 	}
+					 	
+					 	MenuItems.removeItemFromMenu(itemName, categoryName);
 					 
 					 
 					 
@@ -338,24 +352,78 @@ public class MainController {
 			    public String adminEditItemFromMenuPage(@PathVariable("categoryName") String categoryName, @PathVariable("itemName") String itemName, Model model) {
 				 	List<Item> menuItems = MenuItems.getMenuItemsList();
 				 	//Check if the user is an admin
-					 	
+					 
+				 	//Get item from menu
+				 	Item item = MenuItems.getItemFromMenu(itemName, categoryName);
 				 	
-				 
+				 	//If there was an error getting item from menu.
+				 	if(item.getItemName() == null || item.getItemName().isEmpty()) {
+				 		//Redirect to home and show popup error.
+				 		return "redirect:/?showError=Item not found. Try again.";
+				 	}
+				 	
 				 	model.addAttribute("itemCategories", itemCategories.toArray());
 				 	model.addAttribute("menuItems", menuItems.toArray());
+				 	model.addAttribute("item", item);
+				 
 				 	
 			        return "admin/adminEditItemPage";
 			    }
 			 	
-				 @PostMapping("/editClickedItem")
-				 public String editAnItem(@RequestParam("categoryName") String categoryName,
-				                      		@RequestParam("itemName") String itemName) {
+			 	//Update the menu.
+				 @PostMapping("/pizzaStore/admin/updateItemOnMenu")
+				 public String editAnItem(Model model, @RequestParam("itemName") String itemName,
+				    		@RequestParam("categoryName") String categoryName, 
+				    		@RequestParam("itemPrice") String itemPrice,
+				    		@RequestParam("itemDescription") String itemDescription,
+				    		
+				    		@RequestParam(name = "mainToppingsName", required = false) String[] mainToppingsName,
+				    		@RequestParam(name = "mainToppingsType",required = false) String[] mainToppingsType,
+				    		@RequestParam(name = "mainToppingsTypes",required = false) String[] mainToppingsTypes,
+				    		@RequestParam(name = "mainToppingsIsPizza",required = false) String[] mainToppingsIsPizza,
+				    		@RequestParam(name = "mainToppingsExtra",required = false) String[] mainToppingsExtra,
+				    		
+				    		@RequestParam(name = "addonToppingsName", required = false) String[] addonToppingsName,
+				    		@RequestParam(name = "addonToppingsType",required = false) String[] addonToppingsType,
+				    		@RequestParam(name = "addonToppingsTypes",required = false) String[] addonToppingsTypes,
+				    		@RequestParam(name = "addonToppingsIsPizza",required = false) String[] addonToppingsIsPizza,
+				    		@RequestParam(name = "addonToppingsExtra",required = false) String[] addonToppingsExtra,
+				    		@RequestParam(name = "addonToppingsPrice",required = false) String[] addonToppingsPrice,
+				    		
+				    		@RequestParam(name = "jpgFile", required = false) MultipartFile jpgFile
+				    ) {
 					 //If user is admin, continue. Else redirect to home.
-					 	//Edit item from database
-					 System.out.println("categoryName- " + categoryName + "     itemName- " + itemName);
+					 	
+					 	//Creates item 
+					 	Item item = CreateNewMenuItem.CreateItem(itemCategories, itemName, categoryName, itemPrice, itemDescription, mainToppingsName,
+					            mainToppingsType, mainToppingsTypes, mainToppingsIsPizza, mainToppingsExtra, addonToppingsName,
+					            addonToppingsType, addonToppingsTypes, addonToppingsIsPizza, addonToppingsExtra, addonToppingsPrice,
+					            jpgFile);
+					    //If item creation failed... redirect
+					 	if (item == null) {
+					         // Handle case when item could not be created. Redirect to admin home and show an error message.
+					 		return "redirect:/pizzaStore/admin/optionsPage?itemCreationError=Item creation failed. Try again.";
+					    }
+					 	
+					 	//Find the item in the database, delete item. Add updated item to database.
+					 	//Get item from menu
+					 	Item menuItem = MenuItems.getItemFromMenu(itemName, categoryName);
+					 	
+					 	//If there was an error getting item from menu.
+					 	if(menuItem.getItemName() == null || menuItem.getItemName().isEmpty()) {
+					 		//Redirect to home and show popup error.
+					 		return "redirect:/?showError=Item not found. Could not be edited. Try again.";
+					 	}
+					 	
+					 	//Remove Item
+					 	MenuItems.removeItemFromMenu(itemName, categoryName);
+					 	
+					 	//Add updated item to menu
+					 	if(!CreateNewMenuItem.addItemToDatabase(item, jpgFile)) {
+					 		//Error saving item
+					 		return "redirect:/pizzaStore/admin/optionsPage?itemCreationError=Error saving item. Item may already exsit.";
+					 	}
 				     
-					 
-					 
 					 
 					 return "redirect:/pizzaStore/admin/edit/showAllItems";
 				 }		 

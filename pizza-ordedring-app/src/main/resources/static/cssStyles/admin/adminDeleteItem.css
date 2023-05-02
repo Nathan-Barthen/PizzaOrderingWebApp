@@ -1,6 +1,15 @@
 
 	@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
 	
+	html, body {
+	  min-height: 100%;
+	  min-width: 100%;
+	  margin: 0;
+	  background: url(/images/blueGradiant.png) no-repeat center center fixed;
+  	  background-size: cover;
+  	  
+	}
+	
 	#pageBody {
 		width: 1400px;
 	    min-width: 99%;
@@ -13,7 +22,6 @@
 	}
 	
 	#body-headers {
-		margin-top: 10px;
 		width: 100%;
 		height: 50px;
 		font-size: 35px;
@@ -106,6 +114,7 @@
 					width: 100%;
 					
 					display: flex;
+					position: relative;
 					
 					justify-content: center;
 					align-items: center;
@@ -113,7 +122,7 @@
 					font-size: 50px;
 				}
 					#itemName {
-					width: 35%;
+					width: 45%;
 					
 					display: flex;
 					justify-content: center;
@@ -123,8 +132,15 @@
 					text-decoration: underline;
 					text-decoration-color: blue;
 				}
+					#itemCost {
+						position: absolute;
+					  	right: 70%;
+					  	top: 80%;
+					  	
+					  	font-size: 45px;
+					}
 					#deleteItemDiv {
-						width: 65%;
+						width: 55%;
 					
 						display: flex;
 						justify-content: center;
@@ -162,8 +178,10 @@
 				}
 		
 		
+		
 		#mainOptions {
-			min-height: 350px;
+			min-height: 25px;
+			padding-right: 28px;
 		}			
 		/* START - mainOptions Dropdown box styles. */	
 			#mainOptions-dropdownContainer {
@@ -176,9 +194,19 @@
 			    
 				padding-bottom: 10px;
 			}	
+			#addonOptions-dropdownContainer {
+				width: 100%;
+				
+				display: flex;
+				align-items: center;
+			    text-align: center;
+			    padding-left: 70px;
+			    
+				padding-bottom: 10px;
+			}	
 			
 				#dropdownLabelName {
-					width: 35%;
+					width: 30%;
 					font-size: 40px;
 					text-align: end;
 					
@@ -186,7 +214,8 @@
 			  	.dropdown {
 			    	width: 55%;
 			  		margin-left: 60px;
-			  
+			  		position: relative;
+			  		z-index: 15;
 				    border: 3px solid black;
 				    background: rgb(255, 187, 153);
 				    color: black;
@@ -197,7 +226,6 @@
 				    width: 300px;
 				    text-align: center;
 				    text-decoration: none;
-				    z-index: 1;
 				    transform: perspective(1000px);
 				    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 				    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
@@ -205,50 +233,53 @@
 				  	font-size: 25px;
 				  	margin-right: 20px;
 			  }
+			  
 			  #selectedOption {
 			    position: relative;
 			    font-weight: bold;
+			     z-index: 10;
 			  }
-			
-			  .dropdown-menu {
-				    background-color: rgb(255, 136, 77);
-				    list-style-type: none;
-				    margin: 0;
-				    padding: 0;
-				    position: absolute;
-				    left: 0;
-				    opacity: 0;
-				    text-align: center;
-				    top: 100%;
-				    visibility: hidden;
-				    z-index: -99999;
-				    width: 100%;
-				    
-				    
-				    -webkit-transition: all .5s, background, 2s .5s linear;
-				    transition: all .5s, background 2s .5s linear;
-			  }
+			.dropdown-menu li {
+			  position: relative;
+			}
+			.active .dropdown-menu {
+			   z-index: 9999;
+			   background-color: red;
+			}
+			 .dropdown-menu {
+				  background-color: rgb(255, 136, 77);
+				  list-style-type: none;
+				  margin: 0;
+				  padding: 0;
+				  position: absolute;
+				  left: 0;
+				  opacity: 0;
+				  text-align: center;
+				  top: 100%;
+				  visibility: hidden;
+				  z-index: 10;
+				  width: 100%;
+				  -webkit-transition: all .5s, background, 2s .5s linear;
+				  transition: all .5s, background 2s .5s linear;
+				}
 			
 			  .dropdown-menu li:first-child {
 			    	cursor: default;
 			  }
 			
 			  .dropdown-menu a {
-				    color: #000;
 				    display: inline-block;
 				    width: 100%;
 				    text-decoration: none;
 				    -webkit-transition: all .5s;
 				    transition: all .001s;
+				    color: black;
 			  }
 			
 			  .dropdown-menu a:hover {
-				    background: rgb(179, 60, 0);
-				    color: #fff;
 			  }
 			
 			  .dropdown:hover .dropdown-menu {
-				    background: rgb(255, 102, 26);
 				    opacity: 1;
 				    visibility: visible;
 				    z-index: 10;
@@ -434,13 +465,44 @@
 					    cursor: pointer;
 				  	}
 	 		
+	 		
+	 		#toppPriceDiv {
+	 			width: 10%;
+				font-size: 25px;
+				padding-right: 10px;
+				text-align: end; 
+	 			
+	 			
+	 		}
+	 		#toppPriceText {
+	 			padding-left: 10px;
+	 			padding-right: 10px;
+	 			
+	 			border-radius: 5px;
+	 			border: 2px solid black;
+				background-color: rgb(255, 204, 153);
+				
+				
+	 		}
+	 		
+	 		
 	 		#removeIngredient {
-	 			width: 20%;
+	 			width: 10%;
 				font-size: 35px;
 				padding-right: 10px;
 				text-align: end; 
 	 		
 	 			
+	 		}
+	 		.dropdownAddonRemove {
+	 			width: 15%;
+				font-size: 35px;
+				margin-right: 120px;
+				text-align: end; 
+	 		
+	 		}
+	 		.dropdownToppPrice {
+	 			margin-right: 22px;
 	 		}
 	 		#removeIngredientText {
 	 			padding-left: 10px;
@@ -455,7 +517,7 @@
  		/* END - Main Options - lightNormalExtra styles */
 			
 		#add-ons_Extra {
-			min-height: 350px;
+			min-height: 15px;
 			
 		}
 			#add-ons_Extra-TitleDiv {
@@ -484,33 +546,60 @@
 				
 				border-top: 1px solid black;
  			}
-			#userComments {
-				width: 100%;
+ 			#commentsAndSubmit {
+ 				width: 100%;
 				height: 120px;
 				padding-top: 20px;
 				padding-bottom: 100px;
 				
 				display: flex;
-				align-items: center;
-				text-align: center;
-				justify-content: center;
-				
-			}
-				#additionalInstructions {
-					height: 120px;
-					width: 650px;
-					font-size: 20px;
-				}
-				#countDisplay {
-					height: 100%;
+				flex-direction: row;
+ 			}
+ 				#addItemDiv {
+ 					width: 35%;
+					
 					display: flex;
-					align-items: end;
+					align-items: center;
 					text-align: center;
 					justify-content: center;
-					padding-left: 5px;
+ 				}
+ 					#addItem {
+ 						font-size: 80px;
+ 						margin-right: 70px;
+ 						
+ 						border-radius: 10px;
+					  	border: 2px solid black;	
+					  	cursor: pointer;
+					  	
+					  	padding-left: 20px;
+					  	padding-right: 20px;
+					  	
+					  	background-color: rgb(102, 255, 102);
+ 					}
+ 					
+				#userComments {
+					width: 65%;
 					
-					font-size: 20px;
+					display: flex;
+					align-items: center;
+					text-align: center;
+					justify-content: right;
+					
 				}
-		
-		
+			
+					#additionalInstructions {
+						height: 120px;
+						width: 650px;
+						font-size: 20px;
+					}
+					#countDisplay {
+						height: 100%;
+						display: flex;
+						align-items: end;
+						text-align: center;
+						justify-content: center;
+						padding-left: 5px;
+						
+						font-size: 20px;
+					}
 		

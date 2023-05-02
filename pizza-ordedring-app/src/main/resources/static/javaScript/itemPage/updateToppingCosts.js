@@ -39,19 +39,31 @@ function addUpdateForAddonCosts() {
 	
 	targetDivs3.forEach(function(targetDiv) {
 	  var toppPriceText3 = targetDiv.querySelector("#toppPriceText");
+
 	  var toppPricesHidden = targetDiv.querySelector("#toppPricesHidden");
-	  var addonPrice = parseFloat(toppPricesHidden.querySelector("#hiddenAddonPrice").textContent);
-	  var extraPrice = parseFloat(toppPricesHidden.querySelector("#hiddenExtraPrice").textContent);
+	  
+	  var addonPriceElements = toppPricesHidden.querySelectorAll("#hiddenAddonPrice");
+	  var addonPrice = 0;
+	  addonPriceElements.forEach(function(addonPriceElement) {
+	    addonPrice += parseFloat(addonPriceElement.textContent);
+	  });
+
+	  var extraPriceElements = toppPricesHidden.querySelectorAll("#hiddenExtraPrice");
+	  var extraPrice = 0;
+	  extraPriceElements.forEach(function(extraPriceElement) {
+	    extraPrice += parseFloat(extraPriceElement.textContent);
+	  });
+	  
 	  var light3 = targetDiv.querySelector("#light");
 	  var normal3 = targetDiv.querySelector("#normal");
 	  var extra3 = targetDiv.querySelector("#extra");
 	  
 	  light3.addEventListener("click", function() {
-		  toppPriceText3.textContent = "$" + addonPrice;
+		  toppPriceText3.textContent = "$" + addonPrice.toFixed(2);
 		});
 
 		normal3.addEventListener("click", function() {
-		  toppPriceText3.textContent = "$" + addonPrice;
+		  toppPriceText3.textContent = "$" + addonPrice.toFixed(2);
 		});
 
 		extra3.addEventListener("click", function() {

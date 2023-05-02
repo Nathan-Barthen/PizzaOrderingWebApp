@@ -9,7 +9,7 @@
 
 	items.forEach((item) => {
 	  item.addEventListener('click', () => {
-	    const categoryName = item.parentNode.querySelector('#categoryName').textContent;
+	    const categoryName = item.parentNode.querySelector('#category').textContent;
 	    const itemName = item.textContent;
 	    window.location.href = `/pizzaStore/admin/delete/${categoryName}/${itemName}`;
 	  });

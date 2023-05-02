@@ -27,25 +27,22 @@ public class SaveItemImage {
         File directory = new File(directoryPath);
         
         try {
-            // create the directory if it does not exist
-            if (!directory.exists()) {
-                directory.mkdirs();
+            // delete the file if it already exists
+            File file = new File(filePath);
+            if (file.exists()) {
+                file.delete();
             }
 
             // create a new file
-            File file = new File(filePath);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
+            file.createNewFile();
 
             // write the contents of the multipart file to the new file
             FileOutputStream outputStream = new FileOutputStream(file);
             outputStream.write(jpgFile.getBytes());
             outputStream.close();
 
+            
             return true;
-            
-            
             
         } catch (IOException e) {
             e.printStackTrace();

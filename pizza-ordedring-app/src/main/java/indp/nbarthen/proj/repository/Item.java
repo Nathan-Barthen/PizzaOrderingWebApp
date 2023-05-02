@@ -3,6 +3,9 @@ package indp.nbarthen.proj.repository;
 import java.util.List;
 import java.util.Vector;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ibm.icu.text.DecimalFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -113,6 +116,15 @@ public class Item {
 
 	public Double getItemDefaultCost() {
 		return itemDefaultCost;
+	}
+	
+	@JsonIgnore
+	public String getItemDefaultCostAsString() {
+		//Returns a string to match the format of currency #.##. (and not something like 10.0)
+		DecimalFormat df = new DecimalFormat("0.00");
+		String formattedPrice = df.format(itemDefaultCost);
+		return formattedPrice;
+
 	}
 
 	public void setItemDefaultCost(Double itemDefaultCost) {

@@ -21,6 +21,9 @@
    		<div hidden >
 		    <p th:each="category : ${itemCategories}" th:id="'categoryName' + ${category}" th:text="${category}"></p>
 		</div>
+		<div hidden>
+		    <p th:each="item : ${menuItems}" th:id="'itemName' + ${item.getItemName()}" th:text="${item.getCategory()} + ' ' + ${item.getItemName()}"></p>
+		</div>
    		<!-- TopHeader div inserted here from JavaScript (topHeaderHtml.js) -->
 		
    		<div id="pageBody">
@@ -36,13 +39,13 @@
    				<div id="addInstructions-1"> Enter data into the fields to add an item to the menu.</div>
    			 	<div id="addInstructions-2"> If you do not use one of the already established&nbsp;<b>Categories</b>, it will be placed in Misc. </div>
    				<div id="addItemFields">
-   					<form id="addItemForm" method="post" th:action="@{/pizzaStore/admin/addItemToMenu}">
+   					<form id="addItemForm" method="post" th:action="@{/pizzaStore/admin/updateItemOnMenu}" enctype="multipart/form-data">
    						<div id="addItemRow1">
    						   
    						    <div id=addItemCol>
 	   							<div id="itemName">
 								    <span id="addItemParamTitle"> *Item Name: </span>
-								    <input type="text" name="itemName" placeholder="Name">
+								    <input type="text" name="itemName" placeholder="Name" th:value="${item.getItemName()}">
 								</div>
 								<div id="checkItemName">
 								    <span id="emptyText"></span>
@@ -51,9 +54,9 @@
 							</div>
 							
 							<div id=addItemCol>
-						      	<div id="categoryName">
+						      	<div id="categoryN">
 								    <span id="addItemParamTitle"> *Category: </span>
-								    <input type="text" name="categoryName" placeholder="Category">
+								    <input type="text" name="categoryName" placeholder="Category" th:value="${item.getCategory()}">
 								</div>
 								<div id="checkCategoryName">
 								    <span id="emptyText"></span>
@@ -64,7 +67,7 @@
 							<div id=addItemCol>
 								<div id="itemPrice">
 								    <span id="addItemParamTitle"> *Price ($): </span>
-								    <input type="text" name="itemPrice" placeholder="$0.00">
+								    <input type="text" name="itemPrice" placeholder="$0.00" th:value="${item.getItemDefaultCostAsString()}">
 								</div>
 								<div id="checkItemPrice">
 								    <span id="emptyText"></span>
@@ -77,7 +80,7 @@
 							<div id="descAndImage">
 								<div id="itemDescRow">
 									<div id="itemDescriptionDiv">
-						   				<textarea id="itemDescription" name="itemDescription"
+						   				<textarea id="itemDescription" name="itemDescription" th:text="${item.getItemDesc()}"
 						   				 placeholder="*Item Description..."  rows="5" cols="50" maxlength="250"></textarea>
 						    			 <div id="countDisplay">0/250</div>
 						   			</div>
@@ -86,9 +89,13 @@
 									    <div class="errorMessages" id="itemDescriptionErrorMessages"></div>
 									</div>
 								</div>
+								<div id="oldImageDiv">
+									Old Image:
+									<img id="oldImage" th:src="${item.getImageUrl()}">
+								</div>
 								<div id="addImageRow">
 									<input type="file" name="jpgFile" accept=".jpg" />
-									<div id="addImageText"><i>If no image is added, item will be given a default image.</i></div>
+									<div id="addImageText"><i>If no image is added, old image will still be used. Workspace needs refreshed to reflect the change.</i></div>
 								</div>
 							</div>
 						</div>	
@@ -118,6 +125,26 @@
 				            </div>
 			        	</div>   
 						
+						<!-- Thymleaf variables to be inserted onto included and add-on toppings-->
+		   				<div th:each="topping : ${item.getIncludedToppings()}" id="hiddenIncludedToppings" hidden>
+						    
+							    <p id="toppingName" th:text="${topping.getToppingName()}"></p>
+							    <p id="toppingType" th:text="${topping.getToppingType()}"></p>
+							    <p id="isPizza" th:text="${topping.getIsPizza()}"></p>
+							    <p id="toppingOptions" th:each="toppOpt : ${topping.getToppingOptions()}" th:text="${toppOpt}"></p>
+							    <p id="additionalCostExtra" th:text="${topping.getAdditionalCostExtra()}"></p>
+							    
+						</div>
+						<div th:each="topping : ${item.getAdditionalToppings()}" id="hiddenAdditionalToppings" hidden>
+							    
+							    <p id="toppingName" th:text="${topping.getToppingName()}"></p>
+							    <p id="toppingType" th:text="${topping.getToppingType()}"></p>
+							    <p id="isPizza" th:text="${topping.getIsPizza()}"></p>
+							    <p id="toppingOptions" th:each="toppOpt : ${topping.getToppingOptions()}" th:text="${toppOpt}"></p>
+							    <p id="additionalCostExtra" th:text="${topping.getAdditionalCostExtra()}"></p>
+							    <p id="additionalCostAddon" th:text="${topping.getAdditionalCostAddon()}"></p>
+							    
+						</div>
 						
 						<div id="addInstructions-3"> Included Topping(s) (<i>optional</i>)</div>
 							
@@ -141,7 +168,7 @@
 							<div id="addAddonTopping" class="addTopping"> + </div>	
 						</div>	
 					       
-				        <input type="submit" value="Add to Menu">
+				        <input type="submit" value="Update Item">
 				   </form>
    					  
 
@@ -188,6 +215,10 @@
 	<script src="/javaScript/adminPages/admin-AddItem-AddMainTopping.js"></script>
 	<script src="/javaScript/adminPages/admin-AddItem-AddAddonTopping.js"></script>
 	<script src="/javaScript/adminPages/admin-AddItem-AdjustHeight.js"></script>
+	
+	<script src="/javaScript/adminPages/admin-EditItem-InitializeOptions.js"></script>
+	<script src="/javaScript/adminPages/admin-EditItem-InsertMainToppings.js"></script>
+	<script src="/javaScript/adminPages/admin-EditItem-InsertAddonToppings.js"></script>
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>
