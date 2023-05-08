@@ -38,19 +38,14 @@
    			</div>
    			
    			<div id="foodItems">
-   				<div id="foodItems-row">
-   					
-   					<div th:each="item : ${displayItems}" id="foodItems-Item">
-					    <div id="itemBorder">
-					        <div id="itemImgDiv">
-					            <img id="itemImg" th:src="${item.getImageUrl()}" />
-					        </div>
-					        <div id="itemName" th:text="${item.getItemName()}">
-					        </div>
-					    </div>
-					</div>
-   					
-   				</div>
+   				<!-- Used to insert item rows and columns -->
+   				<div th:each="item : ${displayItems}" id="hiddenDisplayItems" hidden>
+				    
+					    <p id="itemUrl" th:text="${item.getImageUrl()}"></p>
+					    <p id="itemName" th:text="${item.getItemName()}"></p>
+					    
+				</div>
+				<!-- Insets the item rows using categoryPage-Rows.js -->
    				
    			</div>
    				
@@ -87,6 +82,7 @@
 	<script src="/javaScript/pageRedirects/clicksCheckout.js"></script>
 	
 	<script src="/javaScript/bodySize-categoryPage.js"></script>
+	<script src="/javaScript/categoryPage-Rows.js"></script>
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>

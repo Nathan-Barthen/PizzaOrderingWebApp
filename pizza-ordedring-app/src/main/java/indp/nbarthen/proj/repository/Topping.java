@@ -22,6 +22,8 @@ public class Topping {
 	
 	//Determines if there needs to be a selector to put toppings on 'Left', 'Whole', or 'Right' side of pizza.
 	private Boolean isPizza;
+	//Could be - 'Left', 'Whole', 'Right', or 'Not Pizza'
+	private String sideOfPizza;
 	//If topping is not included for item, but it can be added w/ an additional fee;
 	private Boolean isAddon;
 	
@@ -29,7 +31,7 @@ public class Topping {
 	
 	//Used if toppingType = 'dropdown'. List of selected options (Ex. Type of Sauce)
 	private List<String> toppingOptions;
-	
+	private String selectedOption;
 	
 	//Default = 'Normal'. Could also be 'Light', 'Extra' or 'None' (topping was removed)
 	private String selectedAmount;
@@ -41,6 +43,7 @@ public class Topping {
 
 	public Topping()
 	{
+		this.selectedOption = "";
 		this.toppingType = "default";
 		this.selectedAmount = "Normal";
 	}
@@ -91,6 +94,16 @@ public class Topping {
 	}
 
 
+	public String getSideOfPizza() {
+		return sideOfPizza;
+	}
+
+
+	public void setSideOfPizza(String sideOfPizza) {
+		this.sideOfPizza = sideOfPizza;
+	}
+
+
 	public Boolean getIsAddon() {
 		return isAddon;
 	}
@@ -118,6 +131,16 @@ public class Topping {
 
 	public void setToppingOptions(List<String> toppingOptions) {
 		this.toppingOptions = toppingOptions;
+	}
+
+
+	public String getSelectedOption() {
+		return selectedOption;
+	}
+
+
+	public void setSelectedOption(String selectedOption) {
+		this.selectedOption = selectedOption;
 	}
 
 

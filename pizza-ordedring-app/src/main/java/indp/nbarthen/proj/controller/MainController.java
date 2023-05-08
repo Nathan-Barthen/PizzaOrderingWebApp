@@ -2,13 +2,15 @@ package indp.nbarthen.proj.controller;
 
 
 
-import indp.nbarthen.proj.repository.UserOrder;
 import indp.nbarthen.proj.admin.CreateNewMenuItem;
 import indp.nbarthen.proj.admin.SaveItemImage;
+import indp.nbarthen.proj.menu.CartItem;
 import indp.nbarthen.proj.menu.MenuItems;
 import indp.nbarthen.proj.repository.Item;
 import indp.nbarthen.proj.repository.OrdersRepository;
-import indp.nbarthen.proj.repository.UserAccount;
+import indp.nbarthen.proj.user.AddUserSignup;
+import indp.nbarthen.proj.user.UserAccount;
+import indp.nbarthen.proj.user.UserOrder;
 import io.github.cdimascio.dotenv.Dotenv;
 
 import java.io.File;
@@ -63,9 +65,6 @@ public class MainController {
 		        model.addAttribute("showError", showError);
 		    }
 		 	
-		 	//Default value for userSearchPopupError is 'none' (no error will popup)
-		 	model.addAttribute("popupError", userSearchPopupError);
-		 	
 		 	model.addAttribute("menuItems", menuItems.toArray());
 		 	model.addAttribute("itemCategories", itemCategories.toArray());
 		 	
@@ -102,8 +101,8 @@ public class MainController {
 		 *  They can also be directed here by clicking it from the dropdown menu at the top of the page.
 		 * 		This will show all of the options for a given item and allow them to add it to their cart.
 	 */
-	 @RequestMapping({"/pizzaStore/{categoryName}/{itenName}"})
-	    public String itemPage(@PathVariable("categoryName") String categoryName, @PathVariable("itenName") String itemName, Model model) {
+	 @RequestMapping({"/pizzaStore/{categoryName}/{itemName}"})
+	    public String itemPage(@PathVariable("categoryName") String categoryName, @PathVariable("itemName") String itemName, Model model) {
 		 	List<Item> menuItems = MenuItems.getMenuItemsList();
 		 	
 		 	Item item = MenuItems.getItemFromMenu(itemName, categoryName);
@@ -122,6 +121,58 @@ public class MainController {
 	        return "itemPage";
 	    }
 	 
+	 /* Redirect from itemPage.html
+	  * 	When the user hits 'Add' on itemPage this will add the item to their cart.
+	 */
+	 @PostMapping({"/pizzaStore/addToCart"})
+	 public String addItemToCart(Model model, 
+			 	@RequestParam("itemName") String itemName,
+	    		@RequestParam("categoryName") String categoryName, 
+	    		@RequestParam("customDesc") String customInstructions, 
+	    		
+	    		@RequestParam(name = "main-drop-dropdownLabelName", required = false) String[] mainDropNames,
+	    		@RequestParam(name = "main-drop-selectedOption",required = false) String[] mainDropSelected,
+	    		@RequestParam(name = "main-drop-selectedAmount",required = false) String[] mainDropAmounts,
+	    		
+	    		@RequestParam(name = "main-lne-toppingName",required = false) String[] mainLNENames,
+	    		@RequestParam(name = "main-lne-sideOfPizza",required = false) String[] mainLNESideOfPizza,
+	    		@RequestParam(name = "main-lne-selectedAmount",required = false) String[] mainLNEAmounts,
+	    		
+	    		@RequestParam(name = "addon-drop-dropdownLabelName", required = false) String[] addonDropNames,
+	    		@RequestParam(name = "addon-drop-selectedOption",required = false) String[] addonDropSelected,
+	    		@RequestParam(name = "addon-drop-selectedAmount",required = false) String[] addonDropAmounts,
+	    		
+	    		@RequestParam(name = "addon-lne-toppingName",required = false) String[] addonLNENames,
+	    		@RequestParam(name = "addon-lne-sideOfPizza",required = false) String[] addonLNESideOfPizza,
+	    		@RequestParam(name = "addon-lne-selectedAmount",required = false) String[] addonLNEAmounts
+	    		
+	    ) {
+		 
+		 	List<Item> menuItems = MenuItems.getMenuItemsList();
+		 	
+		 	Item item = MenuItems.getItemFromMenu(itemName, categoryName);
+		 	
+		 	//If there was an error getting item from menu.
+		 	if(item.getItemName() == null || item.getItemName().isEmpty()) {
+		 		//Redirect to home and show popup error.
+		 		return "redirect:/?showError=Item not found. Try again.";
+		 	}
+		 	
+		 	//Generate cart item from passed parameters.
+		 	Item cartItem = CartItem.generateItemForCart(item, customInstructions,
+		 			mainDropNames, mainDropSelected, mainDropAmounts, 
+		 			mainLNENames, mainLNESideOfPizza, mainLNEAmounts, 
+		 			addonDropNames, addonDropSelected, addonDropAmounts, 
+		 			addonLNENames, addonLNESideOfPizza, addonLNEAmounts);
+		 	//Get final price for the item.
+		 	cartItem = CartItem.getFinalPrice(cartItem);
+		 	
+		 	//Add item to users cart
+		 		//STILL NEED TO DO THIS
+		 	
+		 	return "redirect:/";
+	    }
+	 
 	 @RequestMapping({"/pizzaStore/checkout"})
 	    public String checkoutPage(Model model) {
 		 	List<Item> menuItems = MenuItems.getMenuItemsList();
@@ -136,14 +187,30 @@ public class MainController {
 		 * 	This will be used to allow the user login to their account.
 	 */
 	 @RequestMapping({"/pizzaStore/signin"})
-	    public String signInPage(Model model) {
+	    public String signInPage(Model model,  @RequestParam(name = "showError", required = false) String showError) {
 		 	List<Item> menuItems = MenuItems.getMenuItemsList();
+		 	
+		 	if (showError != null) {
+		 		//Error creating item
+		        model.addAttribute("showError", showError);
+		    }
 		 	
 		 	model.addAttribute("itemCategories", itemCategories.toArray());
 		 	model.addAttribute("menuItems", menuItems.toArray());
 		 	
 	        return "sign-inPage";
 	    }
+	 
+	 @PostMapping("/signin")
+	 public String signUp(
+	                      @RequestParam("email") String email,
+	                      @RequestParam("password") String passwordHash) {
+		 
+		 
+		 
+		 return "redirect:/";
+	 }
+	 
 	 /* sign-upPage.html
 		 * 	This will be used to allow the user to create an account.
 	*/
@@ -162,14 +229,18 @@ public class MainController {
 	                      @RequestParam("lastname") String lastName,
 	                      @RequestParam("address") String address,
 	                      @RequestParam("email") String email,
-	                      @RequestParam("passwordHash") String passwordHash) {
+	                      @RequestParam("password") String passwordHash) {
 		 
 		 
 	     // Create the UserAccount object with hashed password
 	     UserAccount user = new UserAccount(firstName, lastName, address, email, passwordHash);
 
 	     // Save the user account to your database
-	     // ...
+	     if(!AddUserSignup.addUser(user)) {
+	    	 //Error creating account. Redirect to signup.
+	    	 return "redirect:/pizzaStore/signin?showError=Error creating account. Email may already be in use.";
+	     }
+	     
 
 	     return "redirect:/";
 	 }
@@ -318,7 +389,7 @@ public class MainController {
 					 		 *  Saves image to database (if it exists), 
 					 		 *  Saves item to MenuItems.json
 					 	*/
-					 	if(!CreateNewMenuItem.addItemToDatabase(item, jpgFile)) {
+					 	if(!CreateNewMenuItem.addItemToDatabase(item, jpgFile, false)) {
 					 		//Error saving item
 					 		return "redirect:/pizzaStore/admin/optionsPage?itemCreationError=Error saving item. Item may already exsit.";
 					 	}
@@ -370,7 +441,7 @@ public class MainController {
 			        return "admin/adminEditItemPage";
 			    }
 			 	
-			 	//Update the menu.
+			 	//Update the menu (when editing an item)
 				 @PostMapping("/pizzaStore/admin/updateItemOnMenu")
 				 public String editAnItem(Model model, @RequestParam("itemName") String itemName,
 				    		@RequestParam("categoryName") String categoryName, 
@@ -415,11 +486,12 @@ public class MainController {
 					 		return "redirect:/?showError=Item not found. Could not be edited. Try again.";
 					 	}
 					 	
+					 	boolean oldItemHasImage = menuItem.getHasImage();
 					 	//Remove Item
 					 	MenuItems.removeItemFromMenu(itemName, categoryName);
 					 	
 					 	//Add updated item to menu
-					 	if(!CreateNewMenuItem.addItemToDatabase(item, jpgFile)) {
+					 	if(!CreateNewMenuItem.addItemToDatabase(item, jpgFile, oldItemHasImage)) {
 					 		//Error saving item
 					 		return "redirect:/pizzaStore/admin/optionsPage?itemCreationError=Error saving item. Item may already exsit.";
 					 	}

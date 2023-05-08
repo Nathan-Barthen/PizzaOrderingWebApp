@@ -1,4 +1,4 @@
-package indp.nbarthen.proj.repository;
+package indp.nbarthen.proj.user;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -12,6 +12,8 @@ import jakarta.persistence.OneToOne;
 
 import java.util.List;
 import java.util.Vector;
+
+import indp.nbarthen.proj.repository.Item;
 
 @Entity
 public class UserOrder {
