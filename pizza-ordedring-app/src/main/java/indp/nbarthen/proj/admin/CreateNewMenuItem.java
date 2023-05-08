@@ -177,9 +177,10 @@ public class CreateNewMenuItem {
 	/* Adds the item to MenuItems database. Returns true.
 	 * 	If MenuItems does not exist, it will create the file.
 	 * 	If the item already exists in the database, it will not add the item and returns false.
+	 *      oldItemHasImage - used when editing an item. If creating a new item, will be set to false
 	 */
 		
-	public static boolean addItemToDatabase(Item item, MultipartFile jpgFile) {
+	public static boolean addItemToDatabase(Item item, MultipartFile jpgFile, boolean oldItemHasImage) {
 		String menuFileLocation = "src/main/resources/MenuItems.json";
 		List<Item> items = new ArrayList<>();
 		
@@ -226,16 +227,9 @@ public class CreateNewMenuItem {
 		 		item.setImageUrl("/images/items/noImageAvailable.jpg");
 		 	}
 		 	//No image passed, but image for item already exists (item was edited)
-		 	String fileName = "/images/items/" + item.getCategory().toLowerCase() + "/" + item.getItemName().toLowerCase() + ".jpg";
-		 	File file1 = new File(fileName);
-
-		 	if (file1.exists()) {
+		 	if (oldItemHasImage) {
 		 	    // File exists
-		 		System.out.println("it exists");
 		 		item.setImageUrl("/images/items/" + item.getCategory().toLowerCase() + "/" + item.getItemName().toLowerCase() + ".jpg");
-		 	}
-		 	else {
-		 		System.out.println("doesnt exist");
 		 	}
 		 	
 	        // Add item to list and save to file

@@ -21,7 +21,13 @@
    		<div hidden >
 		    <p th:each="category : ${itemCategories}" th:id="'categoryName' + ${category}" th:text="${category}"></p>
 		</div>
+   		<!-- Listing item names to pass to JavaScript. -->
+		<div hidden>
+		    <p th:each="item : ${menuItems}" th:id="'itemName' + ${item.getItemName()}" th:text="${item.getCategory()} + ' ' + ${item.getItemName()}"></p>
+		</div>
    		<!-- TopHeader div inserted here from JavaScript (topHeaderHtml.js) -->
+		
+		<span id="popup" th:text="${showError}" style="display: none;"></span>
 		
    		<div id="pageBody">
    			<div id="body-headers">
@@ -39,16 +45,17 @@
 				        	Already have an Account?
 				      </div>
 				      <div id="signInEntry">
-				        <div id="signInEmail">
-				          	<span id="signInParamTitle"> Email: </span>
-				          	<input type="text" name="email" required>
-				        </div>
-				        <div id="signInPassword">
-				          	<span id="signInParamTitle"> Password: </span>
-				          	<input type="password" name="password" required>
-				        </div>
-				        <input type="submit" value="Sign In">
-				      
+				      	<form id="signInForm" method="post" th:action="@{/signin}">
+					        <div id="signInEmail">
+					          	<span id="signInParamTitle"> Email: </span>
+					          	<input type="text" name="email" required>
+					        </div>
+					        <div id="signInPassword">
+					          	<span id="signInParamTitle"> Password: </span>
+					          	<input type="password" name="password" required>
+					        </div>
+					        <input type="submit" value="Sign In">
+				      	</form>
 				      	<div id="signUpDiv">
 				          	<span id="signupParamTitle"> Don't have an Account? </span>
 				          	 <a id="signupLink" th:href="@{/pizzaStore/signup}">Sign up</a>
@@ -72,6 +79,7 @@
   </div>
 
 	<script src="/javaScript/topHeaderHtml.js"></script>
+	<script  src="/javaScript/showPopupError.js"></script>
 
 	<script src="/javaScript/showOperatingHours.js"></script>
 	<script src="/javaScript/menuOptions/showPizzas.js"></script>

@@ -1,4 +1,4 @@
-package indp.nbarthen.proj.repository;
+package indp.nbarthen.proj.user;
 
 import java.util.List;
 

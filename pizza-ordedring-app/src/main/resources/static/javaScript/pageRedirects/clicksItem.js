@@ -34,6 +34,7 @@
 
 
 //Clicks on an item div in categoryPage.html
+	function clicksItemOnCategoryPage() {
 	// Get the menu title
 		const menuTitle = document.getElementById('menuTitle').textContent;
 		
@@ -50,6 +51,6 @@
 		    });
 		});
 
-  
+	}
 	
 	
