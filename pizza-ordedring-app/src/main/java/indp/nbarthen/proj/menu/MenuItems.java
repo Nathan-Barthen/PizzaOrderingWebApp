@@ -71,7 +71,7 @@ public class MenuItems {
             
             //Get the specific item matching name and category
             for(Item i : items) {
-            	if(i.getItemName().equals(itemName) && i.getCategory().equals(categoryName)) {
+            	if(i.getItemName().trim().equals(itemName.trim()) && i.getCategory().trim().equals(categoryName.trim())) {
             		item = i;
             	}
             }

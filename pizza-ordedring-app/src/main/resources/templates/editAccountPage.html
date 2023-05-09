@@ -7,7 +7,7 @@
 <title>Online Pizza Ordering</title>
 
 <link rel="stylesheet" href="/cssStyles/backgroundAndTopBar.css">
-<link rel="stylesheet" href="/cssStyles/sign-upPage.css">
+<link rel="stylesheet" href="/cssStyles/editAccountPage.css">
 <link rel="stylesheet" href="/cssStyles/bottomLinks.css">
 
 
@@ -36,7 +36,7 @@
    		<div id="pageBody">
    			<div id="body-headers">
    				<div id="storeLocation"> 156 Elderwood Ave </div>
-   				<div id="signUpTitle"> Sign-up </div>
+   				<div id="signUpTitle"> Edit Account </div>
    				<div id="emptySpace">
    					
    				</div>
@@ -46,13 +46,13 @@
    				
    				<div id="signUpTextDiv">
 				      <div id="createAccount">
-				        	Create an Account
+				        	Edit Your Infomration
 				      </div>
 				      <div id="signUpEntry">
-				      	<form id="signUpForm" method="post" th:action="@{/signup}">
+				      	<form id="signUpForm" method="post" th:action="@{/pizzaStore/finishEditAccount}">
 					      	<div id="signUpFirstName">
 							    <span id="signUpParamTitle"> *First Name: </span>
-							    <input type="text" name="firstname" >
+							    <input type="text" name="firstname" th:value="${user.getFirstName()}">
 							</div>
 							<div id="signUpCheckFirstName">
 							    <span id="emptyText"></span>
@@ -62,7 +62,7 @@
 							
 							<div id="signUpLastName">
 							    <span id="signUpParamTitle"> *Last Name: </span>
-							    <input type="text" name="lastname" >
+							    <input type="text" name="lastname" th:value="${user.getLastName()}">
 							</div>
 							<div id="signUpCheckLastName">
 							    <span id="emptyText"></span>
@@ -71,7 +71,7 @@
 							
 							<div id="signUpPhone">
 							    <span id="signUpParamTitle"> *Phone: </span>
-							    <input type="text" name="phone" >
+							    <input type="text" name="phone" th:value="${user.getPhoneNumber()}">
 							</div>
 							<div id="signUpCheckPhone">
 							    <span id="emptyText"></span>
@@ -80,7 +80,7 @@
 							
 							<div id="signUpEmail">
 							    <span id="signUpParamTitle"> *Email: </span>
-							    <input type="text" name="email" >
+							    <input type="text" name="email" th:value="${user.getEmail()}">
 							</div>
 							<div id="signUpCheckEmail">
 							    <span id="emptyText"></span>
@@ -89,7 +89,7 @@
 							
 							<div id="signUpAddress">
 							    <span id="signUpParamTitle"> *Address: </span>
-							    <input type="text" name="address" >
+							    <input type="text" name="address" th:value="${user.getAddress()}">
 							</div>
 							<div id="signUpCheckAddress">
 							    <span id="emptyText"></span>
@@ -98,7 +98,7 @@
 							
 								<div id="signUpApartment">
 								  	<span id="signUpConfirmApartmentTitle"> Apt / Bldg: </span>
-								  	<input type="text" name="apartment">
+								  	<input type="text" name="apartment" th:value="${user.getApartmentNum()}">
 								</div>
 							
 					        
@@ -109,11 +109,6 @@
 					        </div>
 					        
 					        <div id="signUpConfirmPassword">
-							  	<span id="signUpConfirmPassTitle"> *Confirm Pass: </span>
-							  	<input id="confirmPassword" type="password" name="confirmPassword" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[a-z]).{7,}$"  title="Password must be at least 7 characters with one capital and one number">
-							</div>
-					        
-					        <div id="signUpConfirmPassword">
 					        	<span id="emptyText"></span>
 					        	<div class="errorMessages" id="passwordErrorMessages"></div>
 					        </div>
@@ -122,10 +117,7 @@
 					       
 				        	<input type="submit" value="Sign Up">
 				      	</form>
-				      	<div id="signInDiv">
-				          	<span id="signInParamTitle"> Already have an Account? </span>
-				          	 <a id="signInLink" th:href="@{/pizzaStore/signin}">Log-in</a>
-				        </div>
+				      	
 				      </div>
 			    </div>
    			</div>
@@ -164,7 +156,7 @@
 	
 	<script src="/javaScript/updateSelectedOption.js"></script>
 	
-	<script src="/javaScript/signUpParameterChecking/confirmParameters-SignUp.js"></script>
+	<script src="/javaScript/signUpParameterChecking/confirmParameters-EditAccount.js"></script>
 	
 	
 	<script src="/javaScript/entersLocation.js"></script>

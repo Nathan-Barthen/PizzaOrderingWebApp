@@ -19,7 +19,9 @@ public class UserAccount {
 	
     private String firstName;
     private String lastName;
+    private String phoneNumber;
     private String address;
+    private String apartmentNum;
     private String email;
     private String passwordHash;
     private boolean isGuest;
@@ -34,19 +36,16 @@ public class UserAccount {
     	
     	this.isAdmin= false; 
     }
-    public UserAccount(String firstName, String lastName, String address, String email, String password) {
+    public UserAccount(String firstName, String lastName, String phoneNumber, String address, String apartmentNum, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
         this.address = address;
+        this.apartmentNum = apartmentNum;
         this.email = email;
         this.isGuest = false;
         this.isAdmin= false; 
         this.passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
-        	/*
-				if (BCrypt.checkpw(inputPassword, hashedPassword)) {
-				    //Executes if passwords match
-				}
-        	 */
     }
     
     
@@ -75,7 +74,13 @@ public class UserAccount {
         this.lastName = lastName;
     }
 
-    public String getAddress() {
+    public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public String getAddress() {
         return address;
     }
 
@@ -83,7 +88,13 @@ public class UserAccount {
         this.address = address;
     }
 
-    public String getEmail() {
+    public String getApartmentNum() {
+		return apartmentNum;
+	}
+	public void setApartmentNum(String apartmentNum) {
+		this.apartmentNum = apartmentNum;
+	}
+	public String getEmail() {
         return email;
     }
 
