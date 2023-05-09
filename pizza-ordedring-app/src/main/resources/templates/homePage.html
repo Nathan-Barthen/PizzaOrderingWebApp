@@ -25,14 +25,19 @@
 		<div hidden>
 		    <p th:each="item : ${menuItems}" th:id="'itemName' + ${item.getItemName()}" th:text="${item.getCategory()} + ' ' + ${item.getItemName()}"></p>
 		</div>
+		<!-- Listing users account email. -->
+		<div hidden>
+		    <p id="accIsAdmin" th:text="${userIsAdmin}"></p>
+		    <span id="isUserLoggedin" th:text="${isLoggedIn}" hidden></span>
+		</div>
    		<!-- TopHeader div inserted here from JavaScript (topHeaderHtml.js) -->
 		
 		<span id="popup" th:text="${showError}" style="display: none;"></span>
 		
+		
    		<div id="pageBody">
    			<div id="body-headers">
    				<div id="storeLocation"> 156 Elderwood Ave </div>
-   				<div id="adminEditMenu"> Edit Menu </div>
    				<div id="menuTitle"> Menu </div>
    				<div id="searchMenu">
    					Search:  
@@ -166,6 +171,7 @@
 
 	<script  src="/javaScript/topHeaderHtml.js"></script>
 	<script  src="/javaScript/showPopupError.js"></script>
+	<script  src="/javaScript/clicksAccount.js"></script>
 
 	<script src="/javaScript/showOperatingHours.js"></script>
 	<script src="/javaScript/menuOptions/showPizzas.js"></script>
@@ -184,7 +190,6 @@
 	<script src="/javaScript/pageRedirects/clicksCheckout.js"></script>
 	
 	<script src="/javaScript/bodySize-homePage.js"></script>
-	<script src="/javaScript/adminPages/adminClicksEditMenu.js"></script>
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>

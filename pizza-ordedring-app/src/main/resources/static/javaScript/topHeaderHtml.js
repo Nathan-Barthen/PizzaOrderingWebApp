@@ -54,12 +54,36 @@
 		
 	});	
 		
+	
+	var loginText = "";
+	 var isLoggedin = document.getElementById("isUserLoggedin");
+	 	//User is logged in.
+	    if (isLoggedin != null && isLoggedin.innerText.includes("true")) {
+	    	loginText += "<div id=\"loggedIn\"> <span id=\"userProfileImgSpan\"><img id=\"userProfileImg\" src=\"/images/userProfile.png\" alt=\"User Profile\"></span> Account</div>";
+	    	loginText += "<div id=\"hiddenLoggedInElements\">";
+	    	var isAdmin = document.getElementById("accIsAdmin").textContent;
+	    	if(isAdmin == 'true'){
+	    		loginText +=	"<div class=\"loggedInElement\" id=\"editMenu\">Edit Menu</div>";
+	    	}
+	    	loginText +=	"<div class=\"loggedInElement\" id=\"viewOrders\">View Orders</div>" + 
+				            "<div class=\"loggedInElement\" id=\"editAccount\">Edit Account</div>" + 
+				            "<div class=\"loggedInElement\" id=\"changePassword\">Change Password</div>" + 
+				            "<div class=\"loggedInElement\" id=\"logout\">Logout</div>" + 
+				        "</div>";
+	    }
+	    //User is not logged in. User is a guest.
+	    else {
+	    	loginText += "<div id=\"login\">Login-in | Sign-up</div>";
+	    }
+	
+	
+	
+	
 	const contentDiv = document.querySelector(".content");
 	const pageBody = document.querySelector("#pageBody");
 
-	//IF the [+] is clicked created the div for the topping, and append div above the [+]
 	
-	  
+	//Create the header div. Insett html. Insert it into page.  
 	  const mainHeader = document.createElement("div");
 	  mainHeader.id = "topHeader";
 	  mainHeader.innerHTML = `
@@ -87,7 +111,7 @@
 			${arrayOfHtmlText}	
 			
 		<div id="spaceBetween"></div>
-		<div id="login">Login-in | Sign-up</div>
+		${loginText}
 		<div id="checkout">Checkout</div>
 
 		
