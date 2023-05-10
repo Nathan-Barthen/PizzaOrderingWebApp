@@ -10,6 +10,15 @@
 	// Get a reference to the hidden div for Wedgie items
 	const hiddenWedgieDiv = document.getElementById('hiddenWedgie');
 	
+	
+	//If user mouseover the element change background color
+	wedgieCategory.addEventListener('mouseover', function() {
+	    this.style.backgroundColor = 'rgb(0, 0, 255)';
+	  });
+	wedgieCategory.addEventListener('mouseout', function() {
+	    this.style.backgroundColor = 'rgb(0, 64, 255)';
+	  });
+	
 	// If category is clicked, show hidden div (dropdown menu)
 	wedgieCategory.addEventListener('click', () => {
 	  hiddenWedgieDiv.classList.toggle('show');

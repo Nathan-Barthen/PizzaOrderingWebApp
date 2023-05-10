@@ -1,0 +1,187 @@
+
+	@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+	
+	#pageBody {
+		width: 1400px;
+	    min-width: 99%;
+	    min-height: 100%;
+	    margin: 0 auto;
+		margin-bottom: -100px;
+		
+		background: url(/images/lightBlueBackgrd.png) no-repeat center center fixed;
+  	    background-size: cover;
+	}
+	
+	#body-headers {
+		width: 100%;
+		height: 70px;
+		font-size: 35px;
+		color: black;
+		
+		display: flex;
+	}
+	
+		#storeLocation {
+			width: 33%;
+			height: 100%;
+			
+			display: flex;
+			align-items: center;
+	    	text-align: center;
+	    	justify-content: left;
+	    	
+	    	font-style: italic;
+			padding-left: 15px;
+		}
+		
+		#adminHomeTitle {
+			width: 34%;
+			height: 100%;
+			
+			display: flex;
+			align-items: center;
+	    	text-align: center;
+	    	justify-content: center;
+	    	
+	    	text-decoration: underline;
+			text-decoration-color: red;
+			font-size: 45px;
+		}
+
+		#adminHomeDiv {
+			width: 33%;
+			height: 100%;
+			
+			display: flex;
+			align-items: center;
+	    	text-align: center;
+	    	justify-content: end;
+	    	
+	    	font-style: italic;
+	    	padding-right: 20px;
+		}
+			#adminHome {
+				width: 240px;
+				border: 3px solid black;
+	      		border-radius: 5px;
+				
+				background-color: rgb(153, 255, 153);
+				cursor: pointer;
+			}
+		
+		
+		
+		#showAllUsersDiv {
+			width: 100%;
+			
+			margin-top: 50px;
+			min-height: 50px;
+			
+			display: flex;
+			flex-direction: column;
+			
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+		}
+		
+			#titleUser {
+				width: 90%;
+				height: 30px;
+				
+				font-size: 22px;
+				font-weight: bold;
+				
+				padding-top: 2px;
+				padding-bottom: 8px;
+				
+				display: flex;
+				flex-direction: row;
+				
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				
+				
+				margin: auto;
+			}
+			
+			#user {
+				width: 90%;
+				height: 30px;
+				
+				font-size: 20px;
+				
+				border-top: 3px solid #ccc;
+				border-bottom: 3px solid #ccc;
+				padding-top: 2px;
+				padding-bottom: 2px;
+				
+				display: flex;
+				flex-direction: row;
+				
+				justify-content: center;
+				align-items: center;
+				text-align: center;
+				
+				
+				margin: auto;
+			}
+				#firstName {
+					width: 15%;
+				
+				}
+				#lastName {
+					width: 15%;
+				
+				}
+				#email {
+					width: 18%;
+				
+				}
+				#isAdmin {
+					width: 10%;
+				
+				}
+				#giveAdmin {
+					width: 12%;
+				
+				}
+					#giveAdminSpan {
+						width: 95%;
+						padding-left: 5px;
+						padding-right: 5px;
+						background-color: rgb(153, 255, 153);
+						border: 3px solid black;
+						cursor: pointer;
+					}
+				#removeAdmin {
+					width: 15%;
+				
+				}
+					#removeAdminSpan {
+						width: 95%;
+						padding-left: 5px;
+						padding-right: 5px;
+						background-color: rgb(102, 153, 255);
+						border: 3px solid black;
+						cursor: pointer;
+					}
+				#deleteAccount {
+					width: 15%;
+				
+				}
+					#deleteAccountSpan {
+						width: 95%;
+						padding-left: 5px;
+						padding-right: 5px;
+						background-color: rgb(255, 153, 153);
+						border: 3px solid black;
+						cursor: pointer;
+					}
+			
+			
+		      	
+		
+		
+		

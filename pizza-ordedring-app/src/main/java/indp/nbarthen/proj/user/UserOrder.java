@@ -69,6 +69,8 @@ public class UserOrder {
 		//Initialize to a logged in Account
 		this.userAcc = userAcc;
 		
+		this.items = new Vector<Item>();
+		
 		//Pennsylvania standard tax rate
 		taxPercentAsDecimal = 0.06;
 	}

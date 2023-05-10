@@ -7,7 +7,7 @@
 <title>Online Pizza Ordering</title>
 
 <link rel="stylesheet" href="/cssStyles/backgroundAndTopBar.css">
-<link rel="stylesheet" href="/cssStyles/admin/adminOptions.css">
+<link rel="stylesheet" href="/cssStyles/editAccountPassPage.css">
 <link rel="stylesheet" href="/cssStyles/bottomLinks.css">
 
 
@@ -21,7 +21,7 @@
    		<div hidden >
 		    <p th:each="category : ${itemCategories}" th:id="'categoryName' + ${category}" th:text="${category}"></p>
 		</div>
-   		<!-- TopHeader div inserted here from JavaScript (topHeaderHtml.js) -->
+   		<!-- Listing item names to pass to JavaScript. -->
 		<div hidden>
 		    <p th:each="item : ${menuItems}" th:id="'itemName' + ${item.getItemName()}" th:text="${item.getCategory()} + ' ' + ${item.getItemName()}"></p>
 		</div>
@@ -30,37 +30,58 @@
 		    <p id="accIsAdmin" th:text="${userIsAdmin}"></p>
 		    <span id="isUserLoggedin" th:text="${isLoggedIn}" hidden></span>
 		</div>
-		<!-- TopHeader div inserted here from JavaScript (topHeaderHtml.js) -->
-		
+   		<!-- TopHeader div inserted here from JavaScript (topHeaderHtml.js) -->
+   		
+   		
    		<div id="pageBody">
    			<div id="body-headers">
    				<div id="storeLocation"> 156 Elderwood Ave </div>
-   				<div id="adminHomeTitle"> Admin Menu Home </div>
+   				<div id="signUpTitle"> Edit Account </div>
    				<div id="emptySpace">
    					
    				</div>
    			</div>
    			
-   			<span id="popup" th:text="${itemCreationError}" style="display: none;"></span>
-   			
-   			<div id="editMenuDiv">
-   		
-   				<div id="editMenuTextDiv">
-				      <div id="deleteItemDiv">
-				      	<div id="deleteItem" class="modifyItem">Delete an Item</div>
+   			<div id="signUpDiv">
+   				
+   				<div id="signUpTextDiv">
+				      <div id="createAccount">
+				        	Change Your Password
 				      </div>
-				      <div id="addItemDiv">
-				      	<div id="addItem" class="modifyItem">Add an Item</div>
-				      </div>
-				      <div id="editItemDiv">
-				      	<div id="editItem" class="modifyItem">Edit an Item</div>
+				      <div id="signUpEntry">
+				      	<form id="signUpForm" method="post" th:action="@{/pizzaStore/finishPasswordChange}">
+					      	
+							<div id="showsUsersEmail">
+								Email: [[${user.getEmail}]]
+							</div>
+							<input hidden id="passedEmail"  type="passedEmail" name="userEmail" th:value="${user.getEmail()}">
+					        <div id="signUpPassword">
+					          	<span id="signUpParamTitle"> *Old Password: </span>
+					          	 <input id="password"  type="password" name="oldPassword" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[a-z]).{7,}$"  title="Password must be at least 7 characters with one capital and one number">
+					        </div>
+					        
+					        <div id="signUpPassword">
+					          	<span id="signUpParamTitle"> *New Password: </span>
+					          	 <input id="password"  type="password" name="password" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[a-z]).{7,}$"  title="Password must be at least 7 characters with one capital and one number">
+					        </div>
+					        
+					        <div id="signUpConfirmPassword">
+							  	<span id="signUpConfirmPassTitle"> *Confirm New Pass: </span>
+							  	<input id="confirmPassword" type="password" name="confirmPassword" pattern="^(?=.*[A-Z])(?=.*\d)(?=.*[a-z]).{7,}$"  title="Password must be at least 7 characters with one capital and one number">
+							</div>
+					        
+					        <div id="signUpConfirmPassword">
+					        	<span id="emptyText"></span>
+					        	<div class="errorMessages" id="passwordErrorMessages"></div>
+					        </div>
+					        
+					        
+					       
+				        	<input type="submit" value="Submit">
+				      	</form>
+				      	
 				      </div>
 			    </div>
-			    <div id="editUsersContainer">
-				    <div id="editUsersDiv">
-					      	<div id="editUsers" class="modifyItem">Edit Users</div>
-					</div>
-				</div>
    			</div>
    			
    		</div>
@@ -79,7 +100,7 @@
 
 	<script src="/javaScript/topHeaderHtml.js"></script>
 	<script  src="/javaScript/clicksAccount.js"></script>
-	
+
 	<script src="/javaScript/showOperatingHours.js"></script>
 	<script src="/javaScript/menuOptions/showPizzas.js"></script>
 	<script src="/javaScript/menuOptions/showSides.js"></script>
@@ -95,8 +116,10 @@
 	<script src="/javaScript/pageRedirects/clicksItem.js"></script>
 	<script src="/javaScript/pageRedirects/clicksCheckout.js"></script>
 	
-	<script src="/javaScript/adminPages/adminClicksDeleteAddEdit.js"></script>
-	<script src="/javaScript/adminPages/adminItemCreationError.js"></script>
+	<script src="/javaScript/updateSelectedOption.js"></script>
+	
+	<script src="/javaScript/signUpParameterChecking/confirmParameters-EditAccount.js"></script>
+	
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>

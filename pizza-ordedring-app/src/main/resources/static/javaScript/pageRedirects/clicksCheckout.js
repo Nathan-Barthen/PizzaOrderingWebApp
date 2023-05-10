@@ -8,3 +8,12 @@
 	checkoutDiv.addEventListener('click', function() {
 	  window.location.href = '/pizzaStore/checkout';
 	});
+	
+	
+	//User mouses over Checkout - change background color
+	checkoutDiv.addEventListener('mouseover', function() {
+	    this.style.backgroundColor = 'rgb(0, 0, 230)';
+	  });
+	checkoutDiv.addEventListener('mouseout', function() {
+	    this.style.backgroundColor = 'rgb(0, 57, 230)';
+	  });

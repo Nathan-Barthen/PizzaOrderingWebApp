@@ -48,8 +48,8 @@ public class CartItem {
 			String[] addonDropNames, String[] addonDropSelected, String[] addonDropAmounts,
 			String[] addonLNENames, String[] addonLNESideOfPizza, String[] addonLNEAmounts
 			) {
+		
 			Item cartItem = item;
-			System.out.println(customInstructions);
 			cartItem.setItemAdditionalInstructions(customInstructions);
 			
 			//Loop through included toppings.

@@ -10,6 +10,15 @@
 	// Get a reference to the hidden div for drinks
 	const hiddenDrinksDiv = document.getElementById('hiddenDrinks');
 	
+	
+	//If user mouseover the element change background color
+	drinksCategory.addEventListener('mouseover', function() {
+	    this.style.backgroundColor = 'rgb(0, 0, 255)';
+	  });
+	drinksCategory.addEventListener('mouseout', function() {
+	    this.style.backgroundColor = 'rgb(0, 64, 255)';
+	  });
+	
 	//If drinks category is clicked, show hidden div (dropdown menu)
 	drinksCategory.addEventListener('click', () => {
 	  hiddenDrinksDiv.classList.toggle('show');

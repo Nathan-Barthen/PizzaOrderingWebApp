@@ -96,7 +96,6 @@ public class ManageUsers {
 	            if (u.getEmail().equalsIgnoreCase(user.getEmail())) {
 	                users.set(i, user);
 	                foundUser = true;
-	                System.out.println("Should be updating- " + user.getFirstName());
 	                break;
 	            }
 	        }
@@ -120,6 +119,59 @@ public class ManageUsers {
 	    return false; // Error saving user
 	}
 
+	
+	//Find the user with the same email, changes user's password to new password and saves it to StoredUsers.json.
+		public static boolean editUserPassword(String email, String newPassword) {
+		    List<UserAccount> users = new ArrayList<>();
+
+		    try {
+		        File file = new File(userFileLocation);
+		        if (file.exists()) {
+		            // Load existing users from file
+		            try {
+		                ObjectMapper objectMapper = new ObjectMapper();
+		                users = objectMapper.readValue(file, new TypeReference<List<UserAccount>>() {});
+		            } catch (IOException e) {
+		                e.printStackTrace();
+		                System.out.println("Failed to read users from " + userFileLocation);
+		                return false;
+		            }
+		        }
+
+		        // Find the user with the same email and update its password
+		        boolean foundUser = false;
+		        for (int i = 0; i < users.size(); i++) {
+		            UserAccount u = users.get(i);
+		            //User found with passed email.
+		            if (u.getEmail().equalsIgnoreCase(email)) {
+		            	String newPasswordHash = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+		            	u.setPasswordHash(newPasswordHash);
+		                //Save u (user) with updated password to current index.
+		            	users.set(i, u);
+		                foundUser = true;
+		                break;
+		            }
+		        }
+
+		        if (!foundUser) {
+		            System.out.println("User not found with email: " + email);
+		            return false;
+		        }
+
+		        // Save updated list of users to file
+		        ObjectMapper objectMapper = new ObjectMapper();
+		        objectMapper.writeValue(new File(userFileLocation), users);
+
+		        return true; // User saved successfully
+
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		        System.out.println("Error updating user in " + userFileLocation);
+		    }
+
+		    return false; // Error saving user
+		}
+	
 	
 	//Returns true if the email exists in the database.
 	public static boolean checkIfValidEmail(String email) {
@@ -204,6 +256,30 @@ public class ManageUsers {
 		}
 
 		return null; 
+	
+    }
+	
+	
+	//Gets a list of all of the users in the database.
+	public static List<UserAccount> getAllUsers() {
+		List<UserAccount> users = new ArrayList<>();
+		
+		File file = new File(userFileLocation);
+		if (file.exists()) {
+			// Load existing users from file
+			try {
+				ObjectMapper objectMapper = new ObjectMapper();
+				users = objectMapper.readValue(file, new TypeReference<List<UserAccount>>() {});
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.out.println("Failed to read users from " + userFileLocation);
+				return null;
+			}
+		}
+
+		
+
+		return users; 
 	
     }
 	
@@ -292,6 +368,108 @@ public class ManageUsers {
     }
 	
 
+	
+	//Find the user with the same email, give or take away admin (Passed by function). Save change.
+			public static boolean setUserAdminPermission(String email, boolean setAdmin) {
+			    List<UserAccount> users = new ArrayList<>();
+
+			    try {
+			        File file = new File(userFileLocation);
+			        if (file.exists()) {
+			            // Load existing users from file
+			            try {
+			                ObjectMapper objectMapper = new ObjectMapper();
+			                users = objectMapper.readValue(file, new TypeReference<List<UserAccount>>() {});
+			            } catch (IOException e) {
+			                e.printStackTrace();
+			                System.out.println("Failed to read users from " + userFileLocation);
+			                return false;
+			            }
+			        }
+
+			        // Find the user with the same email and update its password
+			        boolean foundUser = false;
+			        for (int i = 0; i < users.size(); i++) {
+			            UserAccount u = users.get(i);
+			            //User found with passed email.
+			            if (u.getEmail().equalsIgnoreCase(email)) {
+			            	u.setAdmin(setAdmin);
+			                //Save u (user) with updated password to current index.
+			            	users.set(i, u);
+			                foundUser = true;
+			                break;
+			            }
+			        }
+
+			        if (!foundUser) {
+			            System.out.println("User not found with email: " + email);
+			            return false;
+			        }
+
+			        // Save updated list of users to file
+			        ObjectMapper objectMapper = new ObjectMapper();
+			        objectMapper.writeValue(new File(userFileLocation), users);
+
+			        return true; // User saved successfully
+
+			    } catch (IOException e) {
+			        e.printStackTrace();
+			        System.out.println("Error updating user in " + userFileLocation);
+			    }
+
+			    return false; // Error saving user
+			}
+		//Find the user with the same email, give or take away admin (Passed by function). Save change.
+			public static boolean adminDeletesUser(String email) {
+			    List<UserAccount> users = new ArrayList<>();
+
+			    try {
+			        File file = new File(userFileLocation);
+			        if (file.exists()) {
+			            // Load existing users from file
+			            try {
+			                ObjectMapper objectMapper = new ObjectMapper();
+			                users = objectMapper.readValue(file, new TypeReference<List<UserAccount>>() {});
+			            } catch (IOException e) {
+			                e.printStackTrace();
+			                System.out.println("Failed to read users from " + userFileLocation);
+			                return false;
+			            }
+			        }
+
+			        // Find the user with the same email and update its password
+			        boolean foundUser = false;
+			        for (int i = 0; i < users.size(); i++) {
+			            UserAccount u = users.get(i);
+			            //User found with passed email.
+			            if (u.getEmail().equalsIgnoreCase(email)) {
+			            	//Remove user with matching email.
+			            	users.remove(i);
+			                foundUser = true;
+			                break;
+			            }
+			        }
+
+			        if (!foundUser) {
+			            System.out.println("User not found with email: " + email);
+			            return false;
+			        }
+
+			        // Save updated list of users to file
+			        ObjectMapper objectMapper = new ObjectMapper();
+			        objectMapper.writeValue(new File(userFileLocation), users);
+
+			        return true; // User saved successfully
+
+			    } catch (IOException e) {
+			        e.printStackTrace();
+			        System.out.println("Error updating user in " + userFileLocation);
+			    }
+
+			    return false; // Error saving user
+			}
+	
+	
 
 
 	    

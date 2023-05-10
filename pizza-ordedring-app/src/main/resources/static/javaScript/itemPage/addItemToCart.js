@@ -4,11 +4,37 @@
  *  
 */
 
-// Get the 'Add Item' box by its ID
-const addItemButton = document.getElementById('addItem');
+	// Get the 'Add Item' box by its ID
+	const addItemButton = document.getElementById('addItem');
 
-// Add a click event listener to the 'Add Item' button
-addItemButton.addEventListener('click', function() {
+	// Add a click event listener to the 'Add Item' button
+	addItemButton.addEventListener('click', function() {
+		var isUserLoggedin = document.getElementById('isUserLoggedin').textContent.trim();
+		if(isUserLoggedin == 'true'){
+			 submitItem();
+		}
+		else {
+			var notLoggedInDiv = document.getElementById('notLoggedInDiv');
+		    notLoggedInDiv.style.display = 'flex'; // Show the hidden div
+			
+		}
+		
+	});
+	
+	// Listener for a click on continueAsGuestSpan
+	const continueAsGuestSpan = document.getElementById('continueAsGuestSpan');
+	continueAsGuestSpan.addEventListener('click', function() {
+	  submitItem();
+	});
+
+	// Listener for a click on loginSpan
+	const loginSpan = document.getElementById('loginSpan');
+	loginSpan.addEventListener('click', function() {
+	  window.location.href = '/pizzaStore/signin';
+	});
+	
+	
+function submitItem(){
   // Create a new form element
   const myForm = document.createElement('form');
   myForm.method = 'POST';
@@ -286,4 +312,5 @@ addItemButton.addEventListener('click', function() {
   // Submit the form
   document.body.appendChild(myForm);
   myForm.submit();
-});
+
+}

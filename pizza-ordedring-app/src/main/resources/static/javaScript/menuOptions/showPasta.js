@@ -10,6 +10,15 @@
 	// Get a reference to the hidden div
 	const hiddenPastaDiv = document.getElementById('hiddenPasta');
 	
+	//If user mouseover the element change background color
+	pastaCategory.addEventListener('mouseover', function() {
+	    this.style.backgroundColor = 'rgb(0, 0, 255)';
+	  });
+	pastaCategory.addEventListener('mouseout', function() {
+	    this.style.backgroundColor = 'rgb(0, 64, 255)';
+	  });
+	
+	
 	// If category is clicked, show hidden div (dropdown menu)
 	pastaCategory.addEventListener('click', () => {
 	  hiddenPastaDiv.classList.toggle('show');
