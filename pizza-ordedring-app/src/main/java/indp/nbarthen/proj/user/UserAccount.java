@@ -1,6 +1,7 @@
 package indp.nbarthen.proj.user;
 
 import java.util.List;
+import java.util.Vector;
 
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -35,6 +36,7 @@ public class UserAccount {
     	this.isGuest = true;
     	
     	this.isAdmin= false; 
+    	this.orders = new Vector<UserOrder>();
     }
     public UserAccount(String firstName, String lastName, String phoneNumber, String address, String apartmentNum, String email, String password) {
         this.firstName = firstName;
@@ -46,6 +48,8 @@ public class UserAccount {
         this.isGuest = false;
         this.isAdmin= false; 
         this.passwordHash = BCrypt.hashpw(password, BCrypt.gensalt());
+        
+        this.orders = new Vector<UserOrder>();
     }
     
     
@@ -122,6 +126,12 @@ public class UserAccount {
 	
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+	public List<UserOrder> getOrders() {
+		return orders;
+	}
+	public void setOrders(List<UserOrder> orders) {
+		this.orders = orders;
 	}
 }
 

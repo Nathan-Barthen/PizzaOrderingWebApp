@@ -7,7 +7,7 @@
 <title>Online Pizza Ordering</title>
 
 <link rel="stylesheet" href="/cssStyles/backgroundAndTopBar.css">
-<link rel="stylesheet" href="/cssStyles/admin/adminOptions.css">
+<link rel="stylesheet" href="/cssStyles/admin/adminEditAllUsers.css">
 <link rel="stylesheet" href="/cssStyles/bottomLinks.css">
 
 
@@ -35,32 +35,62 @@
    		<div id="pageBody">
    			<div id="body-headers">
    				<div id="storeLocation"> 156 Elderwood Ave </div>
-   				<div id="adminHomeTitle"> Admin Menu Home </div>
-   				<div id="emptySpace">
-   					
+   				<div id="adminHomeTitle"> Admin: Edit All Users </div>
+   				<div id="adminHomeDiv">
+   					<div id="adminHome">Admin Home</div>
    				</div>
    			</div>
    			
-   			<span id="popup" th:text="${itemCreationError}" style="display: none;"></span>
    			
-   			<div id="editMenuDiv">
+   			<div id="showAllUsersDiv">
    		
-   				<div id="editMenuTextDiv">
-				      <div id="deleteItemDiv">
-				      	<div id="deleteItem" class="modifyItem">Delete an Item</div>
-				      </div>
-				      <div id="addItemDiv">
-				      	<div id="addItem" class="modifyItem">Add an Item</div>
-				      </div>
-				      <div id="editItemDiv">
-				      	<div id="editItem" class="modifyItem">Edit an Item</div>
-				      </div>
-			    </div>
-			    <div id="editUsersContainer">
-				    <div id="editUsersDiv">
-					      	<div id="editUsers" class="modifyItem">Edit Users</div>
-					</div>
+   		
+   				<div id="titleUser">
+   					<div id="firstName">
+   						First Name
+   					</div>
+   					<div id="lastName">
+   						Last Name
+   					</div>
+   					<div id="email">
+   						Email
+   					</div>
+   					<div id="isAdmin">
+   						isAdmin?
+   					</div>
+   					<div id="giveAdmin">
+   						Give Admin
+   					</div>
+   					<div id="removeAdmin">
+   						Remove Admin
+   					</div>
+   					
+   					<div id="deleteAccount">
+   						Delete Account
+   					</div>
+   				
+   				</div>
+   				
+   				<div th:each="user : ${users}" id="user">
+				    <div id="firstName" th:text="${user.firstName}"></div>
+				    <div id="lastName" th:text="${user.lastName}"></div>
+				    <div id="email" th:text="${user.email}"></div>
+				    <div id="isAdmin" th:text="${user.admin}" class="isAdmin"></div>
+
+
+				    <div id="giveAdmin">
+				        <span id="giveAdminSpan" class="giveAdminSpan">Give Admin</span>
+				    </div>
+				    <div id="removeAdmin">
+				        <span id="removeAdminSpan" class="removeAdminSpan">Remove Admin</span>
+				    </div>
+				    <div id="deleteAccount">
+				        <span id="deleteAccountSpan" class="deleteAccountSpan">Delete Account</span>
+				    </div>
 				</div>
+
+   				
+   				
    			</div>
    			
    		</div>
@@ -95,8 +125,8 @@
 	<script src="/javaScript/pageRedirects/clicksItem.js"></script>
 	<script src="/javaScript/pageRedirects/clicksCheckout.js"></script>
 	
-	<script src="/javaScript/adminPages/adminClicksDeleteAddEdit.js"></script>
-	<script src="/javaScript/adminPages/adminItemCreationError.js"></script>
+	<script src="/javaScript/adminPages/adminClicksAdminHome.js"></script>
+	<script src="/javaScript/adminPages/adminClicksGiveRemoveDeleteUser.js"></script>
 	
 	<script src="/javaScript/entersLocation.js"></script>
 	<script src="/javaScript/errorRedirectPopup.js"></script>

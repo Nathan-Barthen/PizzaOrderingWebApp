@@ -10,6 +10,15 @@
 	// Get a reference to the hidden div
 	const hiddenWingsDiv = document.getElementById('hiddenWings');
 	
+	//If user mouseover the element change background color
+	wingsCategory.addEventListener('mouseover', function() {
+	    this.style.backgroundColor = 'rgb(0, 0, 255)';
+	  });
+	wingsCategory.addEventListener('mouseout', function() {
+	    this.style.backgroundColor = 'rgb(0, 64, 255)';
+	  });
+	
+	
 	// If Wings category is clicked, show hidden div (dropdown menu)
 	wingsCategory.addEventListener('click', () => {
 	  hiddenWingsDiv.classList.toggle('show');

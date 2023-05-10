@@ -25,6 +25,8 @@
 	});
 
 	
+	
+	
 	//Hide pizzas div if user clicks anywhere (other than inside of the div)
 	document.addEventListener('click', (event) => {
 		  const clickedElement = event.target;
@@ -40,3 +42,13 @@
 			  }
 		  }
 	});
+	
+	
+	//Change background color on hover of 'Hours'
+	operatingHours.addEventListener('mouseover', function() {
+	    this.style.backgroundColor = 'rgb(0, 64, 255)';
+	  });
+	operatingHours.addEventListener('mouseout', function() {
+	    this.style.backgroundColor = 'rgb(51, 102, 255)';
+	  });
+	

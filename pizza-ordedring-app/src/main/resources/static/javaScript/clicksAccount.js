@@ -17,7 +17,7 @@
 	// Get a reference to the hidden div
 	var hiddenLoggedInElements = document.getElementById('hiddenLoggedInElements');
 	
-	// If Wings category is clicked, show hidden div (dropdown menu)
+	// If Account is clicked, show hidden div (dropdown menu)
 	loggedIn.addEventListener('click', () => {
 		hiddenLoggedInElements.style.display = "block";
 	});
@@ -35,6 +35,16 @@
 	    }
 	  }
 	});
+	
+	//User mouses over Account - change background color
+	loggedIn.addEventListener('mouseover', function() {
+	    this.style.backgroundColor = 'rgb(0, 0, 230)';
+	  });
+	loggedIn.addEventListener('mouseout', function() {
+	    this.style.backgroundColor = 'rgb(0, 57, 230)';
+	  });
+	
+	
 	
 	
 	//Changes background color when hovering over elements.

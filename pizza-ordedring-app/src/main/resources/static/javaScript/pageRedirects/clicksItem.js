@@ -19,17 +19,28 @@
 	// Get all the div elements with the id of "item"
 	const topItemDivs = document.querySelectorAll("#hiddenPizzas div, #hiddenSides div, #hiddenWings div, #hiddenPasta div, #hiddenWedgie div, #hiddenDesserts div, #hiddenDrinks div, #hiddenMisc div");
 	
-	// Add a click event listener to each item div
+	//If user mouseover the element change background color
 	topItemDivs.forEach(function(div) {
-	  div.addEventListener("click", function() {
-	    // Get the category name
-	    const topCategoryName = this.parentNode.previousElementSibling.textContent.trim();
-	    // Get the item name
-	    const topItemName = this.textContent;
-	    // Redirect to the URL with the category name and item name
-	    window.location.href = `/pizzaStore/${topCategoryName}/${topItemName}`;
-	  });
+		div.addEventListener('mouseover', function() {
+			div.style.backgroundColor = 'rgb(102, 102, 255)';
+		  });
+		div.addEventListener('mouseout', function() {
+			div.style.backgroundColor = 'rgb(0, 0, 255)';
+		  });
+		
 	});
+	
+	
+	topItemDivs.forEach(function(div) {
+		  div.addEventListener("click", function() {
+		    // Get the category name
+		    const topCategoryName = this.parentNode.previousElementSibling.textContent.trim();
+		    // Get the item name
+		    const topItemName = this.textContent;
+		    // Redirect to the URL with the category name and item name
+		    window.location.href = `/pizzaStore/${topCategoryName}/${topItemName}`;
+		  });
+		});
 
 
 

@@ -44,7 +44,7 @@
 		  var zindex = (toppings.length + 5) - i;
 		  htmlText += "<div id=\"mainOptions-dropdownContainer\"> <label id=\"dropdownLabelName\">" 
 		      + topping.toppingName + ": </label>" +
-		           "<div class=\"dropdown\" style=\"z-index:" + zindex + "\"> <div id=\"selectedOption\">Select</div> <ul class=\"dropdown-menu\">";
+		           "<div class=\"dropdown\" style=\"z-index:" + zindex + "\"> <div id=\"selectedOption\">"+ topping.toppingOptions[0] +"</div> <ul class=\"dropdown-menu\">";
 		  
 		  for (var j = 0; j < topping.toppingOptions.length; j++) {
 		    var option = topping.toppingOptions[j];

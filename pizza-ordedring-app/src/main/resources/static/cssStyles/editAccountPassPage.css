@@ -1,0 +1,232 @@
+
+	@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+	
+	#pageBody {
+		width: 1400px;
+	    min-width: 99%;
+	    min-height: 100%;
+	    margin: 0 auto;
+		margin-bottom: -100px;
+		
+		background: url(/images/lightBlueBackgrd.png) no-repeat center center fixed;
+  	    background-size: cover;
+	}
+	
+	#body-headers {
+		width: 100%;
+		height: 70px;
+		font-size: 35px;
+		color: black;
+		
+		display: flex;
+		margin-bottom: 0px;
+	}
+	
+		#storeLocation {
+			width: 33%;
+			height: 100%;
+			
+			display: flex;
+			align-items: center;
+	    	text-align: center;
+	    	justify-content: left;
+	    	
+	    	font-style: italic;
+			padding-left: 15px;
+		}
+		
+		#signUpTitle {
+			width: 34%;
+			height: 100%;
+			
+			display: flex;
+			align-items: center;
+	    	text-align: center;
+	    	justify-content: center;
+	    	
+	    	text-decoration: underline;
+			text-decoration-color: red;
+			font-size: 45px;
+		}
+
+		#emptySpace {
+			width: 33%;
+			height: 100%;
+			
+			display: flex;
+			align-items: center;
+	    	text-align: center;
+	    	justify-content: end;
+	    	
+	    	font-style: italic;
+	    	padding-right: 20px;
+		}
+		
+		
+		
+		#signUpDiv {
+			width: 100%;
+			height: 1000px;
+			
+			display: flex;
+		}
+			#signUpTextDiv {
+				width: 50%;
+				height: 100%;
+				
+				display: flex;
+				flex-direction: column;
+				
+				justify-content: start;
+				align-items: start;
+				text-align: center;
+				
+				margin: auto;
+			}
+			 #createAccount {
+				width: 100%;
+				
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				
+				padding-top: 0px;
+		        margin-bottom: 10px;
+		        font-size: 50px;
+		      }
+		      
+		      #signUpEntry {
+		      	width: 90%;
+		        display: flex;
+		        flex-direction: column;
+		        align-items: center;
+		        border: 3px solid #ccc;
+		        padding: 20px;
+		      }
+		      #signUpForm {
+		      	width: 100%;
+		      }
+		      
+		      #signUpFirstName, #signUpLastName, #signUpAddress, #signUpPhone, #signUpApartment,
+		      #signUpEmail, #signUpPassword, #signUpConfirmPassword, #signUpPasswordError {
+		      	width: 100%;
+		      	display: flex;
+		      	flex-direction: row;
+		      	
+		      	justify-content: center;
+				align-items: center;
+		      	
+		      	font-size: 34px;
+		        margin-bottom: 10px;
+		      }
+		      	#signUpParamTitle {
+		      		width: 40%;
+		      		display: flex;
+			      	justify-content: right;
+					align-items: center;
+					margin-bottom: 7px;
+					padding-right: 20px;
+		      	}
+		      	#showsUsersEmail {
+		      		width: 100%;
+		      		display: flex;
+		      		justify-content: center;
+					align-items: center;
+					font-size: 36px;
+					padding-bottom: 10px;
+		      	}
+		      	#signUpConfirmApartmentTitle {
+		      		width: 45%;
+		      		display: flex;
+			      	justify-content: center;
+					align-items: center;
+		      		font-size: 30px;
+		      		font-style: italic;
+		      		margin-top: 10px;
+		      		
+		      	}
+		      	#signUpConfirmPassTitle {
+		      		width: 45%;
+		      		display: flex;
+			      	justify-content: center;
+					align-items: center;
+		      		font-size: 27px;
+		      		font-style: italic;
+		      	}
+		      	#emptyText {
+		      		width: 0%;
+		      	}
+		      	.errorMessages {
+		      		width: 100%;
+		      		color: red;
+		      		font-size: 15px;
+		      		text-align: right;
+		      	}
+		      	
+		      input[type="text"],
+		      input[type="password"] {
+		        width: 60%;
+		        padding: 10px;
+		        border: 2px solid black;
+		        border-radius: 5px;
+		        margin-bottom: 10px;
+		        font-size: 15px;
+		        margin-top: 10px;
+		      }
+		      
+		      input[type="text"],
+		      input[type="oldPassword"] {
+		        width: 60%;
+		        padding: 10px;
+		        border: 2px solid black;
+		        border-radius: 5px;
+		        margin-bottom: 10px;
+		        font-size: 15px;
+		        margin-top: 10px;
+		      }
+		      
+		      input[type="submit"] {
+		      	width: 140px;
+		      	height: 50px;
+		      	font-size: 30px;
+		      	
+		        background-color: #4CAF50;
+		        color: white;
+		        padding: 10px 20px;
+		        border: none;
+		        border-radius: 5px;
+		        cursor: pointer;
+		      }
+		      
+		      input[type="submit"]:hover {
+		        background-color: #3e8e41;
+		      }	
+			
+			  #signInDiv {
+			  	width: 100%;
+		      	display: flex;
+		      	flex-direction: row;
+		      	
+		      	justify-content: center;
+				align-items: center;
+		      	
+		      	font-size: 30px;
+		      	
+		      	margin-top: 50px;
+			  }
+			  	#signInParamTitle {
+			  		
+			  	}
+				#signInLink {
+					padding-left: 5px;
+					
+					justify-content: center;
+					align-items: center;
+					text-align: left;
+					
+					font-style: italic;
+				}
+			
+		
+		
+		

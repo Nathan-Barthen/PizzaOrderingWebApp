@@ -10,6 +10,15 @@
 	// Get a reference to the hidden div
 	const hiddenSidesDiv = document.getElementById('hiddenSides');
 	
+	//If user mouseover the element change background color
+	sidesCategory.addEventListener('mouseover', function() {
+	    this.style.backgroundColor = 'rgb(0, 0, 255)';
+	  });
+	sidesCategory.addEventListener('mouseout', function() {
+	    this.style.backgroundColor = 'rgb(0, 64, 255)';
+	  });
+	
+	
 	// If category is clicked, show hidden div (dropdown menu)
 	sidesCategory.addEventListener('click', () => {
 	  hiddenSidesDiv.classList.toggle('show');

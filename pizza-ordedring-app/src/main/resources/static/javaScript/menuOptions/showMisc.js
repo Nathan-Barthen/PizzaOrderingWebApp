@@ -10,6 +10,15 @@
 	// Get a reference to the hidden div for misc
 	const hiddenMiscDiv = document.getElementById('hiddenMisc');
 	
+	//If user mouseover the element change background color
+	miscCategory.addEventListener('mouseover', function() {
+	    this.style.backgroundColor = 'rgb(0, 0, 255)';
+	  });
+	miscCategory.addEventListener('mouseout', function() {
+	    this.style.backgroundColor = 'rgb(0, 64, 255)';
+	  });
+	
+	
 	//If misc category is clicked, show hidden div (dropdown menu)
 	miscCategory.addEventListener('click', () => {
 	  hiddenMiscDiv.classList.toggle('show');

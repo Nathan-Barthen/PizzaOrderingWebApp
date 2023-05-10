@@ -189,8 +189,41 @@ public class MainController {
 		 	cartItem = CartItem.getFinalPrice(cartItem);
 		 	
 		 	//Add item to users cart
-		 		//STILL NEED TO DO THIS
 		 	
+		 	//Check if user is logged in. 
+		 	UserAccount user = (UserAccount) session.getAttribute("user");
+		 	//User is not logged in. Make guest user.
+		    if (user == null) {
+		    	UserAccount guestUser = new UserAccount();
+		    	session.setAttribute("user", guestUser);
+		    	
+		    } 
+		    
+		    user = (UserAccount) session.getAttribute("user");
+		    //Get order session attribute.
+		    UserOrder order = (UserOrder) session.getAttribute("order");
+		    List<Item> items = new Vector<Item>();
+		    //This is the first item being added to the cart. (No order created yet)
+	    	if (order == null) {
+	    		UserOrder newOrder = new UserOrder(user);
+		    	items = newOrder.getItems();
+		    	items.add(cartItem);
+		    	newOrder.setItems(items);
+		    	order = newOrder;
+	    	}
+	    	//Items have already been add to users order/cart.
+	    	else {
+	    		//Get items already added to order
+	    		items = order.getItems();
+	    		//Add new item. Update order.
+	    		items.add(cartItem);
+	    		order.setItems(items);
+	    	}
+	    	
+		 	//Update session attribute
+	    	session.setAttribute("order", order);
+	    	
+	    	
 		 	return "redirect:/";
 	    }
 	 
@@ -199,6 +232,17 @@ public class MainController {
 		 	List<Item> menuItems = MenuItems.getMenuItemsList();
 		 	
 		 	setSessionAttributes(session, model);
+		 	
+		 	UserAccount user = (UserAccount) session.getAttribute("user");
+		 	UserOrder order = (UserOrder) session.getAttribute("order");
+		 	//Not logged in or cart is empty. Redirect to home.
+		 	if (user == null || order.getItems().size() < 1) {
+		 		return "redirect:/?showError=Cart is empty.";
+		    }
+		 	
+		 	
+		 	model.addAttribute("user", user);
+		 	model.addAttribute("order", order);
 		 	
 		 	model.addAttribute("itemCategories", itemCategories.toArray());
 		 	model.addAttribute("menuItems", menuItems.toArray());
@@ -236,10 +280,16 @@ public class MainController {
 		        UserAccount user = ManageUsers.getUser(email, password);
 		        if (user == null) {
 		            //Invalid password
-		            return "redirect:/pizzaStore/signin?showError=Password does not match. Try again.";
+		            return "redirect:/pizzaStore/signin?showError=Incorrect password. Try again.";
 		        } else {
 		            //User is signed in
+		        	//Set user session 
 		            session.setAttribute("user", user);
+		            //Set order session attribute
+		            UserOrder newOrder = new UserOrder(user);
+			    	session.setAttribute("order", newOrder);
+		            
+		            
 		            return "redirect:/";
 		        }
 		    } 
@@ -288,7 +338,8 @@ public class MainController {
 		 
 	     // Create the UserAccount object with hashed password
 	     UserAccount editedUser = new UserAccount(firstName, lastName, phoneNumber, address, apartmentNum, email, passwordHash);
-
+	     editedUser.setAdmin(sessionUser.isAdmin());
+	     
 	     // Save the user account to your database
 	     //If password matches saved password.
 	     if(ManageUsers.checkIfPasswordsMatch(sessionUser.getEmail(), passwordHash)) {
@@ -321,8 +372,35 @@ public class MainController {
 		 	model.addAttribute("itemCategories", itemCategories.toArray());
 		 	
 		 
-		 	return "editAccountPage";
+		 	return "editAccountPassPage";
 	 }
+	 
+	 @PostMapping("/pizzaStore/finishPasswordChange")
+		public String editUsersPassword(HttpSession session,
+				@RequestParam("userEmail") String userEmail,
+				@RequestParam("oldPassword") String oldPassword,
+				@RequestParam("password") String password) {
+		
+		
+		
+		  // Save the user account to your database
+		  //If password matches saved password.
+		  if(ManageUsers.checkIfPasswordsMatch(userEmail, oldPassword)) {
+		 	 //If there was an error updating users password.
+		 	 if(!ManageUsers.editUserPassword(userEmail, password)) {
+			    	 //Redirect to home. Show error.
+			    	 return "redirect:/?showError=Error updating account information.";
+			     }
+		  }
+		  else {
+		 	 //Invalid password sent when editing user's info.
+		 	 return "redirect:/?showError=Incorrect Password. Try again.";
+		  }
+		  
+		  
+		
+		  return "redirect:/?showError=Account updated.";
+		}
 	 
 	 /* sign-upPage.html
 		 * 	This will be used to allow the user to create an account.
@@ -731,5 +809,115 @@ public class MainController {
 				 }		 
 			 
 			 
+				 
+				 
+				 @RequestMapping({"/pizzaStore/admin/edit/AllUsers"})
+				    public String adminEditAllUsers(HttpSession session, Model model) {
+					 	
+					 	UserAccount user = (UserAccount) session.getAttribute("user");
+					 	//Check if user is signed in and is an admin.
+					    if (user != null && user.isAdmin()) {
+					    	// User is an admin
+					    	
+					    	List<Item> menuItems = MenuItems.getMenuItemsList();
+						 	//Check if the user is an admin
+						 	
+						 	setSessionAttributes(session, model);
+						 	
+						 	List<UserAccount> users = ManageUsers.getAllUsers();
+						 	if(users == null) {
+						 		return "redirect:/pizzaStore/admin/optionsPage?itemCreationError=Error gettings users from database.";
+						 	}
+						 	
+						 	
+						 	model.addAttribute("users", users);
+						 	
+						 	model.addAttribute("itemCategories", itemCategories.toArray());
+						 	model.addAttribute("menuItems", menuItems.toArray());
+					    } 
+					    else {
+						 	// User is not an admin
+					    	return "redirect:/?showError=You are not an admin. You do not have permission to go here.";
+					    }
+					 	
+					 	
+					 
+					 	
+				        return "admin/adminEditAllUsersPage";
+				    }
+				 
+				 
+				 @RequestMapping({"/pizzaStore/giveAdmin/email/{email}"})
+				    public String adminGiveUserAdmin(HttpSession session, @PathVariable("email") String email) {
+					 	
+					 	UserAccount user = (UserAccount) session.getAttribute("user");
+					 	//Check if user is signed in and is an admin.
+					    if (user != null && user.isAdmin()) {
+					    	
+						 	//Give user admin
+					    	if(!ManageUsers.setUserAdminPermission(email, true)) {
+					    		return "redirect:/pizzaStore/admin/optionsPage?itemCreationError=Error giving admin.";
+					    	}
+						 	
+					    } 
+					    else {
+						 	// User is not an admin
+					    	return "redirect:/?showError=You are not an admin. You do not have permission to go here.";
+					    }
+					 	
+					 	
+					 
+					    
+				        return "redirect:/pizzaStore/admin/edit/AllUsers";
+				    }
+				 @RequestMapping({"/pizzaStore/removeAdmin/email/{email}"})
+				    public String adminRemoveUserAdmin(HttpSession session, @PathVariable("email") String email) {
+					 	
+					 	UserAccount user = (UserAccount) session.getAttribute("user");
+					 	//Check if user is signed in and is an admin.
+					    if (user != null && user.isAdmin()) {
+					    	
+						 	//Remove user admin
+					    	if(!ManageUsers.setUserAdminPermission(email, false)) {
+					    		return "redirect:/pizzaStore/admin/optionsPage?itemCreationError=Error removing admin.";
+					    	}
+						 	
+					    } 
+					    else {
+						 	// User is not an admin
+					    	return "redirect:/?showError=You are not an admin. You do not have permission to go here.";
+					    }
+					 	
+					 	
+					 
+					    
+				        return "redirect:/pizzaStore/admin/edit/AllUsers";
+				    }
+				 
+				 @RequestMapping({"/pizzaStore/deleteUser/email/{email}"})
+				    public String adminDeleteUser(HttpSession session, @PathVariable("email") String email) {
+					 	
+					 	UserAccount user = (UserAccount) session.getAttribute("user");
+					 	//Check if user is signed in and is an admin.
+					    if (user != null && user.isAdmin()) {
+					    	
+						 	//Give user admin
+					    	if(!ManageUsers.adminDeletesUser(email)) {
+					    		return "redirect:/pizzaStore/admin/optionsPage?itemCreationError=Error deleting user.";
+					    	}
+						 	
+					    } 
+					    else {
+						 	// User is not an admin
+					    	return "redirect:/?showError=You are not an admin. You do not have permission to go here.";
+					    }
+					 	
+					 	
+					 
+					    
+				        return "redirect:/pizzaStore/admin/edit/AllUsers";
+				    }
+				    
+				    
 			 
 }

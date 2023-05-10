@@ -8,6 +8,15 @@
 	const pizzaCategory = document.getElementById('pizzasText');
 	const hiddenPizzaDiv = document.getElementById('hiddenPizzas');
 	
+	//If user mouseover the element change background color
+	pizzaCategory.addEventListener('mouseover', function() {
+	    this.style.backgroundColor = 'rgb(0, 0, 255)';
+	  });
+	pizzaCategory.addEventListener('mouseout', function() {
+	    this.style.backgroundColor = 'rgb(0, 64, 255)';
+	  });
+	
+	
 	//If category is clicked, show hidden div (dropdown menu)
 	pizzaCategory.addEventListener('click', () => {
 	  hiddenPizzaDiv.classList.toggle('show');
