@@ -6,6 +6,7 @@ import indp.nbarthen.proj.admin.CreateNewMenuItem;
 import indp.nbarthen.proj.admin.SaveItemImage;
 import indp.nbarthen.proj.menu.CartItem;
 import indp.nbarthen.proj.menu.MenuItems;
+import indp.nbarthen.proj.menu.UpdateOrderInformation;
 import indp.nbarthen.proj.repository.Item;
 import indp.nbarthen.proj.repository.OrdersRepository;
 import indp.nbarthen.proj.user.ManageUsers;
@@ -16,6 +17,9 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 
@@ -44,11 +48,18 @@ public class MainController {
 	private OrdersRepository ordersRepository;
 	private String userSearchPopupError;
 	private List<String> itemCategories;
+	private String storeName;
+	private String storeLocation;
+	private String storePhoneNum;
+	
 	
 	public MainController(OrdersRepository  ordersRepository) {
 		this.ordersRepository = ordersRepository;
 		this.userSearchPopupError = "none";
 		itemCategories = Arrays.asList( "Pizzas", "Sides", "Wings", "Pasta", "Wedgie", "Desserts", "Drinks", "Misc");
+		storeName = "Elemental Pizzas";
+		storeLocation = "115 Elemental Avenue";
+		storePhoneNum = "000-000-0000";
 	}
 	
 	
@@ -73,7 +84,9 @@ public class MainController {
 	 * 	This will be the home page
 	 */
 	 @RequestMapping({"/"})
-	    public String homePage(Model model, HttpSession session, @RequestParam(name = "showError", required = false) String showError) {
+	    public String homePage(Model model, HttpSession session, 
+	    		@RequestParam(name = "showError", required = false) String showError) 
+	 {
 		 	List<Item> menuItems = MenuItems.getMenuItemsList();
 		 	
 		 	if (showError != null) {
@@ -209,6 +222,11 @@ public class MainController {
 		    	items = newOrder.getItems();
 		    	items.add(cartItem);
 		    	newOrder.setItems(items);
+		    	newOrder.setStoreName(storeName);
+	            newOrder.setStoreLocation(storeLocation);
+	            newOrder.setStorePhoneNumber(storePhoneNum);
+	            newOrder.setHomeAddress(" ");
+	            newOrder.setAptNumber(" ");
 		    	order = newOrder;
 	    	}
 	    	//Items have already been add to users order/cart.
@@ -227,8 +245,42 @@ public class MainController {
 		 	return "redirect:/";
 	    }
 	 
+	 
+	 //Removes item from cart using item's id.
+	 @RequestMapping({"/pizzaStore/removeItemFromCart/{itemId}"})
+	    public String removeItemFromCart(Model model, HttpSession session, @PathVariable("itemId") long itemId) 
+	 {
+		 	UserAccount user = (UserAccount) session.getAttribute("user");
+		 	UserOrder order = (UserOrder) session.getAttribute("order");
+		 	
+		 	//Not logged in or cart is empty. Redirect to home.
+		 	if (user == null || order.getItems().size() < 1) {
+		 		return "redirect:/?showError=Cart is empty.";
+		    }
+		 	
+		 	//Gets items in users cart
+		 	List<Item> items = order.getItems();
+		 	for(int i=0; i<items.size(); i++) {
+		 		//If item id's match. Remove index.
+		 		if(items.get(i).getId() == itemId) {
+		 			System.out.println("Item removed");
+		 			items.remove(i);
+		 			break;
+		 		}
+		 	}
+		 
+		 	//Update order and session attribute.
+		 	order.setItems(items);
+		 	session.setAttribute("order", order);
+		 	
+		 	
+		 	return "redirect:/pizzaStore/checkout";
+	 }
+	 
 	 @RequestMapping({"/pizzaStore/checkout"})
-	    public String checkoutPage(Model model, HttpSession session) {
+	    public String checkoutPage(Model model, HttpSession session,
+	    		@RequestParam(name = "showError", required = false) String showError) 
+	 {
 		 	List<Item> menuItems = MenuItems.getMenuItemsList();
 		 	
 		 	setSessionAttributes(session, model);
@@ -248,7 +300,75 @@ public class MainController {
 		 	model.addAttribute("menuItems", menuItems.toArray());
 		 	
 	        return "checkoutPage";
+	  }
+	 
+	 //Updates delivery information before going to payment page.
+	 @PostMapping({"/pizzaStore/checkout/updateOrderInformation"})
+	    public String confirmOrderBeforePayment(HttpSession session,
+	    		@RequestParam(name = "homeAddress", required = false) String homeAddress,
+	    		@RequestParam(name = "aptNumber", required = false) String aptNumber,
+	    		@RequestParam(name = "deliveryInstructions", required = false) String deliveryInstructions,
+	    		@RequestParam(name = "pickupAtStore", required = false) String pickupAtStore,
+	    		@RequestParam(name = "asapOrLater", required = false) String asapOrLater,
+	    		@RequestParam(name = "laterSelectedDate", required = false) String laterSelectedDate,
+	    		@RequestParam(name = "laterSelectedTime", required = false) String laterSelectedTime) 
+	 {
+		 	List<Item> menuItems = MenuItems.getMenuItemsList();
+		 	
+		 	
+		 	UserAccount user = (UserAccount) session.getAttribute("user");
+		 	UserOrder order = (UserOrder) session.getAttribute("order");
+		 	//Not logged in or cart is empty. Redirect to home.
+		 	if (user == null || order.getItems().size() < 1) {
+		 		return "redirect:/?showError=Cart is empty.";
+		    }
+		 	
+		 	//Delivery selected, but no address given. Redirect with error.
+		 	if(pickupAtStore.contains("delivery") && homeAddress.length() <= 1) {
+		 		return "redirect:/pizzaStore/checkout?showError=Enter a delivery address.";
+		 	}
+		 	
+		 	
+		 	//Update order information using passed checkout variables.
+		 	order = UpdateOrderInformation.generateItemForCart(order, homeAddress, aptNumber, 
+		 			deliveryInstructions,  pickupAtStore,  asapOrLater, 
+		 			laterSelectedDate, laterSelectedTime); 
+		 
+		 	//Update order session attribute
+		 	session.setAttribute("order", order);
+		 	
+		 	//Redirect to payment page
+		 	return "redirect:/pizzaStore/checkout/payment";
 	    }
+	 
+	//Page where payment information will be given.
+	 @RequestMapping({"/pizzaStore/checkout/payment"})
+	    public String chechoutPaymentPage(Model model, HttpSession session,
+	    		@RequestParam(name = "showError", required = false) String showError) 
+	 {
+		 	List<Item> menuItems = MenuItems.getMenuItemsList();
+		 	
+		 	setSessionAttributes(session, model);
+		 	
+		 	UserAccount user = (UserAccount) session.getAttribute("user");
+		 	UserOrder order = (UserOrder) session.getAttribute("order");
+		 	//Not logged in or cart is empty. Redirect to home.
+		 	if (user == null || order.getItems().size() < 1) {
+		 		return "redirect:/?showError=Cart is empty.";
+		    }
+		 	
+		 	
+		 	model.addAttribute("user", user);
+		 	model.addAttribute("order", order);
+		 	
+		 	model.addAttribute("itemCategories", itemCategories.toArray());
+		 	model.addAttribute("menuItems", menuItems.toArray());
+		 	
+	        return "paymentPage";
+	  }
+	 
+	 
+	 
 	 
 	 /* sign-inPage.html
 		 * 	This will be used to allow the user login to their account.
@@ -270,10 +390,12 @@ public class MainController {
 	        return "sign-inPage";
 	    }
 	 
+	 //Commits sign in
 	 @PostMapping("/signin")
 	 public String signUp(HttpSession session,
 			 			  @RequestParam("email") String email,
-	                      @RequestParam("password") String password) { 
+	                      @RequestParam("password") String password) 
+	 { 
 			//If email is valid (email exist in database)
 		    if (ManageUsers.checkIfValidEmail(email)) {
 		        //Try signing in using passed password
@@ -287,6 +409,17 @@ public class MainController {
 		            session.setAttribute("user", user);
 		            //Set order session attribute
 		            UserOrder newOrder = new UserOrder(user);
+		            newOrder.setStoreName(storeName);
+		            newOrder.setStoreLocation(storeLocation);
+		            newOrder.setStorePhoneNumber(storePhoneNum);
+		            newOrder.setHomeAddress(user.getAddress());
+		            if(user.getApartmentNum() == null || user.getApartmentNum() == "") {
+		            	System.out.println(user.getApartmentNum());
+		            	newOrder.setAptNumber(" ");
+		            }
+		            else {
+		            	newOrder.setAptNumber(user.getApartmentNum());
+		            }
 			    	session.setAttribute("order", newOrder);
 		            
 		            
@@ -299,6 +432,7 @@ public class MainController {
 		 
 	 }
 	 
+	 //Commits user logout
 	 @RequestMapping("/logout")
 	 public String logout(HttpSession session) { 
 			//If email is valid. 
@@ -308,6 +442,9 @@ public class MainController {
 		 
 	 }
 	 
+	 
+	 
+	 //Page to edit account information excluding password.
 	 @RequestMapping("/pizzaStore/editAccountInformation")
 	 public String editAccountInfo(Model model, HttpSession session) { 
 		 	List<Item> menuItems = MenuItems.getMenuItemsList();
@@ -323,7 +460,8 @@ public class MainController {
 		 
 		 	return "editAccountPage";
 	 }
-	 
+	 		
+	 //Commits account edits.
 	 	@PostMapping("/pizzaStore/finishEditAccount")
 	 		public String editUsersAccount(HttpSession session,
 	 					  @RequestParam("firstname") String firstName,
@@ -341,6 +479,9 @@ public class MainController {
 	     editedUser.setAdmin(sessionUser.isAdmin());
 	     
 	     // Save the user account to your database
+	     if(sessionUser.getEmail() == null) {
+	    	 return "redirect:/?showError=Guest account cannot be edited.";
+	     }
 	     //If password matches saved password.
 	     if(ManageUsers.checkIfPasswordsMatch(sessionUser.getEmail(), passwordHash)) {
 	    	 //If there was an error updating users information.
@@ -359,6 +500,7 @@ public class MainController {
 	     return "redirect:/?showError=Account updated.";
 	 }
 	 
+	 //Page to change account password for a user.
 	 @RequestMapping("/pizzaStore/changeAccountPassword")
 	 public String changeAccountPass(Model model, HttpSession session) { 
 		 	List<Item> menuItems = MenuItems.getMenuItemsList();
@@ -374,9 +516,10 @@ public class MainController {
 		 
 		 	return "editAccountPassPage";
 	 }
-	 
-	 @PostMapping("/pizzaStore/finishPasswordChange")
-		public String editUsersPassword(HttpSession session,
+	   
+	 //Commits password change
+	   @PostMapping("/pizzaStore/finishPasswordChange")
+		 public String editUsersPassword(HttpSession session,
 				@RequestParam("userEmail") String userEmail,
 				@RequestParam("oldPassword") String oldPassword,
 				@RequestParam("password") String password) {
@@ -402,6 +545,8 @@ public class MainController {
 		  return "redirect:/?showError=Account updated.";
 		}
 	 
+	   
+	   
 	 /* sign-upPage.html
 		 * 	This will be used to allow the user to create an account.
 	*/
@@ -423,6 +568,7 @@ public class MainController {
 	        return "sign-upPage";
 	    }
 	
+	 //Commits sign up.
 	 @PostMapping("/signup")
 	 public String signUp(@RequestParam("firstname") String firstName,
 	                      @RequestParam("lastname") String lastName,
@@ -445,6 +591,8 @@ public class MainController {
 
 	     return "redirect:/";
 	 }
+	 
+	 
 	 
 	 
 	 
@@ -478,7 +626,8 @@ public class MainController {
 			 	
 		        return "admin/adminOptionsPage";
 		    }
-	 //Admin - DeleteSection		 
+	 
+	//Admin - DeleteSection		 
 		/*If user clicks 'Delete an Item' at the optionsPage, they will be redirected here.
 		 *	This will list all of the item by category, 
 		 * 	 and allow the user to click to view the item (and then delete it if they want)
@@ -506,6 +655,7 @@ public class MainController {
 				 	
 			        return "admin/adminShowAllDeletePage";
 			}
+			 
 		 /*If user clicks on an item at the 'adminShowAllDeletePage.html' page
 			 *	They will be redirected to here which will list the item and its description.
 			 *		At this page the user will be able to permanently delete an item
@@ -542,8 +692,9 @@ public class MainController {
 			        return "admin/adminDeleteItemPage";
 			    }
 			 	
-				 @PostMapping("/deleteClickedItem")
-				 public String deleteAnItem(HttpSession session, @RequestParam("categoryName") String categoryName,
+			 	//Commits item deletion
+				@PostMapping("/deleteClickedItem")
+				public String deleteAnItem(HttpSession session, @RequestParam("categoryName") String categoryName,
 				                      		@RequestParam("itemName") String itemName) {
 					 	
 					 	UserAccount user = (UserAccount) session.getAttribute("user");
@@ -668,7 +819,7 @@ public class MainController {
 				}
 		
 			
-	  //Admin - Edit Section		 
+	//Admin - Edit Section		 
 			 /*If user clicks 'Edit an Item' at the optionsPage, they will be redirected here.
 			 *	This will list all of the item by category, 
 			 * 	 and allow the user to click to view the item (and then edit it if they want)
@@ -696,7 +847,8 @@ public class MainController {
 					 	
 				        return "admin/adminShowAllEditPage";
 				}
-			 /*If user clicks on an item at the 'adminShowAllEditPage.html' page
+			 
+		    /*If user clicks on an item at the 'adminShowAllEditPage.html' page
 			 *	They will be redirected to here which will list the item and its description.
 			 *		At this page the user will be able to edit an existing item
 			 */
@@ -810,7 +962,7 @@ public class MainController {
 			 
 			 
 				 
-				 
+				//Page where an admin can edit user permissions and delete users. 
 				 @RequestMapping({"/pizzaStore/admin/edit/AllUsers"})
 				    public String adminEditAllUsers(HttpSession session, Model model) {
 					 	
@@ -846,7 +998,7 @@ public class MainController {
 				        return "admin/adminEditAllUsersPage";
 				    }
 				 
-				 
+				 //Commits change to edit user admin permissions. Give admin
 				 @RequestMapping({"/pizzaStore/giveAdmin/email/{email}"})
 				    public String adminGiveUserAdmin(HttpSession session, @PathVariable("email") String email) {
 					 	
@@ -870,6 +1022,8 @@ public class MainController {
 					    
 				        return "redirect:/pizzaStore/admin/edit/AllUsers";
 				    }
+				 
+				 //Commits change to edit user admin permissions. Remove admin
 				 @RequestMapping({"/pizzaStore/removeAdmin/email/{email}"})
 				    public String adminRemoveUserAdmin(HttpSession session, @PathVariable("email") String email) {
 					 	
@@ -894,6 +1048,7 @@ public class MainController {
 				        return "redirect:/pizzaStore/admin/edit/AllUsers";
 				    }
 				 
+				 //Commits change to delete a users account.
 				 @RequestMapping({"/pizzaStore/deleteUser/email/{email}"})
 				    public String adminDeleteUser(HttpSession session, @PathVariable("email") String email) {
 					 	

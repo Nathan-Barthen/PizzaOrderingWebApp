@@ -78,7 +78,7 @@
 		}
 			#orderInformation {
 				width: 70%;
-				min-height: 560px; 
+				min-height: 615px; 
 				position: relative;
 				
 				border-radius: 10px;
@@ -123,6 +123,23 @@
 					padding-top: 60px;
 					margin-bottom: 20px;
 			      }
+			      	#enterPaymentButtonDiv {
+			      		position: absolute;
+					  	top: 90%;
+					  	left: 36%;
+					  	z-index: 20;
+					  	
+					  	width: 270px;
+					  	height: 37px;
+					  	font-size: 32px;
+						
+						cursor: pointer;
+					  	
+					  	background-color: rgb(255, 204, 153);
+					  	color: black;
+					  	border: 4px solid black;
+			      	}
+			      
 			      	#storeName {
 			      		margin-bottom: 5px;
 			      	}
@@ -364,7 +381,7 @@
 					border: 3px solid gray;
 					background-color: rgb(153, 153, 255);
 					
-					padding-bottom: 10px;
+					margin-bottom: 20px;
 		     	}
 		     		#cartItemName {
 		     			width: 100%;
@@ -375,11 +392,18 @@
 						
 						
 				        margin-bottom: 10px;
+				        
 				        font-size: 40px;
 				        
 				        color: rgb(170, 0, 255);
 			        	text-decoration: underline;
 						text-decoration-color: rgb(4, 86, 251);
+		     		}
+		     		#cartItemCost {
+		     			position: absolute;
+						top: 2%;
+						right: 10%;
+						font-size: 40px;
 		     		}
 		     		#cartRemoveItem {
 						  position: absolute;
@@ -442,11 +466,27 @@
 						
 					}
 					
-					
+					#addonsTextDiv {
+						padding-top: 10px;
+						padding-bottom: 5px;
+						width: 100%;
+						
+						display: none;
+						justify-content: center;
+						align-items: center;
+						text-align: center;
+						
+						font-size: 30px; 
+					}
+					#addonsTextText {
+						width: 70%;
+						border-top: 2px solid gray;
+					}
+						
 					
 						#itemIngredients {
 				 			width: 100%;
-							height: 50px;
+							height: 42px;
 							
 							display: flex;
 							justify-content: center;
@@ -456,15 +496,18 @@
 							
 				 		}
 					 		#ingredientName {
-					 			width: 25%;
-								font-size: 40px;
-								display: flex;
-								text-align: flex-start; 
-								  
-					 		}
-					 		#amountDiv {
-					 			width: 15%;
+					 			width: 50%;
 								font-size: 30px;
+								display: flex;
+								text-align: center; 
+								
+								justify-content: end;   
+								
+					 		}
+					 		
+					 		#amountDiv {
+					 			width: 25%;
+								font-size: 25px;
 								
 								display: flex;
 								align-items: center;
@@ -482,7 +525,7 @@
 									
 					 			}
 					 				#pickedAmtText {
-						 				width: 92%;
+						 				width: 55%;
 										border-radius: 10px;
 									  	border: 2px solid black;
 								  		background-color: rgb(255, 133, 77);
@@ -492,13 +535,13 @@
 					 			
 					 			
 				 			#sideOfPizzaDiv {
-					 			width: 15%;
-								font-size: 30px;
+					 			width: 25%;
+								font-size: 25px;
 								
 								display: flex;
 								align-items: center;
 								text-align: center;
-								justify-content: center;
+								justify-content: start;
 								
 								flex-direction: row;
 					 		}
@@ -508,11 +551,11 @@
 									display: flex;
 									align-items: center;
 									text-align: center;
-									justify-content: center;
+									justify-content: start;
 					 			}
 					 				#leftSideText {
-					 					width: 40px;
-									    height: 40px;
+					 					width: 33px;
+									    height: 33px;
 									    border-radius: 50%;
 									    border: 2px solid black;
 									    background-color: transparent;
@@ -530,11 +573,11 @@
 									display: flex;
 									align-items: center;
 									text-align: center;
-									justify-content: center;
+									justify-content: start;
 					 			}
 					 				#wholeSideText {
-						 				width: 40px;
-									    height: 40px;
+						 				width: 33px;
+									    height: 33px;
 									    border-radius: 50%;
 									    border: 2px solid black;
 									    background-color: transparent;
@@ -552,11 +595,11 @@
 									display: flex;
 									align-items: center;
 									text-align: center;
-									justify-content: center;
+									justify-content: start;
 					 			}
 					 				#rightSideText {
-						 				width: 40px;
-									    height: 40px;
+						 				width: 33px;
+									    height: 33px;
 									    border-radius: 50%;
 									    border: 2px solid black;
 									    background-color: transparent;

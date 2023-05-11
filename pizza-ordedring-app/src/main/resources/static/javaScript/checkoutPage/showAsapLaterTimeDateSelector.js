@@ -110,7 +110,7 @@
 	
 	// Returns the day of the week (short name) for a given date
 	function getDayOfWeek(date) {
-	  const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+	  const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat'];
 	  const dayIndex = date.getDay();
 	  return daysOfWeek[dayIndex];
 	}
@@ -155,11 +155,13 @@
 	//Returns an array of available time slots between openTime and closeTime
 	//Populates the dropdown with available times for the selected date
 	function populateTimeDropdown(selectedDate) {
+		
 		  // Gets the day of the week for the selected date
 		  const dayOfWeek = getDayOfWeek(selectedDate);
+		  
 		  // Gets the operating hours for the day of the week
 		  const hours = operatingHours1[dayOfWeek];
-	
+		  
 		  // Clears the existing options from the dropdown
 		  timeDropdown.innerHTML = '';
 	
@@ -169,7 +171,8 @@
 		    option.text = 'No available times';
 		    option.disabled = true;
 		    timeDropdown.appendChild(option);
-		  } else {
+		  } 
+		  else {
 		    // Parses the opening and closing times for the selected day
 		    const startTime = parseTime(hours[0]);
 		    const endTime = parseTime(hours[1]);
@@ -228,7 +231,7 @@
 	
 	// Returns the day of the week (short name) for a given date
 	function getDayOfWeek(date) {
-	  const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+	  const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat'];
 	  const dayIndex = date.getDay();
 	  return daysOfWeek[dayIndex];
 	}
