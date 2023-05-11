@@ -6,10 +6,10 @@
 */
 
 	const removeButton = document.getElementById('cartRemoveItem');
-	const itemName = document.getElementById('cartItemName').textContent.trim();
+	const itemId = document.getElementById('hiddenItemId').textContent.trim();
 	
 	removeButton.addEventListener('click', () => {
-	  window.location.href = `/PizzaStore/remove/${itemName}`;
+	  window.location.href = `/pizzaStore/removeItemFromCart/${itemId}`;
 	});
 
   

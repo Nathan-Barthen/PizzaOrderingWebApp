@@ -163,5 +163,14 @@ public class Item {
 		this.itemAdditionalInstructions = itemAdditionalInstructions;
 	}
 	
+	@JsonIgnore
+	public String getItemTotalCost() {
+		double totalCost = itemDefaultCost + itemAdditionalCost;
+		DecimalFormat decimalFormat = new DecimalFormat("0.00");
+		String stringOfCost = decimalFormat.format(totalCost);
+		return stringOfCost;
+	}
+	
+	
 	
 }

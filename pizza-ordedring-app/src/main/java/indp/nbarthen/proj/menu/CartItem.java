@@ -75,7 +75,7 @@ public class CartItem {
 						//If name matches current toopping.
 						if(mainLNENames[i].contains(topp.getToppingName())) {
 							//Set values.
-							topp.setSelectedOption(mainLNEAmounts[i]);
+							topp.setSelectedAmount(mainLNEAmounts[i]);
 							topp.setSideOfPizza(mainLNESideOfPizza[i]);
 						}
 					}
@@ -110,7 +110,7 @@ public class CartItem {
 						//If name matches current toopping.
 						if(addonLNENames[i].contains(topp.getToppingName())) {
 							//Set values.
-							topp.setSelectedOption(addonLNEAmounts[i]);
+							topp.setSelectedAmount(addonLNEAmounts[i]);
 							topp.setSideOfPizza(addonLNESideOfPizza[i]);
 						}
 					}
@@ -147,6 +147,7 @@ public class CartItem {
 			if(!topp.getSelectedAmount().contains("None")) {
 				//Add cost of including add-on
 				additionalCost += topp.getAdditionalCostAddon();
+				
 				if(topp.getSelectedAmount().contains("Extra")) {
 					//Add cost if extra was selected.
 					additionalCost += topp.getAdditionalCostExtra();

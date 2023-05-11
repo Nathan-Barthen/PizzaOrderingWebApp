@@ -37,7 +37,7 @@
    		<div id="pageBody">
    			<div id="body-headers">
    				<div id="emptySpace1"> </div>
-   				<div id="checkoutTitle"> Checkout </div>
+   				<div id="checkoutTitle"> Payment </div>
    				<div id="emptySpace2"> </div>
    			</div>
    			
@@ -45,7 +45,7 @@
    				
    				<div id="orderInformation">
 				      <div id="orderInfoTitle">
-				        	Order Information
+				        	PAYMENT INFORMATION
 				      </div>
 				      <div id="orderInfoDetails">
 				      		<div id="enterPaymentButtonDiv">Enter Payment Info</div>
@@ -93,81 +93,65 @@
 			    <div id="cart">
 			    	<div id="cartTitle">Cart</div>
 			    	
-			    	<div id="cartItem" th:each="item : ${order.getItems()}">
+			    	<div id="cartItem">
 			    		<div id="cartItemName">
-			    			[[${item.getItemName()}]]
+			    			Pepp Pizza
 			    		</div>
-			    		<div id="cartItemCost">
-			    			$[[${item.getItemTotalCost()}]]
-			    		</div>
-			    		<div hidden id="hiddenItemId">[[${item.getId()}]]</div>
 			    		<div id="cartRemoveItem">   </div>
 			    		<div id="cartEditItem"> Edit </div>
 			    		
 			    		<div id="cartItemDetails">
-			    			<div id="itemIngredients" th:each="ingredient : ${item.getIncludedToppings()}" th:if="${ingredient.getToppingType == 'dropdown'}">
-			   					<div id="ingredientName">[[${ingredient.getToppingName()}]]: [[${ingredient.getSelectedOption()}]]: </div>
+			    			<div id="itemIngredients">
+			   					<div id="ingredientName">Red Sauce: </div>
 			   					
 			   					<div id="amountDiv">
-				   					<div id="pickedAmount"> <span id="pickedAmtText">[[${ingredient.getSelectedAmount()}]]</span> </div>
+				   					<div id="pickedAmount"> <span id="pickedAmtText">Normal</span> </div>
 				   				</div>
 			   					<div id="sideOfPizzaDiv">
 				   				</div>
 			   				</div>
-			    			
-			    			<div id="itemIngredients" th:each="ingredient : ${item.getIncludedToppings()}" th:if="${ingredient.getToppingType == 'default'}">
-			   					<div id="ingredientName">[[${ingredient.getToppingName()}]]: </div>
+			    			<div id="itemIngredients">
+			   					<div id="ingredientName">Cheese: </div>
 			   					
 			   					<div id="amountDiv">
-				   					<div id="pickedAmount"> <span id="pickedAmtText">[[${ingredient.getSelectedAmount()}]]</span> </div>
-				   				</div>
-			   					<div id="sideOfPizzaDiv">
-			   						<div th:if="${ingredient.getSideOfPizza != 'Not Pizza'}" th:id="${ingredient.getSideOfPizza().toLowerCase()+'Side'}" ><span th:id="${ingredient.getSideOfPizza().toLowerCase()+'SideText'}"></span></div>
-				   				</div>
-			   				</div>
-			   			
-			   			
-			   			<div id="addonsTextDiv"><div id="addonsTextText"></div></div>	
-  			
-  						<div class="addonsExist" id="itemIngredients" th:each="ingredient : ${item.getAdditionalToppings()}" th:if="${ingredient.getToppingType() == 'dropdown' && ingredient.getSelectedAmount() != 'None'}">
-			   					<div id="ingredientName">[[${ingredient.getToppingName()}]]: [[${ingredient.getSelectedOption()}]]: </div>
-			   					
-			   					<div id="amountDiv">
-				   					<div id="pickedAmount"> <span id="pickedAmtText">[[${ingredient.getSelectedAmount()}]]</span> </div>
+				   					<div id="pickedAmount"> <span id="pickedAmtText">Extra</span> </div>
 				   				</div>
 			   					<div id="sideOfPizzaDiv">
 				   				</div>
 			   				</div>
-			    			
-			    			<div class="addonsExist" id="itemIngredients" th:each="ingredient : ${item.getAdditionalToppings()}" th:if="${ingredient.getToppingType() == 'default' && ingredient.getSelectedAmount() != 'None'}">
-			   					<div id="ingredientName">[[${ingredient.getToppingName()}]]: </div>
+			   				<div id="itemIngredients">
+			   					<div id="ingredientName">Ham: </div>
 			   					
 			   					<div id="amountDiv">
-				   					<div id="pickedAmount"> <span id="pickedAmtText">[[${ingredient.getSelectedAmount()}]]</span> </div>
+				   					<div id="pickedAmount"> <span id="pickedAmtText">Normal</span> </div>
 				   				</div>
+			   					
 			   					<div id="sideOfPizzaDiv">
-			   						<div th:if="${ingredient.getSideOfPizza != 'Not Pizza'}" th:id="${ingredient.getSideOfPizza().toLowerCase()+'Side'}" ><span th:id="${ingredient.getSideOfPizza().toLowerCase()+'SideText'}"></span></div>
+				   					<div id="wholeSide"><span id="wholeSideText"></span></div>
 				   				</div>
-			   				</div>
 			   				
+			   				</div>
+			   				<div id="itemIngredients">
+			   					<div id="ingredientName">Pineapple: </div>
+			   					
+			   					<div id="amountDiv">
+				   					<div id="pickedAmount"> <span id="pickedAmtText">Normal</span> </div>
+				   				</div>
+			   					
+			   					<div id="sideOfPizzaDiv">
+				   					<div id="leftSide"><span id="leftSideText"></span></div>
+				   				</div>
 			   				
-			   			</div>
-			    		
-			    		
-			    		
-			    		
+			   				</div>
+			    		</div>
 			    	</div>
+			    	
+			    
+			    	
+			    	
+			    	
 			    </div>
-			    	
-			    
-			    
-			    
-			    
-			    
-			    	
-			    	
-			 </div>	
-			   
+   			</div>
    			
    		</div>
    		
@@ -209,7 +193,6 @@
 	<script src="/javaScript/checkoutPage/clicksPickupDelivery.js"></script>
 	<script src="/javaScript/checkoutPage/clicksEditAddress-checkoutPage.js"></script>
 	<script src="/javaScript/checkoutPage/clicksPaymentInfo.js"></script>
-	<script src="/javaScript/checkoutPage/showAddonText.js"></script>
 	
 	<script src="/javaScript/usesCommentsCharLeft.js"></script>
 	
