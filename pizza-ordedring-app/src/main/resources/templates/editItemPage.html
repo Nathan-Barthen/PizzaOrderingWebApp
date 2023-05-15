@@ -77,7 +77,6 @@
    			</div>
    			
    			
-   			
    			<div id="mainOptions">
    			
    				<!-- Thymleaf variables to be inserted into mainOptions and add-ons_Extra-->
@@ -86,6 +85,9 @@
 					    <p id="toppingName" th:text="${topping.getToppingName()}"></p>
 					    <p id="toppingType" th:text="${topping.getToppingType()}"></p>
 					    <p id="isPizza" th:text="${topping.getIsPizza()}"></p>
+					    <p id="selectedToppOption" th:text="${topping.getSelectedOption()}"></p>
+					    <p id="selectedToppAmount" th:text="${topping.getSelectedAmount()}"></p>
+					    <p id="sideOfPizza" th:text="${topping.getSideOfPizza()}"></p>
 					    <p id="toppingOptions" th:each="toppOpt : ${topping.getToppingOptions()}" th:text="${toppOpt}"></p>
 					    <p id="additionalCostExtra" th:text="${topping.getAdditionalCostExtra()}"></p>
 					    
@@ -95,6 +97,9 @@
 					    <p id="toppingName" th:text="${topping.getToppingName()}"></p>
 					    <p id="toppingType" th:text="${topping.getToppingType()}"></p>
 					    <p id="isPizza" th:text="${topping.getIsPizza()}"></p>
+					    <p id="selectedToppOption" th:text="${topping.getSelectedOption()}"></p>
+					    <p id="selectedToppAmount" th:text="${topping.getSelectedAmount()}"></p>
+					    <p id="sideOfPizza" th:text="${topping.getSideOfPizza()}"></p>
 					    <p id="toppingOptions" th:each="toppOpt : ${topping.getToppingOptions()}" th:text="${toppOpt}"></p>
 					    <p id="additionalCostExtra" th:text="${topping.getAdditionalCostExtra()}"></p>
 					    <p id="additionalCostAddon" th:text="${topping.getAdditionalCostAddon()}"></p>
@@ -112,13 +117,14 @@
    			</div>
    			<div id=commentsAndSubmit>
 	   			<div id="userComments">
-	   				<textarea id="additionalInstructions" name="additionalInstructions"
+	   				<textarea id="additionalInstructions" name="additionalInstructions" th:text="${item.getItemAdditionalInstructions()}"
 	   				 placeholder="Additional Instructions..."  rows="5" cols="50" maxlength="250"></textarea>
 	    			 <div id="countDisplay">0/250</div>
 	   			</div>
 	   			<div id="addItemDiv">
-	   				<span hidden id="updateItem">false</span>
-	   				<span id="addItem">Add</span>
+	   				<span hidden id="updateItem">true</span>
+	   				<span hidden id="updateItemId">[[${item.getId()}]]</span>
+	   				<span id="addItem">Update</span>
 	   			</div>
 	   		</div>
 	   	
@@ -171,10 +177,9 @@
 	<script src="/javaScript/itemPage/selectedOptions-itemPage.js"></script>
 	<script src="/javaScript/itemPage/removeSelectedOption-itemPage.js"></script>
 	<script src="/javaScript/itemPage/updateToppingCosts.js"></script>
-	<script src="/javaScript/itemPage/insertMainToppingInfo.js"></script>
-	<script src="/javaScript/itemPage/insertAdditionalToppingInfo.js"></script>
+	<script src="/javaScript/itemPage/insertMainToppingInfo-EditPage.js"></script>
+	<script src="/javaScript/itemPage/insertAdditionalToppingInfo-EditPage.js"></script>
 	<script src="/javaScript/itemPage/clicksIncreaseDecreaseHowMany.js"></script>
-	
 	
 	<script src="/javaScript/usesCommentsCharLeft.js"></script>
 	

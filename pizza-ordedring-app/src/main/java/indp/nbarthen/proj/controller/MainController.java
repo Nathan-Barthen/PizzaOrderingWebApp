@@ -157,12 +157,16 @@ public class MainController {
 	 
 	 /* Redirect from itemPage.html
 	  * 	When the user hits 'Add' on itemPage this will add the item to their cart.
+	  * 	Can also be used to update an item in user's cart.
 	 */
 	 @PostMapping({"/pizzaStore/addToCart"})
 	 public String addItemToCart(Model model, HttpSession session,
 			 	@RequestParam("itemName") String itemName,
 	    		@RequestParam("categoryName") String categoryName, 
 	    		@RequestParam("customDesc") String customInstructions, 
+	    		@RequestParam("numbertOfItem") int numbertOfItem,
+	    		@RequestParam("updateItem") String updateItem,
+	    		@RequestParam(name="updateItemId", required = false) Long updateItemId,
 	    		
 	    		@RequestParam(name = "main-drop-dropdownLabelName", required = false) String[] mainDropNames,
 	    		@RequestParam(name = "main-drop-selectedOption",required = false) String[] mainDropSelected,
@@ -193,7 +197,7 @@ public class MainController {
 		 	}
 		 	
 		 	//Generate cart item from passed parameters.
-		 	Item cartItem = CartItem.generateItemForCart(item, customInstructions,
+		 	Item cartItem = CartItem.generateItemForCart(item, numbertOfItem, customInstructions,
 		 			mainDropNames, mainDropSelected, mainDropAmounts, 
 		 			mainLNENames, mainLNESideOfPizza, mainLNEAmounts, 
 		 			addonDropNames, addonDropSelected, addonDropAmounts, 
@@ -205,8 +209,9 @@ public class MainController {
 		 	
 		 	//Check if user is logged in. 
 		 	UserAccount user = (UserAccount) session.getAttribute("user");
-		 	//User is not logged in. Make guest user.
+		 	//User is not logged in.
 		    if (user == null) {
+		    	//Make guest user.
 		    	UserAccount guestUser = new UserAccount();
 		    	session.setAttribute("user", guestUser);
 		    	
@@ -218,6 +223,7 @@ public class MainController {
 		    List<Item> items = new Vector<Item>();
 		    //This is the first item being added to the cart. (No order created yet)
 	    	if (order == null) {
+	    		cartItem.setId(0);
 	    		UserOrder newOrder = new UserOrder(user);
 		    	items = newOrder.getItems();
 		    	items.add(cartItem);
@@ -229,12 +235,31 @@ public class MainController {
 	            newOrder.setAptNumber(" ");
 		    	order = newOrder;
 	    	}
-	    	//Items have already been add to users order/cart.
+	    	//Items have already been addedto users order/cart.
 	    	else {
 	    		//Get items already added to order
+	    		cartItem.setId(order.getItems().size());
 	    		items = order.getItems();
-	    		//Add new item. Update order.
-	    		items.add(cartItem);
+	    		//Check if user is updating an item.
+	    		if(updateItem.contains("true")) {
+	    			//Update item.
+	    			cartItem.setId(updateItemId);
+	    			//Find item to update
+	    			for (int i = 0; i < items.size(); i++) {
+	    	            Item currentItem = items.get(i);
+	    	            
+	    	            if (currentItem.getId() == updateItemId) {
+	    	                // Replace item at index i with cartItem
+	    	                items.set(i, cartItem);
+	    	                break; // Exit the loop once item is updated
+	    	            }
+	    	        }
+	    		}
+	    		else {
+		    		//Add new item. 
+		    		items.add(cartItem);
+	    		}
+	    		//Update order.
 	    		order.setItems(items);
 	    	}
 	    	
@@ -248,7 +273,8 @@ public class MainController {
 	 
 	 //Removes item from cart using item's id.
 	 @RequestMapping({"/pizzaStore/removeItemFromCart/{itemId}"})
-	    public String removeItemFromCart(Model model, HttpSession session, @PathVariable("itemId") long itemId) 
+	    public String removeItemFromCart(Model model, HttpSession session, 
+	    		@PathVariable("itemId") long itemId) 
 	 {
 		 	UserAccount user = (UserAccount) session.getAttribute("user");
 		 	UserOrder order = (UserOrder) session.getAttribute("order");
@@ -263,7 +289,6 @@ public class MainController {
 		 	for(int i=0; i<items.size(); i++) {
 		 		//If item id's match. Remove index.
 		 		if(items.get(i).getId() == itemId) {
-		 			System.out.println("Item removed");
 		 			items.remove(i);
 		 			break;
 		 		}
@@ -276,6 +301,39 @@ public class MainController {
 		 	
 		 	return "redirect:/pizzaStore/checkout";
 	 }
+	 
+	 @RequestMapping({"/pizzaStore/editCart/{itemId}/{itemName}"})
+	    public String checkoutPage(Model model, HttpSession session,
+	    		@PathVariable("itemId") long itemId, @PathVariable("itemName") String itemName) 
+	 {
+		 	List<Item> menuItems = MenuItems.getMenuItemsList();
+		 	
+		 	setSessionAttributes(session, model);
+		 	
+		 	UserAccount user = (UserAccount) session.getAttribute("user");
+		 	UserOrder order = (UserOrder) session.getAttribute("order");
+		 	//Not logged in or cart is empty. Redirect to home.
+		 	if (user == null || order.getItems().size() < 1) {
+		 		return "redirect:/?showError=Cart is empty.";
+		    }
+		 	
+		 	
+		 	//Get the item the user wants to edit using itemId.
+		 	Item itemToEdit  = new Item();
+		 	for(Item i : order.getItems()) {
+		 		if(i.getId() == itemId) {
+		 			itemToEdit = i;
+		 		}
+		 	}
+		 	
+		 	
+		 	model.addAttribute("item", itemToEdit);
+		 	
+		 	model.addAttribute("itemCategories", itemCategories.toArray());
+		 	model.addAttribute("menuItems", menuItems.toArray());
+		 	
+	        return "editItemPage";
+	  }
 	 
 	 @RequestMapping({"/pizzaStore/checkout"})
 	    public String checkoutPage(Model model, HttpSession session,

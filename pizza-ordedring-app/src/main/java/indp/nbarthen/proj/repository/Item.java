@@ -32,6 +32,9 @@ public class Item {
 	//Calculated: Items additional cost to be added to itemDefaultCost if additional toppings are added or 'Extra' is selected.
 	private Double itemAdditionalCost;
 	
+	//The number of the item the user orders. 
+	private int howMany;
+	
 	//Toppings included on item. (Ex. Pepperoni Pizza - Sauce, Cheese, Pepperoni)
 	@OneToMany
 	private List<Topping> includedToppings;
@@ -137,6 +140,14 @@ public class Item {
 
 	public void setItemAdditionalCost(Double itemAdditionalCost) {
 		this.itemAdditionalCost = itemAdditionalCost;
+	}
+
+	public int getHowMany() {
+		return howMany;
+	}
+
+	public void setHowMany(int howMany) {
+		this.howMany = howMany;
 	}
 
 	public List<Topping> getIncludedToppings() {

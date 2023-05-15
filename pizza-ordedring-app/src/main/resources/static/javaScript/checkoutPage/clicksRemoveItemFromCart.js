@@ -5,11 +5,19 @@
  *  
 */
 
-	const removeButton = document.getElementById('cartRemoveItem');
-	const itemId = document.getElementById('hiddenItemId').textContent.trim();
+	const removeButtonsCheckout = document.querySelectorAll('#cartRemoveItem');
 	
-	removeButton.addEventListener('click', () => {
-	  window.location.href = `/pizzaStore/removeItemFromCart/${itemId}`;
+	
+	removeButtonsCheckout.forEach((removeButton) => {
+		console.log("Meep");
+		var itemId1 = removeButton.parentElement.querySelector('#hiddenItemId').textContent.trim();
+		  
+		  removeButton.addEventListener('click', () => {
+		    window.location.href = `/pizzaStore/removeItemFromCart/${itemId1}`;
+		  });
 	});
 
+
+
+	
   

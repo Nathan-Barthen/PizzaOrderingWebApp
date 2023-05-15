@@ -42,7 +42,7 @@ public class CartItem {
 	 * 			 non-dropdown amount (light normal extra Or 'None' [topping removed])
 	 * 			 non-dropdown sideOfPizza (left whole right Or 'Not Pizza')
 	 */
-	public static Item generateItemForCart(Item item, String customInstructions,
+	public static Item generateItemForCart(Item item, int numbertOfItem, String customInstructions,
 			String[] mainDropNames, String[] mainDropSelected, String[] mainDropAmounts,
 			String[] mainLNENames, String[] mainLNESideOfPizza, String[] mainLNEAmounts,
 			String[] addonDropNames, String[] addonDropSelected, String[] addonDropAmounts,
@@ -51,6 +51,7 @@ public class CartItem {
 		
 			Item cartItem = item;
 			cartItem.setItemAdditionalInstructions(customInstructions);
+			cartItem.setHowMany(numbertOfItem);
 			
 			//Loop through included toppings.
 			for(Topping topp : cartItem.getIncludedToppings()) {
