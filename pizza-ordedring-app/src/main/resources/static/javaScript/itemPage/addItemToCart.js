@@ -41,11 +41,25 @@ function submitItem(){
   
   var itemCatName = document.getElementById('categoryTitle').textContent.trim();
   var pageItemName = document.getElementById('itemName').childNodes[0].textContent.trim();
+  //Will be 'true' or 'false'
+  var pageUpdateItem = document.getElementById('updateItem').textContent.trim();
+  let updateItemIdElement = document.getElementById('updateItemId');
+  
   var customInst = document.getElementById('additionalInstructions').value.trim();
+  
+  var numberElement1 = document.getElementById('numberOfItem');
+  let numberOfItem = parseInt(numberElement1.textContent);
   
   myForm.action = '/pizzaStore/addToCart';
 
-  //Item name, category inputs, and custom instructions
+  //Item name, category inputs, and custom instructions, and number of item.
+  
+  var numberOfItemInput = document.createElement('input');
+  numberOfItemInput.setAttribute('type', 'hidden');
+  numberOfItemInput.setAttribute('name', 'numbertOfItem');
+  numberOfItemInput.setAttribute('value', numberOfItem);
+  myForm.appendChild(numberOfItemInput);
+  
   var itemNameInput = document.createElement('input');
   itemNameInput.setAttribute('type', 'hidden');
   itemNameInput.setAttribute('name', 'itemName');
@@ -63,6 +77,21 @@ function submitItem(){
   instructionsInput.setAttribute('name', 'customDesc');
   instructionsInput.setAttribute('value', customInst);
   myForm.appendChild(instructionsInput);
+  
+  var updateItemInput = document.createElement('input');
+  updateItemInput.setAttribute('type', 'hidden');
+  updateItemInput.setAttribute('name', 'updateItem');
+  updateItemInput.setAttribute('value', pageUpdateItem);
+  myForm.appendChild(updateItemInput);
+  
+  if(updateItemIdElement !== null){
+	  let updateItemId = updateItemIdElement.textContent.trim();
+	  var updateItemIdInput = document.createElement('input');
+	  updateItemIdInput.setAttribute('type', 'hidden');
+	  updateItemIdInput.setAttribute('name', 'updateItemId');
+	  updateItemIdInput.setAttribute('value', updateItemId);
+	  myForm.appendChild(updateItemIdInput);
+  }
   
   
   //Create inputs for included toppings.

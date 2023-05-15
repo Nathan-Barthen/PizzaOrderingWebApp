@@ -4,11 +4,16 @@
  *  
 */
 
-	const editButton = document.getElementById('cartEditItem');
-	const itemName1 = document.getElementById('cartItemName').textContent.trim();
-	
-	editButton.addEventListener('click', () => {
-	  window.location.href = `/PizzaStore/edit/${itemName1}`;
+	const editButtons = document.querySelectorAll('#cartEditItem');
+
+	editButtons.forEach((editButton) => {
+	  const itemName = editButton.parentElement.querySelector('#cartItemName').textContent.trim();
+	  const itemId = editButton.parentElement.querySelector('#hiddenItemId').textContent.trim();
+	  
+	  editButton.addEventListener('click', () => {
+	    window.location.href = `/pizzaStore/editCart/${itemId}/${itemName}`;
+	  });
 	});
+
 
   

@@ -19,19 +19,18 @@
 			    const amountDiv = parentDiv.querySelector("#amountDiv");
 			    const toppPriceText = parentDiv.querySelector('#toppPriceText');
 			    
-			    if (ingredientNameDiv.style.textDecoration === "line-through") {
+			    if (removeText.textContent === "Add") {
 			      ingredientNameDiv.style.textDecoration = "none";
 			      amountDiv.style.textDecoration = "none";
 			      toppPriceText.style.textDecoration = 'none';
 			      removeText.textContent = "Remove";
-			      console.log("Meep");
 			    } 
 			    else {
 			      ingredientNameDiv.style.textDecoration = "line-through";
 			      amountDiv.style.textDecoration = "line-through";
 			      toppPriceText.style.textDecoration = 'line-through';
 			      removeText.textContent = "Add";
-			      console.log("Mop");
+			      console.log("Default - Remove");
 			      
 			    }
 			 }
@@ -44,7 +43,7 @@
 		        const amountDropdownDiv = dropdownParentDiv.querySelector("#amountDiv");
 		        const toppPriceText = dropdownParentDiv.querySelector('#toppPriceText');
 		        
-		        if (dropdownLabelName.style.textDecoration === "line-through") {
+		        if (removeText.textContent === "Add") {
 		          dropdownLabelName.style.textDecoration = "none";
 		          selectedOption.style.textDecoration = "none";
 		          amountDropdownDiv.style.textDecoration = "none";
@@ -64,24 +63,45 @@
 		  });
 		});
   	
-  
-	//On page load, remove all add-ons by adding line-through ahd changing 'Remove' to 'Add'
+	//On page load for edit item page. Add line through main option toppings that have been removed.
+		window.addEventListener('load', () => {
+			 var mainOptionsDivs2 = document.querySelector('#mainOptions');
+			 var mainOptionsDivsNormalExtraDivs = mainOptionsDivs2.querySelectorAll('#lightNormalExtra');
+			 mainOptionsDivsNormalExtraDivs.forEach(div => {
+				    var ingredientNameDiv = div.querySelector('#ingredientName');
+				    var amountDiv = div.querySelector('#amountDiv');
+				    var sideOfPizzaDiv = div.querySelector('#sideOfPizzaDiv');
+				    var removeIngredientText = div.querySelector('#removeIngredientText');
+				    var toppPriceText = div.querySelector('#toppPriceText');
+				    if( removeIngredientText.textContent == 'Add'){
+					    ingredientNameDiv.style.textDecoration = 'line-through';
+					    amountDiv.style.textDecoration = 'line-through';
+					    sideOfPizzaDiv.style.textDecoration = 'line-through';
+					    toppPriceText.style.textDecoration = 'line-through';
+					    removeIngredientText.textContent = 'Add';
+				    }
+				    
+			  });
+		});
+	//On page load, remove all add-ons by adding line-through and changing 'Remove' to 'Add'
 		window.addEventListener('load', () => {
 			  const addOnsExtraDiv = document.querySelector('#add-ons_Extra');
 			  const addOnLightNormalExtraDivs = addOnsExtraDiv.querySelectorAll('#lightNormalExtra');
-			  
-			  //For the non-dropdown toppings
+			  let updateItemIdElement = document.getElementById('updateItemId');
+			 
 			  addOnLightNormalExtraDivs.forEach(div => {
 				    const ingredientNameDiv = div.querySelector('#ingredientName');
 				    const amountDiv = div.querySelector('#amountDiv');
 				    const sideOfPizzaDiv = div.querySelector('#sideOfPizzaDiv');
 				    const removeIngredientText = div.querySelector('#removeIngredientText');
 				    const toppPriceText = div.querySelector('#toppPriceText');
-				    ingredientNameDiv.style.textDecoration = 'line-through';
-				    amountDiv.style.textDecoration = 'line-through';
-				    sideOfPizzaDiv.style.textDecoration = 'line-through';
-				    toppPriceText.style.textDecoration = 'line-through';
-				    removeIngredientText.textContent = 'Add';
+				    if( removeIngredientText.textContent == 'Add' || updateItemIdElement == null){
+					    ingredientNameDiv.style.textDecoration = 'line-through';
+					    amountDiv.style.textDecoration = 'line-through';
+					    sideOfPizzaDiv.style.textDecoration = 'line-through';
+					    toppPriceText.style.textDecoration = 'line-through';
+					    removeIngredientText.textContent = 'Add';
+				    }
 				    
 				    
 			  });
@@ -94,11 +114,12 @@
 				    const selectedOptionDiv = div.querySelector('#selectedOption');
 				    const removeIngredientText = div.querySelector('#removeIngredientText');
 				    const toppPriceText = div.querySelector('#toppPriceText');
-				    ingredientNameDiv.style.textDecoration = 'line-through';
-				    amountDiv.style.textDecoration = 'line-through';
-				    selectedOptionDiv.style.textDecoration = 'line-through';
-				    toppPriceText.style.textDecoration = 'line-through';
-				    removeIngredientText.textContent = 'Add';
+				    if( removeIngredientText.textContent == 'Add' || updateItemIdElement == null){
+					    ingredientNameDiv.style.textDecoration = 'line-through';
+					    amountDiv.style.textDecoration = 'line-through';
+					    toppPriceText.style.textDecoration = 'line-through';
+					    removeIngredientText.textContent = 'Add';
+				    }
 			  });
 			  
 		});

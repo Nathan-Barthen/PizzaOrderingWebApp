@@ -95,7 +95,7 @@
 			    	
 			    	<div id="cartItem" th:each="item : ${order.getItems()}">
 			    		<div id="cartItemName">
-			    			[[${item.getItemName()}]]
+			    			[[${item.getHowMany()}]] x [[${item.getItemName()}]]
 			    		</div>
 			    		<div id="cartItemCost">
 			    			$[[${item.getItemTotalCost()}]]
