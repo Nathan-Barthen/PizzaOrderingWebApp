@@ -470,7 +470,102 @@ public class ManageUsers {
 			}
 	
 	
+			//Find the user with the same email, add order to users order list and save it to StoredUsers.json.
+			public static boolean submitOrderAndUpdateUser(UserAccount user, UserOrder order) {
+			    List<UserAccount> users = new ArrayList<>();
+
+			    try {
+			        File file = new File(userFileLocation);
+			        if (file.exists()) {
+			            // Load existing users from file
+			            try {
+			                ObjectMapper objectMapper = new ObjectMapper();
+			                users = objectMapper.readValue(file, new TypeReference<List<UserAccount>>() {});
+			            } catch (IOException e) {
+			                e.printStackTrace();
+			                System.out.println("Failed to read users from " + userFileLocation);
+			                return false;
+			            }
+			        }
+
+			        // Find the user with the same email and update its orders list.
+			        boolean foundUser = false;
+			        for (int i = 0; i < users.size(); i++) {
+			            UserAccount u = users.get(i);
+			            if (u.getEmail().equalsIgnoreCase(user.getEmail())) {
+			            	// Fetch existing orders list
+			                List<UserOrder> orders = u.getOrders();
+			            	//Add new order
+			            	orders.add(order);
+			            	user.setOrders(orders);
+			            	
+			            	//Save to user list
+			                users.set(i, user);
+			                foundUser = true;
+			                break;
+			            }
+			        }
+
+			        if (!foundUser) {
+			            System.out.println("User not found with email: " + user.getEmail());
+			            return false;
+			        }
+
+			        //Save updated list of users to file
+			        ObjectMapper objectMapper = new ObjectMapper();
+			        objectMapper.writeValue(new File(userFileLocation), users);
+
+			        return true; // User saved successfully
+
+			    } catch (IOException e) {
+			        e.printStackTrace();
+			        System.out.println("Error updating user in " + userFileLocation);
+			    }
+
+			    return false; // Error saving user
+			}
 
 
+		//Gets the list of orders for a given user.	
+			public static List<UserOrder> getUserOrders(UserAccount user) {
+				List<UserAccount> users = new ArrayList<>();
+				boolean emailExists = false;
+				
+				File file = new File(userFileLocation);
+				if (file.exists()) {
+					// Load existing users from file
+					try {
+						ObjectMapper objectMapper = new ObjectMapper();
+						users = objectMapper.readValue(file, new TypeReference<List<UserAccount>>() {});
+					} catch (IOException e) {
+						e.printStackTrace();
+						System.out.println("Failed to read users from " + userFileLocation);
+						return null;
+					}
+				}
+
+				//Find the user with the same email. Return order list.
+				for (UserAccount u : users) {
+					if (u.getEmail().toLowerCase().contentEquals(user.getEmail().toLowerCase())) {
+						emailExists = true;
+						
+						return u.getOrders();
+						
+					}
+					
+				}
+
+				if (!emailExists) {
+					System.out.println("Email (" + user.getEmail() + ") does not exist in " + userFileLocation);
+					
+					return null; 
+				}
+
+				return null; 
+			
+		    }
+			
+			
+			
 	    
 }

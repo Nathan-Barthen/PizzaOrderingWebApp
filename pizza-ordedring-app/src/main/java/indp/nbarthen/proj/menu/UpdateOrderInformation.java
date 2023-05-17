@@ -57,7 +57,7 @@ public class UpdateOrderInformation {
 	 	}
 	 	//Order is for a later time/date.
 	 	else {
-	 		order.setDelivery(false);
+	 		order.setAsap(false);
 		 	order.setLaterPickupDate(laterSelectedDate);
 		 	order.setLaterPickupTime(laterSelectedTime);
 	 	}

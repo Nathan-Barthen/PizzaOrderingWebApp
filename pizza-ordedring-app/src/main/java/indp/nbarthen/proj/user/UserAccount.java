@@ -28,7 +28,7 @@ public class UserAccount {
     private boolean isGuest;
     private boolean isAdmin;
     
-    @OneToMany(mappedBy = "userAcc", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<UserOrder> orders;
 
     public UserAccount() {

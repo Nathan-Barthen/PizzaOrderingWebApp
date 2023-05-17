@@ -7,7 +7,7 @@
 <title>Online Pizza Ordering</title>
 
 <link rel="stylesheet" href="/cssStyles/backgroundAndTopBar.css">
-<link rel="stylesheet" href="/cssStyles/checkoutPage.css">
+<link rel="stylesheet" href="/cssStyles/paymentPage.css">
 <link rel="stylesheet" href="/cssStyles/bottomLinks.css">
 
 
@@ -44,113 +44,83 @@
    			<div id="orderAndCart">
    				
    				<div id="orderInformation">
-				      <div id="orderInfoTitle">
-				        	PAYMENT INFORMATION
-				      </div>
+			      <div id="orderInfoTitle">
+			        	Payment Information
+			      </div>
+				  <div id="detailsAndPayment">
 				      <div id="orderInfoDetails">
-				      		<div id="enterPaymentButtonDiv">Enter Payment Info</div>
+				      		<div id="paymentCheckout">Edit Cart</div>
+				      		<div id="orderTotalCost">$[[${order.getOrderTotalCost()}]]</div>
 				      		<div id="storeName">[[${order.getStoreName()}]]</div>
 				      		<div id="storeLocation">[[${order.getStoreLocation()}]]</div>
 				      		<div id="storePhone">[[${order.getStorePhoneNumber()}]]</div>
-				      		<div id="deliveryPickupEta">
+				      		
+				      		<div id="deliveryPickupEta" th:if="${order.getIsDelivery() && order.getIsAsap()}">
 				      			<div id="typeEta">Delivery: 	<span id="etaTimes"> 45 mins </span> </div>
+				      		</div>
+				      		<div id="deliveryPickupEta" th:if="${!order.getIsDelivery() && order.getIsAsap()}">
 				      			<div id="typeEta">Pickup: 	<span id="etaTimes"> 30 mins </span> </div>
 				      		</div>
 				      		
-				      		<div id="orderTime">
+				      		<div id="orderTime" th:if="${order.getIsAsap()}">
 				      			<div id="timeAsap">ASAP</div>
+				      		</div>
+				      		<div id="orderTime" th:unless="${order.getIsAsap()}">
 				      			<div id="timeLater">Later</div>
 				      		</div>
 				      		
-				      		<div id="laterDateSelectorDiv">
-							  <span id="laterDateTitle">Select Date and Time:</span>
+				      		<div id="laterDateSelectorDiv" th:unless="${order.getIsAsap()}">
+							  <span id="laterDate">[[${order.getLaterPickupDate}]] </span>
+							  <span id="laterDate"> [[${order.getLaterPickupTime}]]</span>
 							</div>
 
 
-				      		<div id="deliveryPickupSelector">
+				      		<div id="deliveryPickupSelector" th:if="${order.getIsDelivery()}">
 				      			<div id="deliverySelector">Delivery</div>
+				      		</div>
+				      		<div id="deliveryPickupSelector" th:unless="${order.getIsDelivery()}">
 				      			<div id="pickupSelector">Pickup</div>
 				      		</div>
 				      		
 				      		
 				      		<div id="usersHomeAddr" hidden> My Home Address St. </div>
-				      		<div id="collectionMethod">
-							  <span id="collectionType">Delivery to:</span>
-							  <span id="collectionLocation" th:data-original-text="${order.getHomeAddress()}">[[${order.getHomeAddress()}]]</span>
-							  <span id="collectionLocationApt" th:data-original-text="${order.getAptNumber()}">[[${order.getAptNumber()}]]</span>
-							  <button id="editLocationBtn">Edit</button>
+				      		<div id="collectionMethod" th:if="${order.getIsDelivery()}">
+							    <span id="collectionType">Delivery to:</span>
+							    <span id="collectionLocation">[[${order.getHomeAddress()}]]</span>
+							    <span id="collectionLocationApt">[[${order.getAptNumber()}]]</span>
 							</div>
-				      		
-				      		
-				      		<div id="userComments">
-				   				<textarea id="additionalInstructions" name="additionalInstructions"
-				   				 placeholder="Delivery Instructions..."  rows="5" cols="50" maxlength="250"></textarea>
-				    			 <div id="countDisplay">0/250</div>
-				   			</div>
+							<div id="collectionMethod" th:unless="${order.getIsDelivery()}">
+							    <span id="collectionType">Pickup at:</span>
+							    <span id="collectionLocation">[[${order.getStoreLocation()}]]</span>
+							</div>
+							
+
+				      		<div id="userComments" th:if="${order.getDeliveryInstructions().length > 1}">
+							    <span id="userCommentsBorder"><span id="userCommentsTitle">Added Instructions:</span></span> [[${order.getDeliveryInstructions()}]]
+							</div>
+
 				      		
 				      </div>
+				      
+				      <div id="paymentDiv">
+				      		<div id="paymentInfoHere">
+				      			Payment Info would go here.
+				      		</div>
+				      		<div id="paymentButtonHere">
+				      			Button to confirm payment info & sent order to store.
+				      		</div>
+				      		
+				      		<div id="paymentButton">
+				      			Submit
+				      		</div>
+				      		<div id="paymentButtonNote">
+				      			Temp Submit - just updates user order since it is not linked to a store.
+				      		</div>
+				      </div>
+				      
+				   </div>
 			    </div>
-			    <div id="cart">
-			    	<div id="cartTitle">Cart</div>
-			    	
-			    	<div id="cartItem">
-			    		<div id="cartItemName">
-			    			Pepp Pizza
-			    		</div>
-			    		<div id="cartRemoveItem">   </div>
-			    		<div id="cartEditItem"> Edit </div>
-			    		
-			    		<div id="cartItemDetails">
-			    			<div id="itemIngredients">
-			   					<div id="ingredientName">Red Sauce: </div>
-			   					
-			   					<div id="amountDiv">
-				   					<div id="pickedAmount"> <span id="pickedAmtText">Normal</span> </div>
-				   				</div>
-			   					<div id="sideOfPizzaDiv">
-				   				</div>
-			   				</div>
-			    			<div id="itemIngredients">
-			   					<div id="ingredientName">Cheese: </div>
-			   					
-			   					<div id="amountDiv">
-				   					<div id="pickedAmount"> <span id="pickedAmtText">Extra</span> </div>
-				   				</div>
-			   					<div id="sideOfPizzaDiv">
-				   				</div>
-			   				</div>
-			   				<div id="itemIngredients">
-			   					<div id="ingredientName">Ham: </div>
-			   					
-			   					<div id="amountDiv">
-				   					<div id="pickedAmount"> <span id="pickedAmtText">Normal</span> </div>
-				   				</div>
-			   					
-			   					<div id="sideOfPizzaDiv">
-				   					<div id="wholeSide"><span id="wholeSideText"></span></div>
-				   				</div>
-			   				
-			   				</div>
-			   				<div id="itemIngredients">
-			   					<div id="ingredientName">Pineapple: </div>
-			   					
-			   					<div id="amountDiv">
-				   					<div id="pickedAmount"> <span id="pickedAmtText">Normal</span> </div>
-				   				</div>
-			   					
-			   					<div id="sideOfPizzaDiv">
-				   					<div id="leftSide"><span id="leftSideText"></span></div>
-				   				</div>
-			   				
-			   				</div>
-			    		</div>
-			    	</div>
-			    	
 			    
-			    	
-			    	
-			    	
-			    </div>
    			</div>
    			
    		</div>
@@ -185,14 +155,10 @@
 	<script src="/javaScript/pageRedirects/clicksPizzaLogo.js"></script>
 	<script src="/javaScript/pageRedirects/clicksItem.js"></script>
 	<script src="/javaScript/pageRedirects/clicksCheckout.js"></script>
+	<script src="/javaScript/pageRedirects/clicksPaymentButton.js"></script>
 	
-	<script src="/javaScript/checkoutPage/clicksRemoveItemFromCart.js"></script>
-	<script src="/javaScript/checkoutPage/clicksEditItemFromCart.js"></script>
-	<script src="/javaScript/checkoutPage/clicksAsapLater.js"></script>
-	<script src="/javaScript/checkoutPage/showAsapLaterTimeDateSelector.js"></script>
-	<script src="/javaScript/checkoutPage/clicksPickupDelivery.js"></script>
-	<script src="/javaScript/checkoutPage/clicksEditAddress-checkoutPage.js"></script>
-	<script src="/javaScript/checkoutPage/clicksPaymentInfo.js"></script>
+	
+	
 	
 	<script src="/javaScript/usesCommentsCharLeft.js"></script>
 	

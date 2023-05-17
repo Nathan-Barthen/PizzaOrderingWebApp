@@ -180,7 +180,7 @@ public class CreateNewMenuItem {
 	 *      oldItemHasImage - used when editing an item. If creating a new item, will be set to false
 	 */
 		
-	public static boolean addItemToDatabase(Item item, MultipartFile jpgFile, boolean oldItemHasImage) {
+	public static boolean addItemToDatabase(Item item, MultipartFile jpgFile, boolean oldItemHasImage, String oldItemName) {
 		String menuFileLocation = "src/main/resources/MenuItems.json";
 		List<Item> items = new ArrayList<>();
 		
@@ -209,28 +209,36 @@ public class CreateNewMenuItem {
 	        }
 	        
 	        
-	      //Save image. If image exists. 
-		 	if(item.getHasImage()) {
+	        //Save image. 
+	        //If image exists... save
+	        if(item.getHasImage()) {
 				//Save image to database, rename image to item name.
 		 		if(SaveItemImage.saveImage(item, jpgFile)) {
-		 			//Save url
+		 			//Save image url
 		 			item.setImageUrl("/images/items/" + item.getCategory().toLowerCase() + "/" + item.getItemName().toLowerCase() + ".jpg");
 		 		}
+		 		//Save image failed. 
 		 		else {
-		 			//Image did not save. Set to default image url
+		 			//Image did not save. Set to default image url.
 		 			item.setImageUrl("/images/items/noImageAvailable.jpg");
 		 		}
 		 		
 			}
-		 	//Set item url to default picture.
+		 	//No images was passed for edit
 		 	else {
-		 		item.setImageUrl("/images/items/noImageAvailable.jpg");
+		 		//No image passed, but image for item already exists and name is the same (item was edited).
+			 	if (oldItemHasImage && oldItemName.equals(item.getItemName())) {
+			 	    //Old image file exists
+			 		//Item was not renamed. Old image can be used.
+			 		item.setImageUrl("/images/items/" + item.getCategory().toLowerCase() + "/" + item.getItemName().toLowerCase() + ".jpg");
+			 		
+			 	}
+			 	else {
+			 		//No image passed / Item does not have a prev image.
+			 		item.setImageUrl("/images/items/noImageAvailable.jpg");
+			 	}
 		 	}
-		 	//No image passed, but image for item already exists (item was edited)
-		 	if (oldItemHasImage) {
-		 	    // File exists
-		 		item.setImageUrl("/images/items/" + item.getCategory().toLowerCase() + "/" + item.getItemName().toLowerCase() + ".jpg");
-		 	}
+		 	
 		 	
 	        // Add item to list and save to file
 	        items.add(item);

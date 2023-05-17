@@ -349,6 +349,7 @@
 				
 				width: 70%;
 				position: relative;
+				
 				border-radius: 10px;
 				border: 3px solid gray;
 				background-color: rgb(179, 179, 255);
@@ -361,7 +362,6 @@
 				text-align: center;
 				padding-bottom: 30px;
 				
-				margin: auto;
 			}
 				#cartTitle {
 					width: 100%;
@@ -387,6 +387,22 @@
 					  margin-top: 5px;
 					  z-index: 5;
 			    }
+			    #orderDate {
+			    	  position: absolute;
+					  top: 0%;
+					  right: 58%;
+					  
+					  width: 400px;
+					  font-size: 35px;
+					  margin-right: 5px;
+					  margin-top: 5px;
+					  z-index: 5;
+					  padding-top: 5px;
+			    }
+			    	#orderPlacementDate{
+			    		border-right: 3px solid black;
+			    		padding-right: 10px;
+			    	}
 		     	#cartItem {
 		     		position: relative;
 		     		width: 90%;
@@ -449,7 +465,7 @@
 					}
 					
 					#cartEditItem {
-						  position: absolute;
+						 position: absolute;
 						  top: 0;
 						  left: 0;
 						  

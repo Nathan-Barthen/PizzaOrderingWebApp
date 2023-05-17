@@ -222,9 +222,10 @@ public class MainController {
 		    UserOrder order = (UserOrder) session.getAttribute("order");
 		    List<Item> items = new Vector<Item>();
 		    //This is the first item being added to the cart. (No order created yet)
+		    //User is a guest (urder == null) Order is created on login.
 	    	if (order == null) {
 	    		cartItem.setId(0);
-	    		UserOrder newOrder = new UserOrder(user);
+	    		UserOrder newOrder = new UserOrder();
 		    	items = newOrder.getItems();
 		    	items.add(cartItem);
 		    	newOrder.setItems(items);
@@ -233,6 +234,16 @@ public class MainController {
 	            newOrder.setStorePhoneNumber(storePhoneNum);
 	            newOrder.setHomeAddress(" ");
 	            newOrder.setAptNumber(" ");
+	            
+	            if(user.getFirstName().contains("Guest")) {
+	            	//Guest order.
+	            	newOrder.setUsersFirstName("Guest");
+	            	newOrder.setUsersLastName("Guest");
+	            	newOrder.setUsersPhoneNum("Guest");
+	            	newOrder.setUsersEmail("Guest");
+	            	System.out.println("Name "+ user.getFirstName());
+	            }
+	            
 		    	order = newOrder;
 	    	}
 	    	//Items have already been addedto users order/cart.
@@ -392,6 +403,7 @@ public class MainController {
 		 			deliveryInstructions,  pickupAtStore,  asapOrLater, 
 		 			laterSelectedDate, laterSelectedTime); 
 		 
+		 	
 		 	//Update order session attribute
 		 	session.setAttribute("order", order);
 		 	
@@ -425,6 +437,36 @@ public class MainController {
 	        return "paymentPage";
 	  }
 	 
+	/* Submits order. Adding order to users account to view later.
+	 	  -If user is a guest. It would just submit order to store.
+	   Is not currently linked to a store. If it were this would send order information to store.
+	*/
+		 @RequestMapping({"/pizzaStore/payment/submitOrder"})
+		    public String submitOrder(Model model, HttpSession session,
+		    		@RequestParam(name = "showError", required = false) String showError) 
+		 {
+			 	List<Item> menuItems = MenuItems.getMenuItemsList();
+			 	
+			 	setSessionAttributes(session, model);
+			 	
+			 	UserAccount user = (UserAccount) session.getAttribute("user");
+			 	UserOrder order = (UserOrder) session.getAttribute("order");
+			 	//Not logged in or cart is empty. Redirect to home.
+			 	if (user == null || order.getItems().size() < 1) {
+			 		return "redirect:/?showError=Cart is empty. Can't submit order.";
+			    }
+			 	
+			 	//If user is a guest (not logged in)
+			 	if(user.getFirstName().contains("Guest")) {
+			 		//Since this is not linked to a store. It cannot save order to users account.
+			 		//If it were linked to a store. Order would still be sent to store.
+			 		return "redirect:/?showError=Guest order submitted.";
+			 	}
+			 	
+			 	ManageUsers.submitOrderAndUpdateUser(user, order);
+			 	
+			 	return "redirect:/?showError=Order submitted for " + user.getFirstName() + ".";
+		  }
 	 
 	 
 	 
@@ -461,23 +503,28 @@ public class MainController {
 		        if (user == null) {
 		            //Invalid password
 		            return "redirect:/pizzaStore/signin?showError=Incorrect password. Try again.";
-		        } else {
+		        } 
+		        else {
 		            //User is signed in
 		        	//Set user session 
 		            session.setAttribute("user", user);
 		            //Set order session attribute
-		            UserOrder newOrder = new UserOrder(user);
+		            UserOrder newOrder = new UserOrder();
 		            newOrder.setStoreName(storeName);
 		            newOrder.setStoreLocation(storeLocation);
 		            newOrder.setStorePhoneNumber(storePhoneNum);
 		            newOrder.setHomeAddress(user.getAddress());
 		            if(user.getApartmentNum() == null || user.getApartmentNum() == "") {
-		            	System.out.println(user.getApartmentNum());
 		            	newOrder.setAptNumber(" ");
 		            }
 		            else {
 		            	newOrder.setAptNumber(user.getApartmentNum());
 		            }
+		            newOrder.setUsersFirstName(user.getFirstName());
+	            	newOrder.setUsersLastName(user.getLastName());
+	            	newOrder.setUsersPhoneNum(user.getPhoneNumber());
+	            	newOrder.setUsersEmail(user.getEmail());
+	            	
 			    	session.setAttribute("order", newOrder);
 		            
 		            
@@ -502,6 +549,31 @@ public class MainController {
 	 
 	 
 	 
+	//Page to edit account information excluding password.
+		 @RequestMapping("/pizzaStore/account/viewOrders")
+		 public String accountViewOrders(Model model, HttpSession session) { 
+			 List<Item> menuItems = MenuItems.getMenuItemsList();
+			 	
+			 	setSessionAttributes(session, model);
+			 	
+			 	UserAccount user = (UserAccount) session.getAttribute("user");
+			 	//Not logged in or cart is empty. Redirect to home.
+			 	if (user == null ) {
+			 		return "redirect:/?showError=Login to view orders.";
+			    }
+			 	
+			 	//Gets the list of orders for user.
+			 	List<UserOrder> orders = ManageUsers.getUserOrders(user);
+			 	
+			 	model.addAttribute("user", user);
+			 	model.addAttribute("orders", orders);
+			 	
+			 	model.addAttribute("itemCategories", itemCategories.toArray());
+			 	model.addAttribute("menuItems", menuItems.toArray());
+			 	
+			 
+			 	return "accountOrdersPage";
+		 }
 	 //Page to edit account information excluding password.
 	 @RequestMapping("/pizzaStore/editAccountInformation")
 	 public String editAccountInfo(Model model, HttpSession session) { 
@@ -861,7 +933,7 @@ public class MainController {
 						 		 *  Saves image to database (if it exists), 
 						 		 *  Saves item to MenuItems.json
 						 	*/
-						 	if(!CreateNewMenuItem.addItemToDatabase(item, jpgFile, false)) {
+						 	if(!CreateNewMenuItem.addItemToDatabase(item, jpgFile, false, "")) {
 						 		//Error saving item
 						 		return "redirect:/pizzaStore/admin/optionsPage?itemCreationError=Error saving item. Item may already exsit.";
 						 	}
@@ -950,6 +1022,7 @@ public class MainController {
 			 	//Update the menu (when editing an item)
 				 @PostMapping("/pizzaStore/admin/updateItemOnMenu")
 				 public String editAnItem(Model model, HttpSession session,  
+						 	@RequestParam("oldItemName") String oldItemName,
 						 	@RequestParam("itemName") String itemName,
 				    		@RequestParam("categoryName") String categoryName, 
 				    		@RequestParam("itemPrice") String itemPrice,
@@ -989,7 +1062,7 @@ public class MainController {
 						 	
 						 	//Find the item in the database, delete item. Add updated item to database.
 						 	//Get item from menu
-						 	Item menuItem = MenuItems.getItemFromMenu(itemName, categoryName);
+						 	Item menuItem = MenuItems.getItemFromMenu(oldItemName, categoryName);
 						 	
 						 	//If there was an error getting item from menu.
 						 	if(menuItem.getItemName() == null || menuItem.getItemName().isEmpty()) {
@@ -999,10 +1072,10 @@ public class MainController {
 						 	
 						 	boolean oldItemHasImage = menuItem.getHasImage();
 						 	//Remove Item
-						 	MenuItems.removeItemFromMenu(itemName, categoryName);
+						 	MenuItems.removeItemFromMenu(oldItemName, categoryName);
 						 	
 						 	//Add updated item to menu
-						 	if(!CreateNewMenuItem.addItemToDatabase(item, jpgFile, oldItemHasImage)) {
+						 	if(!CreateNewMenuItem.addItemToDatabase(item, jpgFile, oldItemHasImage, oldItemName)) {
 						 		//Error saving item
 						 		return "redirect:/pizzaStore/admin/optionsPage?itemCreationError=Error saving item. Item may already exsit.";
 						 	}

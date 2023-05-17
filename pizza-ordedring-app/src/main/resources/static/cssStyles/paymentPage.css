@@ -1,0 +1,438 @@
+
+	@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+	
+	#pageBody {
+		width: 1400px;
+	    min-width: 99%;
+	    min-height: 100%;
+	    margin: 0 auto;
+		margin-bottom: -100px;
+		
+		background: url(/images/lightBlueBackgrd.png) no-repeat center center fixed;
+  	    background-size: cover;
+  	    
+  	    padding-bottom: 100px;
+	}
+	
+	#body-headers {
+		width: 100%;
+		height: 70px;
+		font-size: 35px;
+		color: black;
+		
+		display: flex;
+		margin-bottom: 20px;
+	}
+	
+		#emptySpace1 {
+			width: 33%;
+			height: 100%;
+			
+			display: flex;
+			align-items: center;
+	    	text-align: center;
+	    	justify-content: left;
+	    	
+	    	font-style: italic;
+			padding-left: 15px;
+		}
+		
+		#checkoutTitle {
+			width: 34%;
+			height: 100%;
+			
+			display: flex;
+			align-items: center;
+	    	text-align: center;
+	    	justify-content: center;
+	    	
+	    	text-decoration: underline;
+			text-decoration-color: red;
+			font-size: 60px;
+		}
+
+		#emptySpace2 {
+			width: 33%;
+			height: 100%;
+			
+			display: flex;
+			align-items: center;
+	    	text-align: center;
+	    	justify-content: end;
+	    	
+	    	font-style: italic;
+	    	padding-right: 20px;
+		}
+		
+		
+		
+		#orderAndCart {
+			width: 100%;
+			
+			display: flex;
+			flex-direction: column;
+			
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+		}
+			#orderInformation {
+				width: 90%;
+				min-height: 515px; 
+				position: relative;
+				
+				border-radius: 10px;
+				border: 3px solid gray;
+				background-color: rgb(179, 179, 255);
+				
+				display: flex;
+				flex-direction: column;
+				
+				align-items: center;
+				text-align: center;
+					
+				margin: auto;
+				margin-bottom: 20px;
+			}
+				 #orderInfoTitle {
+					width: 100%;
+					
+					display: flex;
+					position: absolute;
+					top: 0;
+					left: 31%;
+					
+					
+			        margin-bottom: 0px;
+			        font-size: 50px;
+			        
+			        color: rgb(51, 51, 255);
+			        text-decoration: underline;
+					text-decoration-color: rgb(4, 86, 251);
+			      }
+			      #detailsAndPayment {
+			     	 height: 100%;
+			      	 width: 100%;
+			      	 display: flex;
+					 flex-direction: row;
+					
+			      }
+			      #orderInfoDetails {
+			      	position: relative;
+			        padding-left: 20px;
+			      	width: 55%;
+			      	height: 100%;
+					border-right: 3px solid blue;
+					
+					display: flex;
+					flex-direction: column;
+				 	align-items: center;
+				  	font-size: 35px;
+					
+					font-size: 30px;
+					margin-top: 70px;
+					margin-bottom: 20px;
+			      }
+			      #paymentDiv {
+			      	width: 45%;
+					
+					display: flex;
+					flex-direction: column;
+				 	align-items: center;
+				  	font-size: 35px;
+					
+					font-size: 30px;
+					margin-top: 70px;
+					margin-bottom: 20px;
+			      	
+			      }
+			      	#paymentInfoHere{
+			      		width: 85%;
+			      		height: 80%;
+			      		background-color: rgb(0, 57, 230);
+			      		
+			      		display: flex;
+					    justify-content: center;
+					    align-items: center;
+					    text-align: center;
+					    
+					    border-radius: 10px;
+					    border: 4px solid black;
+			      	}
+			      	#paymentButtonHere {
+			      		width: 80%;
+			      		height: 10%;
+			      		background-color: rgb(77, 121, 255);
+			      		
+			      		font-size: 20px;
+			      		
+			      		display: flex;
+					    justify-content: center;
+					    align-items: center;
+					    text-align: center;
+					    
+					    border-radius: 10px;
+					    border: 2px solid black;
+					    margin-top: 10px;
+			      	}
+			      	#paymentButton {
+			      		width: 20%;
+			      		height: 10%;
+			      		background-color: rgb(51, 102, 255);
+			      		
+			      		font-size: 30px;
+			      		
+			      		display: flex;
+					    justify-content: center;
+					    align-items: center;
+					    text-align: center;
+					    
+					    border-radius: 10px;
+					    border: 2px solid black;
+					    margin-top: 10px;
+					    
+					    cursor: pointer;
+			      	}
+			      	#paymentButtonNote {
+			      		width: 80%;
+			      		height: 10%;
+			      		background-color: rgb(102, 140, 255);
+			      		
+			      		font-size: 15px;
+			      		
+			      		display: flex;
+					    justify-content: center;
+					    align-items: center;
+					    text-align: center;
+					    
+					    border-radius: 10px;
+					    border: 2px solid black;
+					    margin-top: 10px;
+			      	}
+			      	
+			      	
+			      #paymentCheckout {
+			      	cursor: pointer;
+			      	
+			      	padding: 5px;
+			      	border-radius: 10px;
+					border: 3px solid black;
+							
+							background-color: rgb(255, 224, 102);
+			      	
+			      }
+			      #enterPaymentButtonDiv {
+			      		position: absolute;
+					  	top: 90%;
+					  	left: 36%;
+					  	z-index: 20;
+					  	
+					  	width: 270px;
+					  	height: 37px;
+					  	font-size: 32px;
+						
+						cursor: pointer;
+					  	
+					  	background-color: rgb(255, 204, 153);
+					  	color: black;
+					  	border: 4px solid black;
+			      	}
+			      
+			      	#orderTotalCost {
+			    	  position: absolute;
+					  top: 0%;
+					  right: 5%;
+					  
+					  font-size: 40px;
+					  margin-right: 5px;
+					  margin-top: 5px;
+					  z-index: 5;
+			    	}
+			      	#storeName {
+			      		margin-bottom: 5px;
+			      	}
+			      	#storeLocation {
+			      		margin-bottom: 5px;
+			      	}
+			      	#storePhone {
+			      		margin-bottom: 5px;
+			      	}
+			      	#deliveryPickupEta {
+			      	  width: 40%;
+			      	  display: flex;
+					  margin-bottom: 5px;
+					  
+					  flex-direction: column;
+					}
+						#typeEta {
+							display: flex;
+							align-items: flex-start;
+						}
+						#etaTimes {
+							margin-left: auto;
+						}
+					
+					#orderTime {
+					  width: 40%;
+					  display: flex;
+					  justify-content: center;
+					  
+					  margin-bottom: 8px;
+					}
+						#timeAsap {
+							width: 40%;
+							display: flex;
+							justify-content: center;
+							
+							padding: 2px;
+							padding-left: 4px;
+							border-radius: 10px;
+							border: 3px solid blue;
+							
+							background-color: rgb(213, 128, 255);
+							
+						}
+						#timeLater {
+							width: 100%;
+							margin-left: auto;
+							
+							padding: 2px;
+							border-radius: 10px;
+							border: 3px solid blue;
+							
+							background-color: rgb(213, 128, 255);
+							
+						}
+					#laterDateSelectorDiv {
+							width: 80%;
+							white-space: nowrap;
+
+							display: none;
+							justify-content: center;
+							margin-bottom: 10px;
+							font-size: 25px;
+					}
+						#laterDateTitle {
+							padding-right: 10px;
+							
+						}
+						#dateDropdown {
+							cursor: pointer;
+						}
+						#timeDropdown {
+							cursor: pointer;
+							margin-left: 10px;
+						}
+					
+					#deliveryPickupSelector {
+					  width: 40%;
+					  display: flex;
+					  justify-content: center;
+					}
+						#deliverySelector {
+							width: 45%;
+							display: flex;
+							align-items: flex-start;
+							justify-content: center;
+							
+							padding: 2px;
+							padding-left: 4px;
+							border-radius: 10px;
+							border: 3px solid blue;
+							
+							background-color: rgb(213, 128, 255);
+							
+						}
+						#pickupSelector {
+							width: 45%;
+							display: flex;
+							align-items: flex-start;
+							justify-content: center;
+							
+							padding: 2px;
+							border-radius: 10px;
+							border: 3px solid blue;
+							
+							background-color: rgb(213, 128, 255);
+							
+						}
+						
+					#collectionMethod {
+					  width: 95%;
+					  display: flex;
+					  justify-content: center;
+					  align-items: center;
+					  text-align: center;
+					  
+					  padding-bottom: 5px;
+					  padding-top: 10px;
+					  margin-left: 100px;
+					}
+						#collectionType {
+							width: 24%;
+							white-space: nowrap;
+							padding-left: 10px;
+							padding-right: 10px;
+							
+							border-radius: 10px;
+							border: 2px solid blue;
+							
+							background-color: rgb(213, 128, 255);
+							margin-right: 5px;
+							
+						}
+						#collectionLocation {
+							width: 50%;
+							display: flex;
+							justify-content: start;
+							align-items: center;
+							text-align: center;
+							font-style: italic;
+							white-space: nowrap;
+							
+						}
+						#collectionLocationApt {
+							width: 21%;
+							display: flex;
+							justify-content: start;
+							align-items: center;
+							text-align: center;
+							font-style: italic;
+							white-space: nowrap;
+						}
+						
+						
+					#userComments {
+						width: 100%;
+						height: 120px;
+						
+						padding-top: 5px;
+						padding-right: 15px;
+						
+					}
+						#userCommentsBorder {
+							width: 100%;
+							border-radius: 10px;
+							
+							
+							display: flex;
+							align-items: center;
+							text-align: center;
+							justify-content: center;
+						}
+						#userCommentsTitle {
+							width: 300px;
+							border-radius: 10px;
+							border: 2px solid blue;
+							
+							background-color: rgb(213, 128, 255);
+							margin-right: 5px;
+							
+							display: flex;
+							align-items: center;
+							text-align: center;
+							justify-content: center;
+						}
+		
+		
+		
