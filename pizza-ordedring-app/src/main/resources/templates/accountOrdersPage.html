@@ -7,7 +7,7 @@
 <title>Online Pizza Ordering</title>
 
 <link rel="stylesheet" href="/cssStyles/backgroundAndTopBar.css">
-<link rel="stylesheet" href="/cssStyles/checkoutPage.css">
+<link rel="stylesheet" href="/cssStyles/accountOrdersPage.css">
 <link rel="stylesheet" href="/cssStyles/bottomLinks.css">
 
 
@@ -37,62 +37,17 @@
    		<div id="pageBody">
    			<div id="body-headers">
    				<div id="emptySpace1"> </div>
-   				<div id="checkoutTitle"> Checkout </div>
+   				<div id="checkoutTitle"> Past Orders </div>
    				<div id="emptySpace2"> </div>
    			</div>
    			
    			<div id="orderAndCart">
    				
-   				<div id="orderInformation">
-				      <div id="orderInfoTitle">
-				        	Order Information
-				      </div>
-				      <div id="orderInfoDetails">
-				      		<div id="enterPaymentButtonDiv">Enter Payment Info</div>
-				      		<div id="storeName">[[${order.getStoreName()}]]</div>
-				      		<div id="storeLocation">[[${order.getStoreLocation()}]]</div>
-				      		<div id="storePhone">[[${order.getStorePhoneNumber()}]]</div>
-				      		<div id="deliveryPickupEta">
-				      			<div id="typeEta">Delivery: 	<span id="etaTimes"> 45 mins </span> </div>
-				      			<div id="typeEta">Pickup: 	<span id="etaTimes"> 30 mins </span> </div>
-				      		</div>
-				      		
-				      		<div id="orderTime">
-				      			<div id="timeAsap">ASAP</div>
-				      			<div id="timeLater">Later</div>
-				      		</div>
-				      		
-				      		<div id="laterDateSelectorDiv">
-							  <span id="laterDateTitle">Select Date and Time:</span>
-							</div>
-
-
-				      		<div id="deliveryPickupSelector">
-				      			<div id="deliverySelector">Delivery</div>
-				      			<div id="pickupSelector">Pickup</div>
-				      		</div>
-				      		
-				      		
-				      		<div id="usersHomeAddr" hidden> My Home Address St. </div>
-				      		<div id="collectionMethod">
-							  <span id="collectionType">Delivery to:</span>
-							  <span id="collectionLocation" th:data-original-text="${order.getHomeAddress()}">[[${order.getHomeAddress()}]]</span>
-							  <span id="collectionLocationApt" th:data-original-text="${order.getAptNumber()}">[[${order.getAptNumber()}]]</span>
-							  <button id="editLocationBtn">Edit</button>
-							</div>
-				      		<div id="addressErrorMessages"></div>
-				      		
-				      		<div id="userComments">
-				   				<textarea id="additionalInstructions" name="additionalInstructions"
-				   				 placeholder="Delivery Instructions..."  rows="5" cols="50" maxlength="250"></textarea>
-				    			 <div id="countDisplay">0/250</div>
-				   			</div>
-				      		
-				      </div>
-			    </div>
-			    <div id="cart">
-			    	<div id="cartTitle">Cart</div>
+   				
+			    <div id="cart" th:each="order, orderIndex : ${orders}">
+    				<div id="cartTitle">Order [[${orderIndex.index + 1}]]</div>
 			    	<div id="orderTotalCost">$[[${order.getOrderTotalCost()}]]</div>
+			    	<div id="orderDate"><span id="orderPlacementDate">[[${order.getOrderDate()}]]</span> <span id="orderPlacementTime">[[${order.getOrderPlacementTime()}]]</span></div>
 			    	<div id="cartItem" th:each="item : ${order.getItems()}">
 			    		<div id="cartItemName">
 			    			[[${item.getHowMany()}]] x [[${item.getItemName()}]]
@@ -101,8 +56,6 @@
 			    			$[[${item.getItemTotalCost()}]]
 			    		</div>
 			    		<div hidden id="hiddenItemId">[[${item.getId()}]]</div>
-			    		<div id="cartRemoveItem">   </div>
-			    		<div id="cartEditItem"> Edit </div>
 			    		
 			    		<div id="cartItemDetails">
 			    			<div id="itemIngredients" th:each="ingredient : ${item.getIncludedToppings()}" th:if="${ingredient.getToppingType == 'dropdown'}">
@@ -202,14 +155,7 @@
 	<script src="/javaScript/pageRedirects/clicksItem.js"></script>
 	<script src="/javaScript/pageRedirects/clicksCheckout.js"></script>
 	
-	<script src="/javaScript/checkoutPage/clicksRemoveItemFromCart.js"></script>
-	<script src="/javaScript/checkoutPage/clicksEditItemFromCart.js"></script>
-	<script src="/javaScript/checkoutPage/clicksAsapLater.js"></script>
-	<script src="/javaScript/checkoutPage/showAsapLaterTimeDateSelector.js"></script>
-	<script src="/javaScript/checkoutPage/clicksPickupDelivery.js"></script>
-	<script src="/javaScript/checkoutPage/clicksEditAddress-checkoutPage.js"></script>
-	<script src="/javaScript/checkoutPage/clicksPaymentInfo.js"></script>
-	<script src="/javaScript/checkoutPage/showAddonText.js"></script>
+
 	
 	<script src="/javaScript/usesCommentsCharLeft.js"></script>
 	

@@ -78,7 +78,7 @@
 	}
 
 	viewOrdersDiv.addEventListener('click', function() {
-	  window.location.href = '/pizzaStore/viewOrders';
+	  window.location.href = '/pizzaStore/account/viewOrders';
 	});
 
 	editAccountDiv.addEventListener('click', function() {

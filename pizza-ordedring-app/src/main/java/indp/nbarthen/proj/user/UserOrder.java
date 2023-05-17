@@ -13,6 +13,9 @@ import jakarta.persistence.OneToOne;
 import java.util.List;
 import java.util.Vector;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ibm.icu.text.DecimalFormat;
+
 import indp.nbarthen.proj.repository.Item;
 
 @Entity
@@ -40,6 +43,11 @@ public class UserOrder {
 	private String homeAddress;
 	private String aptNumber;
 	
+	//Information relating to users account.
+	private String usersFirstName;
+	private String usersLastName;
+	private String usersPhoneNum;
+	private String usersEmail;
 	
 	
 	//Cost / Price of order
@@ -50,30 +58,18 @@ public class UserOrder {
 	@OneToMany
 	private List<Item> items;
 	
-	@ManyToOne
-    @JoinColumn(name = "user_account_id")
-    private UserAccount userAcc;
+	
 	
 	
 	
 	public UserOrder(){
-		//Initialize order to Guest
-		this.userAcc = new UserAccount();
 		
 		this.items = new Vector<Item>();
 		//Pennsylvania standard tax rate
 		taxPercentAsDecimal = 0.06;
 	}
 	
-	public UserOrder(UserAccount userAcc){
-		//Initialize to a logged in Account
-		this.userAcc = userAcc;
-		
-		this.items = new Vector<Item>();
-		
-		//Pennsylvania standard tax rate
-		taxPercentAsDecimal = 0.06;
-	}
+	
 
 
 	
@@ -125,7 +121,7 @@ public class UserOrder {
 		this.storePhoneNumber = storePhoneNumber;
 	}
 
-	public boolean isDelivery() {
+	public boolean getIsDelivery() {
 		return isDelivery;
 	}
 
@@ -133,7 +129,7 @@ public class UserOrder {
 		this.isDelivery = isDelivery;
 	}
 
-	public boolean isAsap() {
+	public boolean getIsAsap() {
 		return isAsap;
 	}
 
@@ -189,6 +185,70 @@ public class UserOrder {
 		this.totalCost = totalCost;
 	}
 
+	public String getUsersFirstName() {
+		return usersFirstName;
+	}
+
+
+
+
+
+	public void setUsersFirstName(String usersFirstName) {
+		this.usersFirstName = usersFirstName;
+	}
+
+
+
+
+
+	public String getUsersLastName() {
+		return usersLastName;
+	}
+
+
+
+
+
+	public void setUsersLastName(String usersLastName) {
+		this.usersLastName = usersLastName;
+	}
+
+
+
+
+
+	public String getUsersPhoneNum() {
+		return usersPhoneNum;
+	}
+
+
+
+
+
+	public void setUsersPhoneNum(String usersPhoneNum) {
+		this.usersPhoneNum = usersPhoneNum;
+	}
+
+
+
+
+
+	public String getUsersEmail() {
+		return usersEmail;
+	}
+
+
+
+
+
+	public void setUsersEmail(String usersEmail) {
+		this.usersEmail = usersEmail;
+	}
+
+
+
+
+
 	public double getTaxPercentAsDecimal() {
 		return taxPercentAsDecimal;
 	}
@@ -205,24 +265,18 @@ public class UserOrder {
 		this.items = items;
 	}
 
-	public UserAccount getUserAcc() {
-		return userAcc;
+	
+
+	@JsonIgnore
+	public String getOrderTotalCost() {
+		double totalOrderCost = 0;
+		for(Item i : items) {
+			totalOrderCost += i.getItemDefaultCost() + i.getItemAdditionalCost();
+		}
+		DecimalFormat decimalFormat = new DecimalFormat("0.00");
+		String stringOfCost = decimalFormat.format(totalOrderCost);
+		return stringOfCost;
 	}
-
-	public void setUserAcc(UserAccount userAcc) {
-		this.userAcc = userAcc;
-	}
-
-	public UserAccount getUserAccount() {
-		return userAcc;
-	}
-
-
-	public void setUserAccount(UserAccount userAcc) {
-		this.userAcc = userAcc;
-	}
-
-
 
 	    
 }

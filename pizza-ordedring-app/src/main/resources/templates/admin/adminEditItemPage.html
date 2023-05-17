@@ -46,7 +46,7 @@
    				<div id="addItemFields">
    					<form id="addItemForm" method="post" th:action="@{/pizzaStore/admin/updateItemOnMenu}" enctype="multipart/form-data">
    						<div id="addItemRow1">
-   						   
+   						   <input type="hidden" name="oldItemName" th:value="${item.getItemName()}">
    						    <div id=addItemCol>
 	   							<div id="itemName">
 								    <span id="addItemParamTitle"> *Item Name: </span>

@@ -84,12 +84,27 @@
 	    pickupOrDeliveryInput.value = pickupOrDeliveryText;
 	  	form.appendChild(pickupOrDeliveryInput);
 	  	
-	  	
+	  
+	  
+	  
 	  
 	
 	  // Append the form to the document and submit it
 	  document.body.appendChild(form);
-	  form.submit();
+	  
+	//If delivery is selected. Ensure an address was entered.
+	  	var addressErrorMessages = document.getElementById('addressErrorMessages');
+	  	var deliveryAddress = document.getElementById('collectionLocation').textContent.trim()
+	  	if (pickupOrDeliveryText === 'delivery' && deliveryAddress === '') {
+	  			addressErrorMessages.innerHTML = '*Address cannot be empty when delivering.';
+		        event.preventDefault();
+		}
+	  	else {
+	  		form.submit();
+	  	}
+	  
+	  
+	  
 	});
 
   
