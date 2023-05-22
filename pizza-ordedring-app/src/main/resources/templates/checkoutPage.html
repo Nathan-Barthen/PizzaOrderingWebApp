@@ -105,6 +105,7 @@
 			    		<div id="cartEditItem"> Edit </div>
 			    		
 			    		<div id="cartItemDetails">
+			    			<div id="itemSize" th:if="${item.getSelectedSize() != 'One Size'}">Size: [[${item.getSelectedSize()}]]</div>
 			    			<div id="itemIngredients" th:each="ingredient : ${item.getIncludedToppings()}" th:if="${ingredient.getToppingType == 'dropdown'}">
 			   					<div id="ingredientName">[[${ingredient.getToppingName()}]]: [[${ingredient.getSelectedOption()}]]: </div>
 			   					

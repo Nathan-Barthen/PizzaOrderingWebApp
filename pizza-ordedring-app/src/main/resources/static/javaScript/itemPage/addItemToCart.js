@@ -94,6 +94,16 @@ function submitItem(){
   }
   
   
+  //Item cost
+  var itemSelectedCost = document.getElementById('itemCost');
+  itemSelectedCost = itemSelectedCost.textContent.replace('$', '');
+  var itemCostInput = document.createElement('input');
+  itemCostInput.setAttribute('type', 'hidden');
+  itemCostInput.setAttribute('name', 'itemSelectedCost');
+  itemCostInput.setAttribute('value', itemSelectedCost);
+  myForm.appendChild(itemCostInput);
+  
+  
   //Create inputs for included toppings.
 	  const dropdownContainers = document.querySelectorAll('#mainOptions-dropdownContainer');
 	  //loop through Main Options - dropdown containers. Add inputs

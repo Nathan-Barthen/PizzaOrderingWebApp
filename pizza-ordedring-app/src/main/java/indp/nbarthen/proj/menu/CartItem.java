@@ -42,7 +42,7 @@ public class CartItem {
 	 * 			 non-dropdown amount (light normal extra Or 'None' [topping removed])
 	 * 			 non-dropdown sideOfPizza (left whole right Or 'Not Pizza')
 	 */
-	public static Item generateItemForCart(Item item, int numbertOfItem, String customInstructions,
+	public static Item generateItemForCart(Item item, int numbertOfItem, String itemSelectedCost, String customInstructions,
 			String[] mainDropNames, String[] mainDropSelected, String[] mainDropAmounts,
 			String[] mainLNENames, String[] mainLNESideOfPizza, String[] mainLNEAmounts,
 			String[] addonDropNames, String[] addonDropSelected, String[] addonDropAmounts,
@@ -52,6 +52,20 @@ public class CartItem {
 			Item cartItem = item;
 			cartItem.setItemAdditionalInstructions(customInstructions);
 			cartItem.setHowMany(numbertOfItem);
+			for(int i=0; i<cartItem.getItemDefaultCosts().size(); i++) {
+				//Get index of selected cost
+				if(cartItem.getItemDefaultCosts().get(i) == Double.parseDouble(itemSelectedCost)) {
+					//Set cost and size index.
+					cartItem.setSelectedCost(Double.parseDouble(itemSelectedCost));
+					//Check if size is null (only one size allowed for item)
+					if(cartItem.getItemSizesAsString() != null) {
+						cartItem.setSelectedSize(cartItem.getItemSizesAsString().get(i));
+					}
+					else {
+						cartItem.setSelectedSize("One Size");
+					}
+				}
+			}
 			
 			//Loop through included toppings.
 			for(Topping topp : cartItem.getIncludedToppings()) {

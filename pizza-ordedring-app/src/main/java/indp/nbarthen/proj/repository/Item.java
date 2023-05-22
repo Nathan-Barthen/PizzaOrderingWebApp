@@ -1,7 +1,9 @@
 package indp.nbarthen.proj.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ibm.icu.text.DecimalFormat;
@@ -28,7 +30,14 @@ public class Item {
 	private boolean hasImage;
 	private String imageUrl;
 	
-	private Double itemDefaultCost;
+	//Cost of item depending on size. First index will be smallest size.
+	private List<Double> itemDefaultCosts;
+	//Sizes of item. First index will be smallest size.
+	private List<String> itemSizes;
+	
+	private Double selectedCost;
+	private String selectedSize;
+	
 	//Calculated: Items additional cost to be added to itemDefaultCost if additional toppings are added or 'Extra' is selected.
 	private Double itemAdditionalCost;
 	
@@ -54,7 +63,7 @@ public class Item {
 		this.hasImage = false;
 	}
 	
-	public Item(String category, String itemName, String itemDesc, boolean hasImage, Double itemDefaultCost, 
+	public Item(String category, String itemName, String itemDesc, boolean hasImage, List<Double> itemDefaultCost, List<String> itemSizes,
 			Double itemAdditionalCost, Vector<Topping> includedToppings, 
 			Vector<Topping> additionalToppings, String itemAdditionalInstructions) 
 	{	
@@ -62,8 +71,9 @@ public class Item {
 		this.itemName = itemName;
 		this.itemDesc = itemDesc;
 		this.hasImage = hasImage;
-		this.itemDefaultCost = itemDefaultCost;
+		this.itemDefaultCosts = itemDefaultCost;
 		this.itemAdditionalCost = itemAdditionalCost;
+		this.itemSizes = itemSizes;
 		this.includedToppings = includedToppings;
 		this.additionalToppings = additionalToppings;
 		this.itemAdditionalInstructions = itemAdditionalInstructions;
@@ -117,21 +127,86 @@ public class Item {
 		this.imageUrl = imageUrl;
 	}
 
-	public Double getItemDefaultCost() {
-		return itemDefaultCost;
+	public List<Double> getItemDefaultCosts() {
+		return itemDefaultCosts;
 	}
 	
 	@JsonIgnore
-	public String getItemDefaultCostAsString() {
+	public String getItemDefaultCostsCommaSeperated() {
+		//Returns a comma seperated string to match the format of currency #.##. (and not something like 10.0)
+		List<String> itemDefaultCostsList = new ArrayList<>();;
+		for(Double cost : itemDefaultCosts) {
+			DecimalFormat df = new DecimalFormat("0.00");
+			String formattedPrice = df.format(cost);
+			itemDefaultCostsList.add(formattedPrice);
+		}
+		String commaSeparatedCosts = String.join(", ", itemDefaultCostsList);
+		return commaSeparatedCosts;
+	}
+	@JsonIgnore
+	public List<String> getItemDefaultCostsAsString() {
 		//Returns a string to match the format of currency #.##. (and not something like 10.0)
-		DecimalFormat df = new DecimalFormat("0.00");
-		String formattedPrice = df.format(itemDefaultCost);
-		return formattedPrice;
+		List<String> itemDefaultCostsString = new ArrayList();
+		for(Double cost : itemDefaultCosts) {
+			DecimalFormat df = new DecimalFormat("0.00");
+			String formattedPrice = df.format(cost);
+			itemDefaultCostsString.add(formattedPrice);
+		}
+		return itemDefaultCostsString;
 
 	}
 
-	public void setItemDefaultCost(Double itemDefaultCost) {
-		this.itemDefaultCost = itemDefaultCost;
+	public void setItemDefaultCosts(List<Double> itemDefaultCosts) {
+		this.itemDefaultCosts = itemDefaultCosts;
+	}
+	
+	public List<String> getItemSizes() {
+		return itemSizes;
+	}
+	
+	@JsonIgnore
+	public String getItemSizesCommaSeperated() {
+		//Returns a comma seperated string of sizes
+		if(itemSizes == null) {
+			return "";
+		}
+		String commaSeparatedSizes = String.join(", ", itemSizes);
+		return commaSeparatedSizes;
+	}
+	
+	@JsonIgnore
+	public List<String> getItemSizesAsString() {
+		//Returns a string to match the format of currency #.##. (and not something like 10.0)
+		if(itemSizes == null) {
+			return null;
+		}
+		List<String> itemSizesString = new ArrayList();
+		for(String size: itemSizes) {
+			itemSizesString.add(size);
+		}
+		return itemSizesString;
+
+	}
+	
+	public void setItemSizes(List<String> itemSizes) {
+		this.itemSizes = itemSizes;
+	}
+	
+
+	public Double getSelectedCost() {
+		return selectedCost;
+	}
+
+	public void setSelectedCost(Double selectedCost) {
+		this.selectedCost = selectedCost;
+	}
+
+	public String getSelectedSize() {
+		return selectedSize;
+	}
+
+	public void setSelectedSize(String selectedSize) {
+		this.selectedSize = selectedSize;
 	}
 
 	public Double getItemAdditionalCost() {
@@ -176,7 +251,7 @@ public class Item {
 	
 	@JsonIgnore
 	public String getItemTotalCost() {
-		double totalCost = itemDefaultCost + itemAdditionalCost;
+		double totalCost = selectedCost + itemAdditionalCost;
 		DecimalFormat decimalFormat = new DecimalFormat("0.00");
 		String stringOfCost = decimalFormat.format(totalCost);
 		return stringOfCost;
