@@ -1,17 +1,13 @@
-/*Used for sign-upPage.html
- * 	Ensures the parameters  for sign-up is acceptable
+/*Used for adminEditItemPage.html
+ * 	Ensures the parameters for item creation is acceptable
  * 
- * 	First and Last Name: Must be at least 2 characters. Cannot be empty.
- *  Address: Must contain at least one number, at least one letter, and a space
- * 	Email: Must contain an '@', then a letter, and end in '.com'
- * 	Password: Ensures the two passwords match for the user.
- * 			  Also makes sure it is at least 7 characters long. Must contain one capital and one number
+ * 
  *  
 */
 
-  const signUpForm = document.getElementById('addItemForm');
+  const addOrEditItemForm = document.getElementById('addItemForm');
 
-  signUpForm.addEventListener('submit', function(event) {
+  addOrEditItemForm.addEventListener('submit', function(event) {
 	  
 	  //Get item name fields.
 	  const itemName = document.getElementsByName('itemName')[0];
@@ -22,8 +18,12 @@
 	  const categoryNameErrorMessages = document.getElementById('categoryNameErrorMessages');
 	  
 	  // Get itemPrice fields
-	  const itemPrice = document.getElementsByName('itemPrice')[0];
+	  const itemPrice = document.getElementsByName('itemPrices')[0];
 	  const itemPriceErrorMessages = document.getElementById('itemPriceErrorMessages');
+	  
+	  // Get itemCosts fields
+	  const itemSize = document.getElementsByName('itemSizes')[0];
+	  const itemSizeErrorMessages = document.getElementById('itemSizeErrorMessages');
 	  
 	  //Get itemDescription fields
 	  const itemDescription = document.getElementsByName('itemDescription')[0];
@@ -56,16 +56,30 @@
 		  
 		 
 		// Check item price number
-		  const itemPriceRegex = /^\$?\d+(\.\d{1,2})?$/;
-		  //If item price is entered
-		  
-		  if (!itemPriceRegex.test(itemPrice.value)) {
-			  itemPriceErrorMessages.innerHTML = '*Please follow the format $0.00';
+		  const itemPriceRegex = /^(\$?\d+(\.\d{1,2})?(,\s*\$?\d+(\.\d{1,2})?)*)?$/;
+		  // If item price is entered
+		  console.log("---s"+itemPrice.value.trim() +"--");
+		  if(itemPrice.value.trim() ==  ""){
+			  console.log("Meep");
+			  itemPriceErrorMessages.innerHTML = '*Enter a price.';
+			    event.preventDefault();
+		  }
+		  else if(!itemPriceRegex.test(itemPrice.value)) {
+		    itemPriceErrorMessages.innerHTML = '*Please follow the format $0.00 or $0.00, $0.00, ...';
+		    event.preventDefault();
+		  } 
+		  else {
+		    itemPriceErrorMessages.innerHTML = '';
+		  }
+
+		// Check if item size and price are the same size.
+		  const itemSizeValues = itemSize.value.split(',').map(value => value.trim());
+		  const itemPriceValues = itemPrice.value.split(',').map(value => value.trim());
+		  if (itemSizeValues.length != itemPriceValues.length) {
+			  itemPriceErrorMessages.innerHTML = '*Price and Size must contain the same amount of values.';
 			  event.preventDefault();
 		  }
-		  else {
-			  itemPriceErrorMessages.innerHTML = '';
-		  } 
+			  
 	 
 		//Check item description
 		  //Check if item description is empty

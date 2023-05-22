@@ -47,7 +47,7 @@
    				<div id="itemDescDiv">
    					<div id="itemNameAndDelete">
    						<div id="itemName">
-   							[[${item.getItemName()}]] <span id="itemCost">$[[${item.getItemDefaultCostAsString()}]]</span>
+   							[[${item.getItemName()}]] <span id="itemCost">$[[${item.getItemDefaultCostsAsString().get(0)}]]</span>
    						</div>
    						<div id="deleteItemDiv"> 
    							<div id="deleteItem">Delete</div>
@@ -60,9 +60,38 @@
    					<div id="itemDesc">
    						[[${item.getItemDesc()}]]
    					</div>
+   					
+   					<div id="howManyDiv">
+		   				<div id="increaseNumberDiv">
+		   					<span id="increaseNumber">+</span>
+		   				</div>
+		   				<div id="numberOfItemDiv">
+		   					<span id="numberOfItem">1</span>
+		   				</div>
+		   				<div id="decreaseNumberDiv">
+		   					<span id="decreaseNumber">-</span>
+		   				</div>
+   					</div>
    				</div>
    			</div>
    			<div id="mainOptions">
+   			
+   				<div id="sizeDropdownContainer" th:if="${item.getItemSizesAsString()}"> 
+   					<label id="dropdownLabelName">Size: </label>
+   					<div class="dropdown" style="z-index:9"> 
+   						<div id="sizeSelectedOption"><span id="itemSizeSpan">[[${item.getItemSizesAsString().get(0)}]]</span> -
+								      <span id="sizeCostSpan">$[[${item.getItemDefaultCostsAsString().get(0)}]]</span></div> 
+   							<ul class="dropdown-menu" id="sizeDropdown-menu">
+   								<li th:each="price, sizeIndex : ${item.getItemDefaultCostsAsString()}" >
+								    <a href="#">
+								      <span id="itemSizeSpan" th:if="${item.getItemSizesAsString().get(sizeIndex.index) != null}"> [[${item.getItemSizesAsString().get(sizeIndex.index)}]] </span> 
+								      -
+								      <span id="sizeCostSpan">$[[${price}]]</span>
+								    </a>
+								 </li>
+   							</ul> 
+   					</div>
+   				</div>
    			
    				<!-- Thymleaf variables to be inserted into mainOptions -->
    				<div th:each="topping : ${item.getIncludedToppings()}" id="hiddenIncludedToppings" hidden>
@@ -139,6 +168,7 @@
 	<script src="/javaScript/itemPage/updateToppingCosts.js"></script>
 	<script src="/javaScript/itemPage/insertMainToppingInfo.js"></script>
 	<script src="/javaScript/itemPage/insertAdditionalToppingInfo.js"></script>
+	<script src="/javaScript/itemPage/clicksIncreaseDecreaseHowMany.js"></script>
 	
 	<script src="/javaScript/adminPages/deleteItemPermanently.js"></script>
 	<script src="/javaScript/adminPages/adminClicksAdminHome.js"></script>

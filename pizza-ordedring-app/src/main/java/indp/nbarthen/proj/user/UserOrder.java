@@ -271,7 +271,7 @@ public class UserOrder {
 	public String getOrderTotalCost() {
 		double totalOrderCost = 0;
 		for(Item i : items) {
-			totalOrderCost += i.getItemDefaultCost() + i.getItemAdditionalCost();
+			totalOrderCost += (i.getSelectedCost() + i.getItemAdditionalCost()) * i.getHowMany();
 		}
 		DecimalFormat decimalFormat = new DecimalFormat("0.00");
 		String stringOfCost = decimalFormat.format(totalOrderCost);

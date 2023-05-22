@@ -23,5 +23,23 @@ function addUpdateSelOptListeners() {
 }
 
 
+//Controls dropdown for size selector.
+	const sizeSelectedOption = document.getElementById("sizeSelectedOption");
+	const sizeDropdownMenu = document.getElementById("sizeDropdown-menu");
+	const sizeDropdownOptions = sizeDropdownMenu.querySelectorAll("a");
+	var itemCostSpan = document.getElementById("itemCost");
+	
+
+	sizeDropdownOptions.forEach((option) => {
+		option.addEventListener("click", (event) => {
+			      event.preventDefault();
+			      sizeSelectedOption.textContent = option.textContent;
+			      var sizeCostSpan = option.querySelector("#sizeCostSpan");
+			      if (sizeCostSpan) {
+			        itemCostSpan.textContent = sizeCostSpan.textContent;
+			      }
+		});
+	});
+	    
 
 

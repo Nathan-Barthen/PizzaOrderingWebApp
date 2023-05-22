@@ -33,7 +33,7 @@ public class CreateNewMenuItem {
 	 
 	
 	//Create the actual Item class using parameters
-	public static Item CreateItem(List<String> itemCategories, String itemName, String categoryName, String itemPrice, String itemDescription,
+	public static Item CreateItem(List<String> itemCategories, String itemName, String categoryName, String itemPrices, String itemSizes, String itemDescription,
             String[] mainToppingsName, String[] mainToppingsType, String[] mainToppingsTypes,
             String[] mainToppingsIsPizza, String[] mainToppingsExtra, String[] addonToppingsName,
             String[] addonToppingsType, String[] addonToppingsTypes, String[] addonToppingsIsPizza,
@@ -56,11 +56,28 @@ public class CreateNewMenuItem {
 			item.setCategory("Misc");
 		}
 		
-		//Remove "$" from price, if it exists.
-		if(itemPrice.contains("$")) {
-			itemPrice = itemPrice.replace("$", "");
+		//Remove "$" from price, if it exists and create Double list
+		String[] itemPricesList = itemPrices.split(","); 
+		List<Double> doublePrices = new ArrayList();
+		for(int i=0; i< itemPricesList.length; i++) {
+			if(itemPricesList[i].contains("$")) {
+				itemPricesList[i] = itemPricesList[i].replace("$", "");
+			}
+			Double doublePrice = Double.parseDouble(itemPricesList[i]);
+			doublePrices.add(doublePrice);
+					
+			
 		}
-		item.setItemDefaultCost(Double.parseDouble(itemPrice));
+		item.setItemDefaultCosts(doublePrices);
+		
+		//Set sizes if itemSizes is not null.
+		 //If item sizes is null. It just mean the item only has once size.
+		if(itemSizes != null) {
+			String[] itemSizesArray = itemSizes.split(","); 
+			List<String> itemSizesList = new ArrayList<>(Arrays.asList(itemSizesArray));
+			item.setItemSizes(itemSizesList);
+		}
+		
 		
 		item.setItemDesc(itemDescription);
 		

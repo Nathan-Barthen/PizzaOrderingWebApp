@@ -164,6 +164,7 @@ public class MainController {
 			 	@RequestParam("itemName") String itemName,
 	    		@RequestParam("categoryName") String categoryName, 
 	    		@RequestParam("customDesc") String customInstructions, 
+	    		@RequestParam("itemSelectedCost") String itemSelectedCost,
 	    		@RequestParam("numbertOfItem") int numbertOfItem,
 	    		@RequestParam("updateItem") String updateItem,
 	    		@RequestParam(name="updateItemId", required = false) Long updateItemId,
@@ -197,7 +198,7 @@ public class MainController {
 		 	}
 		 	
 		 	//Generate cart item from passed parameters.
-		 	Item cartItem = CartItem.generateItemForCart(item, numbertOfItem, customInstructions,
+		 	Item cartItem = CartItem.generateItemForCart(item, numbertOfItem, itemSelectedCost, customInstructions,
 		 			mainDropNames, mainDropSelected, mainDropAmounts, 
 		 			mainLNENames, mainLNESideOfPizza, mainLNEAmounts, 
 		 			addonDropNames, addonDropSelected, addonDropAmounts, 
@@ -241,7 +242,6 @@ public class MainController {
 	            	newOrder.setUsersLastName("Guest");
 	            	newOrder.setUsersPhoneNum("Guest");
 	            	newOrder.setUsersEmail("Guest");
-	            	System.out.println("Name "+ user.getFirstName());
 	            }
 	            
 		    	order = newOrder;
@@ -889,7 +889,8 @@ public class MainController {
 				    		Model model, HttpSession session, 
 				    		@RequestParam("itemName") String itemName,
 				    		@RequestParam("categoryName") String categoryName, 
-				    		@RequestParam("itemPrice") String itemPrice,
+				    		@RequestParam("itemPrices") String itemPrices,
+				    		@RequestParam(name = "itemSizes", required = false) String itemSizes,
 				    		@RequestParam("itemDescription") String itemDescription,
 				    		
 				    		@RequestParam(name = "mainToppingsName", required = false) String[] mainToppingsName,
@@ -916,7 +917,7 @@ public class MainController {
 					    	// User is an admin
 					    	
 					    	//Creates item 
-						 	Item item = CreateNewMenuItem.CreateItem(itemCategories, itemName, categoryName, itemPrice, itemDescription, mainToppingsName,
+						 	Item item = CreateNewMenuItem.CreateItem(itemCategories, itemName, categoryName, itemPrices, itemSizes,itemDescription, mainToppingsName,
 						            mainToppingsType, mainToppingsTypes, mainToppingsIsPizza, mainToppingsExtra, addonToppingsName,
 						            addonToppingsType, addonToppingsTypes, addonToppingsIsPizza, addonToppingsExtra, addonToppingsPrice,
 						            jpgFile);
@@ -1025,7 +1026,8 @@ public class MainController {
 						 	@RequestParam("oldItemName") String oldItemName,
 						 	@RequestParam("itemName") String itemName,
 				    		@RequestParam("categoryName") String categoryName, 
-				    		@RequestParam("itemPrice") String itemPrice,
+				    		@RequestParam("itemPrices") String itemPrices,
+				    		@RequestParam(name = "itemSizes", required = false) String itemSizes,
 				    		@RequestParam("itemDescription") String itemDescription,
 				    		
 				    		@RequestParam(name = "mainToppingsName", required = false) String[] mainToppingsName,
@@ -1050,7 +1052,7 @@ public class MainController {
 					    	// User is an admin
 					    	
 					    	//Creates item 
-						 	Item item = CreateNewMenuItem.CreateItem(itemCategories, itemName, categoryName, itemPrice, itemDescription, mainToppingsName,
+						 	Item item = CreateNewMenuItem.CreateItem(itemCategories, itemName, categoryName, itemPrices, itemSizes, itemDescription, mainToppingsName,
 						            mainToppingsType, mainToppingsTypes, mainToppingsIsPizza, mainToppingsExtra, addonToppingsName,
 						            addonToppingsType, addonToppingsTypes, addonToppingsIsPizza, addonToppingsExtra, addonToppingsPrice,
 						            jpgFile);
@@ -1071,7 +1073,7 @@ public class MainController {
 						 	}
 						 	
 						 	boolean oldItemHasImage = menuItem.getHasImage();
-						 	//Remove Item
+						 	//Remove old Item
 						 	MenuItems.removeItemFromMenu(oldItemName, categoryName);
 						 	
 						 	//Add updated item to menu

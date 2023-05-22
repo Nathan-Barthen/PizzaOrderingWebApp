@@ -69,14 +69,27 @@
 								</div>
 							</div>
 							
+							<div id="priceAndSizeInfo">
+								The item prices and sizes must be comma (,) separated. Follow format of placeholder. 
+							</div>
 							<div id=addItemCol>
 								<div id="itemPrice">
-								    <span id="addItemParamTitle"> *Price ($): </span>
-								    <input type="text" name="itemPrice" placeholder="$0.00">
+								    <span id="addItemParamTitle"> *Prices ($): </span>
+								    <input type="text" name="itemPrices" placeholder="$0.00, $0.00, ..." >
 								</div>
 								<div id="checkItemPrice">
 								    <span id="emptyText"></span>
 								    <div class="errorMessages" id="itemPriceErrorMessages"></div>
+								</div>
+							</div>
+							<div id=addItemCol>
+								<div id="itemSize">
+								    <span id="addItemParamTitle"> *Sizes: </span>
+								    <input type="text" name="itemSizes" placeholder="Small, Medium, ... (Empty)" >
+								</div>
+								<div id="checkItemSize">
+								    <span id="emptyText"></span>
+								    <div class="errorMessages" id="itemSizeErrorMessages"></div>
 								</div>
 							</div>
 							
