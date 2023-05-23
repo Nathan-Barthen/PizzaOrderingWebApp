@@ -188,6 +188,21 @@ public class Item {
 
 	}
 	
+	@JsonIgnore
+	public boolean getCheckItemSizes() {
+		//Returns a string to match the format of currency #.##. (and not something like 10.0)
+		if(itemSizes == null) {
+			return false;
+		}
+		if(itemSizes.size() <= 1) {
+			return false;
+		}
+		
+		
+		return true;
+
+	}
+	
 	public void setItemSizes(List<String> itemSizes) {
 		this.itemSizes = itemSizes;
 	}
@@ -197,12 +212,32 @@ public class Item {
 		return selectedCost;
 	}
 
+	@JsonIgnore
+	public String getSelectedCostAsString() {
+		DecimalFormat df = new DecimalFormat("0.00");
+		String formattedCost = df.format(selectedCost);
+		return formattedCost;
+	}
+	
 	public void setSelectedCost(Double selectedCost) {
 		this.selectedCost = selectedCost;
 	}
 
 	public String getSelectedSize() {
 		return selectedSize;
+	}
+	@JsonIgnore
+	public boolean getSelectedSizeLength() {
+		if(selectedSize.length() < 2) {
+			return false;
+		}
+		else if(selectedSize.contains("One Size")){
+			return false;
+		}
+		else {
+			return true;
+			
+		}
 	}
 
 	public void setSelectedSize(String selectedSize) {
@@ -251,7 +286,7 @@ public class Item {
 	
 	@JsonIgnore
 	public String getItemTotalCost() {
-		double totalCost = selectedCost + itemAdditionalCost;
+		double totalCost = (selectedCost + itemAdditionalCost)*howMany;
 		DecimalFormat decimalFormat = new DecimalFormat("0.00");
 		String stringOfCost = decimalFormat.format(totalCost);
 		return stringOfCost;

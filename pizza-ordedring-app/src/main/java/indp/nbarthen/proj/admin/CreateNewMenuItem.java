@@ -91,7 +91,7 @@ public class CreateNewMenuItem {
 		//Check if main topping(s) exist. Add toppings to item.
 		if(mainToppingsName != null) {
 			List<Topping> includedToppings = new Vector<Topping>();
-			for(int i = 0; i < mainToppingsName.length; i ++) {
+			for(int i = 0; i < mainToppingsName.length; i++) {
 				Topping topping = new Topping();
 				
 				//Set Name
@@ -115,13 +115,26 @@ public class CreateNewMenuItem {
 				
 				//Set types if ToppingType = dropdown.
 				if(topping.getToppingType().contains("dropdown")) {
-					String[] splitUpList = mainToppingsTypes[i].split(",");
-					//Remove leading and trailing spaces
-					for (int j = 0; j < splitUpList.length; j++) {
-					    splitUpList[j] = splitUpList[j].trim();
+					
+					//If only one main topping was passed. Fixes bug when only one dropdown topping was passed
+					if(mainToppingsName.length == 1) {
+						String[] allTypeNames = new String[mainToppingsTypes.length];
+						for(int j = 0; j < mainToppingsTypes.length; j++) {
+							allTypeNames[j] = mainToppingsTypes[j].trim();
+							
+						}
+						//Save splitUpList to topping
+						topping.setToppingOptions(Arrays.asList(allTypeNames));
 					}
-					//Save splitUpList to topping
-					topping.setToppingOptions(Arrays.asList(splitUpList));
+					else {
+						String[] splitUpList = mainToppingsTypes[i].split(",");
+						//Remove leading and trailing spaces
+						for (int j = 0; j < splitUpList.length; j++) {
+						    splitUpList[j] = splitUpList[j].trim();
+						}
+						//Save splitUpList to topping
+						topping.setToppingOptions(Arrays.asList(splitUpList));
+					}
 				}
 				
 				//Set isAddon to false

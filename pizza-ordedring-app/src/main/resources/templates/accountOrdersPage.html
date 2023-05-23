@@ -58,7 +58,7 @@
 			    		<div hidden id="hiddenItemId">[[${item.getId()}]]</div>
 			    		
 			    		<div id="cartItemDetails">
-			    			<div id="itemSize" th:if="${item.getSelectedSize() != 'One Size'}">Size: [[${item.getSelectedSize()}]]</div>
+			    			<div id="itemSize" th:if="${item.getSelectedSizeLength()}">Size: [[${item.getSelectedSize()}]]</div>
 			    			<div id="itemIngredients" th:each="ingredient : ${item.getIncludedToppings()}" th:if="${ingredient.getToppingType == 'dropdown'}">
 			   					<div id="ingredientName">[[${ingredient.getToppingName()}]]: [[${ingredient.getSelectedOption()}]]: </div>
 			   					

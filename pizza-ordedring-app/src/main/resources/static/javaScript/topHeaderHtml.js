@@ -104,7 +104,7 @@
 						<div id="day">Sun: <span id="dayHours"> Closed </span>				</div>
 					
 					</div>
-				<div id="openClosed">Open</div>
+				<div id="openClosed"></div>
 			</div>
 		
 		
