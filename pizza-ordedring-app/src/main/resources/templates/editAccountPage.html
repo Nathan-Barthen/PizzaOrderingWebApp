@@ -35,7 +35,7 @@
    		
    		<div id="pageBody">
    			<div id="body-headers">
-   				<div id="storeLocation"> 156 Elderwood Ave </div>
+   				<div id="storeLocation">  </div>
    				<div id="signUpTitle"> Edit Account </div>
    				<div id="emptySpace">
    					
@@ -50,6 +50,7 @@
 				      </div>
 				      <div id="signUpEntry">
 				      	<form id="signUpForm" method="post" th:action="@{/pizzaStore/finishEditAccount}">
+					      	<input type="hidden" name="oldEmail" th:value="${user.getEmail()}">
 					      	<div id="signUpFirstName">
 							    <span id="signUpParamTitle"> *First Name: </span>
 							    <input type="text" name="firstname" th:value="${user.getFirstName()}">

@@ -96,9 +96,12 @@
 				    const removeIngredientText = div.querySelector('#removeIngredientText');
 				    const toppPriceText = div.querySelector('#toppPriceText');
 				    if( removeIngredientText.textContent == 'Add' || updateItemIdElement == null){
+				    	console.log("Meep");
 					    ingredientNameDiv.style.textDecoration = 'line-through';
 					    amountDiv.style.textDecoration = 'line-through';
-					    sideOfPizzaDiv.style.textDecoration = 'line-through';
+					    if(sideOfPizzaDiv){
+					    	 sideOfPizzaDiv.style.textDecoration = 'line-through';
+					    }
 					    toppPriceText.style.textDecoration = 'line-through';
 					    removeIngredientText.textContent = 'Add';
 				    }

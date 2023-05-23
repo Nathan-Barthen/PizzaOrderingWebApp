@@ -159,7 +159,7 @@
 				  const closestToppingType = toppingType.closest('#addItemToppingRow').querySelector('.toppingTypesValue');
 				  const typesErrorMessage = closestToppingType.closest('#addItemToppingRow').querySelector('#toppingTypesErrorMessages');
 				    
-				   if (closestToppingType.value.trim() === '' || closestToppingType.value == null) {
+				   if (closestToppingType.value === '' || closestToppingType.value == null) {
 				    	typesErrorMessage.textContent = '*Types cannot be empty';
 				        event.preventDefault();
 				   }

@@ -107,14 +107,33 @@ public class MainController {
 		 * 		This will show all of the items for the given category.
 	 */
 	 @RequestMapping({"/pizzaStore/{categoryName}"})
-	    public String categoryPage(Model model, HttpSession session, @PathVariable("categoryName") String categoryName) {
+	    public String categoryPage(Model model, HttpSession session, 
+	    		@RequestParam(name="itemSearchString", required = false) String itemSearchString,
+	    		@PathVariable("categoryName") String categoryName)
+	 {
 			List<Item> menuItems = MenuItems.getMenuItemsList();
 		 	
 			//Get items to display.
 			List<Item> displayItems = new Vector<Item>();
-			for(Item item : menuItems) {
-				if(item.getCategory().equals(categoryName)) {
-					displayItems.add(item);
+			//Check if query is for item search
+			if(categoryName.contains("ItemSearch")) {
+				for(Item item : menuItems) {
+					//Check if item name contains searchString
+					if(item.getItemName().toLowerCase().contains(itemSearchString.toLowerCase())) {
+						//Add item.
+						displayItems.add(item);
+					}
+				}
+				if(displayItems.size() < 1) {
+					return "redirect:/?showError=No results found for item names containing: '" + itemSearchString + "'.";
+				}
+			}
+			//Get items for particular category
+			else {
+				for(Item item : menuItems) {
+					if(item.getCategory().equals(categoryName)) {
+						displayItems.add(item);
+					}
 				}
 			}
 		 	
@@ -594,6 +613,7 @@ public class MainController {
 	 //Commits account edits.
 	 	@PostMapping("/pizzaStore/finishEditAccount")
 	 		public String editUsersAccount(HttpSession session,
+	 					  @RequestParam("oldEmail") String oldEmail,
 	 					  @RequestParam("firstname") String firstName,
 	                      @RequestParam("lastname") String lastName,
 	                      @RequestParam("phone") String phoneNumber,
@@ -615,7 +635,7 @@ public class MainController {
 	     //If password matches saved password.
 	     if(ManageUsers.checkIfPasswordsMatch(sessionUser.getEmail(), passwordHash)) {
 	    	 //If there was an error updating users information.
-	    	 if(!ManageUsers.editUser(editedUser)) {
+	    	 if(!ManageUsers.editUser(editedUser, oldEmail)) {
 		    	 //Redirect to home. Show error.
 		    	 return "redirect:/?showError=Error updating account information.";
 		     }

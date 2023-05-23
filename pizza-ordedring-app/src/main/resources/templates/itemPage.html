@@ -34,13 +34,13 @@
 		
    		<div id="pageBody">
    			<div id="body-headers">
-   				<div id="storeLocation"> 156 Elderwood Ave </div>
+   				<div id="storeLocation"> </div>
    				<div id="categoryTitle"> [[${item.getCategory()}]] </div>
    				<div id="searchMenu">
    					Search:  
    					<div id="searchDiv">
-   							<form>
-		                        <input type="text" id="userSearchInput" placeholder="Search menu">
+   							<form action="/pizzaStore/ItemSearch" method="post">
+		                        <input type="text" id="userSearchInput" placeholder="Search menu" name="itemSearchString">
 		                     </form>
 		             </div>
    				</div>
@@ -84,7 +84,7 @@
    			
    			<div id="mainOptions">
    				
-   				<div id="sizeDropdownContainer" th:if="${item.getItemSizesAsString()}"> 
+   				<div id="sizeDropdownContainer" th:if="${item.getCheckItemSizes()}"> 
    					<label id="dropdownLabelName">Size: </label>
    					<div class="dropdown" style="z-index:9"> 
    						<div id="sizeSelectedOption"><span id="itemSizeSpan">[[${item.getItemSizesAsString().get(0)}]]</span> -
@@ -186,7 +186,7 @@
 	<script src="/javaScript/pageRedirects/clicksPizzaLogo.js"></script>
 	<script src="/javaScript/pageRedirects/clicksItem.js"></script>
 	<script src="/javaScript/pageRedirects/clicksCheckout.js"></script>
-	
+	<script src="/javaScript/pageRedirects/entersItemSearch.js"></script>
 	
 	<script src="/javaScript/itemPage/updateSelectedOption-itemPage.js"></script>
 	<script src="/javaScript/itemPage/selectedOptions-itemPage.js"></script>

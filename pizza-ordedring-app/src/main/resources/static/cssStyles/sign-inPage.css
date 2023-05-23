@@ -7,9 +7,11 @@
 	    min-height: 100%;
 	    margin: 0 auto;
 		margin-bottom: -100px;
-		
+		position: relative;
 		background: url(/images/lightBlueBackgrd.png) no-repeat center center fixed;
   	    background-size: cover;
+  	    
+  	    
 	}
 	
 	#body-headers {
@@ -176,6 +178,53 @@
 					font-style: italic;
 				}
 			
-		
-		
-		
+		#githubUserInstructions {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			
+			position: absolute;
+			top: 7%;
+			width: 100%;
+			
+			font-size: 20px;
+			font-family: Trebuchet MS;
+		}
+			#UsernameInstructions {
+				margin-bottom: 10px;
+			}
+			#UsernamePass1 {
+				width: 60%;
+				display: flex;
+				justify-content: end;
+				align-items: center;
+			}
+			#UsernamePass2 {
+				width: 60%;
+				display: flex;
+				justify-content: end;
+				align-items: center;
+			}
+				#usernameSampleAdmin{
+					width: 40%;
+					margin-left: 20px;
+					justify-content: end;
+					align-items: center;
+				}
+				#usernameSampleRegular{
+					width: 40%;
+					margin-left: 20px;
+					justify-content: end;
+					align-items: center;
+				}
+				#userPassSample {
+					width: 30%;
+					margin-left: 20px;
+					justify-content: end;
+					align-items: center;
+				}
+			
+			
+			
+			

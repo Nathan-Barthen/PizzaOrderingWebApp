@@ -72,7 +72,7 @@ public class ManageUsers {
     }
 	
 	//Find the user with the same email, applys edits to user's info and saved it to StoredUsers.json.
-	public static boolean editUser(UserAccount user) {
+	public static boolean editUser(UserAccount user, String oldEmail) {
 	    List<UserAccount> users = new ArrayList<>();
 
 	    try {
@@ -93,7 +93,7 @@ public class ManageUsers {
 	        boolean foundUser = false;
 	        for (int i = 0; i < users.size(); i++) {
 	            UserAccount u = users.get(i);
-	            if (u.getEmail().equalsIgnoreCase(user.getEmail())) {
+	            if (u.getEmail().equalsIgnoreCase(oldEmail)) {
 	                users.set(i, user);
 	                foundUser = true;
 	                break;

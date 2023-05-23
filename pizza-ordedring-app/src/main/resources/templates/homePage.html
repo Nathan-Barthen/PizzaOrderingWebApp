@@ -37,13 +37,13 @@
 		
    		<div id="pageBody">
    			<div id="body-headers">
-   				<div id="storeLocation"> 156 Elderwood Ave </div>
+   				<div id="storeLocation">  </div>
    				<div id="menuTitle"> Menu </div>
    				<div id="searchMenu">
    					Search:  
    					<div id="searchDiv">
-   							<form>
-		                        <input type="text" id="userSearchInput" placeholder="Search menu">
+   							<form action="/pizzaStore/ItemSearch" method="post">
+		                        <input type="text" id="userSearchInput" placeholder="Search menu" name="itemSearchString">
 		                     </form>
 		             </div>
    				</div>
@@ -188,6 +188,7 @@
 	<script src="/javaScript/pageRedirects/clicksCategory.js"></script>
 	<script src="/javaScript/pageRedirects/clicksItem.js"></script>
 	<script src="/javaScript/pageRedirects/clicksCheckout.js"></script>
+	<script src="/javaScript/pageRedirects/entersItemSearch.js"></script>
 	
 	<script src="/javaScript/bodySize-homePage.js"></script>
 	
